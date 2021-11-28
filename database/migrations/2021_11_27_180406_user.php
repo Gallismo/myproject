@@ -19,6 +19,7 @@ class User extends Migration
            $table->string('login')->unique();
            $table->string('password');
            $table->string('jwt_token')->nullable();
+           $table->boolean('is_admin')->default(0);
            $table->timestamps();
         });
     }

@@ -21,7 +21,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'login',
-        'password'
+        'password',
+        'jwt_token',
+        'is_admin'
     ];
 
     /**
@@ -31,6 +33,8 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'jwt_token',
+        'is_admin'
     ];
 
     /**
@@ -42,8 +46,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-//    public function prunable()
-//    {
-//        return static::where('created_at', '<=', now()->subYear(2));
-//    }
+    public function prunable()
+    {
+        return static::where('updated_at', '<=', now()->subYear(2));
+    }
 }
