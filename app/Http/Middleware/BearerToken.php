@@ -29,6 +29,7 @@ class BearerToken
         if (!auth()->check()) {
             return response()->json('Unauthorized', 401);
         }
+
         return $next($request);
     }
 }

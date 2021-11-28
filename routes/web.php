@@ -19,4 +19,4 @@ Route::get('/', function () {
 
 Route::get('/admin', function () {
     return view('welcome');
-})->middleware('bearer');
+})->middleware('bearer')->middleware('isAdmin');
