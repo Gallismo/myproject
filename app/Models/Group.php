@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'group_name',
+        'department',
+        'start_year'
+    ];
+
+
+
+
+
+    public function prunable()
+    {
+        return static::where('created_at', '<=', now()->subYear(6));
+    }
 }

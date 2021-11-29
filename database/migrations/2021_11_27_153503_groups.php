@@ -15,7 +15,7 @@ class Groups extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('group_name');
+            $table->string('group_name')->unique();
             $table->enum('department', ['technology', 'economic']);
             $table->year('start_year');
             $table->timestamps();

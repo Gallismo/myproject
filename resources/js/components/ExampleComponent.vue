@@ -22,7 +22,7 @@
                 method: 'get',
                 url: '/admin',
                 headers: {
-                    Authorization: 'Bearer MkrJXCDjE484OU1VKTgAMIfC1O4iTT'
+                    Authorization: 'Bearer kC4bzfaXnAChIGYmXaw4X0yrTtVRj8'
                 }
             });
         },

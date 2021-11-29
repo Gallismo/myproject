@@ -20,3 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [\App\Http\Controllers\UserController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\UserController::class, 'login']);
+
+Route::middleware(['bearer', 'isAdmin'])->group(function () {
+    Route::post('/addNewAudience', [\App\Http\Controllers\AudienceController::class, 'addNewAudience']);
+    Route::post('/deleteAudience', [\App\Http\Controllers\AudienceController::class, 'deleteAudience']);
+    Route::post('/addNewGroup', [\App\Http\Controllers\GroupController::class, 'addNewGroup']);
+    Route::post('/deleteGroup', [\App\Http\Controllers\GroupController::class, 'deleteGroup']);
+});

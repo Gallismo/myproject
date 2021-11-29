@@ -18,7 +18,7 @@ class isAdmin
     {
 
         if (!auth()->user()->is_admin) {
-            return response()->json('You not have admin permission', 401);
+            return response()->json('You do not have admin permission', 401);
         }
 
         return $next($request);

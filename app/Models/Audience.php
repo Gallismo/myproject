@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Audience extends Model
 {
+    protected $fillable = [
+        'audience_name'
+    ];
     use HasFactory;
 }

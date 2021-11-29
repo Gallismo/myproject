@@ -18,17 +18,18 @@ class GroupsBookings extends Migration
             $table->unsignedBigInteger('booking_id');
             $table->foreign('booking_id')->references('id')->on('lessons_bookings');
 
-            $table->unsignedBigInteger('group_id_first');
-            $table->foreign('group_id_first')->references('id')->on('groups');
+            $table->unsignedBigInteger('group_id');
+            $table->foreign('group_id')->references('id')->on('groups');
 
-            $table->unsignedBigInteger('group_id_second')->nullable();
-            $table->foreign('group_id_second')->references('id')->on('groups');
-
-            $table->unsignedBigInteger('group_id_third')->nullable();
-            $table->foreign('group_id_third')->references('id')->on('groups');
-
-            $table->unsignedBigInteger('group_id_fourth')->nullable();
-            $table->foreign('group_id_fourth')->references('id')->on('groups');
+            $table->enum('group_part', ['first_part', 'second_part', 'full_part']);
+//            $table->unsignedBigInteger('group_id_second')->nullable();
+//            $table->foreign('group_id_second')->references('id')->on('groups');
+//
+//            $table->unsignedBigInteger('group_id_third')->nullable();
+//            $table->foreign('group_id_third')->references('id')->on('groups');
+//
+//            $table->unsignedBigInteger('group_id_fourth')->nullable();
+//            $table->foreign('group_id_fourth')->references('id')->on('groups');
 
             $table->timestamps();
         });
