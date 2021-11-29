@@ -21,6 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'login',
+        'teacher_id',
         'password',
         'jwt_token',
         'is_admin'

@@ -13,10 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+//Route::get('/', function () {
+//    return view('index');
+//});
+//
 Route::get('/admin', function () {
-    return view('welcome');
+    return view('admin');
 })->middleware('bearer')->middleware('isAdmin');
+Route::get('/admin/{any}', function () {
+    return view('admin');
+})->where('any', '.*')->middleware('bearer')->middleware('isAdmin');
+Route::get('/{any}', function () {
+    return view('index');
+})->where('any', '.*');

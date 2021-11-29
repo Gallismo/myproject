@@ -16,6 +16,7 @@ class UserController extends Controller
         $val = Validator::make($request->all(), [
             'name' => 'required|string',
             'login' => 'required|string|min:6|unique:users',
+            'teacher_id' => 'string',
             'password' => 'required|string|min:6',
             'registerValue' => 'required|string',
             'secretValue' => 'string'
@@ -38,6 +39,7 @@ class UserController extends Controller
             'name' => $request->name,
             'login' => $request->login,
             'password' => Hash::make($request->password),
+            'teacher_id' => $request->teacher_id,
             'jwt_token' => Hash::make($jwt_token),
             'is_admin' => $is_admin
         ]);
