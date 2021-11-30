@@ -16,7 +16,8 @@ class LessonsBookings extends Migration
         Schema::create('lessons_bookings', function (Blueprint $table) {
             $table->id();
             $table->date('lesson_date');
-            $table->enum('lesson_order', [1, 2, 3, 4, 5, 6, 7]);
+            $table->unsignedBigInteger('lesson_order_id');
+            $table->foreign('lesson_order_id')->references('id')->on('lessons_orders');
             $table->unsignedBigInteger('audience_id');
             $table->foreign('audience_id')->references('id')->on('audiences');
             $table->unsignedBigInteger('subject_id');

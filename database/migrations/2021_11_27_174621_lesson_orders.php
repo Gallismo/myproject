@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Groups extends Migration
+class LessonOrders extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class Groups extends Migration
      */
     public function up()
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('lessons_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('group_name')->unique();
-            $table->enum('department', ['technology', 'economic']);
-            $table->year('start_year');
-            $table->timestamps();
+            $table->string('lessons_order')->unique();
         });
     }
 
@@ -29,6 +26,6 @@ class Groups extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('lessons_orders');
     }
 }

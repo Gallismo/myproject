@@ -16,8 +16,12 @@ class Schedule extends Migration
 
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->enum('week_day', ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']);
-            $table->enum('order_value', [1, 2, 3, 4, 5, 6, 7, 'Обед', 'Классный час']);
+            $table->unsignedBigInteger('week_day_id');
+            $table->foreign('week_day_id')->references('id')->on('week_days');
+            $table->unsignedBigInteger('lesson_order_id');
+            $table->foreign('lesson_order_id')->references('id')->on('lessons_orders');
+            $table->unsignedBigInteger('department_id');
+            $table->foreign('department_id')->references('id')->on('departments');
             $table->time('start_time')->default(1);
             $table->time('end_time')->default(1);
             $table->integer('break')->default(0)->nullable();
