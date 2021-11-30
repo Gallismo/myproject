@@ -70,5 +70,27 @@ class UserController extends Controller
         return response()->json(['data' => ['token' => $token]], 200);
     }
 
+    public function changePassword (Request $request) {
+        $val = Validator::make($request->all(), [
+            'login' => 'required|string',
+            'password' => 'required|string|min:6'
+        ]);
 
+        if ($val->fails()) {
+            return response()->json(['error' => ['code' => '422', 'message' => 'Validation error', 'errors' => $val->errors()]], 422);
+        }
+
+        $user = User::where('login', $request->login)->first();
+
+        if (is_null($user)) {
+            return response()->json(['error' => ['code' => '422', 'message' => 'User doesnt exist']], 422);
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->jwt_token = null;
+
+        $user->save();
+
+        return response()->json(['response' => 'Password changed'], 200);
+    }
 }
