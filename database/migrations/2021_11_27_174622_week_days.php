@@ -16,6 +16,7 @@ class WeekDays extends Migration
         Schema::create('week_days', function (Blueprint $table) {
             $table->id();
             $table->string('week_day')->unique();
+            $table->timestamps();
         });
     }
 

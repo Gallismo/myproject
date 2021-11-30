@@ -16,6 +16,7 @@ class GroupsParts extends Migration
         Schema::create('groups_parts', function (Blueprint $table) {
             $table->id();
             $table->string('groups_part')->unique();
+            $table->timestamps();
         });
     }
 

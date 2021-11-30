@@ -10,7 +10,7 @@ class GroupController extends Controller
 {
     public function addNewGroup(Request $request) {
         $val = Validator::make($request->all(), [
-            'group_name' => 'required|string|unique:groups',
+            'name' => 'required|string|unique:groups',
             'department' => 'required|string',
             'start_year' => 'required|string|min:4|max:4'
         ]);
@@ -32,7 +32,7 @@ class GroupController extends Controller
         }
 
         Group::create([
-            'group_name' => $request->group_name,
+            'name' => $request->group_name,
             'department' => $request->department,
             'start_year' => $request->start_year
         ]);
@@ -42,14 +42,14 @@ class GroupController extends Controller
 
     public function deleteGroup(Request $request) {
         $val = Validator::make($request->all(), [
-            'group_name' => 'required|string'
+            'name' => 'required|string'
         ]);
 
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $group = Group::where('group_name', '=', $request->group_name)->first();
+        $group = Group::where('name', '=', $request->name)->first();
 
         if (is_null($group)) {
             return response()->json('Group does not exist already', 422);

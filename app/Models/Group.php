@@ -10,7 +10,7 @@ class Group extends Model
     use HasFactory;
 
     protected $fillable = [
-        'group_name',
+        'name',
         'department',
         'start_year'
     ];

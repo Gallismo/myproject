@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Validator;
 
 class AudienceController extends Controller
 {
-    public function addNewAudience(Request $request) {
+    public function createAudience(Request $request) {
         $val = Validator::make($request->all(), [
-           'audience_name' => 'required|string|max:2|min:2|unique:audiences'
+           'name' => 'required|string|max:2|min:2|unique:audiences'
         ]);
 
         if ($val->fails()) {
@@ -18,7 +18,7 @@ class AudienceController extends Controller
         }
 
         $val = Validator::make($request->all(), [
-            'audience_name' => 'integer'
+            'name' => 'integer'
         ]);
 
         if ($val->fails()) {
@@ -26,37 +26,50 @@ class AudienceController extends Controller
         }
 
         Audience::create([
-            'audience_name' => $request->audience_name
+            'name' => $request->name
         ]);
 
-        return response()->json('Audience has been created', 200);
+        return response()->json(['response' => 'Audience has been created'], 200);
     }
 
     public function deleteAudience(Request $request) {
         $val = Validator::make($request->all(), [
-            'audience_name' => 'required|string|max:2|min:2'
+            'name' => 'required|string'
         ]);
 
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $val = Validator::make($request->all(), [
-            'audience_name' => 'integer'
-        ]);
-
-        if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
-        }
-
-        $audience = Audience::where('audience_name', '=', $request->audience_name)->first();
+        $audience = Audience::where('name', '=', $request->name)->first();
 
         if (is_null($audience)) {
-            return response()->json('Audience does not exist already', 422);
+            return response()->json(['response' => 'Audience does not exist already'], 422);
         }
 
         $audience->delete();
 
-        return response()->json('Audience has been deleted', 200);
+        return response()->json(['response' => 'Audience has been deleted'], 200);
+    }
+
+    public function editAudience (Request $request) {
+        $val = Validator::make($request->all(), [
+            'name' => 'required|string'
+        ]);
+
+        if ($val->fails()) {
+            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+        }
+
+        $audience = Audience::where('name', '=', $request->name)->first();
+
+        if (is_null($audience)) {
+            return response()->json(['response' => 'Audience does not exist'], 422);
+        }
+
+        $audience->name = $request->name_new;
+        $audience->save();
+
+        return response()->json(['response' => 'Audience has been edited'], 200);
     }
 }
