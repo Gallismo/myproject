@@ -10,9 +10,10 @@ class Teacher extends Model
     use HasFactory;
 
     protected $fillable = [
-      'name',
-      'surname',
-      'middle_name'
+         'name',
+         'surname',
+         'middle_name',
+         'code'
     ];
 
 

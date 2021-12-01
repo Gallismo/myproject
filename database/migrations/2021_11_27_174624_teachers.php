@@ -18,6 +18,7 @@ class Teachers extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('middle_name');
+            $table->string('code')->unique();
             $table->timestamps();
         });
     }

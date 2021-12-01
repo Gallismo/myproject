@@ -26,9 +26,6 @@ class BearerToken
             }
         }
 
-        if (!auth()->check()) {
-            return response()->json('Unauthorized', 401);
-        }
-
+        return response()->json('Unauthorized', 401);
     }
 }

@@ -10,7 +10,7 @@ class SubjectController extends Controller
 {
     public function createSubject (Request $request) {
         $val = Validator::make($request->all(), [
-            'name' => 'required|string'
+            'name' => 'required|string|unique:subjects'
         ]);
 
         if ($val->fails()) {

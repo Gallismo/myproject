@@ -10,7 +10,7 @@ class GroupsPartsController extends Controller
 {
     public function createGroupsPart (Request $request) {
         $val = Validator::make($request->all(), [
-            'groups_part' => 'required|string'
+            'groups_part' => 'required|string|unique:groups_parts'
         ]);
 
         if ($val->fails()) {

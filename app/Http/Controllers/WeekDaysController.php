@@ -10,7 +10,7 @@ class WeekDaysController extends Controller
 {
     public function createWeekDay (Request $request) {
         $val = Validator::make($request->all(), [
-            'week_day' => 'required|string'
+            'week_day' => 'required|string|unique:week_days'
         ]);
 
         if ($val->fails()) {

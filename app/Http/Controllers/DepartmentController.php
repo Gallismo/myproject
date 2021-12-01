@@ -10,7 +10,7 @@ class DepartmentController extends Controller
 {
     public function createDepartment (Request $request) {
         $val = Validator::make($request->all(), [
-            'name' => 'required|string'
+            'name' => 'required|string|unique:departments'
         ]);
 
         if ($val->fails()) {

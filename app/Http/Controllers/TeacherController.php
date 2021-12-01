@@ -19,16 +19,18 @@ class TeacherController extends Controller
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
+        $code = $this->codeGenerate(Teacher::class);
         Teacher::create([
             'name' => $request->name,
             'surname' => $request->surname,
-            'middle_name' => $request->middle_name
+            'middle_name' => $request->middle_name,
+            'code' => $code
         ]);
 
-        return response()->json(['response' => 'Teacher has been created'], 200);
+        return response()->json(['response' => "Teacher has been created, unique code: ".$code], 200);
     }
 
-    public function editTeacher (Request $request, $id) {
+    public function editTeacher (Request $request, $code) {
         $val = Validator::make($request->all(), [
             'name' => 'string|required_without_all:surname,middle_name',
             'surname' => 'required_without_all:name,middle_name|string',
@@ -39,7 +41,7 @@ class TeacherController extends Controller
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $teacher = Teacher::where('id', $id)->first();
+        $teacher = Teacher::where('code', $code)->first();
 
         if (is_null($teacher)) {
             return response()->json(['response' => 'Teacher does not exist'], 422);
@@ -54,8 +56,8 @@ class TeacherController extends Controller
         return response()->json(['response' => 'Teacher has been edited'], 200);
     }
 
-    public function deleteTeacher (Request $request, $id) {
-        $teacher = Teacher::where('id', $id)->first();
+    public function deleteTeacher (Request $request, $code) {
+        $teacher = Teacher::where('code', $code)->first();
 
         if (is_null($teacher)) {
             return response()->json(['response' => 'Teacher does not exist already'], 422);

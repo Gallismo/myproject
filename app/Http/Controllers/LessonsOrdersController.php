@@ -10,7 +10,7 @@ class LessonsOrdersController extends Controller
 {
     public function createLessonsOrder (Request $request) {
         $val = Validator::make($request->all(), [
-            'lessons_order' => 'required|string'
+            'lessons_order' => 'required|string|unique:lessons_orders'
         ]);
 
         if ($val->fails()) {

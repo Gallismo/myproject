@@ -49,9 +49,10 @@ Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::patch('/weekDay/edit', [\App\Http\Controllers\WeekDaysController::class, 'editWeekDay']);
 
     Route::post('/Teacher/create', [\App\Http\Controllers\TeacherController::class, 'createTeacher']);
-    Route::post('/Teacher/{id}/delete', [\App\Http\Controllers\TeacherController::class, 'deleteTeacher']);
-    Route::patch('/Teacher/{id}/edit', [\App\Http\Controllers\TeacherController::class, 'editTeacher']);
+    Route::post('/Teacher/{code}/delete', [\App\Http\Controllers\TeacherController::class, 'deleteTeacher']);
+    Route::patch('/Teacher/{code}/edit', [\App\Http\Controllers\TeacherController::class, 'editTeacher']);
 
-    Route::post('/addNewGroup', [\App\Http\Controllers\GroupController::class, 'addNewGroup']);
-    Route::post('/deleteGroup', [\App\Http\Controllers\GroupController::class, 'deleteGroup']);
+    Route::post('/Group/create', [\App\Http\Controllers\GroupController::class, 'createGroup']);
+    Route::post('/Group/delete', [\App\Http\Controllers\GroupController::class, 'deleteGroup']);
+    Route::post('/Group/edit', [\App\Http\Controllers\GroupController::class, 'editGroup']);
 });

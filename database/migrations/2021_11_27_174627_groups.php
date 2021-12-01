@@ -19,6 +19,7 @@ class Groups extends Migration
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments');
             $table->year('start_year');
+            $table->year('end_year');
             $table->timestamps();
         });
     }

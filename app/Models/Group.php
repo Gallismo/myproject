@@ -11,8 +11,9 @@ class Group extends Model
 
     protected $fillable = [
         'name',
-        'department',
-        'start_year'
+        'department_id',
+        'start_year',
+        'end_year'
     ];
 
 

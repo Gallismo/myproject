@@ -25,6 +25,9 @@ class LessonsBookings extends Migration
             $table->unsignedBigInteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('teachers');
             $table->boolean('is_remote');
+            $table->string('conference_url')->nullable();
+            $table->string('lesson_topic')->nullable();
+            $table->string('lesson_homework')->nullable();
             $table->timestamps();
         });
     }
