@@ -20,11 +20,17 @@ const routes = [
     },
     {
         path: '/admin',
-        component: ExampleComponent3
+        component: ExampleComponent3,
+        meta: {
+            requiresAuth: true
+        }
     }
 ];
 
-export default new VueRouter({
+const router = new VueRouter({
     mode: 'history',
     routes
 });
+
+
+export default router;

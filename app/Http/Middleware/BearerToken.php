@@ -22,7 +22,7 @@ class BearerToken
         $token = Str::replaceFirst('Bearer ', '', $request->header('authorization'));
         foreach (User::all() as $user) {
             if (Hash::check($token, $user->jwt_token)) {
-                auth()->login($user);
+                return $next($request);
             }
         }
 
@@ -30,6 +30,5 @@ class BearerToken
             return response()->json('Unauthorized', 401);
         }
 
-        return $next($request);
     }
 }

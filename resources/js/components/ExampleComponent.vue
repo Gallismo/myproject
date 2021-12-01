@@ -18,13 +18,6 @@
     export default {
         mounted() {
             console.log('Component mounted.');
-            axios({
-                method: 'get',
-                url: '/admin',
-                headers: {
-                    Authorization: 'Bearer hL8i9JTEuemv20vwAYp3u7KaaViixM'
-                }
-            });
         },
         name: 'ExampleComponent'
     }
