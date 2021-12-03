@@ -54,5 +54,12 @@ Route::middleware(['bearer', 'isAdmin'])->group(function () {
 
     Route::post('/Group/create', [\App\Http\Controllers\GroupController::class, 'createGroup']);
     Route::post('/Group/delete', [\App\Http\Controllers\GroupController::class, 'deleteGroup']);
-    Route::post('/Group/edit', [\App\Http\Controllers\GroupController::class, 'editGroup']);
+    Route::patch('/Group/edit', [\App\Http\Controllers\GroupController::class, 'editGroup']);
+
+    Route::post('/Schedule/create', [\App\Http\Controllers\ScheduleController::class, 'createSchedule']);
+    Route::post('/Schedule/massCreate', [\App\Http\Controllers\ScheduleController::class, 'massCreateSchedule']);
+    Route::patch('/Schedule/{id}/edit', [\App\Http\Controllers\ScheduleController::class, 'editSchedule']);
+    Route::post('/Schedule/{id}/delete', [\App\Http\Controllers\ScheduleController::class, 'deleteSchedule']);
+
 });
+
