@@ -16,8 +16,10 @@ class Groups extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->unsignedBigInteger('department_id');
-            $table->foreign('department_id')->references('id')->on('departments');
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->foreign('department_id')->references('id')
+                                            ->on('departments')
+                                            ->onDelete('SET NULL')->onUpdate('CASCADE');
             $table->year('start_year');
             $table->year('end_year');
             $table->timestamps();

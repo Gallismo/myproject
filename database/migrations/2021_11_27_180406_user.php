@@ -19,7 +19,7 @@ class User extends Migration
            $table->string('login')->unique();
            $table->string('password');
            $table->unsignedBigInteger('teacher_id')->nullable()->unique();
-           $table->foreign('teacher_id')->references('id')->on('teachers');
+           $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('SET NULL')->onUpdate('CASCADE');
            $table->string('jwt_token')->nullable();
            $table->boolean('is_admin')->default(0);
            $table->timestamps();

@@ -23,6 +23,7 @@ Route::post('/user/login', [\App\Http\Controllers\UserController::class, 'login'
 
 Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::post('/user/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
+    Route::post('/user/delete', [\App\Http\Controllers\UserController::class, 'deleteUser']);
 
     Route::post('/Audience/create', [\App\Http\Controllers\AudienceController::class, 'createAudience']);
     Route::post('/Audience/delete', [\App\Http\Controllers\AudienceController::class, 'deleteAudience']);

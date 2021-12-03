@@ -16,7 +16,7 @@ class UserController extends Controller
         $val = Validator::make($request->all(), [
             'name' => 'required|string',
             'login' => 'required|string|min:6|unique:users',
-            'teacher_id' => 'string',
+            'teacher_id' => 'integer|unique:users',
             'password' => 'required|string|min:6',
             'registerValue' => 'required|string',
             'secretValue' => 'string'
@@ -92,5 +92,17 @@ class UserController extends Controller
         $user->save();
 
         return response()->json(['response' => 'Password changed'], 200);
+    }
+
+    public function deleteUser (Request $request) {
+        $user = User::where('login', $request->login);
+
+        if (is_null($user)) {
+            return response()->json(['response' => 'User doesnt exist'], 422);
+        }
+
+        $user->delete();
+
+        return response()->json(['response' => 'User has been deleted'], 200);
     }
 }
