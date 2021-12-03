@@ -61,6 +61,5 @@ Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::post('/Schedule/massCreate', [\App\Http\Controllers\ScheduleController::class, 'massCreateSchedule']);
     Route::patch('/Schedule/{id}/edit', [\App\Http\Controllers\ScheduleController::class, 'editSchedule']);
     Route::post('/Schedule/{id}/delete', [\App\Http\Controllers\ScheduleController::class, 'deleteSchedule']);
-
 });
 
