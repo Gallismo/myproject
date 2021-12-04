@@ -15,16 +15,13 @@ const routes = [
         component: ExampleComponent
     },
     {
-        path: '/admin/second',
-        component: ExampleComponent2
+        path: '/admin',
+        component: ExampleComponent3
     },
     {
-        path: '/admin',
-        component: ExampleComponent3,
-        meta: {
-            requiresAuth: true
-        }
-    }
+        path: '/*/second',
+        component: ExampleComponent2
+    },
 ];
 
 const router = new VueRouter({

@@ -2274,14 +2274,11 @@ var routes = [{
   path: '/',
   component: _components_ExampleComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
-  path: '/admin/second',
-  component: _components_ExampleComponent2__WEBPACK_IMPORTED_MODULE_3__["default"]
-}, {
   path: '/admin',
-  component: _components_ExampleComponent3__WEBPACK_IMPORTED_MODULE_4__["default"],
-  meta: {
-    requiresAuth: true
-  }
+  component: _components_ExampleComponent3__WEBPACK_IMPORTED_MODULE_4__["default"]
+}, {
+  path: '/*/second',
+  component: _components_ExampleComponent2__WEBPACK_IMPORTED_MODULE_3__["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
