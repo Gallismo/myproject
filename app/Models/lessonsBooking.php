@@ -24,4 +24,9 @@ class lessonsBooking extends Model
     protected $casts = [
         'is_remote' => 'boolean'
     ];
+
+    public function prunable()
+    {
+        return static::where('updated_at', '<=', now()->subYear(2));
+    }
 }

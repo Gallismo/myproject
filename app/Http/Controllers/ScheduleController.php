@@ -112,8 +112,9 @@ class ScheduleController extends Controller
         return response()->json(['response' => 'Schedule created'], 200);
     }
 
-    public function editSchedule (Request $request, $id) {
+    public function editSchedule (Request $request) {
         $val = Validator::make($request->all(), [
+            'id' => 'required|integer|exists:schedules,id',
             'week_day_id' => 'required_without_all:lesson_order_id,department_id,start_time,end_time,break|integer',
             'lesson_order_id' => 'required_without_all:week_day_id,department_id,start_time,end_time,break|integer',
             'department_id' => 'required_without_all:week_day_id,lesson_order_id,start_time,end_time,break|integer',
@@ -140,7 +141,7 @@ class ScheduleController extends Controller
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
-        $schedule = Schedule::find($id);
+        $schedule = Schedule::find($request->id);
 
         if (!$schedule) {
             return response()->json(['response' => 'Schedule doesnt exist'], 422);
@@ -199,12 +200,20 @@ class ScheduleController extends Controller
         return response()->json(['response' => 'Schedule edited'], 200);
     }
 
-    public function deleteSchedule (Request $request, $id) {
-        $schedule = Schedule::find($id);
+    public function deleteSchedule (Request $request) {
+        $val = Validator::make($request->all(), [
+            'id' => 'required|integer|exists:schedules,id'
+        ]);
 
-        if (!$schedule) {
-            return response()->json(['response' => 'Schedule does not exist'], 422);
+        if ($val->fails()) {
+            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
+
+        $schedule = Schedule::find($request->id);
+
+//        if (!$schedule) {
+//            return response()->json(['response' => 'Schedule does not exist'], 422);
+//        }
 
         $schedule->delete();
 

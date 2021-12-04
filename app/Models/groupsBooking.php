@@ -12,6 +12,7 @@ class groupsBooking extends Model
     protected $fillable = [
         'booking_id',
         'group_id',
-        'group_part_id'
+        'group_part_id',
+        'lesson_date'
     ];
 }

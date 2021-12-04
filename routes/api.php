@@ -23,47 +23,51 @@ Route::post('/user/login', [\App\Http\Controllers\UserController::class, 'login'
 
 Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::post('/user/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
-    Route::post('/user/delete', [\App\Http\Controllers\UserController::class, 'deleteUser']);
+    Route::delete('/user/delete', [\App\Http\Controllers\UserController::class, 'deleteUser']);
 
-    Route::post('/Audience/create', [\App\Http\Controllers\AudienceController::class, 'createAudience']);
-    Route::post('/Audience/delete', [\App\Http\Controllers\AudienceController::class, 'deleteAudience']);
-    Route::patch('/Audience/edit', [\App\Http\Controllers\AudienceController::class, 'editAudience']);
+    Route::post('/Audience', [\App\Http\Controllers\AudienceController::class, 'createAudience']);
+    Route::delete('/Audience', [\App\Http\Controllers\AudienceController::class, 'deleteAudience']);
+    Route::patch('/Audience', [\App\Http\Controllers\AudienceController::class, 'editAudience']);
 
-    Route::post('/Department/create', [\App\Http\Controllers\DepartmentController::class, 'createDepartment']);
-    Route::post('/Department/delete', [\App\Http\Controllers\DepartmentController::class, 'deleteDepartment']);
-    Route::patch('/Department/edit', [\App\Http\Controllers\DepartmentController::class, 'editDepartment']);
+    Route::post('/Department', [\App\Http\Controllers\DepartmentController::class, 'createDepartment']);
+    Route::delete('/Department', [\App\Http\Controllers\DepartmentController::class, 'deleteDepartment']);
+    Route::patch('/Department', [\App\Http\Controllers\DepartmentController::class, 'editDepartment']);
 
-    Route::post('/groupsPart/create', [\App\Http\Controllers\GroupsPartsController::class, 'createGroupsPart']);
-    Route::post('/groupsPart/delete', [\App\Http\Controllers\GroupsPartsController::class, 'deleteGroupsPart']);
-    Route::patch('/groupsPart/edit', [\App\Http\Controllers\GroupsPartsController::class, 'editGroupsPart']);
+    Route::post('/groupsPart', [\App\Http\Controllers\GroupsPartsController::class, 'createGroupsPart']);
+    Route::delete('/groupsPart', [\App\Http\Controllers\GroupsPartsController::class, 'deleteGroupsPart']);
+    Route::patch('/groupsPart', [\App\Http\Controllers\GroupsPartsController::class, 'editGroupsPart']);
 
-    Route::post('/lessonsOrder/create', [\App\Http\Controllers\LessonsOrdersController::class, 'createLessonsOrder']);
-    Route::post('/lessonsOrder/delete', [\App\Http\Controllers\LessonsOrdersController::class, 'deleteLessonsOrder']);
-    Route::patch('/lessonsOrder/edit', [\App\Http\Controllers\LessonsOrdersController::class, 'editLessonsOrder']);
+    Route::post('/lessonsOrder', [\App\Http\Controllers\LessonsOrdersController::class, 'createLessonsOrder']);
+    Route::delete('/lessonsOrder', [\App\Http\Controllers\LessonsOrdersController::class, 'deleteLessonsOrder']);
+    Route::patch('/lessonsOrder', [\App\Http\Controllers\LessonsOrdersController::class, 'editLessonsOrder']);
 
-    Route::post('/Subject/create', [\App\Http\Controllers\SubjectController::class, 'createSubject']);
-    Route::post('/Subject/delete', [\App\Http\Controllers\SubjectController::class, 'deleteSubject']);
-    Route::patch('/Subject/edit', [\App\Http\Controllers\SubjectController::class, 'editSubject']);
+    Route::post('/Subject', [\App\Http\Controllers\SubjectController::class, 'createSubject']);
+    Route::delete('/Subject', [\App\Http\Controllers\SubjectController::class, 'deleteSubject']);
+    Route::patch('/Subject', [\App\Http\Controllers\SubjectController::class, 'editSubject']);
 
-    Route::post('/weekDay/create', [\App\Http\Controllers\WeekDaysController::class, 'createWeekDay']);
-    Route::post('/weekDay/delete', [\App\Http\Controllers\WeekDaysController::class, 'deleteWeekDay']);
-    Route::patch('/weekDay/edit', [\App\Http\Controllers\WeekDaysController::class, 'editWeekDay']);
+    Route::post('/weekDay', [\App\Http\Controllers\WeekDaysController::class, 'createWeekDay']);
+    Route::delete('/weekDay', [\App\Http\Controllers\WeekDaysController::class, 'deleteWeekDay']);
+    Route::patch('/weekDay', [\App\Http\Controllers\WeekDaysController::class, 'editWeekDay']);
 
-    Route::post('/Teacher/create', [\App\Http\Controllers\TeacherController::class, 'createTeacher']);
-    Route::post('/Teacher/{code}/delete', [\App\Http\Controllers\TeacherController::class, 'deleteTeacher']);
-    Route::patch('/Teacher/{code}/edit', [\App\Http\Controllers\TeacherController::class, 'editTeacher']);
+    Route::post('/Teacher', [\App\Http\Controllers\TeacherController::class, 'createTeacher']);
+    Route::delete('/Teacher/{code}', [\App\Http\Controllers\TeacherController::class, 'deleteTeacher']);
+    Route::patch('/Teacher/{code}', [\App\Http\Controllers\TeacherController::class, 'editTeacher']);
 
-    Route::post('/Group/create', [\App\Http\Controllers\GroupController::class, 'createGroup']);
-    Route::post('/Group/delete', [\App\Http\Controllers\GroupController::class, 'deleteGroup']);
-    Route::patch('/Group/edit', [\App\Http\Controllers\GroupController::class, 'editGroup']);
+    Route::post('/Group', [\App\Http\Controllers\GroupController::class, 'createGroup']);
+    Route::delete('/Group', [\App\Http\Controllers\GroupController::class, 'deleteGroup']);
+    Route::patch('/Group', [\App\Http\Controllers\GroupController::class, 'editGroup']);
 
-    Route::post('/Schedule/create', [\App\Http\Controllers\ScheduleController::class, 'createSchedule']);
+    Route::post('/Schedule', [\App\Http\Controllers\ScheduleController::class, 'createSchedule']);
     Route::post('/Schedule/massCreate', [\App\Http\Controllers\ScheduleController::class, 'massCreateSchedule']);
-    Route::patch('/Schedule/{id}/edit', [\App\Http\Controllers\ScheduleController::class, 'editSchedule']);
-    Route::post('/Schedule/{id}/delete', [\App\Http\Controllers\ScheduleController::class, 'deleteSchedule']);
+    Route::patch('/Schedule', [\App\Http\Controllers\ScheduleController::class, 'editSchedule']);
+    Route::delete('/Schedule', [\App\Http\Controllers\ScheduleController::class, 'deleteSchedule']);
 
-    Route::post('/lessonBooking/create', [\App\Http\Controllers\LessonsBookingsController::class, 'createLessonBooking']);
-    Route::post('/lessonBooking/delete', [\App\Http\Controllers\LessonsBookingsController::class, 'deleteLessonBooking']);
-    Route::patch('/lessonBooking/edit', [\App\Http\Controllers\LessonsBookingsController::class, 'editLessonBooking']);
+    Route::post('/lessonBooking', [\App\Http\Controllers\LessonsBookingsController::class, 'createLessonBooking']);
+    Route::delete('/lessonBooking', [\App\Http\Controllers\LessonsBookingsController::class, 'deleteLessonBooking']);
+    Route::patch('/lessonBooking', [\App\Http\Controllers\LessonsBookingsController::class, 'editLessonBooking']);
+
+    Route::post('/groupBooking', [\App\Http\Controllers\GroupsBookingsController::class, 'createGroupBooking']);
+    Route::delete('/groupBooking', [\App\Http\Controllers\GroupsBookingsController::class, 'deleteGroupBooking']);
+    Route::patch('/groupBooking', [\App\Http\Controllers\GroupsBookingsController::class, 'editGroupBooking']);
 });
 
