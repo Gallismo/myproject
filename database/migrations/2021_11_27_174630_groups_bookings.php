@@ -16,7 +16,7 @@ class GroupsBookings extends Migration
         Schema::create('groups_bookings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('booking_id')->nullable();
-            $table->foreign('booking_id')->references('id')->on('lessons_bookings')->onDelete('SET NULL')->onUpdate('CASCADE');
+            $table->foreign('booking_id')->references('id')->on('lessons_bookings')->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->unsignedBigInteger('group_id')->nullable();
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('SET NULL')->onUpdate('CASCADE');
