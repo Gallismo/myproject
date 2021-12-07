@@ -1,8 +1,11 @@
 <template>
-    <div id="header" class="container">
-        <ExampleComponent3></ExampleComponent3>
-        <div class="row justify-content-center"><div class="col-8"><div class="card text-center bg-primary">Header</div></div></div>
-    </div>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Панель администратора</a>
+            <CollapseToggler target_id="#navbar"></CollapseToggler>
+            <NavbarCollapse id="navbar"></NavbarCollapse>
+        </nav>
+    </header>
 </template>
 
 <script>

@@ -10019,3 +10019,37 @@ h3 {
     border-color: #dee2e6;
   }
 }
+body {
+    background-color: #1e222d;
+}
+
+body * {
+    color: rgba(255,255,255,.5);
+}
+
+.dropdown-item {
+    color: rgba(255,255,255,.5);
+}
+
+.navbar-nav {
+    width: 50%;
+}
+
+@media (min-width: 576px) {
+    .navbar-nav {
+        width: 35%;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-nav {
+        width: 27.5%;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-nav {
+        width: 100%;
+    }
+}
+

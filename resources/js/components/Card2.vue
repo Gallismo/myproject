@@ -1,12 +1,12 @@
 <template>
-    <div>
-        кутак
-    </div>
+        <div>
+            kutak
+        </div>
 </template>
 
 <script>
     export default {
-        name: "index"
+        name: "Card"
     }
 </script>
 

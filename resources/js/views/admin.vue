@@ -1,13 +1,18 @@
 <template>
     <div>
-        <ExampleComponent2></ExampleComponent2>
-        <ExampleComponent3></ExampleComponent3>
+        <Header></Header>
+        <component v-bind:is="currentTab"></component>
     </div>
 </template>
 
 <script>
     export default {
-        name: "admin"
+        name: "admin",
+        data: function () {
+            return {
+                currentTab: "Card2"
+            }
+        }
     }
 </script>
 
