@@ -12,4 +12,10 @@ class lessonsOrder extends Model
     protected $fillable = [
         'lessons_order'
     ];
+
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at'
+    ];
 }

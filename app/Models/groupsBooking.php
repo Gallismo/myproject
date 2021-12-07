@@ -15,4 +15,10 @@ class groupsBooking extends Model
         'group_part_id',
         'lesson_date'
     ];
+
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at'
+    ];
 }

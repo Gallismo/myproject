@@ -13,10 +13,15 @@ class Group extends Model
         'name',
         'department_id',
         'start_year',
-        'end_year'
+        'end_year',
+        'code'
     ];
 
-
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at'
+    ];
 
 
 

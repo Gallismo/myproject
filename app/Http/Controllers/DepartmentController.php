@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,9 +17,10 @@ class DepartmentController extends Controller
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
-
+        $code = $this->codeGenerate(Department::class);
         Department::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'code' => $code
         ]);
 
         return response()->json(['response' => 'Department has been created'], 200);

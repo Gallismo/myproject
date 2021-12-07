@@ -38,8 +38,8 @@ class GroupsBookingsController extends Controller
     public function editGroupBooking (Request $request) {
         $val = Validator::make($request->all(), [
             'id' => 'required|integer|exists:groups_bookings,id',
-            'booking_id' => 'required_without_all:group_id,group_part_id|integer|exists:lessons_bookings,id',
-            'group_id' => 'required_without_all:booking_id,group_part_id|integer|exists:groups,id',
+            'booking_id' => 'required_without_all:group_part_id|integer|exists:lessons_bookings,id',
+            'group_id' => 'required_without_all:group_part_id|integer|exists:groups,id',
             'group_part_id' => 'required_without_all:booking_id,group_id|integer|exists:groups_parts,id'
         ]);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\groupsBooking;
 use App\Models\lessonsBooking;
+use App\Models\subjectHourCount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -97,9 +98,9 @@ class LessonsBookingsController extends Controller
     public function editLessonBooking (Request $request) {
         $val = Validator::make($request->all(), [
             'id' => 'required|exists:lessons_bookings,id|integer',
-            'lesson_date' => 'required_without_all:lesson_order_id,audience_id,subject_id,teacher_id,is_remote|date-format:Y-m-d',
-            'lesson_order_id' => 'required_without_all:lesson_date,audience_id,subject_id,teacher_id,is_remote|exists:lessons_orders,id|integer',
-            'audience_id' => 'required_without_all:lesson_date,lesson_order_id,subject_id,teacher_id,is_remote|exists:audiences,id|integer',
+            'lesson_date' => 'required_without_all:subject_id,teacher_id,is_remote|date-format:Y-m-d',
+            'lesson_order_id' => 'required_without_all:subject_id,teacher_id,is_remote|exists:lessons_orders,id|integer',
+            'audience_id' => 'required_without_all:subject_id,teacher_id,is_remote|exists:audiences,id|integer',
             'subject_id' => 'required_without_all:lesson_date,lesson_order_id,audience_id,teacher_id,is_remote|exists:subjects,id|integer',
             'teacher_id' => 'required_without_all:lesson_date,lesson_order_id,audience_id,subject_id,is_remote|exists:teachers,id|integer',
             'is_remote' => 'boolean|required_without_all:lesson_date,lesson_order_id,audience_id,subject_id,teacher_id'

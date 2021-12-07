@@ -4,24 +4,21 @@ import Vue from "vue";
 
 Vue.use(VueRouter);
 
-import ExampleComponent from "./components/ExampleComponent";
-import ExampleComponent2 from "./components/ExampleComponent2";
-import ExampleComponent3 from "./components/ExampleComponent3";
+const files = require.context('./components', false, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+import index from "./views/index";
+import admin from "./views/admin";
 
 const routes = [
     {
         path: '/',
-        component: ExampleComponent
+        component: index
     },
     {
         path: '/admin',
-        component: ExampleComponent3
-    },
-    {
-        path: '/*/second',
-        component: ExampleComponent2
-    },
+        component: admin
+    }
 ];
 
 const router = new VueRouter({

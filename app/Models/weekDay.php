@@ -12,4 +12,10 @@ class weekDay extends Model
     protected $fillable = [
         'week_day'
     ];
+
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at'
+    ];
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Audience;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,9 +25,10 @@ class AudienceController extends Controller
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
-
+        $code = $this->codeGenerate(Audience::class);
         Audience::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'code' => $code
         ]);
 
         return response()->json(['response' => 'Audience has been created'], 200);

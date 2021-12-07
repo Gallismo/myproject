@@ -115,9 +115,9 @@ class ScheduleController extends Controller
     public function editSchedule (Request $request) {
         $val = Validator::make($request->all(), [
             'id' => 'required|integer|exists:schedules,id',
-            'week_day_id' => 'required_without_all:lesson_order_id,department_id,start_time,end_time,break|integer',
-            'lesson_order_id' => 'required_without_all:week_day_id,department_id,start_time,end_time,break|integer',
-            'department_id' => 'required_without_all:week_day_id,lesson_order_id,start_time,end_time,break|integer',
+            'week_day_id' => 'required_without_all:start_time,end_time,break|integer',
+            'lesson_order_id' => 'required_without_all:start_time,end_time,break|integer',
+            'department_id' => 'required_without_all:start_time,end_time,break|integer',
             'start_time' => 'required_without_all:week_day_id,lesson_order_id,end_time,department_id,break|required_with:end_time|array:hours,minutes',
             'start_time.hours' => "required_with_all:end_time,start_time|min:2|max:2|string",
             'start_time.minutes' => "required_with_all:end_time,start_time|min:2|max:2|string",

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\Group;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,12 +36,13 @@ class GroupController extends Controller
         if (!$department) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>['Department' => 'Department doesnt exist']]], 422);
         }
-
+        $code = $this->codeGenerate(Group::class);
         Group::create([
             'name' => $request->name,
             'department_id' => $request->department_id,
             'start_year' => $request->start_year,
-            'end_year' => $request->end_year
+            'end_year' => $request->end_year,
+            'code' => $code
         ]);
 
         return response()->json(['response' => 'Group has been created'], 200);

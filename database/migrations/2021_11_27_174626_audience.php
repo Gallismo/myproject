@@ -16,6 +16,7 @@ class Audience extends Migration
         Schema::create('audiences', function (Blueprint $table) {
            $table->id();
            $table->string('name')->unique();
+           $table->string('code')->unique();
            $table->timestamps();
         });
     }

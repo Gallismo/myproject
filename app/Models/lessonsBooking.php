@@ -25,6 +25,12 @@ class lessonsBooking extends Model
         'is_remote' => 'boolean'
     ];
 
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at'
+    ];
+
     public function prunable()
     {
         return static::where('updated_at', '<=', now()->subYear(2));

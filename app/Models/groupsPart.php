@@ -12,4 +12,10 @@ class groupsPart extends Model
     protected $fillable = [
         'groups_part'
     ];
+
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at'
+    ];
 }

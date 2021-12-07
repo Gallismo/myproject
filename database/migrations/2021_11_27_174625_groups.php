@@ -22,6 +22,7 @@ class Groups extends Migration
                                             ->onDelete('SET NULL')->onUpdate('CASCADE');
             $table->year('start_year');
             $table->year('end_year');
+            $table->string('code')->unique();
             $table->timestamps();
         });
     }

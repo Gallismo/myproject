@@ -69,5 +69,9 @@ Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::post('/groupBooking', [\App\Http\Controllers\GroupsBookingsController::class, 'createGroupBooking']);
     Route::delete('/groupBooking', [\App\Http\Controllers\GroupsBookingsController::class, 'deleteGroupBooking']);
     Route::patch('/groupBooking', [\App\Http\Controllers\GroupsBookingsController::class, 'editGroupBooking']);
+
+    Route::post('/hours', [\App\Http\Controllers\SubjectHourCountController::class, 'createHourCount']);
+    Route::delete('/hours', [\App\Http\Controllers\SubjectHourCountController::class, 'deleteHourCount']);
+    Route::patch('/hours', [\App\Http\Controllers\SubjectHourCountController::class, 'editHourCount']);
 });
 

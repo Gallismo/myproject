@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Teacher extends Model
+class subjectHourCount extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-         'name',
-         'surname',
-         'middle_name',
-         'code'
+        'group_id',
+        'subject_id',
+        'hours_all',
+        'hours_left'
     ];
 
     protected $hidden = [
