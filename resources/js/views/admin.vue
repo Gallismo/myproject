@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Header></Header>
-        <component v-bind:is="currentTab"></component>
+        <Header @switchTab="switchTab"></Header>
+        <Card :tab="currentTab"></Card>
     </div>
 </template>
 
@@ -10,7 +10,12 @@
         name: "admin",
         data: function () {
             return {
-                currentTab: "Card2"
+                currentTab: "Schedule"
+            }
+        },
+        methods: {
+            switchTab: function (name) {
+                this.currentTab = name;
             }
         }
     }

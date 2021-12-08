@@ -6,7 +6,11 @@
             {{ dropdown.name }}
         </a>
         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#" v-for="item in dropdown.items" :key="item">{{ item }}</a>
+            <a class="dropdown-item" href="#"
+               v-for="(item,index) in dropdown.items" :key="index"
+               @click="switchTab"
+               :id="index"
+            >{{ item }}</a>
         </div>
     </li>
 </template>
@@ -14,6 +18,11 @@
 <script>
     export default {
         name: "NavDropdown",
+        methods: {
+            switchTab: function (event) {
+                this.$emit('switchTab', event.target.id)
+            }
+        },
         props: {
             id: String,
             dropdown: Object
