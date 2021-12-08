@@ -10,7 +10,12 @@
 <script>
     export default {
         name: "CollapseToggler",
-        props: ['target_id']
+        props: {
+            target_id: {
+                type: String,
+                required: true
+            }
+        }
     }
 </script>
 

@@ -16,7 +16,8 @@
         methods: {
             switchTab: function (event) {
                 if (event.target.id === 'Logout') {
-                    console.log('Logout');
+                    alert('Logout');
+                    return;
                 }
                 this.$emit('switchHandle', event.target.id);
             }
