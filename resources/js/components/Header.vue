@@ -11,11 +11,6 @@
 <script>
     export default {
         name: "Header",
-        data: function () {
-            return {
-                isExpanded: false
-            }
-        },
         methods: {
             switchTab: function (name) {
                 this.$emit('switchTab', name);

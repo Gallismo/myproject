@@ -23,6 +23,16 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/admin/{any}', function () {
 //    return view('admin');
 //})->where('any', '.*')->middleware('bearer')->middleware('isAdmin');
-Route::get('/{any}', function () {
+//Route::get('/{any}', function () {
+//    return view('index');
+//})->where('any', '.*');
+
+Route::get('/', function () {
     return view('index');
-})->where('any', '.*');
+});
+Route::get('/admin', function () {
+    return view('index');
+});
+Route::get('/prepod', function () {
+    return view('index');
+});

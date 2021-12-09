@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/user/register', [\App\Http\Controllers\UserController::class, 'register']);
 Route::post('/user/login', [\App\Http\Controllers\UserController::class, 'login']);
 
+Route::get('/Group', [\App\Http\Controllers\MainReadController::class, 'getAllGroups']);
+
+
 Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::post('/user/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
     Route::delete('/user/delete', [\App\Http\Controllers\UserController::class, 'deleteUser']);

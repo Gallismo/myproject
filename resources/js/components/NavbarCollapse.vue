@@ -31,13 +31,6 @@
                         User:'Пользователи'
                     },
                     dropdowns: {
-                        dropdown1: {
-                            name: 'Звонки и расписания',
-                            items: {
-                                Schedule:'Расписание звонков',
-                                Booking:'Расписание занятий'
-                            }
-                        },
                         dropdown2: {
                             name: 'Группы и аудитории',
                             items: {
@@ -46,6 +39,13 @@
                                 Subjects:'Предметы',
                                 Audiences:'Аудитории',
                                 Department:'Отделения'
+                            }
+                        },
+                        dropdown1: {
+                            name: 'Звонки и расписания',
+                            items: {
+                                Schedule:'Расписание звонков',
+                                Booking:'Расписание занятий'
                             }
                         }
                     }

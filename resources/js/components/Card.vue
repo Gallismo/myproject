@@ -1,8 +1,6 @@
 <template>
     <div class="card bg-dark text-white container mt-lg-5 mt-4">
-        <div class="card-body">
-            <component v-bind:is="tab"></component>
-        </div>
+            <component v-bind:is="tab" class="card-body flex row"></component>
     </div>
 </template>
 

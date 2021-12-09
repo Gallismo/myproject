@@ -10,7 +10,7 @@
         name: "admin",
         data: function () {
             return {
-                currentTab: "Schedule"
+                currentTab: "Groups"
             }
         },
         methods: {
