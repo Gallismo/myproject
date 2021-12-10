@@ -43,6 +43,7 @@
         methods: {
             changeGroup: function (event) {
                 this.$emit('changeGroup', event.target.id)
+                this.header = this.groupList[`${event.target.id}`]
             }
         }
     }

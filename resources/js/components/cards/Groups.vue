@@ -1,7 +1,7 @@
 <template >
     <div @click="log" class="justify-content-center">
         <Dropdown :list="dropdownProp" id="GroupDropdown" @changeGroup="changeGroup" class="col-6 col-md-2"></Dropdown>
-        <Card2 :group="currentGroup" class="col-4"></Card2>
+        <groupDescription :group="currentGroup" class="col-4"></groupDescription>
     </div>
 </template>
 
