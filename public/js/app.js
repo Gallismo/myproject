@@ -2278,6 +2278,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2288,11 +2295,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Header",
-  methods: {
-    switchTab: function switchTab(name) {
-      this.$emit('switchTab', name);
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
+    currentTab: 'getCurrentTab'
+  })),
+  watch: {
+    currentTab: function currentTab() {
       var elem = this.$refs.button.$el;
 
       if (elem.attributes.getNamedItem('aria-expanded').value === 'true') {
@@ -2315,6 +2325,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2332,13 +2349,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "NavDropdown",
-  methods: {
-    switchTab: function switchTab(event) {
-      this.$emit('switchTab', event.target.id);
-    }
-  },
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['switchTab'])),
   props: {
     id: String,
     dropdown: Object
@@ -2358,6 +2372,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2374,43 +2395,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "NavbarCollapse",
   props: ['id'],
-  methods: {
-    switchTab: function switchTab(name) {
-      this.$emit('switchTab', name);
-    }
-  },
-  data: function data() {
-    return {
-      links: {
-        simpleLinks: {
-          Prepod: 'Преподаватели',
-          User: 'Пользователи'
-        },
-        dropdowns: {
-          dropdown2: {
-            name: 'Группы и аудитории',
-            items: {
-              Groups: 'Группы',
-              Counter: 'Счетчик остатка часов',
-              Subjects: 'Предметы',
-              Audiences: 'Аудитории',
-              Department: 'Отделения'
-            }
-          },
-          dropdown1: {
-            name: 'Звонки и расписания',
-            items: {
-              Schedule: 'Расписание звонков',
-              Booking: 'Расписание занятий'
-            }
-          }
-        }
-      }
-    };
-  }
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getLinks']))
 });
 
 /***/ }),
@@ -2426,12 +2415,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "NavbarItem",
   props: {
@@ -2440,16 +2437,18 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     }
   },
-  methods: {
+  methods: _objectSpread({
     switchTab: function switchTab(event) {
       if (event.target.id === 'Logout') {
         alert('Logout');
         return;
       }
 
-      this.$emit('switchHandle', event.target.id);
+      this.switchAction(event);
     }
-  }
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
+    switchAction: 'switchTab'
+  }))
 });
 
 /***/ }),
@@ -2807,6 +2806,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2814,18 +2820,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "admin",
-  data: function data() {
-    return {
-      currentTab: "Groups"
-    };
-  },
-  methods: {
-    switchTab: function switchTab(name) {
-      this.currentTab = name;
-    }
-  }
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
+    currentTab: 'getCurrentTab'
+  }))
 });
 
 /***/ }),
@@ -2861,7 +2861,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _storage_storage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage/storage.js */ "./resources/js/storage/storage.js");
+/* harmony import */ var _storage_storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage/storage */ "./resources/js/storage/storage.js");
 /* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -2892,7 +2892,7 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 var app = new Vue({
   el: '#app',
   router: _router_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-  storage: _storage_storage_js__WEBPACK_IMPORTED_MODULE_0__["default"]
+  store: _storage_storage__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
 
 /***/ }),
@@ -3018,20 +3018,62 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
-var storage = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
-  actions: {},
-  mutations: {},
-  state: {},
-  getters: {},
+var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+  actions: {
+    switchTab: function switchTab(context, tabName) {
+      return context.commit('switchTab', tabName.target.id);
+    }
+  },
+  mutations: {
+    switchTab: function switchTab(state, tabName) {
+      return state.currentTab = tabName;
+    }
+  },
+  state: {
+    links: {
+      simpleLinks: {
+        Prepod: 'Преподаватели',
+        User: 'Пользователи'
+      },
+      dropdowns: {
+        dropdown2: {
+          name: 'Группы и аудитории',
+          items: {
+            Groups: 'Группы',
+            Counter: 'Счетчик остатка часов',
+            Subjects: 'Предметы',
+            Audiences: 'Аудитории',
+            Department: 'Отделения'
+          }
+        },
+        dropdown1: {
+          name: 'Звонки и расписания',
+          items: {
+            Schedule: 'Расписание звонков',
+            Booking: 'Расписание занятий'
+          }
+        }
+      }
+    },
+    currentTab: "Groups"
+  },
+  getters: {
+    getLinks: function getLinks(state) {
+      return state.links;
+    },
+    getCurrentTab: function getCurrentTab(state) {
+      return state.currentTab;
+    }
+  },
   modules: {}
 });
 
 var modules = __webpack_require__("./resources/js/storage/modules sync recursive \\.js$/");
 
 modules.keys().map(function (key) {
-  return storage.registerModule(key.split('/').pop().split('.')[0], modules(key)["default"]);
+  return store.registerModule(key.split('/').pop().split('.')[0], modules(key)["default"]);
 });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (storage);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
 /***/ }),
 
@@ -40865,10 +40907,7 @@ var render = function () {
           attrs: { target_id: "#navbar" },
         }),
         _vm._v(" "),
-        _c("NavbarCollapse", {
-          attrs: { id: "navbar" },
-          on: { switchTab: _vm.switchTab },
-        }),
+        _c("NavbarCollapse", { attrs: { id: "navbar" } }),
       ],
       1
     ),
@@ -40967,19 +41006,17 @@ var render = function () {
         "ul",
         { staticClass: "navbar-nav" },
         [
-          _vm._l(_vm.links.dropdowns, function (item, index) {
+          _vm._l(this.getLinks.dropdowns, function (item, index) {
             return _c("NavDropdown", {
               key: index,
               attrs: { id: index, dropdown: item },
-              on: { switchTab: _vm.switchTab },
             })
           }),
           _vm._v(" "),
-          _vm._l(_vm.links.simpleLinks, function (link, index) {
+          _vm._l(this.getLinks.simpleLinks, function (link, index) {
             return _c("NavbarItem", {
               key: index,
               attrs: { name: [index, link] },
-              on: { switchHandle: _vm.switchTab },
             })
           }),
           _vm._v(" "),
@@ -41339,11 +41376,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [
-      _c("Header", { on: { switchTab: _vm.switchTab } }),
-      _vm._v(" "),
-      _c("Card", { attrs: { tab: _vm.currentTab } }),
-    ],
+    [_c("Header"), _vm._v(" "), _c("Card", { attrs: { tab: _vm.currentTab } })],
     1
   )
 }

@@ -16,12 +16,12 @@
 </template>
 
 <script>
+    import {mapActions} from "vuex";
+
     export default {
         name: "NavDropdown",
         methods: {
-            switchTab: function (event) {
-                this.$emit('switchTab', event.target.id)
-            }
+            ...mapActions(['switchTab'])
         },
         props: {
             id: String,

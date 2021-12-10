@@ -23,10 +23,10 @@ window.Vue = require('vue').default;
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-import storage from "./storage/storage.js";
+import store from "./storage/storage";
 import router from "./router.js";
 const app = new Vue({
     el: '#app',
     router,
-    storage
+    store
 });

@@ -1,22 +1,18 @@
 <template>
     <div>
-        <Header @switchTab="switchTab"></Header>
+        <Header></Header>
         <Card :tab="currentTab"></Card>
     </div>
 </template>
 
 <script>
+    import {mapGetters} from 'vuex';
     export default {
         name: "admin",
-        data: function () {
-            return {
-                currentTab: "Groups"
-            }
-        },
-        methods: {
-            switchTab: function (name) {
-                this.currentTab = name;
-            }
+        computed: {
+            ...mapGetters({
+                currentTab: 'getCurrentTab'
+            })
         }
     }
 </script>

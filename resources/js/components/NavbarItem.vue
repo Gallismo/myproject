@@ -5,6 +5,7 @@
 </template>
 
 <script>
+    import {mapGetters, mapActions, mapMutations, mapState} from 'vuex';
     export default {
         name: "NavbarItem",
         props: {
@@ -19,8 +20,11 @@
                     alert('Logout');
                     return;
                 }
-                this.$emit('switchHandle', event.target.id);
-            }
+                this.switchAction(event);
+            },
+            ...mapActions({
+                switchAction: 'switchTab'
+            })
         }
     }
 </script>
