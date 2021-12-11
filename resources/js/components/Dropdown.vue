@@ -1,49 +1,35 @@
 <template>
     <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" :id="id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-secondary dropdown-toggle col-12" type="button" :id="id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{header}}
         </button>
-        <div class="dropdown-menu bg-dark mt-2" :aria-labelledby="id">
+        <div class="dropdown-menu bg-dark mt-1" :aria-labelledby="id">
             <a class="dropdown-item" href="#"
-               v-for="(item, index) in list"
+               v-for="(item, index) in getDropdownData"
                :id="index" :key="index"
-               @click="changeGroup"
+               @click="switchCurrentGroup"
             >{{item}}</a>
         </div>
     </div>
 </template>
 
 <script>
+    import {mapGetters,mapActions} from 'vuex';
     export default {
         name: "Dropdown",
-        async mounted() {
-            console.log(this.groupList);
-        },
-        data: function () {
-            return {
-                header: '',
-                groupList: this.list
-            }
-        },
-        watch: {
-            groupList: function (newValue, oldValue) {
-                this.header = Object.values(this.groupList)[0]
-            }
-        },
         props: {
-            list: {
-                type: Object,
-                required: true
-            },
             id: {
                 type: String,
                 required: true
             }
         },
         methods: {
-            changeGroup: function (event) {
-                this.$emit('changeGroup', event.target.id)
-                this.header = this.groupList[`${event.target.id}`]
+            ...mapActions(['switchCurrentGroup'])
+        },
+        computed: {
+            ...mapGetters(['getDropdownData', 'getCurrentGroup']),
+            header: function () {
+                return this.getDropdownData[Object.keys(this.getDropdownData).find(code => code === this.getCurrentGroup.code)]
             }
         }
     }

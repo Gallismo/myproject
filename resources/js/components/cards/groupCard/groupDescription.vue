@@ -1,22 +1,22 @@
 <template>
     <div class="card bg-dark text-white">
-        <div class="card-body" @click="editGroup">
-            <div><h5 class="card-title" id="GroupName">{{group.name}}</h5></div>
-            <div class="card-text" id="DepartmentName">{{group.department_name}}</div>
-            <div class="card-text" id="StartYear">{{group.start_year}}</div>
-            <div class="card-text" id="EndYear">{{group.end_year}}</div>
-        </div>
+        <form class="card-body">
+            <div class="card-text row align-items-center justify-content-around">Выбрать группу <slot></slot></div>
+            <div class="card-text " id="GroupName">Название группы {{getCurrentGroup.name}}</div>
+            <formGroup></formGroup>
+            <div class="card-text" id="DepartmentName">Отделение {{getCurrentGroup.department_name}}</div>
+            <div class="card-text" id="StartYear">Год поступления {{getCurrentGroup.start_year}}</div>
+            <div class="card-text" id="EndYear">Год окончания {{getCurrentGroup.end_year}}</div>
+        </form>
     </div>
 </template>
 
 <script>
+    import {mapGetters} from 'vuex';
     export default {
         name: "groupDescription",
-        props: {
-            group: {
-                type: Object,
-                required: true
-            }
+        computed: {
+            ...mapGetters(['getCurrentGroup'])
         },
         methods: {
             replaceTag: function (element, newTag)  {

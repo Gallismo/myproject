@@ -2082,6 +2082,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Card",
   props: {
@@ -2136,13 +2138,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
 //
@@ -2159,53 +2160,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Dropdown",
-  mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              console.log(_this.groupList);
-
-            case 1:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
-  },
-  data: function data() {
-    return {
-      header: '',
-      groupList: this.list
-    };
-  },
-  watch: {
-    groupList: function groupList(newValue, oldValue) {
-      this.header = Object.values(this.groupList)[0];
-    }
-  },
   props: {
-    list: {
-      type: Object,
-      required: true
-    },
     id: {
       type: String,
       required: true
     }
   },
-  methods: {
-    changeGroup: function changeGroup(event) {
-      this.$emit('changeGroup', event.target.id);
-      this.header = this.groupList["".concat(event.target.id)];
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['switchCurrentGroup'])),
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getDropdownData', 'getCurrentGroup'])), {}, {
+    header: function header() {
+      var _this = this;
+
+      return this.getDropdownData[Object.keys(this.getDropdownData).find(function (code) {
+        return code === _this.getCurrentGroup.code;
+      })];
     }
-  }
+  })
 });
 
 /***/ }),
@@ -2550,6 +2523,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2563,9 +2543,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Groups",
-  created: function created() {
+  mounted: function mounted() {
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2573,10 +2555,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return _this.getAllGroups();
+              _this.getGroups();
 
-            case 2:
+            case 1:
             case "end":
               return _context.stop();
           }
@@ -2584,54 +2565,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
-  data: function data() {
-    return {
-      currentGroup: {},
-      groupsData: [],
-      dropdownProp: {}
-    };
-  },
-  watch: {
-    groupsData: function groupsData() {
-      this.currentGroup = this.groupsData[0];
-    }
-  },
-  methods: {
-    log: function log() {// console.log(this.currentGroup);
-    },
-    getAllGroups: function getAllGroups() {
-      var _this2 = this;
-
-      axios('/api/Group').then(function (response) {
-        return response.data;
-      }).then(function (data) {
-        return _this2.groupsData = data;
-      })["catch"](function (error) {
-        if (error.response) {
-          // Request made and server responded
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
-        }
-      }).then(function (info) {
-        info.map(function (group) {
-          _this2.$set(_this2.dropdownProp, group.code, group.name);
-        });
-      });
-    },
-    changeGroup: function changeGroup(code) {
-      var target = this.groupsData.filter(function (obj) {
-        return obj.code === code;
-      })[0];
-      this.currentGroup = target;
-    }
-  }
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getGroups'])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getCurrentGroup']))
 });
 
 /***/ }),
@@ -2720,10 +2655,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/groupDescription.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/groupDescription.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/formGroup.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/formGroup.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2740,16 +2675,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "groupDescription",
-  props: {
-    group: {
-      type: Object,
+  name: "formGroup",
+  inject: {
+    name: {
+      type: String,
       required: true
     }
-  },
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/groupDescription.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/groupDescription.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "groupDescription",
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentGroup'])),
   methods: {
     replaceTag: function replaceTag(element, newTag) {
       var elementNew = document.createElement(newTag);
@@ -2994,10 +2966,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  actions: {},
-  mutations: {},
-  state: {},
-  getters: {}
+  actions: {
+    getGroups: function getGroups(context) {
+      axios('/api/Group').then(function (response) {
+        return context.commit('groupsDataFill', response.data);
+      })["catch"](function (error) {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+        }
+      });
+    },
+    switchCurrentGroup: function switchCurrentGroup(context, group) {
+      return context.commit('switchCurrentGroup', group.target.id);
+    }
+  },
+  mutations: {
+    groupsDataFill: function groupsDataFill(state, response) {
+      state.groupsData = response;
+      state.currentGroup = response[0];
+    },
+    switchCurrentGroup: function switchCurrentGroup(state, code) {
+      state.currentGroup = state.groupsData.find(function (obj) {
+        return obj.code === code;
+      });
+    }
+  },
+  state: {
+    groupsData: [],
+    currentGroup: {}
+  },
+  getters: {
+    getGroupsData: function getGroupsData(state) {
+      return state.groupsData;
+    },
+    getDropdownData: function getDropdownData(state) {
+      var DropdownProp = {};
+      state.groupsData.map(function (group) {
+        return DropdownProp[group.code] = group.name;
+      });
+      return DropdownProp;
+    },
+    getCurrentGroup: function getCurrentGroup(state) {
+      return state.currentGroup;
+    }
+  }
 });
 
 /***/ }),
@@ -39864,6 +39885,45 @@ component.options.__file = "resources/js/components/cards/User.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/cards/groupCard/formGroup.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/cards/groupCard/formGroup.vue ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _formGroup_vue_vue_type_template_id_91966758_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./formGroup.vue?vue&type=template&id=91966758&scoped=true& */ "./resources/js/components/cards/groupCard/formGroup.vue?vue&type=template&id=91966758&scoped=true&");
+/* harmony import */ var _formGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formGroup.vue?vue&type=script&lang=js& */ "./resources/js/components/cards/groupCard/formGroup.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _formGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _formGroup_vue_vue_type_template_id_91966758_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _formGroup_vue_vue_type_template_id_91966758_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "91966758",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/cards/groupCard/formGroup.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/cards/groupCard/groupDescription.vue":
 /*!**********************************************************************!*\
   !*** ./resources/js/components/cards/groupCard/groupDescription.vue ***!
@@ -40269,6 +40329,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/cards/groupCard/formGroup.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/cards/groupCard/formGroup.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_formGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./formGroup.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/formGroup.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_formGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/cards/groupCard/groupDescription.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************!*\
   !*** ./resources/js/components/cards/groupCard/groupDescription.vue?vue&type=script&lang=js& ***!
@@ -40623,6 +40699,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/cards/groupCard/formGroup.vue?vue&type=template&id=91966758&scoped=true&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/cards/groupCard/formGroup.vue?vue&type=template&id=91966758&scoped=true& ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formGroup_vue_vue_type_template_id_91966758_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formGroup_vue_vue_type_template_id_91966758_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formGroup_vue_vue_type_template_id_91966758_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./formGroup.vue?vue&type=template&id=91966758&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/formGroup.vue?vue&type=template&id=91966758&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/cards/groupCard/groupDescription.vue?vue&type=template&id=474209d4&scoped=true&":
 /*!*****************************************************************************************************************!*\
   !*** ./resources/js/components/cards/groupCard/groupDescription.vue?vue&type=template&id=474209d4&scoped=true& ***!
@@ -40690,12 +40783,14 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "card bg-dark text-white container mt-lg-5 mt-4" },
-    [_c(_vm.tab, { tag: "component", staticClass: "card-body flex row" })],
-    1
-  )
+  return _c("section", [
+    _c(
+      "div",
+      { staticClass: "card bg-dark text-white container mt-lg-5 mt-4" },
+      [_c(_vm.tab, { tag: "component", staticClass: "card-body flex row" })],
+      1
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -40763,7 +40858,7 @@ var render = function () {
     _c(
       "button",
       {
-        staticClass: "btn btn-secondary dropdown-toggle",
+        staticClass: "btn btn-secondary dropdown-toggle col-12",
         attrs: {
           type: "button",
           id: _vm.id,
@@ -40778,17 +40873,17 @@ var render = function () {
     _c(
       "div",
       {
-        staticClass: "dropdown-menu bg-dark mt-2",
+        staticClass: "dropdown-menu bg-dark mt-1",
         attrs: { "aria-labelledby": _vm.id },
       },
-      _vm._l(_vm.list, function (item, index) {
+      _vm._l(_vm.getDropdownData, function (item, index) {
         return _c(
           "a",
           {
             key: index,
             staticClass: "dropdown-item",
             attrs: { href: "#", id: index },
-            on: { click: _vm.changeGroup },
+            on: { click: _vm.switchCurrentGroup },
           },
           [_vm._v(_vm._s(item))]
         )
@@ -41190,18 +41285,19 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "justify-content-center", on: { click: _vm.log } },
+    { staticClass: "align-items-center" },
     [
-      _c("Dropdown", {
-        staticClass: "col-6 col-md-2",
-        attrs: { list: _vm.dropdownProp, id: "GroupDropdown" },
-        on: { changeGroup: _vm.changeGroup },
-      }),
-      _vm._v(" "),
-      _c("groupDescription", {
-        staticClass: "col-4",
-        attrs: { group: _vm.currentGroup },
-      }),
+      _c(
+        "groupDescription",
+        { staticClass: "col-4" },
+        [
+          _c("Dropdown", {
+            staticClass: "mb-1 col-6",
+            attrs: { id: "GroupDropdown" },
+          }),
+        ],
+        1
+      ),
     ],
     1
   )
@@ -41313,6 +41409,67 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/formGroup.vue?vue&type=template&id=91966758&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/formGroup.vue?vue&type=template&id=91966758&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "form-group" }, [
+    _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+      _vm._v("Адрес электронной почты"),
+    ]),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: this.name,
+          expression: "this.name",
+        },
+      ],
+      staticClass: "form-control",
+      attrs: {
+        type: "email",
+        id: "exampleInputEmail1",
+        "aria-describedby": "emailHelp",
+      },
+      domProps: { value: this.name },
+      on: {
+        input: function ($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.$set(this, "name", $event.target.value)
+        },
+      },
+    }),
+    _vm._v(" "),
+    _c(
+      "small",
+      { staticClass: "form-text text-muted", attrs: { id: "emailHelp" } },
+      [_vm._v("Мы никогда никому не передадим Вашу электронную почту.")]
+    ),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/groupDescription.vue?vue&type=template&id=474209d4&scoped=true&":
 /*!********************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/groupDescription.vue?vue&type=template&id=474209d4&scoped=true& ***!
@@ -41330,25 +41487,42 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card bg-dark text-white" }, [
-    _c("div", { staticClass: "card-body", on: { click: _vm.editGroup } }, [
-      _c("div", [
-        _c("h5", { staticClass: "card-title", attrs: { id: "GroupName" } }, [
-          _vm._v(_vm._s(_vm.group.name)),
+    _c(
+      "form",
+      { staticClass: "card-body" },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "card-text row align-items-center justify-content-around",
+          },
+          [_vm._v("Выбрать группу "), _vm._t("default")],
+          2
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-text ", attrs: { id: "GroupName" } }, [
+          _vm._v("Название группы " + _vm._s(_vm.getCurrentGroup.name)),
         ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-text", attrs: { id: "DepartmentName" } }, [
-        _vm._v(_vm._s(_vm.group.department_name)),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-text", attrs: { id: "StartYear" } }, [
-        _vm._v(_vm._s(_vm.group.start_year)),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-text", attrs: { id: "EndYear" } }, [
-        _vm._v(_vm._s(_vm.group.end_year)),
-      ]),
-    ]),
+        _vm._v(" "),
+        _c("formGroup"),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "card-text", attrs: { id: "DepartmentName" } },
+          [_vm._v("Отделение " + _vm._s(_vm.getCurrentGroup.department_name))]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-text", attrs: { id: "StartYear" } }, [
+          _vm._v("Год поступления " + _vm._s(_vm.getCurrentGroup.start_year)),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-text", attrs: { id: "EndYear" } }, [
+          _vm._v("Год окончания " + _vm._s(_vm.getCurrentGroup.end_year)),
+        ]),
+      ],
+      1
+    ),
   ])
 }
 var staticRenderFns = []
@@ -58027,6 +58201,7 @@ var map = {
 	"./cards/Schedule.vue": "./resources/js/components/cards/Schedule.vue",
 	"./cards/Subjects.vue": "./resources/js/components/cards/Subjects.vue",
 	"./cards/User.vue": "./resources/js/components/cards/User.vue",
+	"./cards/groupCard/formGroup.vue": "./resources/js/components/cards/groupCard/formGroup.vue",
 	"./cards/groupCard/groupDescription.vue": "./resources/js/components/cards/groupCard/groupDescription.vue"
 };
 
