@@ -1,7 +1,6 @@
 <template >
-    <div class="align-items-center">
-        <groupDescription class="col-4">
-            <Dropdown id="GroupDropdown" class="mb-1 col-6"></Dropdown>
+    <div>
+        <groupDescription class="col-4" v-if="getGroupsData[0]">
         </groupDescription>
     </div>
 </template>
@@ -17,7 +16,7 @@
             ...mapActions(['getGroups'])
         },
         computed: {
-            ...mapGetters(['getCurrentGroup'])
+            ...mapGetters(['getCurrentGroup', 'getGroupsData'])
         }
     }
 </script>

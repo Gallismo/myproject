@@ -2127,62 +2127,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dropdown.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dropdown.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Dropdown",
-  props: {
-    id: {
-      type: String,
-      required: true
-    }
-  },
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['switchCurrentGroup'])),
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getDropdownData', 'getCurrentGroup'])), {}, {
-    header: function header() {
-      var _this = this;
-
-      return this.getDropdownData[Object.keys(this.getDropdownData).find(function (code) {
-        return code === _this.getCurrentGroup.code;
-      })];
-    }
-  })
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -2543,7 +2487,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Groups",
@@ -2566,7 +2509,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getGroups'])),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getCurrentGroup']))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getCurrentGroup', 'getGroupsData']))
 });
 
 /***/ }),
@@ -2655,6 +2598,62 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/GroupDropdown.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/GroupDropdown.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "GroupDropdown",
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['switchCurrentGroup'])),
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getDropdownData', 'getCurrentGroup'])), {}, {
+    header: function header() {
+      var _this = this;
+
+      return this.getDropdownData[Object.keys(this.getDropdownData).find(function (code) {
+        return code === _this.getCurrentGroup.code;
+      })];
+    }
+  })
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/formGroup.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/formGroup.vue?vue&type=script&lang=js& ***!
@@ -2675,11 +2674,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "formGroup",
-  inject: {
+  mounted: function mounted() {
+    this.value = this.$store.getters[this.getter][this.name];
+  },
+  data: function data() {
+    return {
+      value: ''
+    };
+  },
+  methods: {
+    throwValue: function throwValue(event) {
+      var data = {
+        name: event.target.id,
+        value: this.value
+      };
+      this.$emit('throwValue', data);
+    }
+  },
+  props: {
     name: {
       type: String,
+      required: true
+    },
+    getter: {
+      type: String,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    isDisabled: {
+      type: Boolean,
       required: true
     }
   }
@@ -2718,51 +2749,63 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "groupDescription",
+  data: function data() {
+    return {
+      formDisabled: true,
+      getter: 'getCurrentGroup',
+      inputs: {
+        name: {
+          title: 'Название группы',
+          value: ''
+        },
+        department_name: {
+          title: 'Отделение',
+          value: ''
+        },
+        start_year: {
+          title: 'Год поступления',
+          value: ''
+        },
+        end_year: {
+          title: 'Год окончания',
+          value: ''
+        }
+      }
+    };
+  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentGroup'])),
-  methods: {
-    replaceTag: function replaceTag(element, newTag) {
-      var elementNew = document.createElement(newTag);
-
-      if (element.localName === newTag) {
-        return;
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['editGroup', 'getGroups'])), {}, {
+    allowEditSwitch: function allowEditSwitch(event) {
+      if (this.formDisabled) {
+        event.target.innerText = "Отменить редактирование";
+      } else {
+        event.target.innerText = "Редактировать";
       }
 
-      elementNew.value = element.innerHTML;
-      Array.prototype.forEach.call(element.attributes, function (attr) {
-        elementNew.setAttribute(attr.name, attr.value);
-      });
-      element.parentNode.insertBefore(elementNew, element);
-      element.parentNode.removeChild(element);
-      return elementNew;
+      this.formDisabled = !this.formDisabled;
     },
-    editGroup: function editGroup(event) {
-      var element = document.getElementById(event.target.id);
-
-      switch (event.target.id) {
-        case 'GroupName':
-          this.replaceTag(element, 'input');
-          break;
-
-        case 'DepartmentName':
-          console.log('DepartmentName');
-          break;
-
-        case 'StartYear':
-          console.log('StartYear');
-          break;
-
-        case 'EndYear':
-          console.log('EndYear');
-          break;
-
-        default:
-          console.log('Lox');
-      }
+    submitChanges: function submitChanges() {
+      var data = {
+        name: this.getCurrentGroup.name,
+        name_new: this.inputs.name.value
+      };
+      this.editGroup(data);
+    },
+    commitValue: function commitValue(data) {
+      this.inputs[data.name].value = data.value;
     }
-  }
+  })
 });
 
 /***/ }),
@@ -2987,6 +3030,31 @@ __webpack_require__.r(__webpack_exports__);
     },
     switchCurrentGroup: function switchCurrentGroup(context, group) {
       return context.commit('switchCurrentGroup', group.target.id);
+    },
+    editGroup: function editGroup(context, data) {
+      axios({
+        method: 'patch',
+        url: '/api/Group',
+        data: data
+      }).then(function (response) {
+        return console.log(response.data);
+      }).then(function () {
+        context.commit('groupsDataFill', []);
+        context.dispatch('getGroups');
+      })["catch"](function (error) {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+        }
+      });
     }
   },
   mutations: {
@@ -39261,45 +39329,6 @@ component.options.__file = "resources/js/components/CollapseToggler.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/Dropdown.vue":
-/*!**********************************************!*\
-  !*** ./resources/js/components/Dropdown.vue ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _Dropdown_vue_vue_type_template_id_ef782e08_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Dropdown.vue?vue&type=template&id=ef782e08&scoped=true& */ "./resources/js/components/Dropdown.vue?vue&type=template&id=ef782e08&scoped=true&");
-/* harmony import */ var _Dropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Dropdown.vue?vue&type=script&lang=js& */ "./resources/js/components/Dropdown.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Dropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Dropdown_vue_vue_type_template_id_ef782e08_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Dropdown_vue_vue_type_template_id_ef782e08_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "ef782e08",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Dropdown.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/components/ExampleComponent.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue ***!
@@ -39885,6 +39914,45 @@ component.options.__file = "resources/js/components/cards/User.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/cards/groupCard/GroupDropdown.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/cards/groupCard/GroupDropdown.vue ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _GroupDropdown_vue_vue_type_template_id_6f471cc9_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GroupDropdown.vue?vue&type=template&id=6f471cc9&scoped=true& */ "./resources/js/components/cards/groupCard/GroupDropdown.vue?vue&type=template&id=6f471cc9&scoped=true&");
+/* harmony import */ var _GroupDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GroupDropdown.vue?vue&type=script&lang=js& */ "./resources/js/components/cards/groupCard/GroupDropdown.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _GroupDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _GroupDropdown_vue_vue_type_template_id_6f471cc9_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _GroupDropdown_vue_vue_type_template_id_6f471cc9_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "6f471cc9",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/cards/groupCard/GroupDropdown.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/cards/groupCard/formGroup.vue":
 /*!***************************************************************!*\
   !*** ./resources/js/components/cards/groupCard/formGroup.vue ***!
@@ -40070,22 +40138,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseToggler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CollapseToggler.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CollapseToggler.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseToggler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Dropdown.vue?vue&type=script&lang=js&":
-/*!***********************************************************************!*\
-  !*** ./resources/js/components/Dropdown.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Dropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Dropdown.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dropdown.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Dropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -40329,6 +40381,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/cards/groupCard/GroupDropdown.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/cards/groupCard/GroupDropdown.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GroupDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GroupDropdown.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/GroupDropdown.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GroupDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/cards/groupCard/formGroup.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************!*\
   !*** ./resources/js/components/cards/groupCard/formGroup.vue?vue&type=script&lang=js& ***!
@@ -40423,23 +40491,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseToggler_vue_vue_type_template_id_2451b9d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseToggler_vue_vue_type_template_id_2451b9d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CollapseToggler.vue?vue&type=template&id=2451b9d4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CollapseToggler.vue?vue&type=template&id=2451b9d4&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Dropdown.vue?vue&type=template&id=ef782e08&scoped=true&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/Dropdown.vue?vue&type=template&id=ef782e08&scoped=true& ***!
-  \*****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dropdown_vue_vue_type_template_id_ef782e08_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dropdown_vue_vue_type_template_id_ef782e08_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dropdown_vue_vue_type_template_id_ef782e08_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Dropdown.vue?vue&type=template&id=ef782e08&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dropdown.vue?vue&type=template&id=ef782e08&scoped=true&");
 
 
 /***/ }),
@@ -40699,6 +40750,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/cards/groupCard/GroupDropdown.vue?vue&type=template&id=6f471cc9&scoped=true&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/cards/groupCard/GroupDropdown.vue?vue&type=template&id=6f471cc9&scoped=true& ***!
+  \**************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GroupDropdown_vue_vue_type_template_id_6f471cc9_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GroupDropdown_vue_vue_type_template_id_6f471cc9_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GroupDropdown_vue_vue_type_template_id_6f471cc9_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GroupDropdown.vue?vue&type=template&id=6f471cc9&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/GroupDropdown.vue?vue&type=template&id=6f471cc9&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/cards/groupCard/formGroup.vue?vue&type=template&id=91966758&scoped=true&":
 /*!**********************************************************************************************************!*\
   !*** ./resources/js/components/cards/groupCard/formGroup.vue?vue&type=template&id=91966758&scoped=true& ***!
@@ -40830,67 +40898,6 @@ var render = function () {
     },
     [_c("span", { staticClass: "navbar-toggler-icon" })]
   )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dropdown.vue?vue&type=template&id=ef782e08&scoped=true&":
-/*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dropdown.vue?vue&type=template&id=ef782e08&scoped=true& ***!
-  \********************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "dropdown" }, [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-secondary dropdown-toggle col-12",
-        attrs: {
-          type: "button",
-          id: _vm.id,
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false",
-        },
-      },
-      [_vm._v("\n        " + _vm._s(_vm.header) + "\n    ")]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "dropdown-menu bg-dark mt-1",
-        attrs: { "aria-labelledby": _vm.id },
-      },
-      _vm._l(_vm.getDropdownData, function (item, index) {
-        return _c(
-          "a",
-          {
-            key: index,
-            staticClass: "dropdown-item",
-            attrs: { href: "#", id: index },
-            on: { click: _vm.switchCurrentGroup },
-          },
-          [_vm._v(_vm._s(item))]
-        )
-      }),
-      0
-    ),
-  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -41285,19 +41292,10 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "align-items-center" },
     [
-      _c(
-        "groupDescription",
-        { staticClass: "col-4" },
-        [
-          _c("Dropdown", {
-            staticClass: "mb-1 col-6",
-            attrs: { id: "GroupDropdown" },
-          }),
-        ],
-        1
-      ),
+      _vm.getGroupsData[0]
+        ? _c("groupDescription", { staticClass: "col-4" })
+        : _vm._e(),
     ],
     1
   )
@@ -41409,6 +41407,67 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/GroupDropdown.vue?vue&type=template&id=6f471cc9&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/GroupDropdown.vue?vue&type=template&id=6f471cc9&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "dropdown" }, [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-secondary dropdown-toggle col-12",
+        attrs: {
+          type: "button",
+          id: _vm.id,
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false",
+        },
+      },
+      [_vm._v("\n        " + _vm._s(_vm.header) + "\n    ")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "dropdown-menu bg-dark mt-1",
+        attrs: { "aria-labelledby": _vm.id },
+      },
+      _vm._l(_vm.getDropdownData, function (item, index) {
+        return _c(
+          "a",
+          {
+            key: index,
+            staticClass: "dropdown-item",
+            attrs: { href: "#", id: index },
+            on: { click: _vm.switchCurrentGroup },
+          },
+          [_vm._v(_vm._s(item))]
+        )
+      }),
+      0
+    ),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/formGroup.vue?vue&type=template&id=91966758&scoped=true&":
 /*!*************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/formGroup.vue?vue&type=template&id=91966758&scoped=true& ***!
@@ -41426,41 +41485,38 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "form-group" }, [
-    _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-      _vm._v("Адрес электронной почты"),
-    ]),
+    _c("label", { attrs: { for: _vm.name } }, [_vm._v(_vm._s(_vm.title))]),
     _vm._v(" "),
     _c("input", {
       directives: [
         {
           name: "model",
           rawName: "v-model",
-          value: this.name,
-          expression: "this.name",
+          value: _vm.value,
+          expression: "value",
         },
       ],
-      staticClass: "form-control",
+      ref: "kutak",
+      staticClass: "form-control bg-dark text-white",
       attrs: {
-        type: "email",
-        id: "exampleInputEmail1",
+        type: "text",
+        disabled: _vm.isDisabled,
+        id: _vm.name,
         "aria-describedby": "emailHelp",
       },
-      domProps: { value: this.name },
+      domProps: { value: _vm.value },
       on: {
-        input: function ($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.$set(this, "name", $event.target.value)
-        },
+        input: [
+          function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.value = $event.target.value
+          },
+          _vm.throwValue,
+        ],
       },
     }),
-    _vm._v(" "),
-    _c(
-      "small",
-      { staticClass: "form-text text-muted", attrs: { id: "emailHelp" } },
-      [_vm._v("Мы никогда никому не передадим Вашу электронную почту.")]
-    ),
   ])
 }
 var staticRenderFns = []
@@ -41497,31 +41553,50 @@ var render = function () {
             staticClass:
               "card-text row align-items-center justify-content-around",
           },
-          [_vm._v("Выбрать группу "), _vm._t("default")],
-          2
+          [
+            _vm._v("\n            Выбрать группу\n            "),
+            _c("GroupDropdown", {
+              staticClass: "mb-1 col-lg-6",
+              attrs: { id: "GroupDropdown" },
+            }),
+          ],
+          1
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "card-text ", attrs: { id: "GroupName" } }, [
-          _vm._v("Название группы " + _vm._s(_vm.getCurrentGroup.name)),
-        ]),
-        _vm._v(" "),
-        _c("formGroup"),
+        _vm._l(_vm.inputs, function (input, name) {
+          return _c("formGroup", {
+            key: name,
+            attrs: {
+              getter: _vm.getter,
+              name: name,
+              title: input.title,
+              isDisabled: _vm.formDisabled,
+            },
+            on: { throwValue: _vm.commitValue },
+          })
+        }),
         _vm._v(" "),
         _c(
-          "div",
-          { staticClass: "card-text", attrs: { id: "DepartmentName" } },
-          [_vm._v("Отделение " + _vm._s(_vm.getCurrentGroup.department_name))]
+          "button",
+          {
+            staticClass: "btn btn-outline-secondary text-white",
+            attrs: { type: "button" },
+            on: { click: _vm.allowEditSwitch },
+          },
+          [_vm._v("Редактировать")]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "card-text", attrs: { id: "StartYear" } }, [
-          _vm._v("Год поступления " + _vm._s(_vm.getCurrentGroup.start_year)),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-text", attrs: { id: "EndYear" } }, [
-          _vm._v("Год окончания " + _vm._s(_vm.getCurrentGroup.end_year)),
-        ]),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-secondary text-white",
+            attrs: { type: "submit" },
+            on: { click: _vm.submitChanges },
+          },
+          [_vm._v("Сохранить")]
+        ),
       ],
-      1
+      2
     ),
   ])
 }
@@ -58185,7 +58260,6 @@ var index = {
 var map = {
 	"./Card.vue": "./resources/js/components/Card.vue",
 	"./CollapseToggler.vue": "./resources/js/components/CollapseToggler.vue",
-	"./Dropdown.vue": "./resources/js/components/Dropdown.vue",
 	"./ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue",
 	"./Footer.vue": "./resources/js/components/Footer.vue",
 	"./Header.vue": "./resources/js/components/Header.vue",
@@ -58201,6 +58275,7 @@ var map = {
 	"./cards/Schedule.vue": "./resources/js/components/cards/Schedule.vue",
 	"./cards/Subjects.vue": "./resources/js/components/cards/Subjects.vue",
 	"./cards/User.vue": "./resources/js/components/cards/User.vue",
+	"./cards/groupCard/GroupDropdown.vue": "./resources/js/components/cards/groupCard/GroupDropdown.vue",
 	"./cards/groupCard/formGroup.vue": "./resources/js/components/cards/groupCard/formGroup.vue",
 	"./cards/groupCard/groupDescription.vue": "./resources/js/components/cards/groupCard/groupDescription.vue"
 };

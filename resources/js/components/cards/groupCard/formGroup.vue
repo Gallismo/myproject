@@ -1,18 +1,51 @@
 <template>
     <div class="form-group">
-        <label for="exampleInputEmail1">Адрес электронной почты</label>
-        <input type="email" class="form-control"
-               id="exampleInputEmail1" aria-describedby="emailHelp" v-model="this.name">
-        <small id="emailHelp" class="form-text text-muted">Мы никогда никому не передадим Вашу электронную почту.</small>
+        <label :for="name">{{title}}</label>
+        <input type="text" class="form-control bg-dark text-white" :disabled="isDisabled"
+               :id="name" aria-describedby="emailHelp"
+               ref="kutak" v-model="value"
+               @input="throwValue"
+        >
     </div>
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
         name: "formGroup",
-        inject: {
+        mounted() {
+            this.value = this.$store.getters[this.getter][this.name]
+        },
+        data() {
+            return {
+                value: ''
+            }
+        },
+        methods: {
+            throwValue(event) {
+                const data = {
+                    name: event.target.id,
+                    value: this.value
+                };
+                this.$emit('throwValue', data)
+            }
+        },
+        props: {
             name: {
                 type: String,
+                required: true
+            },
+            getter: {
+                type: String,
+                required: true
+            },
+            title: {
+                type: String,
+                required: true
+            },
+            isDisabled: {
+                type: Boolean,
                 required: true
             }
         }

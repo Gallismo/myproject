@@ -16,7 +16,7 @@
 <script>
     import {mapGetters,mapActions} from 'vuex';
     export default {
-        name: "Dropdown",
+        name: "GroupDropdown",
         props: {
             id: {
                 type: String,

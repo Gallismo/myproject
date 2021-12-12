@@ -71,9 +71,10 @@ class GroupController extends Controller
     public function editGroup (Request $request) {
         $val = Validator::make($request->all(), [
             'name' => 'required|string',
-            'department_id' => 'required_without_all:start_year,end_year|integer',
-            'start_year' => 'required_without_all:department_id,end_year|string|min:4|max:4',
-            'end_year' => 'required_without_all:start_year,department_id|string|min:4|max:4'
+            'name_new' => 'required_without_all:start_year,end_year,department_id|string|unique:groups,name',
+            'department_id' => 'required_without_all:start_year,end_year,name_new|integer',
+            'start_year' => 'required_without_all:department_id,end_year,name_new|string|min:4|max:4',
+            'end_year' => 'required_without_all:start_year,department_id,name_new|string|min:4|max:4'
         ]);
 
         if ($val->fails()) {
@@ -94,7 +95,6 @@ class GroupController extends Controller
         if (!$group) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>['Group' => 'Group doesnt exist']]], 422);
         }
-
         if ($request->department_id) {
             $department = Department::find($request->department_id);
             if (!$department) {
@@ -103,6 +103,7 @@ class GroupController extends Controller
             $group->department_id = $request->department_id;
         }
 
+        $request->name_new ? $group->name = $request->name_new : false;
         $request->start_year ? $group->start_year = $request->start_year : false;
         $request->end_year ? $group->end_year = $request->end_year : false;
 

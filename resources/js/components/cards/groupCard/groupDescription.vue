@@ -1,57 +1,74 @@
 <template>
     <div class="card bg-dark text-white">
         <form class="card-body">
-            <div class="card-text row align-items-center justify-content-around">Выбрать группу <slot></slot></div>
-            <div class="card-text " id="GroupName">Название группы {{getCurrentGroup.name}}</div>
-            <formGroup></formGroup>
-            <div class="card-text" id="DepartmentName">Отделение {{getCurrentGroup.department_name}}</div>
-            <div class="card-text" id="StartYear">Год поступления {{getCurrentGroup.start_year}}</div>
-            <div class="card-text" id="EndYear">Год окончания {{getCurrentGroup.end_year}}</div>
+            <div class="card-text row align-items-center justify-content-around">
+                Выбрать группу
+                <GroupDropdown id="GroupDropdown" class="mb-1 col-lg-6"></GroupDropdown>
+            </div>
+            <formGroup
+                :getter="getter" :name="name"
+                :title="input.title" :isDisabled="formDisabled"
+                v-for="(input, name) in inputs"
+                :key="name"
+                @throwValue="commitValue"
+            >
+            </formGroup>
+            <button class="btn btn-outline-secondary text-white" type="button" @click="allowEditSwitch">Редактировать</button>
+            <button class="btn btn-outline-secondary text-white" type="submit" @click="submitChanges">Сохранить</button>
         </form>
     </div>
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
+    import {mapGetters, mapActions} from 'vuex';
     export default {
         name: "groupDescription",
+        data() {
+            return {
+                formDisabled: true,
+                getter: 'getCurrentGroup',
+                inputs: {
+                    name: {
+                        title: 'Название группы',
+                        value: ''
+                    },
+                    department_name: {
+                        title: 'Отделение',
+                        value: ''
+                    },
+                    start_year: {
+                        title: 'Год поступления',
+                        value: ''
+                    },
+                    end_year: {
+                        title: 'Год окончания',
+                        value: ''
+                    }
+                }
+            }
+        },
         computed: {
-            ...mapGetters(['getCurrentGroup'])
+            ...mapGetters(['getCurrentGroup']),
         },
         methods: {
-            replaceTag: function (element, newTag)  {
-                let elementNew = document.createElement(newTag);
-                if (element.localName === newTag) {
-                    return;
+            ...mapActions(['editGroup', 'getGroups']),
+            allowEditSwitch(event) {
+                if (this.formDisabled) {
+                    event.target.innerText = "Отменить редактирование"
+                } else {
+                    event.target.innerText = "Редактировать"
                 }
-                elementNew.value = element.innerHTML;
-
-                Array.prototype.forEach.call( element.attributes, function(attr) {
-                    elementNew.setAttribute( attr.name, attr.value );
-                });
-
-                element.parentNode.insertBefore( elementNew, element );
-                element.parentNode.removeChild( element );
-                return elementNew;
+                this.formDisabled=!this.formDisabled
             },
-            editGroup: function (event) {
-                let element = document.getElementById(event.target.id);
-                switch (event.target.id) {
-                    case 'GroupName':
-                        this.replaceTag(element, 'input');
-                        break;
-                    case 'DepartmentName':
-                        console.log('DepartmentName');
-                        break;
-                    case 'StartYear':
-                        console.log('StartYear');
-                        break;
-                    case 'EndYear':
-                        console.log('EndYear');
-                        break;
-                    default:
-                        console.log('Lox');
-                }
+            submitChanges() {
+                const data = {
+                    name: this.getCurrentGroup.name,
+                    name_new: this.inputs.name.value
+                };
+                this.editGroup(data);
+            },
+            commitValue(data) {
+                this.inputs[data.name].value = data.value
             }
         }
     }

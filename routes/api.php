@@ -24,7 +24,7 @@ Route::post('/user/login', [\App\Http\Controllers\UserController::class, 'login'
 Route::get('/Group', [\App\Http\Controllers\MainReadController::class, 'getAllGroups']);
 
 
-Route::middleware(['bearer', 'isAdmin'])->group(function () {
+//Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::post('/user/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
     Route::delete('/user/delete', [\App\Http\Controllers\UserController::class, 'deleteUser']);
 
@@ -76,5 +76,5 @@ Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::post('/hours', [\App\Http\Controllers\SubjectHourCountController::class, 'createHourCount']);
     Route::delete('/hours', [\App\Http\Controllers\SubjectHourCountController::class, 'deleteHourCount']);
     Route::patch('/hours', [\App\Http\Controllers\SubjectHourCountController::class, 'editHourCount']);
-});
+//});
 
