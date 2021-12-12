@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\lessonsOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -16,9 +17,10 @@ class LessonsOrdersController extends Controller
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
-
+        $code = $this->codeGenerate(lessonsOrder::class);
         lessonsOrder::create([
-            'lessons_order' => $request->lessons_order
+            'lessons_order' => $request->lessons_order,
+            'code' => $code
         ]);
 
         return response()->json(['response' => 'Lessons order has been created'], 200);
@@ -27,20 +29,20 @@ class LessonsOrdersController extends Controller
     public function editLessonsOrder (Request $request) {
         $val = Validator::make($request->all(), [
             'lessons_order' => 'required|string',
-            'lessons_order_new' => 'required|string'
+            'code' => 'required|string'
         ]);
 
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $lessonsOrder = lessonsOrder::where('lessons_order', '=', $request->lessons_order)->first();
+        $lessonsOrder = lessonsOrder::where('code', '=', $request->code)->first();
 
         if(is_null($lessonsOrder)) {
             return response()->json(['response' => 'Lessons order does not exist'], 422);
         }
 
-        $lessonsOrder->lessons_order = $request->lessons_order_new;
+        $lessonsOrder->lessons_order = $request->lessons_order;
 
         $lessonsOrder->save();
 
@@ -49,14 +51,14 @@ class LessonsOrdersController extends Controller
 
     public function deleteLessonsOrder (Request $request) {
         $val = Validator::make($request->all(), [
-            'lessons_order' => 'required|string'
+            'code' => 'required|string'
         ]);
 
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $lessonsOrder = lessonsOrder::where('lessons_order', '=', $request->lessons_order)->first();
+        $lessonsOrder = lessonsOrder::where('code', '=', $request->code)->first();
 
         if(is_null($lessonsOrder)) {
             return response()->json(['response' => 'Lessons order does not exist already'], 422);

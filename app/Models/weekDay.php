@@ -10,7 +10,8 @@ class weekDay extends Model
     use HasFactory;
 
     protected $fillable = [
-        'week_day'
+        'week_day',
+        'code'
     ];
 
     protected $hidden = [

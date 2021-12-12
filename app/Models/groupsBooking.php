@@ -13,7 +13,8 @@ class groupsBooking extends Model
         'booking_id',
         'group_id',
         'group_part_id',
-        'lesson_date'
+        'lesson_date',
+        'code'
     ];
 
     protected $hidden = [

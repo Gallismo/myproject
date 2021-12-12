@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -34,6 +35,7 @@ class UserController extends Controller
 //            return response()->json("Secret code is incorrect, access denied", 422);
             $is_admin = true;
         }
+
         $jwt_token = Str::random(30);
         User::create([
             'name' => $request->name,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\groupsBooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -25,8 +26,9 @@ class GroupsBookingsController extends Controller
         if (!is_null($groupBookingCheck)) {
             return response()->json(['response' => 'Group booking already exists'], 422);
         }
-
+        $code = $this->codeGenerate(groupsBooking::class);
         groupsBooking::create([
+            'code' => $code,
             'booking_id' => $request->booking_id,
             'group_id' => $request->group_id,
             'group_part_id' => $request->group_part_id
@@ -37,7 +39,7 @@ class GroupsBookingsController extends Controller
 
     public function editGroupBooking (Request $request) {
         $val = Validator::make($request->all(), [
-            'id' => 'required|integer|exists:groups_bookings,id',
+            'code' => 'required|integer|exists:groups_bookings,code',
             'booking_id' => 'required_without_all:group_part_id|integer|exists:lessons_bookings,id',
             'group_id' => 'required_without_all:group_part_id|integer|exists:groups,id',
             'group_part_id' => 'required_without_all:booking_id,group_id|integer|exists:groups_parts,id'
@@ -53,7 +55,7 @@ class GroupsBookingsController extends Controller
             return response()->json(['response' => 'Group booking with this parameters already exists'], 422);
         }
 
-        $groupBooking = groupsBooking::find($request->id);
+        $groupBooking = groupsBooking::where('code', $request->code)->first();
 
         $request->booking_id ? $groupBooking->booking_id = $request->booking_id : false;
         $request->group_id ? $groupBooking->group_id = $request->group_id : false;
@@ -66,14 +68,14 @@ class GroupsBookingsController extends Controller
 
     public function deleteGroupBooking (Request $request) {
         $val = Validator::make($request->all(), [
-            'id' => 'required|integer|exists:groups_bookings,id'
+            'code' => 'required|integer|exists:groups_bookings,code'
         ]);
 
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $groupBooking = groupsBooking::find($request->id);
+        $groupBooking = groupsBooking::where('code', $request->code)->first();
 
         $groupBooking->delete();
 

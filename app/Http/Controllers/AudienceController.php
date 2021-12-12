@@ -36,14 +36,14 @@ class AudienceController extends Controller
 
     public function deleteAudience(Request $request) {
         $val = Validator::make($request->all(), [
-            'name' => 'required|string'
+            'code' => 'required|string'
         ]);
 
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $audience = Audience::where('name', '=', $request->name)->first();
+        $audience = Audience::where('code', '=', $request->code)->first();
 
         if (is_null($audience)) {
             return response()->json(['response' => 'Audience does not exist already'], 422);
@@ -56,6 +56,7 @@ class AudienceController extends Controller
 
     public function editAudience (Request $request) {
         $val = Validator::make($request->all(), [
+            'code' => 'required|string',
             'name' => 'required|string'
         ]);
 
@@ -63,13 +64,13 @@ class AudienceController extends Controller
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $audience = Audience::where('name', '=', $request->name)->first();
+        $audience = Audience::where('code', '=', $request->code)->first();
 
         if (is_null($audience)) {
             return response()->json(['response' => 'Audience does not exist'], 422);
         }
 
-        $audience->name = $request->name_new;
+        $audience->name = $request->name;
         $audience->save();
 
         return response()->json(['response' => 'Audience has been edited'], 200);

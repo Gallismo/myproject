@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Group;
 use App\Models\lessonsOrder;
 use App\Models\Schedule;
 use App\Models\weekDay;
@@ -99,14 +100,15 @@ class ScheduleController extends Controller
         if (!!$schedule) {
             return response()->json(['response' => 'Schedule already exist'], 422);
         }
-
+        $code = $this->codeGenerate(Schedule::class);
         Schedule::create([
             'week_day_id' => $request->week_day_id,
             'lesson_order_id' => $request->lesson_order_id,
             'department_id' => $request->department_id,
             'start_time' => join(':', $request->start_time),
             'end_time' => join(':', $request->end_time),
-            'break' => $request->break
+            'break' => $request->break,
+            'code' => $code
         ]);
 
         return response()->json(['response' => 'Schedule created'], 200);
@@ -114,7 +116,7 @@ class ScheduleController extends Controller
 
     public function editSchedule (Request $request) {
         $val = Validator::make($request->all(), [
-            'id' => 'required|integer|exists:schedules,id',
+            'code' => 'required|integer|exists:schedules,code',
             'week_day_id' => 'required_without_all:start_time,end_time,break|integer',
             'lesson_order_id' => 'required_without_all:start_time,end_time,break|integer',
             'department_id' => 'required_without_all:start_time,end_time,break|integer',
@@ -141,7 +143,7 @@ class ScheduleController extends Controller
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
-        $schedule = Schedule::find($request->id);
+        $schedule = Schedule::where('code', '=', $request->code)->first();
 
         if (!$schedule) {
             return response()->json(['response' => 'Schedule doesnt exist'], 422);
@@ -202,18 +204,14 @@ class ScheduleController extends Controller
 
     public function deleteSchedule (Request $request) {
         $val = Validator::make($request->all(), [
-            'id' => 'required|integer|exists:schedules,id'
+            'code' => 'required|integer|exists:schedules,code'
         ]);
 
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $schedule = Schedule::find($request->id);
-
-//        if (!$schedule) {
-//            return response()->json(['response' => 'Schedule does not exist'], 422);
-//        }
+        $schedule = Schedule::where('code', '=', $request->code)->first();
 
         $schedule->delete();
 

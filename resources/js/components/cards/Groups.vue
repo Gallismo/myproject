@@ -1,6 +1,6 @@
 <template >
     <div>
-        <groupDescription class="col-4" v-if="getGroupsData[0]">
+        <groupDescription class="col-12 col-md-6 col-lg-4">
         </groupDescription>
     </div>
 </template>

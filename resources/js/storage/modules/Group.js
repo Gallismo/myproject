@@ -2,23 +2,15 @@ export default {
     actions: {
         getGroups: context => {
             axios('/api/Group')
-                .then(response => context.commit('groupsDataFill', response.data))
-                .catch(error => {
-                    if (error.response) {
-                        // Request made and server responded
-                        console.log(error.response.data);
-                        console.log(error.response.status);
-                        console.log(error.response.headers);
-                    } else if (error.request) {
-                        // The request was made but no response was received
-                        console.log(error.request);
-                    } else {
-                        // Something happened in setting up the request that triggered an Error
-                        console.log('Error', error.message);
-                    }
-                });
+                .then(response => {
+                    context.commit('groupsDataFill', response.data)
+                    context.commit('currentGroupFill', response.data)
+                })
+                .catch(error => console.log(error.response.data));
         },
-        switchCurrentGroup: (context, group) => context.commit('switchCurrentGroup', group.target.id),
+        switchCurrentGroup: (context, group) => {
+            context.commit('switchCurrentGroup', group.target.id)
+        },
         editGroup: (context, data) => {
             axios({
                     method: 'patch',
@@ -27,30 +19,31 @@ export default {
                 })
                 .then(response => console.log(response.data))
                 .then(() => {
-                    context.commit('groupsDataFill', [])
-                    context.dispatch('getGroups')
+                    context.dispatch('updateData', data)
                 })
-                .catch(error => {
-                    if (error.response) {
-                        // Request made and server responded
-                        console.log(error.response.data);
-                        console.log(error.response.status);
-                        console.log(error.response.headers);
-                    } else if (error.request) {
-                        // The request was made but no response was received
-                        console.log(error.request);
-                    } else {
-                        // Something happened in setting up the request that triggered an Error
-                        console.log('Error', error.message);
-                    }
-                });
+                .catch(error => console.log(error.response.data));
 
+        },
+        updateData: (context, data) => {
+            context.commit('updateData', data)
         }
     },
     mutations: {
         groupsDataFill: (state, response) => {
             state.groupsData = response;
+        },
+        currentGroupFill: (state, response) => {
             state.currentGroup = response[0];
+        },
+        updateData: (state, data) => {
+            state.groupsData.map((obj, index) => {
+                if (obj.code === data.code) {
+                    data.name ? state.groupsData[index].name = data.name : false;
+                    data.department_name ? state.groupsData[index].department_name = data.department_name : false;
+                    data.start_year ? state.groupsData[index].start_year = data.start_year : false;
+                    data.end_year ? state.groupsData[index].end_year = data.end_year : false;
+                }
+            });
         },
         switchCurrentGroup: (state, code) => {
             state.currentGroup = state.groupsData.find(obj => obj.code === code);
@@ -67,6 +60,6 @@ export default {
             state.groupsData.map(group => DropdownProp[group.code] = group.name);
             return DropdownProp;
         },
-        getCurrentGroup: state => state.currentGroup
+        getCurrentGroup: state => {return state.currentGroup}
     }
 }

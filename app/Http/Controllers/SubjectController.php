@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -16,9 +17,10 @@ class SubjectController extends Controller
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
-
+        $code = $this->codeGenerate(Subject::class);
         Subject::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'code' => $code
         ]);
 
         return response()->json(['response' => 'Subject has been created'], 200);
@@ -27,20 +29,20 @@ class SubjectController extends Controller
     public function editSubject (Request $request) {
         $val = Validator::make($request->all(), [
             'name' => 'required|string',
-            'name_new' => 'required|string'
+            'code' => 'required|string'
         ]);
 
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $subject = Subject::where('name', '=', $request->name)->first();
+        $subject = Subject::where('code', '=', $request->code)->first();
 
         if(is_null($subject)) {
             return response()->json(['response' => 'Subject does not exist'], 422);
         }
 
-        $subject->name = $request->name_new;
+        $subject->name = $request->name;
 
         $subject->save();
 
@@ -49,14 +51,14 @@ class SubjectController extends Controller
 
     public function deleteSubject (Request $request) {
         $val = Validator::make($request->all(), [
-            'name' => 'required|string'
+            'code' => 'required|string'
         ]);
 
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $subject = Subject::where('name', '=', $request->name)->first();
+        $subject = Subject::where('code', '=', $request->code)->first();
 
         if(is_null($subject)) {
             return response()->json(['response' => 'Subject does not exist already'], 422);

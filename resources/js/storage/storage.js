@@ -42,7 +42,9 @@ const store = new Vuex.Store({
         getLinks: state => state.links,
         getCurrentTab: state => state.currentTab
     },
-    modules: {}
+    modules: {
+
+    }
 });
 
 const modules = require.context('./modules', true, /\.js$/i)

@@ -31,7 +31,7 @@
             header: function () {
                 return this.getDropdownData[Object.keys(this.getDropdownData).find(code => code === this.getCurrentGroup.code)]
             }
-        }
+        },
     }
 </script>
 

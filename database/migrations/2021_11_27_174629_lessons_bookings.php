@@ -28,6 +28,7 @@ class LessonsBookings extends Migration
             $table->string('conference_url')->nullable();
             $table->string('lesson_topic')->nullable();
             $table->string('lesson_homework')->nullable();
+            $table->string('code')->unique();
             $table->timestamps();
         });
     }

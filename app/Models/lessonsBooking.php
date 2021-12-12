@@ -18,7 +18,8 @@ class lessonsBooking extends Model
         'is_remote',
         'conference_url',
         'lesson_topic',
-        'lesson_homework'
+        'lesson_homework',
+        'code'
     ];
 
     protected $casts = [

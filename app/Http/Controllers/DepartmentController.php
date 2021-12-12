@@ -28,21 +28,21 @@ class DepartmentController extends Controller
 
     public function editDepartment (Request $request) {
         $val = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'name_new' => 'required|string'
+            'code' => 'required|string',
+            'name' => 'required|string'
         ]);
 
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $department = Department::where('name', '=', $request->name)->first();
+        $department = Department::where('code', '=', $request->code)->first();
 
         if(is_null($department)) {
             return response()->json(['response' => 'Department does not exist'], 422);
         }
 
-        $department->name = $request->name_new;
+        $department->name = $request->name;
 
         $department->save();
 
@@ -51,14 +51,14 @@ class DepartmentController extends Controller
 
     public function deleteDepartment (Request $request) {
         $val = Validator::make($request->all(), [
-            'name' => 'required|string'
+            'code' => 'required|string'
         ]);
 
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $department = Department::where('name', '=', $request->name)->first();
+        $department = Department::where('code', '=', $request->code)->first();
 
         if(is_null($department)) {
             return response()->json(['response' => 'Department does not exist already'], 422);

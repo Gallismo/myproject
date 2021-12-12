@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\groupsBooking;
 use App\Models\lessonsBooking;
 use App\Models\subjectHourCount;
@@ -50,14 +51,15 @@ class LessonsBookingsController extends Controller
             echo json_encode(['warning'=>[
                 'message'=>'Teacher is engaged', 'by' => $teacherArr]])."\n";
         }
-
+        $code = $this->codeGenerate(lessonsBooking::class);
         lessonsBooking::create([
             'lesson_date' => $request->lesson_date,
             'lesson_order_id' => $request->lesson_order_id,
             'audience_id' => $request->audience_id,
             'subject_id' => $request->subject_id,
             'teacher_id' => $request->teacher_id,
-            'is_remote' => $request->is_remote
+            'is_remote' => $request->is_remote,
+            'code' => $code
         ]);
 
         return response()->json(['response' => 'Lesson Booking has been created'], 200);
@@ -65,14 +67,14 @@ class LessonsBookingsController extends Controller
 
     public function deleteLessonBooking (Request $request) {
         $val = Validator::make($request->all(), [
-            'id' => 'required|exists:lessons_bookings,id'
+            'code' => 'required|exists:lessons_bookings,code'
         ]);
 
         if ($val->fails()) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $lessonBooking = lessonsBooking::find($request->id)->first();
+        $lessonBooking = lessonsBooking::where('code', '=', $request->code)->first();
 
         if (is_null($lessonBooking)) {
             return response()->json(['response' => 'Lesson Booking doesnt exist'], 422);
@@ -97,7 +99,7 @@ class LessonsBookingsController extends Controller
 
     public function editLessonBooking (Request $request) {
         $val = Validator::make($request->all(), [
-            'id' => 'required|exists:lessons_bookings,id|integer',
+            'code' => 'required|exists:lessons_bookings,code|integer',
             'lesson_date' => 'required_without_all:subject_id,teacher_id,is_remote|date-format:Y-m-d',
             'lesson_order_id' => 'required_without_all:subject_id,teacher_id,is_remote|exists:lessons_orders,id|integer',
             'audience_id' => 'required_without_all:subject_id,teacher_id,is_remote|exists:audiences,id|integer',
@@ -119,7 +121,7 @@ class LessonsBookingsController extends Controller
                 'errors'=>'Audience is engaged', 'by' => $lessonCheck]], 422);
         }
 
-        $lessonBooking = lessonsBooking::find($request->id);
+        $lessonBooking = lessonsBooking::where('code', '=', $request->code)->first();
 
         $request->lesson_date ? $lessonBooking->lesson_date = $request->lesson_date : false;
         $request->lesson_order_id ? $lessonBooking->lesson_order_id = $request->lesson_order_id : false;

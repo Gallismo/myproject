@@ -2676,15 +2676,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "formGroup",
   mounted: function mounted() {
-    this.value = this.$store.getters[this.getter][this.name];
+    this.value = this.getCurrentGroup[this.name];
+
+    if (this.name === 'department_name') {
+      this.inputType = false;
+    }
+  },
+  computed: {
+    getCurrentGroup: function getCurrentGroup() {
+      return this.$store.getters[this.getter];
+    }
+  },
+  watch: {
+    getCurrentGroup: function getCurrentGroup() {
+      this.value = this.getCurrentGroup[this.name];
+    }
   },
   data: function data() {
     return {
-      value: ''
+      value: '',
+      inputType: true
     };
   },
   methods: {
@@ -2757,14 +2781,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "groupDescription",
   data: function data() {
     return {
+      dropdownKey: 0,
       formDisabled: true,
-      getter: 'getCurrentGroup',
-      inputs: {
+      getter: 'getCurrentGroup'
+    };
+  },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentGroup'])), {}, {
+    inputs: function inputs() {
+      return {
         name: {
           title: 'Название группы',
           value: ''
@@ -2781,14 +2812,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           title: 'Год окончания',
           value: ''
         }
-      }
-    };
-  },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentGroup'])),
+      };
+    }
+  }),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['editGroup', 'getGroups'])), {}, {
     allowEditSwitch: function allowEditSwitch(event) {
       if (this.formDisabled) {
-        event.target.innerText = "Отменить редактирование";
+        event.target.innerText = "Отключить редактирование";
       } else {
         event.target.innerText = "Редактировать";
       }
@@ -2797,10 +2827,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     submitChanges: function submitChanges() {
       var data = {
-        name: this.getCurrentGroup.name,
-        name_new: this.inputs.name.value
+        code: this.getCurrentGroup.code
       };
+      this.inputs.name.value ? data['name'] = this.inputs.name.value : false;
+      this.inputs.department_name.value ? data['department_name'] = this.inputs.department_name.value : false;
+      this.inputs.start_year.value ? data['start_year'] = this.inputs.start_year.value : false;
+      this.inputs.end_year.value ? data['end_year'] = this.inputs.end_year.value : false;
       this.editGroup(data);
+      this.dropdownKey++;
     },
     commitValue: function commitValue(data) {
       this.inputs[data.name].value = data.value;
@@ -3012,24 +3046,14 @@ __webpack_require__.r(__webpack_exports__);
   actions: {
     getGroups: function getGroups(context) {
       axios('/api/Group').then(function (response) {
-        return context.commit('groupsDataFill', response.data);
+        context.commit('groupsDataFill', response.data);
+        context.commit('currentGroupFill', response.data);
       })["catch"](function (error) {
-        if (error.response) {
-          // Request made and server responded
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
-        }
+        return console.log(error.response.data);
       });
     },
     switchCurrentGroup: function switchCurrentGroup(context, group) {
-      return context.commit('switchCurrentGroup', group.target.id);
+      context.commit('switchCurrentGroup', group.target.id);
     },
     editGroup: function editGroup(context, data) {
       axios({
@@ -3039,28 +3063,31 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         return console.log(response.data);
       }).then(function () {
-        context.commit('groupsDataFill', []);
-        context.dispatch('getGroups');
+        context.dispatch('updateData', data);
       })["catch"](function (error) {
-        if (error.response) {
-          // Request made and server responded
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
-        }
+        return console.log(error.response.data);
       });
+    },
+    updateData: function updateData(context, data) {
+      context.commit('updateData', data);
     }
   },
   mutations: {
     groupsDataFill: function groupsDataFill(state, response) {
       state.groupsData = response;
+    },
+    currentGroupFill: function currentGroupFill(state, response) {
       state.currentGroup = response[0];
+    },
+    updateData: function updateData(state, data) {
+      state.groupsData.map(function (obj, index) {
+        if (obj.code === data.code) {
+          data.name ? state.groupsData[index].name = data.name : false;
+          data.department_name ? state.groupsData[index].department_name = data.department_name : false;
+          data.start_year ? state.groupsData[index].start_year = data.start_year : false;
+          data.end_year ? state.groupsData[index].end_year = data.end_year : false;
+        }
+      });
     },
     switchCurrentGroup: function switchCurrentGroup(state, code) {
       state.currentGroup = state.groupsData.find(function (obj) {
@@ -41292,11 +41319,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [
-      _vm.getGroupsData[0]
-        ? _c("groupDescription", { staticClass: "col-4" })
-        : _vm._e(),
-    ],
+    [_c("groupDescription", { staticClass: "col-12 col-md-6 col-lg-4" })],
     1
   )
 }
@@ -41487,36 +41510,74 @@ var render = function () {
   return _c("div", { staticClass: "form-group" }, [
     _c("label", { attrs: { for: _vm.name } }, [_vm._v(_vm._s(_vm.title))]),
     _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.value,
-          expression: "value",
-        },
-      ],
-      ref: "kutak",
-      staticClass: "form-control bg-dark text-white",
-      attrs: {
-        type: "text",
-        disabled: _vm.isDisabled,
-        id: _vm.name,
-        "aria-describedby": "emailHelp",
-      },
-      domProps: { value: _vm.value },
-      on: {
-        input: [
-          function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.value = $event.target.value
+    _vm.inputType
+      ? _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.value,
+              expression: "value",
+            },
+          ],
+          ref: "kutak",
+          staticClass: "form-control btn-secondary",
+          attrs: {
+            type: "text",
+            disabled: _vm.isDisabled,
+            id: _vm.name,
+            "aria-describedby": "emailHelp",
           },
-          _vm.throwValue,
-        ],
-      },
-    }),
+          domProps: { value: _vm.value },
+          on: {
+            input: [
+              function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.value = $event.target.value
+              },
+              _vm.throwValue,
+            ],
+          },
+        })
+      : _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.value,
+                expression: "value",
+              },
+            ],
+            ref: "kutak",
+            staticClass: "form-control btn-secondary",
+            attrs: {
+              disabled: _vm.isDisabled,
+              id: _vm.name,
+              "aria-describedby": "emailHelp",
+            },
+            on: {
+              input: _vm.throwValue,
+              change: function ($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function (o) {
+                    return o.selected
+                  })
+                  .map(function (o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.value = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+            },
+          },
+          [_c("option", [_vm._v(_vm._s(_vm.value))])]
+        ),
   ])
 }
 var staticRenderFns = []
@@ -41556,12 +41617,15 @@ var render = function () {
           [
             _vm._v("\n            Выбрать группу\n            "),
             _c("GroupDropdown", {
-              staticClass: "mb-1 col-lg-6",
+              key: _vm.dropdownKey,
+              staticClass: "mb-1 col-6",
               attrs: { id: "GroupDropdown" },
             }),
           ],
           1
         ),
+        _vm._v(" "),
+        _c("hr"),
         _vm._v(" "),
         _vm._l(_vm.inputs, function (input, name) {
           return _c("formGroup", {
@@ -41576,25 +41640,27 @@ var render = function () {
           })
         }),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-secondary text-white",
-            attrs: { type: "button" },
-            on: { click: _vm.allowEditSwitch },
-          },
-          [_vm._v("Редактировать")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-secondary text-white",
-            attrs: { type: "submit" },
-            on: { click: _vm.submitChanges },
-          },
-          [_vm._v("Сохранить")]
-        ),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-secondary text-white col-12 mb-2",
+              attrs: { type: "button" },
+              on: { click: _vm.allowEditSwitch },
+            },
+            [_vm._v("Редактировать")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-secondary text-white col-12",
+              attrs: { type: "button", disabled: _vm.formDisabled },
+              on: { click: _vm.submitChanges },
+            },
+            [_vm._v("Сохранить")]
+          ),
+        ]),
       ],
       2
     ),

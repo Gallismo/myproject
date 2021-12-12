@@ -23,6 +23,7 @@ class CreateSubjectHourCountsTable extends Migration
                 ->onDelete('SET NULL')->onUpdate('CASCADE');
             $table->bigInteger('hours_all');
             $table->bigInteger('hours_left');
+            $table->string('code')->unique();
             $table->timestamps();
         });
     }

@@ -1,11 +1,20 @@
 <template>
     <div class="form-group">
         <label :for="name">{{title}}</label>
-        <input type="text" class="form-control bg-dark text-white" :disabled="isDisabled"
+        <input type="text" class="form-control btn-secondary" :disabled="isDisabled"
                :id="name" aria-describedby="emailHelp"
                ref="kutak" v-model="value"
                @input="throwValue"
+               v-if="inputType"
         >
+        <select class="form-control btn-secondary" :disabled="isDisabled"
+                :id="name" aria-describedby="emailHelp"
+                ref="kutak" v-model="value"
+                @input="throwValue"
+                v-else
+         >
+            <option>{{value}}</option>
+        </select>
     </div>
 </template>
 
@@ -15,11 +24,25 @@
     export default {
         name: "formGroup",
         mounted() {
-            this.value = this.$store.getters[this.getter][this.name]
+            this.value = this.getCurrentGroup[this.name]
+            if (this.name === 'department_name') {
+                this.inputType = false
+            }
+        },
+        computed: {
+            getCurrentGroup: function () {
+                return this.$store.getters[this.getter]
+            }
+        },
+        watch: {
+            getCurrentGroup: function () {
+                this.value = this.getCurrentGroup[this.name]
+            }
         },
         data() {
             return {
-                value: ''
+                value: '',
+                inputType: true
             }
         },
         methods: {
