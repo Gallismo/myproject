@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class MainReadController extends Controller
 {
     public function getAllGroups (Request $request) {
-        $groups = Group::all();
+        $groups = Group::orderBy('name')->get();
         $departments = Department::all();
         foreach ($groups as $group) {
             foreach ($departments as $department) {
@@ -23,7 +23,7 @@ class MainReadController extends Controller
     }
 
     public function getAllDepartments(Request $request) {
-        $departments = Department::all();
+        $departments = Department::orderBy('name')->get();
         return response()->json($departments);
     }
 }

@@ -1,7 +1,9 @@
 <template>
     <section>
          <div class="card bg-dark text-white container mt-lg-5 mt-4">
-                 <component v-bind:is="tab" class="card-body flex row"></component>
+                 <keep-alive>
+                     <component v-bind:is="tab" class="card-body flex row justify-content-around"></component>
+                 </keep-alive>
          </div>
     </section>
 </template>

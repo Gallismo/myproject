@@ -1,9 +1,8 @@
 <template>
     <div class="card bg-dark text-white">
-        <form class="card-body">
+        <form class="card-body" @keypress.enter="submit">
             <div class="card-text row align-items-center justify-content-around">
-                Выбрать группу
-                <GroupDropdown id="GroupDropdown" class="mb-1 col-6" :key="dropdownKey"></GroupDropdown>
+                Создать группу
             </div>
             <hr>
             <formGroup
@@ -12,12 +11,11 @@
                 v-for="(input, name) in inputs"
                 :key="name"
                 @throwValue="commitValue"
-                :isDescription="true"
+                :isDescription="false"
             />
-            <div class="row">
-                <button class="btn btn-outline-secondary text-white col-12 mb-2" type="button" @click="allowEditSwitch">Редактировать</button>
-                <button class="btn btn-outline-success text-white col-12 mb-2" type="button" @click="submitChanges" :disabled="formDisabled">Сохранить</button>
-                <button class="btn btn-outline-danger text-white col-12" type="button" @click="deleteThisGroup" >Удалить</button>
+            <div class="row button mt-5">
+                <button class="btn btn-outline-success text-white col-12" type="button" @click="submit">Создать</button>
+                <button class="btn btn-outline-secondary text-white col-12 mt-2" type="reset">Сбросить</button>
             </div>
         </form>
     </div>
@@ -29,9 +27,8 @@
         name: "groupDescription",
         data() {
             return {
-                dropdownKey: 0,
-                formDisabled: true,
-                getter: 'getCurrentGroup',
+                formDisabled: false,
+                getter: 'getCurrentGroup'
             }
         },
         computed: {
@@ -58,19 +55,9 @@
             }
         },
         methods: {
-            ...mapActions(['editGroup', 'getGroups', 'deleteGroup']),
-            allowEditSwitch(event) {
-                if (this.formDisabled) {
-                    event.target.innerText = "Отключить редактирование"
-                } else {
-                    event.target.innerText = "Редактировать"
-                }
-                this.formDisabled=!this.formDisabled
-            },
-            submitChanges() {
-                const data = {
-                    code: this.getCurrentGroup.code
-                };
+            ...mapActions(['createGroup']),
+            submit() {
+                const data = {};
                 this.inputs.name.value ? data['name'] = this.inputs.name.value : false;
                 if (this.inputs.department_name.value) {
 
@@ -81,14 +68,8 @@
                 }
                 this.inputs.start_year.value ? data['start_year'] = this.inputs.start_year.value : false;
                 this.inputs.end_year.value ? data['end_year'] = this.inputs.end_year.value : false;
-                this.editGroup(data);
+                this.createGroup(data);
                 this.dropdownKey++;
-            },
-            deleteThisGroup() {
-                const data = {
-                    code: this.getCurrentGroup.code
-                }
-                this.deleteGroup(data)
             },
             commitValue(data) {
                 this.inputs[data.name].value = data.value
@@ -98,5 +79,7 @@
 </script>
 
 <style scoped>
-
+    .button {
+        height: ;
+    }
 </style>

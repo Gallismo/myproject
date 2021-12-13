@@ -13,7 +13,7 @@ class GroupController extends Controller
     public function createGroup (Request $request) {
         $val = Validator::make($request->all(), [
             'name' => 'required|unique:groups|string',
-            'department_id' => 'required|integer',
+            'department_code' => 'required|string',
             'start_year' => 'required|string|min:4|max:4',
             'end_year' => 'required|string|min:4|max:4'
         ]);
@@ -31,7 +31,7 @@ class GroupController extends Controller
             return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
         }
 
-        $department = Department::find($request->department_id);
+        $department = Department::where('code', $request->department_code)->first();
 
         if (!$department) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>['Department' => 'Department doesnt exist']]], 422);
@@ -39,7 +39,7 @@ class GroupController extends Controller
         $code = $this->codeGenerate(Group::class);
         Group::create([
             'name' => $request->name,
-            'department_id' => $request->department_id,
+            'department_id' => $department->id,
             'start_year' => $request->start_year,
             'end_year' => $request->end_year,
             'code' => $code

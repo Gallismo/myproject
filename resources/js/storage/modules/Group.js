@@ -41,7 +41,20 @@ export default {
         },
         deleteGroupData: (context, data) => {
             context.commit('deleteGroupData', data)
-        }
+        },
+        createGroup: (context, data) => {
+            axios({
+                method: 'post',
+                url: '/api/Group',
+                data: data
+            })
+                .then(response => console.log(response.data))
+                .then(() => {
+                    context.dispatch('getGroups', data)
+                })
+                .catch(error => console.log(error.response.data));
+        },
+
     },
     mutations: {
         groupsDataFill: (state, response) => {

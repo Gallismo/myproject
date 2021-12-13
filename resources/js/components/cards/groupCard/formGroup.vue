@@ -3,16 +3,17 @@
         <label :for="name">{{title}}</label>
         <input type="text" class="form-control btn-secondary" :disabled="isDisabled"
                :id="name" aria-describedby="emailHelp"
-               ref="kutak" v-model="value"
+               v-model="value"
                @input="throwValue"
                v-if="inputType"
         >
         <select class="form-control btn-secondary" :disabled="isDisabled"
                 :id="name" aria-describedby="emailHelp"
-                ref="kutak" v-model="value"
+                v-model="value"
                 @change="throwValue"
                 v-else
          >
+            <option value="Выберите отделение" disabled selected class="text-secondary">Выберите отделение</option>
             <option v-for="(name, code) in getDepartmentDropdown" :key="code" :value="name" :id="code">{{name}}</option>
         </select>
     </div>
@@ -24,7 +25,6 @@
     export default {
         name: "formGroup",
         mounted() {
-            this.value = this.getCurrentGroup[this.name]
             if (this.name === 'department_name') {
                 this.inputType = false
             }
@@ -37,8 +37,8 @@
         },
         watch: {
             getCurrentGroup: function () {
-                this.value = this.getCurrentGroup[this.name]
-            }
+                this.isDescription ? this.value = this.getCurrentGroup[this.name] : false;
+            },
         },
         data() {
             return {
@@ -69,6 +69,10 @@
                 required: true
             },
             isDisabled: {
+                type: Boolean,
+                required: true
+            },
+            isDescription: {
                 type: Boolean,
                 required: true
             }
