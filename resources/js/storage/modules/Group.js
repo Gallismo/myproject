@@ -26,6 +26,21 @@ export default {
         },
         updateData: (context, data) => {
             context.commit('updateData', data)
+        },
+        deleteGroup: (context, data) => {
+            axios({
+                method: 'delete',
+                url: '/api/Group',
+                data: data
+            })
+                .then(response => console.log(response.data))
+                .then(() => {
+                    context.dispatch('deleteGroupData', data)
+                })
+                .catch(error => console.log(error.response.data));
+        },
+        deleteGroupData: (context, data) => {
+            context.commit('deleteGroupData', data)
         }
     },
     mutations: {
@@ -44,6 +59,14 @@ export default {
                     data.end_year ? state.groupsData[index].end_year = data.end_year : false;
                 }
             });
+        },
+        deleteGroupData: (state, data) => {
+            state.groupsData.map((obj, index) => {
+                    if (obj.code === data.code) {
+                        state.groupsData.splice(index, 1)
+                    }
+            });
+            state.currentGroup = state.groupsData[0]
         },
         switchCurrentGroup: (state, code) => {
             state.currentGroup = state.groupsData.find(obj => obj.code === code);

@@ -2500,7 +2500,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _this.getGroups();
 
-            case 1:
+              _this.getAllDepartments();
+
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -2508,7 +2510,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getGroups'])),
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getGroups', 'getAllDepartments'])),
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getCurrentGroup', 'getGroupsData']))
 });
 
@@ -2665,6 +2667,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2695,11 +2704,11 @@ __webpack_require__.r(__webpack_exports__);
       this.inputType = false;
     }
   },
-  computed: {
+  computed: _objectSpread({
     getCurrentGroup: function getCurrentGroup() {
       return this.$store.getters[this.getter];
     }
-  },
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getDepartmentDropdown'])),
   watch: {
     getCurrentGroup: function getCurrentGroup() {
       this.value = this.getCurrentGroup[this.name];
@@ -2783,6 +2792,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "groupDescription",
@@ -2793,7 +2803,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       getter: 'getCurrentGroup'
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentGroup'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentGroup', 'getDepartmentDropdown'])), {}, {
     inputs: function inputs() {
       return {
         name: {
@@ -2815,7 +2825,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
     }
   }),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['editGroup', 'getGroups'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['editGroup', 'getGroups', 'deleteGroup'])), {}, {
     allowEditSwitch: function allowEditSwitch(event) {
       if (this.formDisabled) {
         event.target.innerText = "Отключить редактирование";
@@ -2826,15 +2836,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.formDisabled = !this.formDisabled;
     },
     submitChanges: function submitChanges() {
+      var _this = this;
+
       var data = {
         code: this.getCurrentGroup.code
       };
       this.inputs.name.value ? data['name'] = this.inputs.name.value : false;
-      this.inputs.department_name.value ? data['department_name'] = this.inputs.department_name.value : false;
+
+      if (this.inputs.department_name.value) {
+        data['department_code'] = Object.keys(this.getDepartmentDropdown).find(function (key) {
+          return _this.getDepartmentDropdown[key] === _this.inputs.department_name.value;
+        });
+      }
+
       this.inputs.start_year.value ? data['start_year'] = this.inputs.start_year.value : false;
       this.inputs.end_year.value ? data['end_year'] = this.inputs.end_year.value : false;
       this.editGroup(data);
       this.dropdownKey++;
+    },
+    deleteThisGroup: function deleteThisGroup() {
+      var data = {
+        code: this.getCurrentGroup.code
+      };
+      this.deleteGroup(data);
     },
     commitValue: function commitValue(data) {
       this.inputs[data.name].value = data.value;
@@ -3031,6 +3055,59 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 
 /***/ }),
 
+/***/ "./resources/js/storage/modules/Departments.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/storage/modules/Departments.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  actions: {
+    getAllDepartments: function getAllDepartments(context) {
+      axios('/api/Department').then(function (response) {
+        context.commit('getAllDepartments', response.data);
+        context.commit('currentDepartmentSet', response.data);
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
+    }
+  },
+  mutations: {
+    getAllDepartments: function getAllDepartments(state, response) {
+      state.departmentsData = response;
+    },
+    currentDepartmentSet: function currentDepartmentSet(state, response) {
+      state.currentDepartment = response[0];
+    }
+  },
+  state: {
+    departmentsData: [],
+    currentDepartment: {}
+  },
+  getters: {
+    getDepartmentsData: function getDepartmentsData(state) {
+      return state.groupsData;
+    },
+    getDepartmentDropdown: function getDepartmentDropdown(state) {
+      var DropdownProp = {};
+      state.departmentsData.map(function (department) {
+        return DropdownProp[department.code] = department.name;
+      });
+      return DropdownProp;
+    },
+    getCurrentDepartment: function getCurrentDepartment(state) {
+      return state.currentDepartment;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/storage/modules/Group.js":
 /*!***********************************************!*\
   !*** ./resources/js/storage/modules/Group.js ***!
@@ -3070,6 +3147,22 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateData: function updateData(context, data) {
       context.commit('updateData', data);
+    },
+    deleteGroup: function deleteGroup(context, data) {
+      axios({
+        method: 'delete',
+        url: '/api/Group',
+        data: data
+      }).then(function (response) {
+        return console.log(response.data);
+      }).then(function () {
+        context.dispatch('deleteGroupData', data);
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
+    },
+    deleteGroupData: function deleteGroupData(context, data) {
+      context.commit('deleteGroupData', data);
     }
   },
   mutations: {
@@ -3088,6 +3181,14 @@ __webpack_require__.r(__webpack_exports__);
           data.end_year ? state.groupsData[index].end_year = data.end_year : false;
         }
       });
+    },
+    deleteGroupData: function deleteGroupData(state, data) {
+      state.groupsData.map(function (obj, index) {
+        if (obj.code === data.code) {
+          state.groupsData.splice(index, 1);
+        }
+      });
+      state.currentGroup = state.groupsData[0];
     },
     switchCurrentGroup: function switchCurrentGroup(state, code) {
       state.currentGroup = state.groupsData.find(function (obj) {
@@ -41560,23 +41661,32 @@ var render = function () {
               "aria-describedby": "emailHelp",
             },
             on: {
-              input: _vm.throwValue,
-              change: function ($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function (o) {
-                    return o.selected
-                  })
-                  .map(function (o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.value = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
+              change: [
+                function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.value = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                _vm.throwValue,
+              ],
             },
           },
-          [_c("option", [_vm._v(_vm._s(_vm.value))])]
+          _vm._l(_vm.getDepartmentDropdown, function (name, code) {
+            return _c(
+              "option",
+              { key: code, attrs: { id: code }, domProps: { value: name } },
+              [_vm._v(_vm._s(name))]
+            )
+          }),
+          0
         ),
   ])
 }
@@ -41654,11 +41764,21 @@ var render = function () {
           _c(
             "button",
             {
-              staticClass: "btn btn-outline-secondary text-white col-12",
+              staticClass: "btn btn-outline-success text-white col-12 mb-2",
               attrs: { type: "button", disabled: _vm.formDisabled },
               on: { click: _vm.submitChanges },
             },
             [_vm._v("Сохранить")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-danger text-white col-12",
+              attrs: { type: "button" },
+              on: { click: _vm.deleteThisGroup },
+            },
+            [_vm._v("Удалить")]
           ),
         ]),
       ],
@@ -58375,6 +58495,7 @@ webpackContext.id = "./resources/js/components sync recursive \\.vue$/";
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./Departments.js": "./resources/js/storage/modules/Departments.js",
 	"./Group.js": "./resources/js/storage/modules/Group.js"
 };
 

@@ -71,10 +71,10 @@ class GroupController extends Controller
     public function editGroup (Request $request) {
         $val = Validator::make($request->all(), [
             'code' => 'required|string',
-            'name' => 'required_without_all:start_year,end_year,department_id|string|unique:groups,name',
-            'department_id' => 'required_without_all:start_year,end_year,name|integer',
-            'start_year' => 'required_without_all:department_id,end_year,name|string|min:4|max:4',
-            'end_year' => 'required_without_all:start_year,department_id,name|string|min:4|max:4'
+            'name' => 'required_without_all:start_year,end_year,department_code|string|unique:groups,name',
+            'department_code' => 'required_without_all:start_year,end_year,name|string',
+            'start_year' => 'required_without_all:department_code,end_year,name|string|min:4|max:4',
+            'end_year' => 'required_without_all:start_year,department_code,name|string|min:4|max:4'
         ]);
 
         if ($val->fails()) {
@@ -95,12 +95,12 @@ class GroupController extends Controller
         if (!$group) {
             return response()->json(['error'=>['code'=>'422', 'errors'=>['Group' => 'Group doesnt exist']]], 422);
         }
-        if ($request->department_id) {
-            $department = Department::find($request->department_id);
+        if ($request->department_code) {
+            $department = Department::where('code', $request->department_code)->first();
             if (!$department) {
                 return response()->json(['error'=>['code'=>'422', 'errors'=>['Department' => 'Department doesnt exist']]], 422);
             }
-            $group->department_id = $request->department_id;
+            $group->department_id = $department->id;
         }
 
         $request->name ? $group->name = $request->name : false;

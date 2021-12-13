@@ -10,10 +10,11 @@
     export default {
         name: "Groups",
         async mounted() {
-            this.getGroups()
+            this.getGroups();
+            this.getAllDepartments();
         },
         methods: {
-            ...mapActions(['getGroups'])
+            ...mapActions(['getGroups', 'getAllDepartments'])
         },
         computed: {
             ...mapGetters(['getCurrentGroup', 'getGroupsData'])

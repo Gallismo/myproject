@@ -10,10 +10,10 @@
         <select class="form-control btn-secondary" :disabled="isDisabled"
                 :id="name" aria-describedby="emailHelp"
                 ref="kutak" v-model="value"
-                @input="throwValue"
+                @change="throwValue"
                 v-else
          >
-            <option>{{value}}</option>
+            <option v-for="(name, code) in getDepartmentDropdown" :key="code" :value="name" :id="code">{{name}}</option>
         </select>
     </div>
 </template>
@@ -32,7 +32,8 @@
         computed: {
             getCurrentGroup: function () {
                 return this.$store.getters[this.getter]
-            }
+            },
+            ...mapGetters(['getDepartmentDropdown'])
         },
         watch: {
             getCurrentGroup: function () {

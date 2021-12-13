@@ -21,4 +21,9 @@ class MainReadController extends Controller
         }
         return response()->json($groups);
     }
+
+    public function getAllDepartments(Request $request) {
+        $departments = Department::all();
+        return response()->json($departments);
+    }
 }

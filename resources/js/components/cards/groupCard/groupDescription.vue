@@ -15,7 +15,8 @@
             />
             <div class="row">
                 <button class="btn btn-outline-secondary text-white col-12 mb-2" type="button" @click="allowEditSwitch">Редактировать</button>
-                <button class="btn btn-outline-secondary text-white col-12" type="button" @click="submitChanges" :disabled="formDisabled">Сохранить</button>
+                <button class="btn btn-outline-success text-white col-12 mb-2" type="button" @click="submitChanges" :disabled="formDisabled">Сохранить</button>
+                <button class="btn btn-outline-danger text-white col-12" type="button" @click="deleteThisGroup" >Удалить</button>
             </div>
         </form>
     </div>
@@ -33,7 +34,7 @@
             }
         },
         computed: {
-            ...mapGetters(['getCurrentGroup']),
+            ...mapGetters(['getCurrentGroup', 'getDepartmentDropdown']),
             inputs: function () {
                 return {
                     name: {
@@ -56,7 +57,7 @@
             }
         },
         methods: {
-            ...mapActions(['editGroup', 'getGroups']),
+            ...mapActions(['editGroup', 'getGroups', 'deleteGroup']),
             allowEditSwitch(event) {
                 if (this.formDisabled) {
                     event.target.innerText = "Отключить редактирование"
@@ -70,11 +71,23 @@
                     code: this.getCurrentGroup.code
                 };
                 this.inputs.name.value ? data['name'] = this.inputs.name.value : false;
-                this.inputs.department_name.value ? data['department_name'] = this.inputs.department_name.value : false;
+                if (this.inputs.department_name.value) {
+
+                    data['department_code'] = Object.keys(this.getDepartmentDropdown)
+                                                .find(key =>
+                                                    this.getDepartmentDropdown[key] === this.inputs.department_name.value
+                                                )
+                }
                 this.inputs.start_year.value ? data['start_year'] = this.inputs.start_year.value : false;
                 this.inputs.end_year.value ? data['end_year'] = this.inputs.end_year.value : false;
                 this.editGroup(data);
                 this.dropdownKey++;
+            },
+            deleteThisGroup() {
+                const data = {
+                    code: this.getCurrentGroup.code
+                }
+                this.deleteGroup(data)
             },
             commitValue(data) {
                 this.inputs[data.name].value = data.value
