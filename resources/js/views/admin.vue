@@ -2,6 +2,7 @@
     <div>
         <Header></Header>
         <Card :tab="currentTab"></Card>
+        <NotificationBootstrap />
     </div>
 </template>
 

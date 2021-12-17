@@ -1,3 +1,5 @@
+import Notification from "./Notification";
+
 export default {
     actions: {
         getGroups: context => {
@@ -33,9 +35,13 @@ export default {
                 url: '/api/Group',
                 data: data
             })
-                .then(response => console.log(response.data))
-                .then(() => {
+                .then(response => {
+                    console.log(response.data)
+                    return response.data
+                })
+                .then(response => {
                     context.dispatch('deleteGroupData', data)
+                    context.dispatch('showNotification', response)
                 })
                 .catch(error => console.log(error.response.data));
         },
@@ -43,16 +49,19 @@ export default {
             context.commit('deleteGroupData', data)
         },
         createGroup: (context, data) => {
+            let response;
             axios({
                 method: 'post',
                 url: '/api/Group',
                 data: data
-            })
-                .then(response => console.log(response.data))
-                .then(() => {
-                    context.dispatch('getGroups', data)
+            }).then(response => {
+                    context.dispatch('showNotification', response.data)
+                    context.dispatch('getGroups');
                 })
-                .catch(error => console.log(error.response.data));
+                .catch(error => {
+                    context.dispatch('showNotification', error.response.data)
+                });
+            response ? context.dispatch('showNotification', response) : false;
         },
 
     },

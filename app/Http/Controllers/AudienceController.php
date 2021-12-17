@@ -15,7 +15,9 @@ class AudienceController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $val = Validator::make($request->all(), [
@@ -23,15 +25,20 @@ class AudienceController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
+
         $code = $this->codeGenerate(Audience::class);
         Audience::create([
             'name' => $request->name,
             'code' => $code
         ]);
 
-        return response()->json(['response' => 'Audience has been created'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Аудитория была успешно добавлена',
+            'errors' => $val->errors()], 200);
     }
 
     public function deleteAudience(Request $request) {
@@ -40,18 +47,24 @@ class AudienceController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $audience = Audience::where('code', '=', $request->code)->first();
 
         if (is_null($audience)) {
-            return response()->json(['response' => 'Audience does not exist already'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такой аудитории не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $audience->delete();
 
-        return response()->json(['response' => 'Audience has been deleted'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Аудитория была успешно удалена',
+            'errors' => $val->errors()], 200);
     }
 
     public function editAudience (Request $request) {
@@ -61,18 +74,24 @@ class AudienceController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $audience = Audience::where('code', '=', $request->code)->first();
 
         if (is_null($audience)) {
-            return response()->json(['response' => 'Audience does not exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Аудитория не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $audience->name = $request->name;
         $audience->save();
 
-        return response()->json(['response' => 'Audience has been edited'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Аудитория была успешно отредактирована',
+            'errors' => $val->errors()], 200);
     }
 }

@@ -19,7 +19,9 @@ class GroupController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $val = Validator::make($request->all(), [
@@ -28,13 +30,17 @@ class GroupController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $department = Department::where('code', $request->department_code)->first();
 
         if (!$department) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>['Department' => 'Department doesnt exist']]], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такое отделение не существует',
+                'errors' => $val->errors()], 422);
         }
         $code = $this->codeGenerate(Group::class);
         Group::create([
@@ -45,7 +51,9 @@ class GroupController extends Controller
             'code' => $code
         ]);
 
-        return response()->json(['response' => 'Group has been created'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Группа была успешно добавлена',
+            'errors' => $val->errors()], 200);
     }
 
     public function deleteGroup (Request $request) {
@@ -54,18 +62,24 @@ class GroupController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $group = Group::where('code', $request->code)->first();
 
         if (!$group) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>['Group' => 'Group doesnt exist']]], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Группа не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $group->delete();
 
-        return response()->json(['response' => 'Group has been deleted'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Группа была успешно удалена',
+            'errors' => $val->errors()], 200);
     }
 
     public function editGroup (Request $request) {
@@ -78,7 +92,9 @@ class GroupController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $val = Validator::make($request->all(), [
@@ -87,18 +103,24 @@ class GroupController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $group = Group::where('code', $request->code)->first();
 
         if (!$group) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>['Group' => 'Group doesnt exist']]], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Группа не существует',
+                'errors' => $val->errors()], 422);
         }
         if ($request->department_code) {
             $department = Department::where('code', $request->department_code)->first();
             if (!$department) {
-                return response()->json(['error'=>['code'=>'422', 'errors'=>['Department' => 'Department doesnt exist']]], 422);
+                return response()->json(['title' => 'Ошибка',
+                    'text' => 'Такого отделения не существует',
+                    'errors' => $val->errors()], 422);
             }
             $group->department_id = $department->id;
         }
@@ -109,6 +131,8 @@ class GroupController extends Controller
 
         $group->save();
 
-        return response()->json(['response' => 'Group has been edited'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Группа была успешно отредактирована',
+            'errors' => $val->errors()], 200);
     }
 }

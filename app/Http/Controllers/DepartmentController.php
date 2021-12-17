@@ -15,7 +15,9 @@ class DepartmentController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
         $code = $this->codeGenerate(Department::class);
         Department::create([
@@ -23,7 +25,9 @@ class DepartmentController extends Controller
             'code' => $code
         ]);
 
-        return response()->json(['response' => 'Department has been created'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Отделение было успешно добавлено',
+            'errors' => $val->errors()], 200);
     }
 
     public function editDepartment (Request $request) {
@@ -33,20 +37,26 @@ class DepartmentController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $department = Department::where('code', '=', $request->code)->first();
 
         if(is_null($department)) {
-            return response()->json(['response' => 'Department does not exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Отделение не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $department->name = $request->name;
 
         $department->save();
 
-        return response()->json(['response' => 'Department has been edited'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Отделение было успешно отредактировано',
+            'errors' => $val->errors()], 200);
     }
 
     public function deleteDepartment (Request $request) {
@@ -55,17 +65,23 @@ class DepartmentController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $department = Department::where('code', '=', $request->code)->first();
 
         if(is_null($department)) {
-            return response()->json(['response' => 'Department does not exist already'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Отделение не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $department->delete();
 
-        return response()->json(['response' => 'Department has been deleted'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Отделение было успешно удалено',
+            'errors' => $val->errors()], 200);
     }
 }
