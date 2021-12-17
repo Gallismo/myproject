@@ -16,9 +16,10 @@
             />
             <div class="row">
                 <button class="btn btn-outline-secondary text-white col-12 mb-2" type="button" @click="allowEditSwitch">Редактировать</button>
-                <button class="btn btn-outline-success text-white col-12 mb-2" type="button" @click="submitChanges" :disabled="formDisabled">Сохранить</button>
+                <button class="btn btn-outline-success text-white col-12 mb-2" type="button" data-toggle="modal" data-target="#ConfirmModal" :disabled="formDisabled">Сохранить</button>
                 <button class="btn btn-outline-danger text-white col-12" type="button" @click="deleteThisGroup" >Удалить</button>
             </div>
+            <BootstrapModalConfirm id="ConfirmModal" @confirmEvent="submitChanges"></BootstrapModalConfirm>
         </form>
     </div>
 </template>
@@ -31,11 +32,11 @@
             return {
                 dropdownKey: 0,
                 formDisabled: true,
-                getter: 'getCurrentGroup',
+                getter: 'getCurrentGroup'
             }
         },
         computed: {
-            ...mapGetters(['getCurrentGroup', 'getDepartmentDropdown']),
+            ...mapGetters(['getCurrentGroup', 'getDepartmentDropdown', 'getGroupsData']),
             inputs: function () {
                 return {
                     name: {
@@ -67,6 +68,9 @@
                 }
                 this.formDisabled=!this.formDisabled
             },
+            callConfirmModal() {
+                $('#ConfirmModal').modal('show')
+            },
             submitChanges() {
                 const data = {
                     code: this.getCurrentGroup.code
@@ -81,6 +85,9 @@
                 }
                 this.inputs.start_year.value ? data['start_year'] = this.inputs.start_year.value : false;
                 this.inputs.end_year.value ? data['end_year'] = this.inputs.end_year.value : false;
+                // if(!confirm('Вы уверены?')) {
+                //     return;
+                // }
                 this.editGroup(data);
                 this.dropdownKey++;
             },

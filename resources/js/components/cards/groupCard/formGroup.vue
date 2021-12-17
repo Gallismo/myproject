@@ -6,6 +6,8 @@
                v-model="value"
                @input="throwValue"
                v-if="inputType"
+               autocomplete="off"
+               :placeholder="title"
         >
         <select class="form-control btn-secondary" :disabled="isDisabled"
                 :id="name" aria-describedby="emailHelp"
@@ -37,7 +39,9 @@
         },
         watch: {
             getCurrentGroup: function () {
-                this.isDescription ? this.value = this.getCurrentGroup[this.name] : false;
+                if (this.getCurrentGroup) {
+                    this.isDescription ? this.value = this.getCurrentGroup[this.name] : false;
+                }
             },
         },
         data() {

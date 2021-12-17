@@ -2065,6 +2065,53 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BootstrapModalConfirm.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BootstrapModalConfirm.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "BootstrapModalConfirm",
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
+  methods: {
+    confirmEvent: function confirmEvent() {
+      this.$emit('confirmEvent');
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Card.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Card.vue?vue&type=script&lang=js& ***!
@@ -2489,6 +2536,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Groups",
@@ -2513,7 +2564,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getGroups', 'getAllDepartments'])),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getCurrentGroup', 'getGroupsData']))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getCurrentGroup', 'getGroupsData', 'getCurrentDepartment'])),
+  watch: {
+    getCurrentGroup: function getCurrentGroup() {
+      console.log('update');
+      var vm = this;
+      setTimeout(function () {
+        vm.$forceUpdate();
+      }, 500);
+    }
+  }
 });
 
 /***/ }),
@@ -2697,6 +2757,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "formGroup",
@@ -2712,7 +2774,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getDepartmentDropdown'])),
   watch: {
     getCurrentGroup: function getCurrentGroup() {
-      this.isDescription ? this.value = this.getCurrentGroup[this.name] : false;
+      if (this.getCurrentGroup) {
+        this.isDescription ? this.value = this.getCurrentGroup[this.name] : false;
+      }
     }
   },
   data: function data() {
@@ -2897,6 +2961,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "groupDescription",
@@ -2907,7 +2972,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       getter: 'getCurrentGroup'
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentGroup', 'getDepartmentDropdown'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentGroup', 'getDepartmentDropdown', 'getGroupsData'])), {}, {
     inputs: function inputs() {
       return {
         name: {
@@ -2939,6 +3004,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.formDisabled = !this.formDisabled;
     },
+    callConfirmModal: function callConfirmModal() {
+      $('#ConfirmModal').modal('show');
+    },
     submitChanges: function submitChanges() {
       var _this = this;
 
@@ -2954,7 +3022,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       this.inputs.start_year.value ? data['start_year'] = this.inputs.start_year.value : false;
-      this.inputs.end_year.value ? data['end_year'] = this.inputs.end_year.value : false;
+      this.inputs.end_year.value ? data['end_year'] = this.inputs.end_year.value : false; // if(!confirm('Вы уверены?')) {
+      //     return;
+      // }
+
       this.editGroup(data);
       this.dropdownKey++;
     },
@@ -3111,8 +3182,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // window.Pusher = require('pusher-js');
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     key: process..env.MIX_PUSHER_APP_KEY,
+//     cluster: process..env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
 
@@ -39905,6 +39976,45 @@ module.exports = function (list, options) {
 
 /***/ }),
 
+/***/ "./resources/js/components/BootstrapModalConfirm.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/BootstrapModalConfirm.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _BootstrapModalConfirm_vue_vue_type_template_id_90c029f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BootstrapModalConfirm.vue?vue&type=template&id=90c029f4&scoped=true& */ "./resources/js/components/BootstrapModalConfirm.vue?vue&type=template&id=90c029f4&scoped=true&");
+/* harmony import */ var _BootstrapModalConfirm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BootstrapModalConfirm.vue?vue&type=script&lang=js& */ "./resources/js/components/BootstrapModalConfirm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BootstrapModalConfirm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BootstrapModalConfirm_vue_vue_type_template_id_90c029f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _BootstrapModalConfirm_vue_vue_type_template_id_90c029f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "90c029f4",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/BootstrapModalConfirm.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Card.vue":
 /*!******************************************!*\
   !*** ./resources/js/components/Card.vue ***!
@@ -40804,6 +40914,22 @@ component.options.__file = "resources/js/views/index.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/BootstrapModalConfirm.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/BootstrapModalConfirm.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BootstrapModalConfirm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BootstrapModalConfirm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BootstrapModalConfirm.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BootstrapModalConfirm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Card.vue?vue&type=script&lang=js&":
 /*!*******************************************************************!*\
   !*** ./resources/js/components/Card.vue?vue&type=script&lang=js& ***!
@@ -41181,6 +41307,23 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_groupCreate_vue_vue_type_style_index_0_id_6d1d0758_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./groupCreate.vue?vue&type=style&index=0&id=6d1d0758&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/cards/groupCard/groupCreate.vue?vue&type=style&index=0&id=6d1d0758&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/BootstrapModalConfirm.vue?vue&type=template&id=90c029f4&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/BootstrapModalConfirm.vue?vue&type=template&id=90c029f4&scoped=true& ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BootstrapModalConfirm_vue_vue_type_template_id_90c029f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BootstrapModalConfirm_vue_vue_type_template_id_90c029f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BootstrapModalConfirm_vue_vue_type_template_id_90c029f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BootstrapModalConfirm.vue?vue&type=template&id=90c029f4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BootstrapModalConfirm.vue?vue&type=template&id=90c029f4&scoped=true&");
 
 
 /***/ }),
@@ -41576,6 +41719,85 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BootstrapModalConfirm.vue?vue&type=template&id=90c029f4&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BootstrapModalConfirm.vue?vue&type=template&id=90c029f4&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: _vm.id,
+        "data-backdrop": "static",
+        "data-keyboard": "false",
+        tabindex: "-1",
+        "aria-labelledby": "staticBackdropLabel",
+        "aria-hidden": "true",
+      },
+    },
+    [
+      _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
+        _c("div", { staticClass: "modal-content bg-dark" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer border-secondary" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary text-white",
+                attrs: { type: "button", "data-dismiss": "modal" },
+                on: { click: _vm.confirmEvent },
+              },
+              [_vm._v("\n                    Подтвердить\n                ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-danger text-white",
+                attrs: { type: "button", "data-dismiss": "modal" },
+              },
+              [_vm._v("Отмена")]
+            ),
+          ]),
+        ]),
+      ]),
+    ]
+  )
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header border-secondary" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "staticBackdropLabel" } },
+        [_vm._v("Подтвердите действие")]
+      ),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Card.vue?vue&type=template&id=b9bc2c0a&scoped=true&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Card.vue?vue&type=template&id=b9bc2c0a&scoped=true& ***!
@@ -41602,7 +41824,7 @@ var render = function () {
           [
             _c(_vm.tab, {
               tag: "component",
-              staticClass: "card-body flex row justify-content-around",
+              staticClass: "card-body row justify-content-around",
             }),
           ],
           1
@@ -42045,9 +42267,49 @@ var render = function () {
   return _c(
     "div",
     [
-      _c("groupDescription", { staticClass: "col-12 col-md-6 col-lg-5" }),
+      _c("groupDescription", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.getCurrentGroup,
+            expression: "getCurrentGroup",
+          },
+        ],
+        staticClass: "col-12 col-md-6 col-lg-5",
+      }),
       _vm._v(" "),
-      _c("groupCreate", { staticClass: "col-12 col-md-5 mt-3 mt-md-0" }),
+      _c("groupCreate", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.getCurrentDepartment,
+            expression: "getCurrentDepartment",
+          },
+        ],
+        staticClass: "col-12 col-md-5 mt-3 mt-md-0",
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: !_vm.getCurrentDepartment,
+              expression: "!getCurrentDepartment",
+            },
+          ],
+          staticClass: "card-text text-center",
+        },
+        [
+          _vm._v(
+            "\n        Требуется наличие хотя бы одного отделения для того, чтобы добавить группу\n    "
+          ),
+        ]
+      ),
     ],
     1
   )
@@ -42255,6 +42517,8 @@ var render = function () {
             disabled: _vm.isDisabled,
             id: _vm.name,
             "aria-describedby": "emailHelp",
+            autocomplete: "off",
+            placeholder: _vm.title,
           },
           domProps: { value: _vm.value },
           on: {
@@ -42498,8 +42762,12 @@ var render = function () {
             "button",
             {
               staticClass: "btn btn-outline-success text-white col-12 mb-2",
-              attrs: { type: "button", disabled: _vm.formDisabled },
-              on: { click: _vm.submitChanges },
+              attrs: {
+                type: "button",
+                "data-toggle": "modal",
+                "data-target": "#ConfirmModal",
+                disabled: _vm.formDisabled,
+              },
             },
             [_vm._v("Сохранить")]
           ),
@@ -42514,6 +42782,11 @@ var render = function () {
             [_vm._v("Удалить")]
           ),
         ]),
+        _vm._v(" "),
+        _c("BootstrapModalConfirm", {
+          attrs: { id: "ConfirmModal" },
+          on: { confirmEvent: _vm.submitChanges },
+        }),
       ],
       2
     ),
@@ -59177,6 +59450,7 @@ var index = {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./BootstrapModalConfirm.vue": "./resources/js/components/BootstrapModalConfirm.vue",
 	"./Card.vue": "./resources/js/components/Card.vue",
 	"./CollapseToggler.vue": "./resources/js/components/CollapseToggler.vue",
 	"./ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue",

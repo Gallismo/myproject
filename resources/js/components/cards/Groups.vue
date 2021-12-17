@@ -1,7 +1,11 @@
 <template >
     <div>
-        <groupDescription class="col-12 col-md-6 col-lg-5"/>
-        <groupCreate class="col-12 col-md-5 mt-3 mt-md-0"/>
+        <groupDescription class="col-12 col-md-6 col-lg-5" v-show="getCurrentGroup"/>
+        <groupCreate class="col-12 col-md-5 mt-3 mt-md-0" v-show="getCurrentDepartment"/>
+        <div class="card-text text-center" v-show="!getCurrentDepartment">
+            Требуется наличие хотя бы одного отделения для того, чтобы добавить группу
+        </div>
+
     </div>
 </template>
 
@@ -17,7 +21,16 @@
             ...mapActions(['getGroups', 'getAllDepartments'])
         },
         computed: {
-            ...mapGetters(['getCurrentGroup', 'getGroupsData'])
+            ...mapGetters(['getCurrentGroup', 'getGroupsData', 'getCurrentDepartment'])
+        },
+        watch: {
+            getCurrentGroup: function () {
+                console.log('update')
+                let vm = this;
+                setTimeout(function () {
+                    vm.$forceUpdate();
+                }, 500)
+            }
         }
     }
 </script>
