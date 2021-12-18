@@ -85,9 +85,6 @@
                 }
                 this.inputs.start_year.value ? data['start_year'] = this.inputs.start_year.value : false;
                 this.inputs.end_year.value ? data['end_year'] = this.inputs.end_year.value : false;
-                // if(!confirm('Вы уверены?')) {
-                //     return;
-                // }
                 this.editGroup(data);
                 this.dropdownKey++;
             },

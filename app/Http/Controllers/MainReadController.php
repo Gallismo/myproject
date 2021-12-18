@@ -16,6 +16,9 @@ class MainReadController extends Controller
                 if ($department->id === $group->department_id) {
                     $group->department_name = $department->name;
                     unset($group->department_id);
+                } elseif ($group->department_id == null) {
+                    $group->department_name = 'Не указано';
+                    unset($group->department_id);
                 }
             }
         }

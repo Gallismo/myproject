@@ -22,15 +22,6 @@
         },
         computed: {
             ...mapGetters(['getCurrentGroup', 'getGroupsData', 'getCurrentDepartment'])
-        },
-        watch: {
-            getCurrentGroup: function () {
-                console.log('update')
-                let vm = this;
-                setTimeout(function () {
-                    vm.$forceUpdate();
-                }, 500)
-            }
         }
     }
 </script>

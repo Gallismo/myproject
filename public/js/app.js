@@ -2623,16 +2623,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getGroups', 'getAllDepartments'])),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getCurrentGroup', 'getGroupsData', 'getCurrentDepartment'])),
-  watch: {
-    getCurrentGroup: function getCurrentGroup() {
-      console.log('update');
-      var vm = this;
-      setTimeout(function () {
-        vm.$forceUpdate();
-      }, 500);
-    }
-  }
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getCurrentGroup', 'getGroupsData', 'getCurrentDepartment']))
 });
 
 /***/ }),
@@ -3081,10 +3072,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       this.inputs.start_year.value ? data['start_year'] = this.inputs.start_year.value : false;
-      this.inputs.end_year.value ? data['end_year'] = this.inputs.end_year.value : false; // if(!confirm('Вы уверены?')) {
-      //     return;
-      // }
-
+      this.inputs.end_year.value ? data['end_year'] = this.inputs.end_year.value : false;
       this.editGroup(data);
       this.dropdownKey++;
     },
