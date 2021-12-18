@@ -2,66 +2,60 @@ import Notification from "./Notification";
 
 export default {
     actions: {
-        getGroups: context => {
+        getGroups: ({commit, dispatch}) => {
             axios('/api/Group')
                 .then(response => {
-                    context.commit('groupsDataFill', response.data)
-                    context.commit('currentGroupFill', response.data)
+                    commit('groupsDataFill', response.data);
+                    commit('currentGroupFill', response.data);
                 })
-                .catch(error => console.log(error.response.data));
+                .catch(error => {
+                    dispatch('showNotification', error.response.data);
+                });
         },
-        switchCurrentGroup: (context, group) => {
-            context.commit('switchCurrentGroup', group.target.id)
+        switchCurrentGroup: ({commit, dispatch}, group) => {
+            commit('switchCurrentGroup', group.target.id)
         },
-        editGroup: (context, data) => {
+        editGroup: ({commit, dispatch}, data) => {
             axios({
                     method: 'patch',
                     url: '/api/Group',
                     data: data
                 })
-                .then(response => console.log(response.data))
-                .then(() => {
-                    context.dispatch('updateData', data)
+                .then(response => {
+                    commit('updateData', data);
+                    dispatch('showNotification', response.data);
                 })
-                .catch(error => console.log(error.response.data));
+                .catch(error => {
+                    dispatch('showNotification', error.response.data);
+                });
 
         },
-        updateData: (context, data) => {
-            context.commit('updateData', data)
-        },
-        deleteGroup: (context, data) => {
+        deleteGroup: ({commit, dispatch}, data) => {
             axios({
                 method: 'delete',
                 url: '/api/Group',
                 data: data
             })
                 .then(response => {
-                    console.log(response.data)
-                    return response.data
+                    commit('deleteGroupData', data);
+                    dispatch('showNotification', response.data);
                 })
-                .then(response => {
-                    context.dispatch('deleteGroupData', data)
-                    context.dispatch('showNotification', response)
-                })
-                .catch(error => console.log(error.response.data));
+                .catch(error => {
+                    dispatch('showNotification', error.response.data);
+                });
         },
-        deleteGroupData: (context, data) => {
-            context.commit('deleteGroupData', data)
-        },
-        createGroup: (context, data) => {
-            let response;
+        createGroup: ({commit, dispatch}, data) => {
             axios({
                 method: 'post',
                 url: '/api/Group',
                 data: data
             }).then(response => {
-                    context.dispatch('showNotification', response.data)
-                    context.dispatch('getGroups');
+                    dispatch('showNotification', response.data);
+                    dispatch('getGroups');
                 })
                 .catch(error => {
-                    context.dispatch('showNotification', error.response.data)
+                    dispatch('showNotification', error.response.data);
                 });
-            response ? context.dispatch('showNotification', response) : false;
         },
 
     },

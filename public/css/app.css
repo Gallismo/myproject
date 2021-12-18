@@ -10019,15 +10019,27 @@ h3 {
     border-color: #dee2e6;
   }
 }
+
 body {
     background-color: #1e222d;
 }
+
 /*Закругление границ уведомлений*/
 .toast {
-    border-radius: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 4px 4px 15px 5px black;
 }
 /*------------------------------*/
-/*Навбар и дропдауны*/
+
+/*Список ошибок в уведомлении*/
+.errors-list {
+    list-style: url('/img/error-arrow.svg');
+    margin-bottom: 0 !important;
+}
+/*------------------------------*/
+
+    /*Навбар и дропдауны*/
+
 /*Адаптация дропдаунов в навбаре под разные размеры, чтобы выглядело красиво*/
 .navbar-nav {
     width: 50%;

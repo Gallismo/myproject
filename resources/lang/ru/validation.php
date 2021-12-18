@@ -152,7 +152,7 @@ return [
         'minute'                => 'Минута',
         'mobile'                => 'Моб. номер',
         'month'                 => 'Месяц',
-        'name'                  => 'Имя',
+        'name'                  => 'Название',
         'password'              => 'Пароль',
         'password_confirmation' => 'Подтверждение пароля',
         'phone'                 => 'Телефон',
@@ -163,7 +163,7 @@ return [
         'title'                 => 'Наименование',
         'username'              => 'Никнейм',
         'year'                  => 'Год',
-        'department_code'       => 'Код департамента',
+        'department_code'       => 'Отделение',
         'start_year'            => 'Год поступления',
         'end_year'              => 'Год окончания',
         'code'                  => 'Код'

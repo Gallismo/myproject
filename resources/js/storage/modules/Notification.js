@@ -1,36 +1,48 @@
 export default {
     actions: {
-        showNotification({context, state}, data) {
-            console.log('уведомление')
+        showNotification({commit, dispatch, state}, data) {
+            // Очистка предыдущего уведомления
+            commit('clearNotification');
             clearTimeout(state.showId);
             clearTimeout(state.hideId);
+            // Переменный для того чтобы запомнить счеткики для очистки
             let showId, hideId;
-            context.commit('showNotification', data);
+
+            commit('showNotification', data);
+            // Счетчик для скрытия уведомления
             showId = setTimeout(function () {
-                context.commit('unShowNotification');
+
+                commit('unShowNotification');
+                // Счетчик для полного скрытия уведомления
                 hideId = setTimeout(function () {
-                    context.commit('hideNotification');
+                    commit('clearNotification');
+                    commit('hideNotification');
                 }, 200);
-                context.commit('bindHideId', hideId);
+                commit('bindHideId', hideId);
+
             }, 5000);
-            context.commit('bindShowId', showId);
+            commit('bindShowId', showId);
         }
     },
     mutations: {
         showNotification(state, data) {
             state.notification.title = data.title;
             state.notification.text = data.text;
-            state.notification.text = data.errors;
+            Object.values(data.errors).map(errorArr => {
+                errorArr.map(error => state.notification.errors.push(error));
+            });
             state.notification.hide = false;
             state.notification.show = true;
         },
         unShowNotification(state) {
             state.notification.show = false;
         },
-        hideNotification(state) {
+        clearNotification(state) {
             state.notification.title = 'Ошибка';
             state.notification.text = '';
-            state.notification.errors = {};
+            state.notification.errors = [];
+        },
+        hideNotification(state) {
             state.notification.hide = true;
         },
         bindShowId(state, timeoutId) {
@@ -46,7 +58,7 @@ export default {
             hide: true,
             title: 'Ошибка',
             text: '',
-            errors: {}
+            errors: []
         },
         showId: null,
         hideId: null
