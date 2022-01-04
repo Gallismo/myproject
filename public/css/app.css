@@ -10068,3 +10068,27 @@ body {
 }
 /*-----------------------------------------*/
 
+/*Список групп*/
+
+.listGroups {
+    overflow: auto;
+    max-height: 600px;
+}
+
+.list-group-header {
+    border-bottom: solid rgba(0, 0, 0, 0.425) 2px;
+}
+
+.list-group {
+    width: 95% !important;
+    border-radius: 0px !important;
+}
+
+.list-group-item {
+    border-radius: 0px !important;
+}
+
+.list-group-item span {
+    display: inline-block;
+}
+

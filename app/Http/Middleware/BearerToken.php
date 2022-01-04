@@ -26,6 +26,8 @@ class BearerToken
             }
         }
 
-        return response()->json('Unauthorized', 401);
+        return response()->json(['title' => 'Ошибка авторизации',
+            'text' => 'Вы не авторизованы',
+            'errors' => new \stdClass()], 401);
     }
 }

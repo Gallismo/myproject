@@ -15,7 +15,9 @@ class LessonsOrdersController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
         $code = $this->codeGenerate(lessonsOrder::class);
         lessonsOrder::create([
@@ -23,7 +25,9 @@ class LessonsOrdersController extends Controller
             'code' => $code
         ]);
 
-        return response()->json(['response' => 'Lessons order has been created'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Пара(расписание) была добавлена',
+            'errors' => $val->errors()], 200);
     }
 
     public function editLessonsOrder (Request $request) {
@@ -33,20 +37,26 @@ class LessonsOrdersController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $lessonsOrder = lessonsOrder::where('code', '=', $request->code)->first();
 
         if(is_null($lessonsOrder)) {
-            return response()->json(['response' => 'Lessons order does not exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такой пары не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $lessonsOrder->lessons_order = $request->lessons_order;
 
         $lessonsOrder->save();
 
-        return response()->json(['response' => 'Lessons order has been edited'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Пара(расписание) была успешно отредактирована',
+            'errors' => $val->errors()], 200);
     }
 
     public function deleteLessonsOrder (Request $request) {
@@ -55,17 +65,23 @@ class LessonsOrdersController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $lessonsOrder = lessonsOrder::where('code', '=', $request->code)->first();
 
         if(is_null($lessonsOrder)) {
-            return response()->json(['response' => 'Lessons order does not exist already'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такой пары не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $lessonsOrder->delete();
 
-        return response()->json(['response' => 'Lessons order has been deleted'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Пара(расписание) была удалена',
+            'errors' => $val->errors()], 200);
     }
 }

@@ -16,10 +16,11 @@
             />
             <div class="row">
                 <button class="btn btn-outline-secondary text-white col-12 mb-2" type="button" @click="allowEditSwitch">Редактировать</button>
-                <button class="btn btn-outline-success text-white col-12 mb-2" type="button" data-toggle="modal" data-target="#ConfirmModal" :disabled="formDisabled">Сохранить</button>
-                <button class="btn btn-outline-danger text-white col-12" type="button" @click="deleteThisGroup" >Удалить</button>
+                <button class="btn btn-outline-success text-white col-12 mb-2" type="button" data-toggle="modal" data-target="#submitChanges" :disabled="formDisabled">Сохранить</button>
+                <button class="btn btn-outline-danger text-white col-12" type="button" data-toggle="modal" data-target="#deleteThisGroup">Удалить</button>
             </div>
-            <BootstrapModalConfirm id="ConfirmModal" @confirmEvent="submitChanges"></BootstrapModalConfirm>
+            <BootstrapModalConfirm id="submitChanges" @confirmEvent="submitChanges"></BootstrapModalConfirm>
+            <BootstrapModalConfirm id="deleteThisGroup" @confirmEvent="deleteThisGroup"></BootstrapModalConfirm>
         </form>
     </div>
 </template>
@@ -60,6 +61,9 @@
         },
         methods: {
             ...mapActions(['editGroup', 'getGroups', 'deleteGroup']),
+            confirm() {
+
+            },
             allowEditSwitch(event) {
                 if (this.formDisabled) {
                     event.target.innerText = "Отключить редактирование"

@@ -30,6 +30,8 @@ class isAdmin
 //        if (!auth()->user()->is_admin) {
 //            return response()->json('You do not have admin permission', 401);
 //        }
-        return response()->json('You do not have admin permission', 401);
+        return response()->json(['title' => 'Ошибка авторизации',
+            'text' => 'Вы не имеета доступа',
+            'errors' => new \stdClass()], 401);
     }
 }

@@ -17,12 +17,12 @@ export default {
                 hideId = setTimeout(function () {
                     commit('clearNotification');
                     commit('hideNotification');
-                }, 200);
+                }, 3000);
                 commit('bindHideId', hideId);
 
-            }, 5000);
+            }, 7000);
             commit('bindShowId', showId);
-        }
+        },
     },
     mutations: {
         showNotification(state, data) {
@@ -50,6 +50,9 @@ export default {
         },
         bindHideId(state, timeoutId) {
             state.hideId = timeoutId;
+        },
+        updateFrame(state, type) {
+            type === 'show' ? state.bottom += 1 : state.right -= 1;
         }
     },
     state: {

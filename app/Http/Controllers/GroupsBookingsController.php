@@ -17,14 +17,17 @@ class GroupsBookingsController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
-//        return response()->json(['response' => 'Subject has been created'], 200);
 
         $groupBookingCheck = groupsBooking::where('booking_id', $request->booking_id)->where('group_id', $request->group_id)->first();
 
         if (!is_null($groupBookingCheck)) {
-            return response()->json(['response' => 'Group booking already exists'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Группа уже была добавлена ранее на пару',
+                'errors' => $val->errors()], 422);
         }
         $code = $this->codeGenerate(groupsBooking::class);
         groupsBooking::create([
@@ -34,7 +37,9 @@ class GroupsBookingsController extends Controller
             'group_part_id' => $request->group_part_id
         ]);
 
-        return response()->json(['response' => 'Group booking has been created'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Группа была успешно добавлена на пару',
+            'errors' => $val->errors()], 200);
     }
 
     public function editGroupBooking (Request $request) {
@@ -46,13 +51,17 @@ class GroupsBookingsController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $groupBookingCheck = groupsBooking::where('booking_id', $request->booking_id)->where('group_id', $request->group_id)->first();
 
         if (!is_null($groupBookingCheck)) {
-            return response()->json(['response' => 'Group booking with this parameters already exists'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такая группа уже была добавлена на пару',
+                'errors' => $val->errors()], 422);
         }
 
         $groupBooking = groupsBooking::where('code', $request->code)->first();
@@ -63,7 +72,9 @@ class GroupsBookingsController extends Controller
 
         $groupBooking->save();
 
-        return response()->json(['response' => 'Group booking has been edited'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Группа была успешно изменена и добавлена',
+            'errors' => $val->errors()], 200);
     }
 
     public function deleteGroupBooking (Request $request) {
@@ -72,13 +83,17 @@ class GroupsBookingsController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $groupBooking = groupsBooking::where('code', $request->code)->first();
 
         $groupBooking->delete();
 
-        return response()->json(['response' => 'Group booking has been deleted'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Группа была успешно удалена с пары',
+            'errors' => $val->errors()], 200);
     }
 }

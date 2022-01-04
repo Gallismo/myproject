@@ -1,12 +1,14 @@
 export default {
     actions: {
-        getAllDepartments: function (context) {
+        getAllDepartments: function ({commit, dispatch}) {
             axios('/api/Department')
                 .then(response => {
-                    context.commit('getAllDepartments', response.data)
-                    context.commit('currentDepartmentSet', response.data)
+                    commit('getAllDepartments', response.data);
+                    commit('currentDepartmentSet', response.data);
                 })
-                .catch(error => console.log(error.response.data));
+                .catch(error => {
+                    dispatch('showNotification', error.response.data);
+                });
         }
     },
     mutations: {

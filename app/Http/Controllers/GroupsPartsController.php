@@ -15,7 +15,9 @@ class GroupsPartsController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
         $code = $this->codeGenerate(groupsPart::class);
         groupsPart::create([
@@ -23,30 +25,38 @@ class GroupsPartsController extends Controller
             'code' => $code
         ]);
 
-        return response()->json(['response' => 'Group part has been created'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Раздел для групп был успешно добавлен',
+            'errors' => $val->errors()], 200);
     }
 
     public function editGroupsPart (Request $request) {
         $val = Validator::make($request->all(), [
             'code' => 'required|string',
-            'groups_part' => 'required|string'
+            'groups_part' => 'required|string|unique:groups_parts'
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $groupsPart = groupsPart::where('code', '=', $request->code)->first();
 
         if(is_null($groupsPart)) {
-            return response()->json(['response' => 'Group part does not exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такого раздела групп не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $groupsPart->groups_part = $request->groups_part;
 
         $groupsPart->save();
 
-        return response()->json(['response' => 'Group part has been edited'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Раздел групп был успешно отредактирован',
+            'errors' => $val->errors()], 200);
     }
 
     public function deleteGroupsPart (Request $request) {
@@ -55,17 +65,23 @@ class GroupsPartsController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $groupsPart = groupsPart::where('code', '=', $request->code)->first();
 
         if(is_null($groupsPart)) {
-            return response()->json(['response' => 'Group part does not exist already'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такого раздела групп не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $groupsPart->delete();
 
-        return response()->json(['response' => 'Group part has been deleted'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Раздел групп был успешно удален',
+            'errors' => $val->errors()], 200);
     }
 }

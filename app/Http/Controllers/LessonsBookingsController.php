@@ -22,7 +22,9 @@ class LessonsBookingsController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         if (is_null($request->is_remote)) {
@@ -34,8 +36,15 @@ class LessonsBookingsController extends Controller
                                     ->where('audience_id', $request->audience_id)->first();
 
         if (!is_null($lessonCheck)) {
-            return response()->json(['error'=>['code'=>'422',
-                'errors'=>'Audience is engaged', 'by' => $lessonCheck]], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Аудитория занята',
+                'errors' => (object)[
+                    'Дата, Пара' => $lessonCheck->lesson_date.", ".$lessonCheck->lesson_order_id,
+                    'Аудитория, Предмет, Преподаватель' =>
+                        $lessonCheck->audience_id.", "
+                        .$lessonCheck->subject_id.", "
+                        .$lessonCheck->teacher_id
+                ]], 422);
         }
 
         $teacherArr = [];
@@ -47,10 +56,13 @@ class LessonsBookingsController extends Controller
             $teacherArr[] = $item;
         }
 
+        $warning = '';
         if (array_key_exists(0, $teacherArr)) {
-            echo json_encode(['warning'=>[
-                'message'=>'Teacher is engaged', 'by' => $teacherArr]])."\n";
+            $warning = (object)[
+                'warning' => 'Предупреждение! Данный преподаватель уже закреплен за другой(-ими) парами!'
+            ];
         }
+
         $code = $this->codeGenerate(lessonsBooking::class);
         lessonsBooking::create([
             'lesson_date' => $request->lesson_date,
@@ -62,7 +74,9 @@ class LessonsBookingsController extends Controller
             'code' => $code
         ]);
 
-        return response()->json(['response' => 'Lesson Booking has been created'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Пара была успешно добавлена',
+            'errors' => $warning], 200);
     }
 
     public function deleteLessonBooking (Request $request) {
@@ -71,13 +85,17 @@ class LessonsBookingsController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $lessonBooking = lessonsBooking::where('code', '=', $request->code)->first();
 
         if (is_null($lessonBooking)) {
-            return response()->json(['response' => 'Lesson Booking doesnt exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такой записи не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $groupArr = [];
@@ -87,14 +105,11 @@ class LessonsBookingsController extends Controller
             $groupArr[] = $item;
         }
 
-        if (array_key_exists(0, $groupArr)) {
-            echo json_encode(['warning'=>[
-                    'message'=>'Deleting also groups that references on booking', 'groups bookings' => $groupArr]])."\n";
-        }
-
         $lessonBooking->delete();
 
-        return response()->json(['response' => 'Lesson Booking has been deleted'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Пара была успешно удалена',
+            'errors' => $val->errors()], 200);
     }
 
     public function editLessonBooking (Request $request) {
@@ -109,7 +124,9 @@ class LessonsBookingsController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $lessonCheck = lessonsBooking::where('lesson_date', $request->lesson_date)
@@ -117,8 +134,9 @@ class LessonsBookingsController extends Controller
             ->where('audience_id', $request->audience_id)->first();
 
         if (!is_null($lessonCheck)) {
-            return response()->json(['error'=>['code'=>'422',
-                'errors'=>'Audience is engaged', 'by' => $lessonCheck]], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Аудитория занята',
+                'errors' => $val->errors()], 422);
         }
 
         $lessonBooking = lessonsBooking::where('code', '=', $request->code)->first();
@@ -141,14 +159,17 @@ class LessonsBookingsController extends Controller
             }
             $teacherArr[] = $item;
         }
-
+        $warning = '';
         if (array_key_exists(0, $teacherArr)) {
-            echo json_encode(['warning'=>[
-                    'message'=>'Teacher is engaged', 'by' => $teacherArr]])."\n";
+            $warning = (object)[
+                'warning' => 'Предупреждение! Данный преподаватель уже закреплен за другой(-ими) парами!'
+            ];
         }
 
         $lessonBooking->save();
 
-        return response()->json(['response' => 'Lesson Booking has been edited'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Пара была успешно отредактирована',
+            'errors' => $warning], 200);
     }
 }
