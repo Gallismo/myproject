@@ -2613,6 +2613,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Groups",
@@ -2636,7 +2637,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getGroups', 'getAllDepartments'])),
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getGroups', 'getAllDepartments', 'switchCurrentGroup'])),
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getCurrentGroup', 'getGroupsData', 'getCurrentDepartment']))
 });
 
@@ -2768,7 +2769,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: true
     }
   },
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['switchCurrentGroup'])),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['switchCurrentGroup'])), {}, {
+    switcher: function switcher(e) {
+      this.switchCurrentGroup(e.target.id);
+    }
+  }),
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getDropdownData', 'getCurrentGroup'])), {}, {
     header: function header() {
       var _this = this;
@@ -3117,6 +3122,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3125,6 +3137,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "groupList",
   props: {
@@ -3132,7 +3145,18 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       required: true
     }
-  }
+  },
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['switchCurrentGroup'])), {}, {
+    switcher: function switcher(e) {
+      var top = $('a[name=groups]').offset().top;
+      $('body,html').animate({
+        scrollTop: top
+      }, 300);
+      var target = e.target;
+      var parent = target.parentElement;
+      this.switchCurrentGroup(parent.id);
+    }
+  })
 });
 
 /***/ }),
@@ -3405,10 +3429,10 @@ __webpack_require__.r(__webpack_exports__);
         dispatch('showNotification', error.response.data);
       });
     },
-    switchCurrentGroup: function switchCurrentGroup(_ref2, group) {
+    switchCurrentGroup: function switchCurrentGroup(_ref2, code) {
       var commit = _ref2.commit,
           dispatch = _ref2.dispatch;
-      commit('switchCurrentGroup', group.target.id);
+      commit('switchCurrentGroup', code);
     },
     editGroup: function editGroup(_ref3, data) {
       var commit = _ref3.commit,
@@ -42692,6 +42716,8 @@ var render = function () {
       "div",
       { staticClass: "row justify-content-around" },
       [
+        _c("a", { attrs: { name: "groups", hidden: "" } }),
+        _vm._v(" "),
         _c("groupDescription", {
           directives: [
             {
@@ -42941,8 +42967,8 @@ var render = function () {
           {
             key: index,
             staticClass: "dropdown-item",
-            attrs: { href: "#", id: index },
-            on: { click: _vm.switchCurrentGroup },
+            attrs: { href: "#groups", id: index },
+            on: { click: _vm.switcher },
           },
           [_vm._v(_vm._s(item))]
         )
@@ -43300,10 +43326,11 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "a",
+    "ul",
     {
       staticClass: "list-group list-group-horizontal text-white",
-      attrs: { href: "#list" },
+      attrs: { href: "#list", id: _vm.group.code },
+      on: { click: _vm.switcher },
     },
     [
       _c("li", { staticClass: "list-group-item bg-dark col-4" }, [

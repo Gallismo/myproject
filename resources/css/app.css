@@ -64,7 +64,25 @@ body {
 }
 
 .list-group-item {
+    transition: background-color 0.5s;
     border-radius: 0px !important;
+}
+
+.list-group:hover > li {
+    background-color: #6c757d !important;
+    transition: background-color 1s;
+}
+
+.list-group:hover {
+    cursor: pointer;
+}
+
+.list-group-header:hover {
+    cursor: default;
+}
+
+.list-group-header:hover > li {
+    background-color: #343a40 !important;
 }
 
 .list-group-item span {

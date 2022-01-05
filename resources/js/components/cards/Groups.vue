@@ -1,6 +1,7 @@
 <template >
     <div>
         <div class="row justify-content-around">
+            <a name="groups" hidden></a>
             <groupDescription class="col-12 col-md-6 col-lg-5" v-show="getCurrentGroup"/>
             <groupCreate class="col-12 col-md-5 mt-3 mt-md-0" v-show="getCurrentDepartment"/>
             <div class="card-text text-center" v-show="!getCurrentDepartment">
@@ -19,7 +20,7 @@
                 <li class="list-group-item bg-dark col-4">Годы</li>
             </ul>
 
-            <groupList  v-for="group in getGroupsData" :group="group" :key="group.code" />
+            <groupList  v-for="group in getGroupsData" :group="group" :key="group.code"/>
 
         </div>
     </div>
@@ -34,7 +35,8 @@
             this.getAllDepartments();
         },
         methods: {
-            ...mapActions(['getGroups', 'getAllDepartments'])
+            ...mapActions(['getGroups', 'getAllDepartments', 'switchCurrentGroup']),
+
         },
         computed: {
             ...mapGetters(['getCurrentGroup', 'getGroupsData', 'getCurrentDepartment'])

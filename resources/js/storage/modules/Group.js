@@ -12,8 +12,8 @@ export default {
                     dispatch('showNotification', error.response.data);
                 });
         },
-        switchCurrentGroup: ({commit, dispatch}, group) => {
-            commit('switchCurrentGroup', group.target.id)
+        switchCurrentGroup: ({commit, dispatch}, code) => {
+            commit('switchCurrentGroup', code)
         },
         editGroup: ({commit, dispatch}, data) => {
             axios({

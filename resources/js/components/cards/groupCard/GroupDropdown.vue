@@ -4,10 +4,10 @@
             {{header}}
         </button>
         <div class="dropdown-menu bg-dark mt-1" :aria-labelledby="id">
-            <a class="dropdown-item" href="#"
+            <a class="dropdown-item" href="#groups"
                v-for="(item, index) in getDropdownData"
                :id="index" :key="index"
-               @click="switchCurrentGroup"
+               @click="switcher"
             >{{item}}</a>
         </div>
     </div>
@@ -24,7 +24,10 @@
             }
         },
         methods: {
-            ...mapActions(['switchCurrentGroup'])
+            ...mapActions(['switchCurrentGroup']),
+            switcher(e) {
+                this.switchCurrentGroup(e.target.id);
+            }
         },
         computed: {
             ...mapGetters(['getDropdownData', 'getCurrentGroup']),
