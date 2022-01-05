@@ -12,15 +12,18 @@ class MainReadController extends Controller
         $groups = Group::orderBy('name')->get();
         $departments = Department::all();
         foreach ($groups as $group) {
+
             foreach ($departments as $department) {
                 if ($department->id === $group->department_id) {
                     $group->department_name = $department->name;
-                    unset($group->department_id);
-                } elseif ($group->department_id == null) {
-                    $group->department_name = 'Не указано';
-                    unset($group->department_id);
                 }
             }
+
+            if ($group->department_id == null) {
+                $group->department_name = 'Не указано';
+            }
+
+            unset($group->department_id);
         }
         return response()->json($groups);
     }

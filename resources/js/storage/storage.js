@@ -24,7 +24,8 @@ const store = new Vuex.Store({
                         Counter:'Счетчик остатка часов',
                         Subjects:'Предметы',
                         Audiences:'Аудитории',
-                        Department:'Отделения'
+                        Department:'Отделения',
+                        Fundament: 'Основные'
                     }
                 },
                 dropdown1: {
@@ -36,7 +37,7 @@ const store = new Vuex.Store({
                 }
             }
         },
-        currentTab: "Groups"
+        currentTab: "Fundament"
     },
     getters: {
         getLinks: state => state.links,

@@ -9,15 +9,64 @@ export default {
                 .catch(error => {
                     dispatch('showNotification', error.response.data);
                 });
+        },
+        saveDepartment({commit, dispatch}, data) {
+            axios({
+                method: 'patch',
+                url: '/api/Department',
+                data: data
+            })
+                .then(response => {
+                    commit('updateDepartment', data);
+                    dispatch('showNotification', response.data);
+                })
+                .catch(error => {
+                    dispatch('showNotification', error.response.data);
+                });
+        },
+        deleteDepartment: ({commit, dispatch}, data) => {
+            axios({
+                method: 'delete',
+                url: '/api/Department',
+                data: data
+            })
+                .then(response => {
+                    commit('deleteDepartment', data);
+                    dispatch('showNotification', response.data);
+                })
+                .catch(error => {
+                    dispatch('showNotification', error.response.data);
+                });
+        },
+        switchDepartment({commit, dispatch}, code) {
+            commit('switchDepartment', code);
         }
     },
     mutations: {
+        deleteDepartment(state, data) {
+            state.departmentsData.map((obj, index) => {
+                if (obj.code === data.code) {
+                    state.departmentsData.splice(index, 1)
+                }
+            });
+            state.currentDepartment = state.departmentsData[0]
+        },
         getAllDepartments: (state, response) => {
             state.departmentsData = response;
         },
         currentDepartmentSet: (state, response) => {
             state.currentDepartment = response[0]
-        }
+        },
+        switchDepartment(state, code) {
+            state.currentDepartment = state.departmentsData.find(department => department.code === code);
+        },
+        updateDepartment: (state, data) => {
+            state.departmentsData.map((obj, index) => {
+                if (obj.code === data.code) {
+                    data.name ? state.departmentsData[index].name = data.name : false;
+                }
+            });
+        },
     },
     state: {
         departmentsData: [],

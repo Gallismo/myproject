@@ -1,18 +1,20 @@
 <template>
     <section>
          <div class="card bg-dark text-white container mt-lg-5 mt-4">
-             <component v-bind:is="tab" class="card-body"></component>
+             <component v-bind:is="currentTab" class="card-body"></component>
          </div>
     </section>
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
         name: "Card",
-        props: {
-            tab: {
-                type: String
-            }
+        computed: {
+            ...mapGetters({
+                currentTab: 'getCurrentTab'
+            })
         }
     }
 </script>

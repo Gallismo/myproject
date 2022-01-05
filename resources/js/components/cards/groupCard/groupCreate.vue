@@ -1,10 +1,13 @@
 <template>
     <div class="card bg-dark text-white">
         <form class="card-body" @keypress.enter="submit">
+
             <div class="card-text row align-items-center justify-content-around">
                 Создать группу
             </div>
+
             <hr>
+
             <formGroup
                 :getter="getter" :name="name"
                 :title="input.title" :isDisabled="formDisabled"
@@ -13,10 +16,12 @@
                 @throwValue="commitValue"
                 :isDescription="false"
             />
+
             <div class="row button mt-5">
-                <button class="btn btn-outline-success text-white col-12" type="button" @click="submit">Создать</button>
-                <button class="btn btn-outline-secondary text-white col-12 mt-2" type="reset">Сбросить</button>
+                <CreateButton @clickButton="submit"/>
+                <ResetButton />
             </div>
+
         </form>
     </div>
 </template>

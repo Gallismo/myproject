@@ -10073,6 +10073,10 @@ body {
     color: rgba(255,255,255,.5);
 }
 
+.dropdown-item:hover {
+    cursor: pointer;
+}
+
 .dropdown-menu {
     overflow: auto;
     max-height: 200px;

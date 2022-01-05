@@ -1,12 +1,17 @@
 <template>
     <div class="card bg-dark text-white">
+
         <a name="groups"/>
-        <form class="card-body">
+
+        <form class="card-body" @keypress.enter="submitChanges">
+
             <div class="card-text row align-items-center justify-content-around">
                 Выбрать группу
                 <GroupDropdown id="GroupDropdown" class="mb-1 col-6" :key="dropdownKey"/>
             </div>
+
             <hr>
+
             <formGroup
                 :getter="getter" :name="name"
                 :title="input.title" :isDisabled="formDisabled"
@@ -15,14 +20,18 @@
                 @throwValue="commitValue"
                 :isDescription="true"
             />
+
             <div class="row">
-                <button class="btn btn-outline-secondary text-white col-12 mb-2" type="button" @click="allowEditSwitch">Редактировать</button>
-                <button class="btn btn-outline-success text-white col-12 mb-2" type="button" data-toggle="modal" data-target="#submitChanges" :disabled="formDisabled">Сохранить</button>
-                <button class="btn btn-outline-danger text-white col-12" type="button" data-toggle="modal" data-target="#deleteThisGroup">Удалить</button>
+                <editButton @clickButton="allowEditSwitch"/>
+                <SaveButton target="#submitChanges" :isDisabled="formDisabled"/>
+                <DeleteButton target="#deleteThisGroup"/>
             </div>
-            <BootstrapModalConfirm id="submitChanges" @confirmEvent="submitChanges"></BootstrapModalConfirm>
-            <BootstrapModalConfirm id="deleteThisGroup" @confirmEvent="deleteThisGroup"></BootstrapModalConfirm>
+
         </form>
+
+
+        <BootstrapModalConfirm id="submitChanges" @confirmEvent="submitChanges"></BootstrapModalConfirm>
+        <BootstrapModalConfirm id="deleteThisGroup" @confirmEvent="deleteThisGroup"></BootstrapModalConfirm>
     </div>
 </template>
 
@@ -72,9 +81,6 @@
                     event.target.innerText = "Редактировать"
                 }
                 this.formDisabled=!this.formDisabled
-            },
-            callConfirmModal() {
-                $('#ConfirmModal').modal('show')
             },
             submitChanges() {
                 const data = {

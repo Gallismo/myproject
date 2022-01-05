@@ -22,7 +22,7 @@ export default {
                     data: data
                 })
                 .then(response => {
-                    commit('updateData', data);
+                    commit('updateGroup', data);
                     dispatch('showNotification', response.data);
                 })
                 .catch(error => {
@@ -66,7 +66,7 @@ export default {
         currentGroupFill: (state, response) => {
             state.currentGroup = response[0];
         },
-        updateData: (state, data) => {
+        updateGroup: (state, data) => {
             state.groupsData.map((obj, index) => {
                 if (obj.code === data.code) {
                     data.name ? state.groupsData[index].name = data.name : false;
