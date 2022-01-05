@@ -12,7 +12,7 @@ class GroupController extends Controller
 {
     public function createGroup (Request $request) {
         $val = Validator::make($request->all(), [
-            'name' => 'required|unique:groups|string',
+            'name' => 'required|unique:groups|string|max:14',
             'department_code' => 'required|string',
             'start_year' => 'required|string|min:4|max:4',
             'end_year' => 'required|string|min:4|max:4'
@@ -85,7 +85,7 @@ class GroupController extends Controller
     public function editGroup (Request $request) {
         $val = Validator::make($request->all(), [
             'code' => 'required|string',
-            'name' => 'required_without_all:start_year,end_year,department_code|string|unique:groups,name',
+            'name' => 'required_without_all:start_year,end_year,department_code|string|unique:groups,name|max:14',
             'department_code' => 'required_without_all:start_year,end_year,name|string',
             'start_year' => 'required_without_all:department_code,end_year,name|string|min:4|max:4',
             'end_year' => 'required_without_all:start_year,department_code,name|string|min:4|max:4'

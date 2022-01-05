@@ -4,7 +4,7 @@
             {{header}}
         </button>
         <div class="dropdown-menu bg-dark mt-1" :aria-labelledby="id">
-            <a class="dropdown-item" href="#groups"
+            <a class="dropdown-item"
                v-for="(item, index) in getDropdownData"
                :id="index" :key="index"
                @click="switcher"

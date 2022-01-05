@@ -1,4 +1,10 @@
 
+* {
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+}
+
 body {
     background-color: #1e222d;
 }
@@ -45,13 +51,18 @@ body {
 .dropdown-item {
     color: rgba(255,255,255,.5);
 }
+
+.dropdown-menu {
+    overflow: auto;
+    max-height: 200px;
+}
 /*-----------------------------------------*/
 
 /*Список групп*/
 
 .listGroups {
     overflow: auto;
-    max-height: 600px;
+    max-height: 90vh;
 }
 
 .list-group-header {
@@ -88,3 +99,4 @@ body {
 .list-group-item span {
     display: inline-block;
 }
+/*-----------------------------------------*/

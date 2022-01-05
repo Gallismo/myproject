@@ -1,9 +1,10 @@
 <template>
     <div class="card bg-dark text-white">
+        <a name="groups"/>
         <form class="card-body">
             <div class="card-text row align-items-center justify-content-around">
                 Выбрать группу
-                <GroupDropdown id="GroupDropdown" class="mb-1 col-6" :key="dropdownKey"></GroupDropdown>
+                <GroupDropdown id="GroupDropdown" class="mb-1 col-6" :key="dropdownKey"/>
             </div>
             <hr>
             <formGroup

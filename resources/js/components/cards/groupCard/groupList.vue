@@ -20,10 +20,10 @@
         methods: {
             ...mapActions(['switchCurrentGroup']),
             switcher(e) {
-                let top = $('a[name=groups]').offset().top;
+                let top = $('a[name=groups]').offset().top - 50;
                 $('body,html').animate({scrollTop: top}, 300);
-                let target = e.target;
-                let parent = target.parentElement;
+
+                let parent = e.target.parentElement;
                 this.switchCurrentGroup(parent.id);
             }
         }

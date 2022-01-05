@@ -2613,7 +2613,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Groups",
@@ -3032,6 +3031,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "groupDescription",
@@ -3148,12 +3148,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['switchCurrentGroup'])), {}, {
     switcher: function switcher(e) {
-      var top = $('a[name=groups]').offset().top;
+      var top = $('a[name=groups]').offset().top - 50;
       $('body,html').animate({
         scrollTop: top
       }, 300);
-      var target = e.target;
-      var parent = target.parentElement;
+      var parent = e.target.parentElement;
       this.switchCurrentGroup(parent.id);
     }
   })
@@ -42716,8 +42715,6 @@ var render = function () {
       "div",
       { staticClass: "row justify-content-around" },
       [
-        _c("a", { attrs: { name: "groups", hidden: "" } }),
-        _vm._v(" "),
         _c("groupDescription", {
           directives: [
             {
@@ -42967,7 +42964,7 @@ var render = function () {
           {
             key: index,
             staticClass: "dropdown-item",
-            attrs: { href: "#groups", id: index },
+            attrs: { id: index },
             on: { click: _vm.switcher },
           },
           [_vm._v(_vm._s(item))]
@@ -43212,6 +43209,8 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card bg-dark text-white" }, [
+    _c("a", { attrs: { name: "groups" } }),
+    _vm._v(" "),
     _c(
       "form",
       { staticClass: "card-body" },

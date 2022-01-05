@@ -1,7 +1,6 @@
 <template >
     <div>
         <div class="row justify-content-around">
-            <a name="groups" hidden></a>
             <groupDescription class="col-12 col-md-6 col-lg-5" v-show="getCurrentGroup"/>
             <groupCreate class="col-12 col-md-5 mt-3 mt-md-0" v-show="getCurrentDepartment"/>
             <div class="card-text text-center" v-show="!getCurrentDepartment">
