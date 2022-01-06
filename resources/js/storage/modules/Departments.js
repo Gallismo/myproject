@@ -38,6 +38,20 @@ export default {
                     dispatch('showNotification', error.response.data);
                 });
         },
+        createDepartment: ({commit, dispatch}, data) => {
+            axios({
+                method: 'post',
+                url: '/api/Department',
+                data: data
+            })
+                .then(response => {
+                    dispatch('getAllDepartments');
+                    dispatch('showNotification', response.data);
+                })
+                .catch(error => {
+                    dispatch('showNotification', error.response.data);
+                });
+        },
         switchDepartment({commit, dispatch}, code) {
             commit('switchDepartment', code);
         }

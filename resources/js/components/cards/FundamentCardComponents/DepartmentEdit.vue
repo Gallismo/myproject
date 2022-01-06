@@ -1,30 +1,27 @@
 <template>
-    <div class="card bg-dark text-white">
-        <form class="card-body">
+    <form class="card-body">
 
-            <div class="card-text row align-items-center justify-content-around">
-                Выбрать отделение
-                <Dropdown id="DepartmentDropdown" class="mb-1 col-6"
-                :header="getCurrentDepartment.name" :items="getDepartmentDropdown"
-                @clickEvent="switcher"/>
-            </div>
+        <cardHeader>
+            Выбрать отделение
+            <Dropdown id="DepartmentDropdown" :header="getCurrentDepartment.name"
+                      :items="getDepartmentDropdown" @clickEvent="switcher"/>
+        </cardHeader>
 
-            <hr>
+        <hr>
 
-            <inputText :code="getCurrentDepartment.code"
-                       :valueInput="getCurrentDepartment.name"
-                       alias="Название" inputName="name"/>
+        <inputText :code="getCurrentDepartment.code"
+                   :valueInput="getCurrentDepartment.name"
+                   alias="Название" inputName="editName"/>
 
-            <div class="row">
-                <SaveButton target="#save"/>
-                <DeleteButton target="#delete"/>
-            </div>
-
-        </form>
+        <div class="row">
+            <SaveButton target="#save"/>
+            <DeleteButton target="#delete"/>
+        </div>
 
         <BootstrapModalConfirm id="save" @confirmEvent="save"></BootstrapModalConfirm>
         <BootstrapModalConfirm id="delete" @confirmEvent="deleteD"></BootstrapModalConfirm>
-    </div>
+
+    </form>
 </template>
 
 <script>
@@ -45,7 +42,7 @@
                     code: this.getCurrentDepartment.code
                 }
 
-                $('input[name=name]').val() ? data.name = $('input[name=name]').val() : false;
+                $(`input[name=editName]`).val() ? data.name = $('input[name=editName]').val() : false;
 
                 this.saveDepartment(data);
             },

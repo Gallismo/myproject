@@ -10026,6 +10026,12 @@ h3 {
     -ms-hyphens: auto;
 }
 
+/*div, p, h1, h2, h3, h4, h5, h6 :hover {*/
+/*    cursor: default;*/
+/*}*/
+
+
+
 body {
     background-color: #1e222d;
 }
@@ -10110,11 +10116,11 @@ body {
 }
 
 .list-group:hover {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .list-group-header:hover {
-    cursor: default;
+    cursor: default !important;
 }
 
 .list-group-header:hover > li {
@@ -10124,5 +10130,14 @@ body {
 .list-group-item span {
     display: inline-block;
 }
+/*-----------------------------------------*/
+
+/*Заголовки*/
+
+.card-title {
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
 /*-----------------------------------------*/
 

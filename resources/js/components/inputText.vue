@@ -15,7 +15,7 @@
             },
             valueInput: {
                 type: String,
-                default: '...'
+                default: ''
             },
             inputName: {
                 type: String,

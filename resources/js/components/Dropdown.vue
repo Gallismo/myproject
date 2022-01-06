@@ -1,11 +1,11 @@
 <template>
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button"
+    <div class="dropdown col-xl-6 col-lg-7 col-md-12 mt-2 mt-lg-0">
+        <button class="btn btn-secondary dropdown-toggle col-12" type="button"
                 id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
             {{header}}
         </button>
-        <div class="dropdown-menu bg-dark mt-1" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu bg-dark mt-1 col-11" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item"
                v-for="(name, code) in items" :key="code"
                :id="code" @click="click">{{name}}</a>

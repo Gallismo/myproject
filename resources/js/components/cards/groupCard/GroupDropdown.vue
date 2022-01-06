@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown">
+    <div class="dropdown mb-1 col-xl-6 col-lg-7 col-md-12 mt-2 mt-lg-0">
         <button class="btn btn-secondary dropdown-toggle col-12" type="button" :id="id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{header}}
         </button>

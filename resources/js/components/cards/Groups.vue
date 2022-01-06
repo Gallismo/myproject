@@ -1,16 +1,16 @@
 <template >
     <div>
         <div class="row justify-content-around">
-            <groupDescription class="col-12 col-md-6 col-lg-5" v-show="getCurrentGroup"/>
-            <groupCreate class="col-12 col-md-5 mt-3 mt-md-0" v-show="getCurrentDepartment"/>
-            <div class="card-text text-center" v-show="!getCurrentDepartment">
+            <groupDescription class="col-12 col-md-6 col-lg-5" v-show="getCurrentGroup.code"/>
+            <groupCreate class="col-12 col-md-5 mt-3 mt-md-0" v-show="getCurrentDepartment.code"/>
+            <div class="card-text text-center" v-show="!getCurrentDepartment.code">
                 Требуется наличие хотя бы одного отделения для того, чтобы добавить группу
             </div>
         </div>
 
         <hr>
 
-        <div class="row justify-content-around mt-3 listGroups" v-show="getCurrentGroup">
+        <div class="row justify-content-around mt-3 listGroups" v-show="getCurrentGroup.code">
 
             <ul class="list-group list-group-horizontal list-group-header">
                 <a name="list"></a>

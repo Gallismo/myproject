@@ -1,7 +1,15 @@
 <template>
     <div>
         <div class="row justify-content-around">
-            <DepartmentCard class="col-12 col-md-6 col-lg-5"/>
+            <h5 class="card-title col-12">Отделения</h5>
+            <editCard v-show="getCurrentDepartment.code"><DepartmentEdit/></editCard>
+            <createCard><DepartmentCreate/></createCard>
+        </div>
+        <hr>
+        <div class="row justify-content-around">
+            <h5 class="card-title col-12">Отделения</h5>
+            <editCard v-show="getCurrentDepartment.code"><DepartmentEdit/></editCard>
+            <createCard><DepartmentCreate/></createCard>
         </div>
     </div>
 </template>
@@ -16,6 +24,9 @@
         },
         methods: {
             ...mapActions(['getAllDepartments'])
+        },
+        computed: {
+            ...mapGetters(['getCurrentDepartment'])
         }
     }
 </script>
