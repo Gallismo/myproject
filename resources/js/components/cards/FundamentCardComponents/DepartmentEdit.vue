@@ -9,17 +9,17 @@
 
         <hr>
 
-        <inputText :code="getCurrentDepartment.code"
+        <inputText code="editDep"
                    :valueInput="getCurrentDepartment.name"
                    alias="Название" inputName="editName"/>
 
         <div class="row">
-            <SaveButton target="#save"/>
-            <DeleteButton target="#delete"/>
+            <SaveButton target="#saveDep"/>
+            <DeleteButton target="#deleteDep"/>
         </div>
 
-        <BootstrapModalConfirm id="save" @confirmEvent="save"></BootstrapModalConfirm>
-        <BootstrapModalConfirm id="delete" @confirmEvent="deleteD"></BootstrapModalConfirm>
+        <BootstrapModalConfirm id="saveDep" @confirmEvent="save"></BootstrapModalConfirm>
+        <BootstrapModalConfirm id="deleteDep" @confirmEvent="deleteD"></BootstrapModalConfirm>
 
     </form>
 </template>
@@ -42,7 +42,7 @@
                     code: this.getCurrentDepartment.code
                 }
 
-                $(`input[name=editName]`).val() ? data.name = $('input[name=editName]').val() : false;
+                $(`div.departments input[name=editName]`).val() ? data.name = $('div.departments input[name=editName]').val() : false;
 
                 this.saveDepartment(data);
             },

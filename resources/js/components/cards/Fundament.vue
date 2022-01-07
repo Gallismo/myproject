@@ -1,15 +1,15 @@
 <template>
     <div>
-        <div class="row justify-content-around">
+        <div class="row justify-content-around departments">
             <h5 class="card-title col-12">Отделения</h5>
             <editCard v-show="getCurrentDepartment.code"><DepartmentEdit/></editCard>
             <createCard><DepartmentCreate/></createCard>
         </div>
         <hr>
-        <div class="row justify-content-around">
-            <h5 class="card-title col-12">Отделения</h5>
-            <editCard v-show="getCurrentDepartment.code"><DepartmentEdit/></editCard>
-            <createCard><DepartmentCreate/></createCard>
+        <div class="row justify-content-around audiences">
+            <h5 class="card-title col-12">Аудитории</h5>
+            <editCard v-show="getCurrentAudience.code"><AudienceEdit/></editCard>
+            <createCard><AudienceCreate/></createCard>
         </div>
     </div>
 </template>
@@ -21,12 +21,13 @@
         name: "Fundament",
         mounted() {
             this.getAllDepartments();
+            this.getAllAudiences();
         },
         methods: {
-            ...mapActions(['getAllDepartments'])
+            ...mapActions(['getAllDepartments', 'getAllAudiences'])
         },
         computed: {
-            ...mapGetters(['getCurrentDepartment'])
+            ...mapGetters(['getCurrentDepartment', 'getCurrentAudience'])
         }
     }
 </script>

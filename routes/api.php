@@ -23,6 +23,7 @@ Route::post('/user/login', [\App\Http\Controllers\UserController::class, 'login'
 
 Route::get('/Group', [\App\Http\Controllers\MainReadController::class, 'getAllGroups']);
 Route::get('/Department', [\App\Http\Controllers\MainReadController::class, 'getAllDepartments']);
+Route::get('/Audience', [\App\Http\Controllers\MainReadController::class, 'getAllAudiences']);
 
 //Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::post('/user/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);

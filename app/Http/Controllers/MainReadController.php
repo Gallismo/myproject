@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Audience;
 use App\Models\Department;
 use App\Models\Group;
 use Illuminate\Http\Request;
@@ -31,5 +32,10 @@ class MainReadController extends Controller
     public function getAllDepartments(Request $request) {
         $departments = Department::orderBy('name')->get();
         return response()->json($departments);
+    }
+
+    public function getAllAudiences(Request $request) {
+        $audiences = Audience::orderBy('name')->get();
+        return response()->json($audiences);
     }
 }

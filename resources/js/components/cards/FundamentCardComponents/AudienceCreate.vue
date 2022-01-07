@@ -1,11 +1,11 @@
 <template>
     <form class="card-body">
 
-        <cardHeader>Создать отделение</cardHeader>
+        <cardHeader>Создать аудиторию</cardHeader>
 
         <hr>
 
-        <inputText code="createDep" alias="Название" inputName="createName"/>
+        <inputText code="createAud" alias="Название" inputName="createName"/>
 
         <div class="row mt-4">
             <CreateButton @clickButton="create"/>
@@ -19,14 +19,14 @@
     import {mapGetters, mapActions} from 'vuex';
 
     export default {
-        name: "DepartmentCreate",
+        name: "AudienceCreate",
         methods: {
-            ...mapActions(['createDepartment']),
+            ...mapActions(['createAudience']),
             create() {
                 const data = {
-                    name: $('div.departments input[name=createName]').val()
+                    name: $('div.audiences input[name=createName]').val()
                 };
-                this.createDepartment(data);
+                this.createAudience(data);
             }
         }
     }

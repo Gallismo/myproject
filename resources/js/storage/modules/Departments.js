@@ -87,7 +87,7 @@ export default {
         currentDepartment: {}
     },
     getters: {
-        getDepartmentsData: state => state.groupsData,
+        getDepartmentsData: state => state.departmentsData,
         getDepartmentDropdown: state => {
             let DropdownProp = {};
             state.departmentsData.map(department => DropdownProp[department.code] = department.name);
