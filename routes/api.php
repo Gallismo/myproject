@@ -24,6 +24,8 @@ Route::post('/user/login', [\App\Http\Controllers\UserController::class, 'login'
 Route::get('/Group', [\App\Http\Controllers\MainReadController::class, 'getAllGroups']);
 Route::get('/Department', [\App\Http\Controllers\MainReadController::class, 'getAllDepartments']);
 Route::get('/Audience', [\App\Http\Controllers\MainReadController::class, 'getAllAudiences']);
+Route::get('/Week', [\App\Http\Controllers\MainReadController::class, 'getAllWeeks']);
+
 
 //Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::post('/user/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
@@ -49,9 +51,9 @@ Route::get('/Audience', [\App\Http\Controllers\MainReadController::class, 'getAl
     Route::delete('/Subject', [\App\Http\Controllers\SubjectController::class, 'deleteSubject']);
     Route::patch('/Subject', [\App\Http\Controllers\SubjectController::class, 'editSubject']);
 
-    Route::post('/weekDay', [\App\Http\Controllers\WeekDaysController::class, 'createWeekDay']);
-    Route::delete('/weekDay', [\App\Http\Controllers\WeekDaysController::class, 'deleteWeekDay']);
-    Route::patch('/weekDay', [\App\Http\Controllers\WeekDaysController::class, 'editWeekDay']);
+    Route::post('/Week', [\App\Http\Controllers\WeekDaysController::class, 'createWeekDay']);
+    Route::delete('/Week', [\App\Http\Controllers\WeekDaysController::class, 'deleteWeekDay']);
+    Route::patch('/Week', [\App\Http\Controllers\WeekDaysController::class, 'editWeekDay']);
 
     Route::post('/Teacher', [\App\Http\Controllers\TeacherController::class, 'createTeacher']);
     Route::delete('/Teacher/{code}', [\App\Http\Controllers\TeacherController::class, 'deleteTeacher']);

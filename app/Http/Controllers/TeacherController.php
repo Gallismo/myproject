@@ -17,7 +17,9 @@ class TeacherController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $code = $this->codeGenerate(Teacher::class);
@@ -28,7 +30,9 @@ class TeacherController extends Controller
             'code' => $code
         ]);
 
-        return response()->json(['response' => "Teacher has been created, unique code: ".$code], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Преподаватель был успешно добавлен',
+            'errors' => $val->errors()], 200);
     }
 
     public function editTeacher (Request $request, $code) {
@@ -39,13 +43,17 @@ class TeacherController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $teacher = Teacher::where('code', $code)->first();
 
         if (is_null($teacher)) {
-            return response()->json(['response' => 'Teacher does not exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такого преподавателя не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $request->name ? $teacher->name=$request->name : false;
@@ -54,18 +62,24 @@ class TeacherController extends Controller
 
         $teacher->save();
 
-        return response()->json(['response' => 'Teacher has been edited'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Преподаватель был успешно отредактирован',
+            'errors' => $val->errors()], 200);
     }
 
     public function deleteTeacher (Request $request, $code) {
         $teacher = Teacher::where('code', $code)->first();
 
         if (is_null($teacher)) {
-            return response()->json(['response' => 'Teacher does not exist already'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такого преподавателя не существует',
+                'errors' => new \stdClass()], 422);
         }
 
         $teacher->delete();
 
-        return response()->json(['response' => 'Teacher has been deleted'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Преподаватель был успешно удалён',
+            'errors' => new \stdClass()], 200);
     }
 }

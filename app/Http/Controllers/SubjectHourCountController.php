@@ -17,15 +17,20 @@ class SubjectHourCountController extends Controller
         ]);
 
         if($val->fails()) {
-            return response()->json(['error' => ['code' => '422', 'message'=>'Validation error', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $subjectHourCountCheck = subjectHourCount::where('group_id', $request->group)
             ->where('subject_id', $request->subject)->first();
 
         if(!is_null($subjectHourCountCheck)) {
-            return response()->json(['error' => ['code' => '422', 'message'=>'This record already exist', 'errors'=>$subjectHourCountCheck]], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такой предмет уже привязан к группе',
+                'errors' => $val->errors()], 422);
         }
+
         $code = $this->codeGenerate(subjectHourCount::class);
         $record = subjectHourCount::create([
             'group_id' => $request->group,
@@ -35,7 +40,9 @@ class SubjectHourCountController extends Controller
             'code' => $code
         ]);
 
-        return response()->json(['response' => ['message'=>'Record created', 'record'=>$record]], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Предмет был успешно привязан к группе',
+            'errors' => $val->errors()], 200);
     }
 
     public function deleteHourCount (Request $request) {
@@ -44,12 +51,16 @@ class SubjectHourCountController extends Controller
         ]);
 
         if($val->fails()) {
-            return response()->json(['error' => ['code' => '422', 'message'=>'Validation error', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $record = subjectHourCount::where('code', '=', $request->code)->first();
         $record->delete();
-        return response()->json(['response' => ['message'=>'Record deleted', 'record'=>$record]], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Предмет был успешно отвязан от группы, счётчик очищен',
+            'errors' => $val->errors()], 200);
     }
 
     public function editHourCount (Request $request) {
@@ -62,14 +73,18 @@ class SubjectHourCountController extends Controller
         ]);
 
         if($val->fails()) {
-            return response()->json(['error' => ['code' => '422', 'message'=>'Validation error', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $subjectHourCountCheck = subjectHourCount::where('group_id', $request->group)
             ->where('subject_id', $request->subject)->first();
 
         if(!is_null($subjectHourCountCheck)) {
-            return response()->json(['error' => ['code' => '422', 'message'=>'This record already exist', 'errors'=>$subjectHourCountCheck]], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Предмет уже привязан к группе',
+                'errors' => $val->errors()], 422);
         }
 
         $record = subjectHourCount::where('code', '=', $request->code)->first();
@@ -81,6 +96,8 @@ class SubjectHourCountController extends Controller
 
         $record->save();
 
-        return response()->json(['response'=>['message'=>'Record edited', 'record'=>$record]], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Привязка была успешно отредактирована',
+            'errors' => $val->errors()], 200);
     }
 }

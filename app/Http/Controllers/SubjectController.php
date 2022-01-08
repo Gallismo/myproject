@@ -15,7 +15,9 @@ class SubjectController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
         $code = $this->codeGenerate(Subject::class);
         Subject::create([
@@ -23,7 +25,9 @@ class SubjectController extends Controller
             'code' => $code
         ]);
 
-        return response()->json(['response' => 'Subject has been created'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Предмет был успешно добавлен',
+            'errors' => $val->errors()], 200);
     }
 
     public function editSubject (Request $request) {
@@ -33,20 +37,26 @@ class SubjectController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $subject = Subject::where('code', '=', $request->code)->first();
 
         if(is_null($subject)) {
-            return response()->json(['response' => 'Subject does not exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такого предмета не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $subject->name = $request->name;
 
         $subject->save();
 
-        return response()->json(['response' => 'Subject has been edited'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Предмет был успешно отредактирован',
+            'errors' => $val->errors()], 200);
     }
 
     public function deleteSubject (Request $request) {
@@ -55,17 +65,23 @@ class SubjectController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $subject = Subject::where('code', '=', $request->code)->first();
 
         if(is_null($subject)) {
-            return response()->json(['response' => 'Subject does not exist already'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такого предмета не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $subject->delete();
 
-        return response()->json(['response' => 'Subject has been deleted'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Предмет был успешно удалён',
+            'errors' => $val->errors()], 200);
     }
 }

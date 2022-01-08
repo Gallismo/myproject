@@ -33,7 +33,9 @@ class ScheduleController extends Controller
             }
         }
 
-        return response()->json(['response' => 'Schedules created'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Расписания были успешно добавлены',
+            'errors' => new \stdClass()], 200);
     }
 
     public function createSchedule (Request $request) {
@@ -51,7 +53,9 @@ class ScheduleController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $val = Validator::make($request->all(), [
@@ -62,7 +66,9 @@ class ScheduleController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         if (!$request->break) {
@@ -72,25 +78,33 @@ class ScheduleController extends Controller
         $weekDay = weekDay::find($request->week_day_id);
 
         if (!$weekDay) {
-            return response()->json(['response' => 'Week day does not exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такого дня недели не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $lessonOrder = lessonsOrder::find($request->lesson_order_id);
 
         if (!$lessonOrder) {
-            return response()->json(['response' => 'Lesson order does not exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такой пары не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $department = Department::find($request->department_id);
 
         if (!$department) {
-            return response()->json(['response' => 'Department does not exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такого отделения не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $hoursDifference = $request->end_time['hours'] - $request->start_time['hours'];
         $minutesDifference = $request->end_time['minutes'] - $request->start_time['minutes'];
         if ($hoursDifference<=0 && $minutesDifference<=0) {
-                return response()->json(['response' => 'Incorrect time difference'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Неккоректно задано время, длительность пары составляет 0 минут',
+                'errors' => $val->errors()], 422);
         }
 
         $schedule = Schedule::where('week_day_id', $request->week_day_id)
@@ -98,7 +112,9 @@ class ScheduleController extends Controller
             ->where('department_id', $request->department_id)->first();
 
         if (!!$schedule) {
-            return response()->json(['response' => 'Schedule already exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Для выбранного отделения, дня недели и пары расписание уже существует',
+                'errors' => $val->errors()], 422);
         }
         $code = $this->codeGenerate(Schedule::class);
         Schedule::create([
@@ -111,7 +127,9 @@ class ScheduleController extends Controller
             'code' => $code
         ]);
 
-        return response()->json(['response' => 'Schedule created'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Расписание было успешно добавлено',
+            'errors' => $val->errors()], 200);
     }
 
     public function editSchedule (Request $request) {
@@ -130,7 +148,9 @@ class ScheduleController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $val = Validator::make($request->all(), [
@@ -141,19 +161,25 @@ class ScheduleController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
         $schedule = Schedule::where('code', '=', $request->code)->first();
 
         if (!$schedule) {
-            return response()->json(['response' => 'Schedule doesnt exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такого расписания не существует',
+                'errors' => $val->errors()], 422);
         }
 
         if ($request->week_day_id) {
             $weekDay = weekDay::find($request->week_day_id);
 
             if (!$weekDay) {
-                return response()->json(['response' => 'Week day does not exist'], 422);
+                return response()->json(['title' => 'Ошибка',
+                    'text' => 'Такого дня недели не существует',
+                    'errors' => $val->errors()], 422);
             }
 
             $schedule->week_day_id = $request->week_day_id;
@@ -163,7 +189,9 @@ class ScheduleController extends Controller
             $lessonOrder = lessonsOrder::find($request->lesson_order_id);
 
             if (!$lessonOrder) {
-                return response()->json(['response' => 'Lesson order does not exist'], 422);
+                return response()->json(['title' => 'Ошибка',
+                    'text' => 'Такой пары не существует',
+                    'errors' => $val->errors()], 422);
             }
 
             $schedule->lesson_order_id = $request->lesson_order_id;
@@ -173,7 +201,9 @@ class ScheduleController extends Controller
             $department = Department::find($request->department_id);
 
             if (!$department) {
-                return response()->json(['response' => 'Department does not exist'], 422);
+                return response()->json(['title' => 'Ошибка',
+                    'text' => 'Такого отделения не существует',
+                    'errors' => $val->errors()], 422);
             }
 
             $schedule->department_id = $request->department_id;
@@ -183,7 +213,9 @@ class ScheduleController extends Controller
             $hoursDifference = $request->end_time['hours'] - $request->start_time['hours'];
             $minutesDifference = $request->end_time['minutes'] - $request->start_time['minutes'];
             if ($hoursDifference<=0 && $minutesDifference<=0) {
-                return response()->json(['response' => 'Incorrect time difference'], 422);
+                return response()->json(['title' => 'Ошибка',
+                    'text' => 'Некорректно задано время, длительность пары составляет 0 минут',
+                    'errors' => $val->errors()], 422);
             }
             $schedule->start_time = join(':', $request->start_time);
             $schedule->end_time = join(':', $request->end_time);
@@ -194,12 +226,16 @@ class ScheduleController extends Controller
             ->where('department_id', $schedule->department_id)->first();
 
         if (!!$scheduleCheck) {
-            return response()->json(['response' => 'Schedule already exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Для выбранного отделения, дня недели и пары существует расписание',
+                'errors' => $val->errors()], 422);
         }
 
         $schedule->save();
 
-        return response()->json(['response' => 'Schedule edited'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Расписание было успешно отредактировано',
+            'errors' => $val->errors()], 200);
     }
 
     public function deleteSchedule (Request $request) {
@@ -208,13 +244,17 @@ class ScheduleController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error'=>['code'=>'422', 'errors'=>$val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $schedule = Schedule::where('code', '=', $request->code)->first();
 
         $schedule->delete();
 
-        return response()->json(['response' => 'Schedule deleted'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Расписание было успешно удалено',
+            'errors' => $val->errors()], 200);
     }
 }

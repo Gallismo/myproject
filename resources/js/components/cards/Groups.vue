@@ -1,16 +1,16 @@
 <template >
     <div>
         <div class="row justify-content-around">
-            <groupDescription class="col-12 col-md-6 col-lg-5" v-show="getCurrentGroup.code"/>
-            <groupCreate class="col-12 col-md-5 mt-3 mt-md-0" v-show="getCurrentDepartment.code"/>
-            <div class="card-text text-center" v-show="!getCurrentDepartment.code">
+            <groupDescription class="col-12 col-md-6 col-lg-5" v-show="getCurrentDepartment"/>
+            <groupCreate class="col-12 col-md-5 mt-3 mt-md-0" v-show="getCurrentDepartment"/>
+            <h5 class="card-title text-center" v-show="!getCurrentDepartment">
                 Требуется наличие хотя бы одного отделения для того, чтобы добавить группу
-            </div>
+            </h5>
         </div>
 
         <hr>
 
-        <div class="row justify-content-around mt-3 listGroups" v-show="getCurrentGroup.code">
+        <div class="row justify-content-around mt-3 listGroups" v-show="getCurrentDepartment">
 
             <ul class="list-group list-group-horizontal list-group-header">
                 <a name="list"></a>
@@ -34,8 +34,7 @@
             this.getAllDepartments();
         },
         methods: {
-            ...mapActions(['getGroups', 'getAllDepartments', 'switchCurrentGroup']),
-
+            ...mapActions(['getGroups', 'getAllDepartments', 'switchCurrentGroup'])
         },
         computed: {
             ...mapGetters(['getCurrentGroup', 'getGroupsData', 'getCurrentDepartment'])

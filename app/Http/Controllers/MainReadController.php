@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Audience;
 use App\Models\Department;
 use App\Models\Group;
+use App\Models\weekDay;
 use Illuminate\Http\Request;
 
 class MainReadController extends Controller
@@ -37,5 +38,10 @@ class MainReadController extends Controller
     public function getAllAudiences(Request $request) {
         $audiences = Audience::orderBy('name')->get();
         return response()->json($audiences);
+    }
+
+    public function getAllWeeks(Request $request) {
+        $weeks = weekDay::get();
+        return response()->json($weeks);
     }
 }
