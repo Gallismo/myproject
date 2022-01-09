@@ -17,6 +17,12 @@
             <editCard v-if="getCurrentWeek"><WeeksEdit/></editCard>
             <createCard><WeeksCreate/></createCard>
         </div>
+        <hr>
+        <div class="row justify-content-around lesson-orders">
+            <h5 class="card-title col-12">Пары</h5>
+            <editCard v-if="getCurrentLessonOrder"><LessonOrderEdit/></editCard>
+            <createCard><LessonOrderCreate/></createCard>
+        </div>
     </div>
 </template>
 
@@ -29,12 +35,13 @@
             this.getAllDepartments();
             this.getAllAudiences();
             this.getAllWeeks();
+            this.getAllLessonOrders();
         },
         methods: {
-            ...mapActions(['getAllDepartments', 'getAllAudiences', 'getAllWeeks'])
+            ...mapActions(['getAllDepartments', 'getAllAudiences', 'getAllWeeks', 'getAllLessonOrders'])
         },
         computed: {
-            ...mapGetters(['getCurrentDepartment', 'getCurrentAudience', 'getCurrentWeek'])
+            ...mapGetters(['getCurrentDepartment', 'getCurrentAudience', 'getCurrentWeek', 'getCurrentLessonOrder'])
         }
     }
 </script>

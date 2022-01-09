@@ -69,6 +69,7 @@ export default {
         updateGroup: (state, data) => {
             state.groupsData.map((obj, index) => {
                 if (obj.code === data.code) {
+                    console.log(data.department_name);
                     data.name ? state.groupsData[index].name = data.name : false;
                     data.department_name ? state.groupsData[index].department_name = data.department_name : false;
                     data.start_year ? state.groupsData[index].start_year = data.start_year : false;
@@ -93,7 +94,9 @@ export default {
         currentGroup: {}
     },
     getters: {
-        getGroupsData: state => state.groupsData,
+        getGroupsData: state => {
+            return state.groupsData
+        },
         getDropdownData: state => {
             let DropdownProp = {};
             state.groupsData.map(group => DropdownProp[group.code] = group.name);

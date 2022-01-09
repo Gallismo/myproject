@@ -1,7 +1,7 @@
 <template >
     <div>
         <div class="row justify-content-around">
-            <groupDescription class="col-12 col-md-6 col-lg-5" v-show="getCurrentDepartment"/>
+            <groupDescription class="col-12 col-md-6 col-lg-5" v-show="getCurrentGroup"/>
             <groupCreate class="col-12 col-md-5 mt-3 mt-md-0" v-show="getCurrentDepartment"/>
             <h5 class="card-title text-center" v-show="!getCurrentDepartment">
                 Требуется наличие хотя бы одного отделения для того, чтобы добавить группу
@@ -10,7 +10,7 @@
 
         <hr>
 
-        <div class="row justify-content-around mt-3 listGroups" v-show="getCurrentDepartment">
+        <div class="row justify-content-around mt-3 listGroups" v-show="getCurrentGroup">
 
             <ul class="list-group list-group-horizontal list-group-header">
                 <a name="list"></a>

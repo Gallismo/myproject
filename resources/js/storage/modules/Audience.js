@@ -87,7 +87,9 @@ export default {
         currentAudience: {}
     },
     getters: {
-        getAudiencesData: state => state.audienceData,
+        getAudiencesData: state => {
+            return state.audienceData
+        },
         getAudienceDropdown: state => {
             let DropdownProp = {};
             state.audienceData.map(audience => DropdownProp[audience.code] = audience.name);

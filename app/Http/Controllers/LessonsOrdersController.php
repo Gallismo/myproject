@@ -11,7 +11,7 @@ class LessonsOrdersController extends Controller
 {
     public function createLessonsOrder (Request $request) {
         $val = Validator::make($request->all(), [
-            'lessons_order' => 'required|string|unique:lessons_orders'
+            'name' => 'required|string|unique:lessons_orders'
         ]);
 
         if ($val->fails()) {
@@ -21,7 +21,7 @@ class LessonsOrdersController extends Controller
         }
         $code = $this->codeGenerate(lessonsOrder::class);
         lessonsOrder::create([
-            'lessons_order' => $request->lessons_order,
+            'name' => $request->name,
             'code' => $code
         ]);
 
@@ -32,7 +32,7 @@ class LessonsOrdersController extends Controller
 
     public function editLessonsOrder (Request $request) {
         $val = Validator::make($request->all(), [
-            'lessons_order' => 'required|string',
+            'name' => 'required|string|unique:lessons_orders',
             'code' => 'required|string'
         ]);
 
@@ -50,7 +50,7 @@ class LessonsOrdersController extends Controller
                 'errors' => $val->errors()], 422);
         }
 
-        $lessonsOrder->lessons_order = $request->lessons_order;
+        $lessonsOrder->name = $request->name;
 
         $lessonsOrder->save();
 

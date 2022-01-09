@@ -93,6 +93,7 @@
                                                 .find(key =>
                                                     this.getDepartmentDropdown[key] === this.inputs.department_name.value
                                                 )
+                    data['department_name'] = this.inputs.department_name.value
                 }
                 this.inputs.start_year.value ? data['start_year'] = this.inputs.start_year.value : false;
                 this.inputs.end_year.value ? data['end_year'] = this.inputs.end_year.value : false;

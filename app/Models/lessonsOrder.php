@@ -10,7 +10,7 @@ class lessonsOrder extends Model
     use HasFactory;
 
     protected $fillable = [
-        'lessons_order',
+        'name',
         'code'
     ];
 

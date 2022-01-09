@@ -87,7 +87,9 @@ export default {
         currentWeek: {}
     },
     getters: {
-        getWeeksData: state => state.weeksData,
+        getWeeksData: state => {
+            return state.weeksData
+        },
         getWeekDropdown: state => {
             let DropdownProp = {};
             state.weeksData.map(week => DropdownProp[week.code] = week.name);
