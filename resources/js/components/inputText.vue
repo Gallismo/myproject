@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="form-group">
         <label v-if="code" :for="code">{{alias}}</label>
         <input type="text" class="form-control btn-secondary" :id="code" :name="inputName" :value="valueInput" @input="change">
     </div>
