@@ -8,13 +8,32 @@ use App\Models\Group;
 use App\Models\lessonsOrder;
 use App\Models\weekDay;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MainReadController extends Controller
 {
     public function getAllGroups (Request $request) {
-        $groups = Group::orderBy('name')->get();
+        $queries = $request->query();
+
+        $groups = Group::orderBy('name');
+
+        if (isset($queries['department'])) {
+            $department = Department::where('code', $queries['department'])->first();
+            $groups = $groups->where('department_id', $department->id);
+        }
+
+        if (isset($queries['start'])) {
+            $groups = $groups->where('start_year', 'like', "%".$queries['start']."%");
+        }
+
+        if (isset($queries['end'])) {
+            $groups = $groups->where('end_year', 'like', "%".$queries['end']."%");
+        }
+
+        $groupsData = $groups->get();
         $departments = Department::all();
-        foreach ($groups as $group) {
+
+        foreach ($groupsData as $group) {
 
             foreach ($departments as $department) {
                 if ($department->id === $group->department_id) {
@@ -28,7 +47,8 @@ class MainReadController extends Controller
 
             unset($group->department_id);
         }
-        return response()->json($groups);
+
+        return response()->json($groupsData);
     }
 
     public function getAllDepartments(Request $request) {

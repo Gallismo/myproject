@@ -37,7 +37,7 @@ const store = new Vuex.Store({
                 }
             }
         },
-        currentTab: "Fundament"
+        currentTab: "Groups"
     },
     getters: {
         getLinks: state => state.links,

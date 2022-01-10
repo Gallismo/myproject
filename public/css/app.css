@@ -10030,7 +10030,9 @@ h3 {
 /*    cursor: default;*/
 /*}*/
 
-
+#app {
+    padding-bottom: 20vh;
+}
 
 body {
     background-color: #1e222d;
@@ -10091,9 +10093,21 @@ body {
 
 /*Список групп*/
 
+.spinner-border {
+    padding: 50px;
+    margin: 150px;
+}
+
 .listGroups {
     overflow: auto;
-    max-height: 90vh;
+    max-height: 80vh;
+    border-top: solid rgba(0, 0, 0, 0.125) 1px;
+    border-bottom: solid rgba(0, 0, 0, 0.125) 1px;
+    width: 95% !important;
+}
+
+.filter-string {
+    border-bottom: solid rgba(0, 0, 0, 0.125) 1px;
 }
 
 .list-group-header {
@@ -10101,7 +10115,7 @@ body {
 }
 
 .list-group {
-    width: 95% !important;
+    width: 100% !important;
     border-radius: 0px !important;
 }
 

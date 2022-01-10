@@ -25,6 +25,8 @@ class Group extends Model
 
 
 
+
+
     public function prunable()
     {
         return static::where('created_at', '<=', now()->subYear(6));

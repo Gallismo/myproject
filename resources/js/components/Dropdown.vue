@@ -23,7 +23,7 @@
             },
             header: {
                 type: String,
-                default: '...'
+                default: 'Выберите'
             }
         },
         methods: {

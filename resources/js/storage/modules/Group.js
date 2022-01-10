@@ -2,8 +2,14 @@ import Notification from "./Notification";
 
 export default {
     actions: {
-        getGroups: ({commit, dispatch}) => {
-            axios('/api/Group')
+        getGroups: ({commit, dispatch}, query = []) => {
+            axios.get('/api/Group', {
+                params: {
+                    department: query['department'],
+                    start: query['start'],
+                    end: query['end']
+                }
+            })
                 .then(response => {
                     commit('groupsDataFill', response.data);
                     commit('currentGroupFill', response.data);

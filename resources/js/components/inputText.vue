@@ -1,7 +1,7 @@
 <template>
-    <div class="form-group">
-        <label :for="code">{{alias}}</label>
-        <input type="text" class="form-control btn-secondary" :id="code" :name="inputName" :value="valueInput">
+    <div>
+        <label v-if="code" :for="code">{{alias}}</label>
+        <input type="text" class="form-control btn-secondary" :id="code" :name="inputName" :value="valueInput" @input="change">
     </div>
 </template>
 
@@ -11,7 +11,7 @@
         props: {
             alias: {
                 type: String,
-                default: '...'
+                default: ''
             },
             valueInput: {
                 type: String,
@@ -22,9 +22,14 @@
                 default: '...'
             },
             code: {
-                type: String,
-                default: 'await'
+                type: String
             },
+        },
+        methods: {
+            change(event) {
+                this.$emit('changeEvent', event);
+            },
+
         }
     }
 </script>
