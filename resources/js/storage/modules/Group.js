@@ -2,7 +2,8 @@ import Notification from "./Notification";
 
 export default {
     actions: {
-        getGroups: ({commit, dispatch}, query = []) => {
+        async getGroups({commit, dispatch}, query = []) {
+            commit('setLoadingGroup', true);
             axios.get('/api/Group', {
                 params: {
                     department: query['department'],
@@ -13,6 +14,7 @@ export default {
                 .then(response => {
                     commit('groupsDataFill', response.data);
                     commit('currentGroupFill', response.data);
+                    commit('setLoadingGroup', false);
                 })
                 .catch(error => {
                     dispatch('showNotification', error.response.data);
@@ -63,7 +65,9 @@ export default {
                     dispatch('showNotification', error.response.data);
                 });
         },
-
+        switchGroupAction({commit, dispatch}, type) {
+            commit('switchGroupAction', type);
+        }
     },
     mutations: {
         groupsDataFill: (state, response) => {
@@ -93,11 +97,27 @@ export default {
         },
         switchCurrentGroup: (state, code) => {
             state.currentGroup = state.groupsData.find(obj => obj.code === code);
+        },
+        switchGroupAction(state, type) {
+            if (state.groupAction === type) {
+                return false;
+            }
+            state.groupAction = !state.groupAction;
+            state.currentGroup = {name: 'Создать новую'}
+        },
+        setLoadingGroup(state, type) {
+            if (state.loadingGroup === type) {
+                return false;
+            }
+            state.loadingGroup = !state.loadingGroup;
         }
     },
     state: {
         groupsData: [],
-        currentGroup: {}
+        currentGroup: {},
+        // if true => edit, false => create
+        groupAction: true,
+        loadingGroup: false
     },
     getters: {
         getGroupsData: state => {
@@ -108,6 +128,8 @@ export default {
             state.groupsData.map(group => DropdownProp[group.code] = group.name);
             return DropdownProp;
         },
-        getCurrentGroup: state => {return state.currentGroup}
+        getCurrentGroup: state => {return state.currentGroup},
+        getGroupAction: state => {return state.groupAction},
+        loadingGroup(state) {return state.loadingGroup}
     }
 }

@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="form-group">
         <label v-if="code" :for="code">{{alias}}</label>
-        <input type="text" class="form-control btn-secondary" :id="code" :name="inputName" :value="valueInput" @input="change">
+        <input type="text" class="form-control btn-secondary" :placeholder="placeholder" :id="code" :name="inputName" :value="valueInput" @input="change">
     </div>
 </template>
 
@@ -24,6 +24,9 @@
             code: {
                 type: String
             },
+            placeholder: {
+                type:String
+            }
         },
         methods: {
             change(event) {

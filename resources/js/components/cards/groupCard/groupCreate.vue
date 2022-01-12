@@ -1,12 +1,12 @@
 <template>
     <div class="card bg-dark text-white">
+
         <form class="card-body" @keypress.enter="submit">
 
-            <div class="card-text row align-items-center justify-content-around">
-                Создать группу
-            </div>
+            <h5 class="card-title text-center text-danger" v-show="!getCurrentDepartment">
+                Требуется наличие хотя бы одного отделения
+            </h5>
 
-            <hr>
 
             <formGroup
                 :getter="getter" :name="name"
@@ -37,7 +37,7 @@
             }
         },
         computed: {
-            ...mapGetters(['getCurrentGroup', 'getDepartmentDropdown']),
+            ...mapGetters(['getCurrentGroup', 'getDepartmentDropdown', 'getCurrentDepartment']),
             inputs: function () {
                 return {
                     name: {
@@ -84,7 +84,5 @@
 </script>
 
 <style scoped>
-    .button {
-        height: ;
-    }
+
 </style>

@@ -1,14 +1,14 @@
 <template>
     <div class="dropdown mb-1 col-xl-6 col-lg-7 col-md-12 mt-2 mt-lg-0">
         <button class="btn btn-secondary dropdown-toggle col-12" type="button" :id="id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{header}}
+            {{getCurrentGroup.name}}
         </button>
-        <div class="dropdown-menu bg-dark mt-1" :aria-labelledby="id">
-            <a class="dropdown-item"
-               v-for="(item, index) in getDropdownData"
-               :id="index" :key="index"
-               @click="switcher"
-            >{{item}}</a>
+        <div class="dropdown-menu bg-dark mt-1 col-11" :aria-labelledby="id">
+            <a class="dropdown-item" id="createGroup" @click="switcher">Создать новую</a>
+            <a class="dropdown-item" v-for="(item, index) in getDropdownData"
+               :id="index" :key="index" @click="switcher">
+                {{item}}
+            </a>
         </div>
     </div>
 </template>
@@ -24,16 +24,18 @@
             }
         },
         methods: {
-            ...mapActions(['switchCurrentGroup']),
+            ...mapActions(['switchCurrentGroup', 'switchGroupAction']),
             switcher(e) {
-                this.switchCurrentGroup(e.target.id);
+                if (e.target.id === 'createGroup') {
+                    this.switchGroupAction(false);
+                } else {
+                    this.switchGroupAction(true);
+                    this.switchCurrentGroup(e.target.id);
+                }
             }
         },
         computed: {
-            ...mapGetters(['getDropdownData', 'getCurrentGroup']),
-            header: function () {
-                return this.getDropdownData[Object.keys(this.getDropdownData).find(code => code === this.getCurrentGroup.code)]
-            }
+            ...mapGetters(['getDropdownData', 'getCurrentGroup'])
         },
     }
 </script>

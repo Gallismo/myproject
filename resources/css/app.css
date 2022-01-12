@@ -17,6 +17,23 @@ body {
     background-color: #1e222d;
 }
 
+.close {
+    color: #fff;
+}
+
+.close:hover {
+    color: #fff;
+}
+
+.spinner-border {
+    padding: 50px;
+    margin: 150px;
+}
+
+.filters .form-group {
+    margin-bottom: 0;
+}
+
 /*Закругление границ уведомлений*/
 .toast {
     border-radius: 0.5rem;
@@ -71,11 +88,6 @@ body {
 /*-----------------------------------------*/
 
 /*Список групп*/
-
-.spinner-border {
-    padding: 50px;
-    margin: 150px;
-}
 
 .listGroups {
     overflow: auto;

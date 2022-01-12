@@ -4,13 +4,16 @@
             <div class="modal-content bg-dark">
                 <div class="modal-header border-secondary">
                     <h5 class="modal-title" id="staticBackdropLabel">Подтвердите действие</h5>
+                    <button type="button" class="close" @click="close" :data-close="id">
+                        <span aria-hidden="true" @click="close" :data-close="id">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-footer border-secondary">
                     <button type="button" class="btn btn-outline-primary text-white"
-                            data-dismiss="modal" @click="confirmEvent">
+                            @click="confirmEvent" :data-close="id">
                         Подтвердить
                     </button>
-                    <button type="button" class="btn btn-outline-danger text-white" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-outline-danger text-white" @click="close" :data-close="id">Отмена</button>
                 </div>
             </div>
         </div>
@@ -27,8 +30,12 @@
             }
         },
         methods: {
-            confirmEvent() {
-                this.$emit('confirmEvent')
+            confirmEvent(event) {
+                this.$emit('confirmEvent');
+                this.close(event);
+            },
+            close(event) {
+                $("#" + $(event.target).attr('data-close')).modal('hide');
             }
         }
     }

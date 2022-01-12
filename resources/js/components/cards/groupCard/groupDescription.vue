@@ -1,16 +1,12 @@
 <template>
     <div class="card bg-dark text-white">
 
-        <a name="groups"/>
-
         <form class="card-body" @keypress.enter="submitChanges">
 
-            <div class="card-text row align-items-center justify-content-around">
-                Выбрать группу
-                <GroupDropdown id="GroupDropdown" :key="dropdownKey"/>
-            </div>
+            <h5 class="card-title text-center text-danger" v-show="!getCurrentDepartment">
+                Требуется наличие хотя бы одного отделения
+            </h5>
 
-            <hr>
 
             <formGroup
                 :getter="getter" :name="name"
