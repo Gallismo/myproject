@@ -4049,9 +4049,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "groupDescription",
@@ -4085,7 +4082,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['editGroup', 'getGroups', 'deleteGroup'])), {}, {
-    confirm: function confirm() {},
     allowEditSwitch: function allowEditSwitch(event) {
       if (this.formDisabled) {
         event.target.innerText = "Отключить редактирование";
@@ -47201,9 +47197,12 @@ var render = function () {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "row button mt-5" },
+          { staticClass: "row button mt-2" },
           [
-            _c("CreateButton", { on: { clickButton: _vm.submit } }),
+            _c("CreateButton", {
+              attrs: { name: "Добавить" },
+              on: { clickButton: _vm.submit },
+            }),
             _vm._v(" "),
             _c("ResetButton"),
           ],
@@ -47285,7 +47284,6 @@ var render = function () {
                 getter: _vm.getter,
                 name: name,
                 title: input.title,
-                isDisabled: _vm.formDisabled,
                 isDescription: true,
               },
               on: { throwValue: _vm.commitValue },
@@ -47296,14 +47294,7 @@ var render = function () {
             "div",
             { staticClass: "row" },
             [
-              _c("editButton", { on: { clickButton: _vm.allowEditSwitch } }),
-              _vm._v(" "),
-              _c("SaveButton", {
-                attrs: {
-                  target: "#submitChanges",
-                  isDisabled: _vm.formDisabled,
-                },
-              }),
+              _c("SaveButton", { attrs: { target: "#submitChanges" } }),
               _vm._v(" "),
               _c("DeleteButton", { attrs: { target: "#deleteThisGroup" } }),
             ],

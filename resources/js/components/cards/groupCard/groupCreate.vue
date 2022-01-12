@@ -17,8 +17,8 @@
                 :isDescription="false"
             />
 
-            <div class="row button mt-5">
-                <CreateButton @clickButton="submit"/>
+            <div class="row button mt-2">
+                <CreateButton @clickButton="submit" name="Добавить"/>
                 <ResetButton />
             </div>
 

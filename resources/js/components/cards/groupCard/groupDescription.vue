@@ -9,17 +9,14 @@
 
 
             <formGroup
-                :getter="getter" :name="name"
-                :title="input.title" :isDisabled="formDisabled"
-                v-for="(input, name) in inputs"
-                :key="name"
+                :getter="getter" :name="name" :title="input.title"
+                v-for="(input, name) in inputs" :key="name"
                 @throwValue="commitValue"
                 :isDescription="true"
             />
 
             <div class="row">
-                <editButton @clickButton="allowEditSwitch"/>
-                <SaveButton target="#submitChanges" :isDisabled="formDisabled"/>
+                <SaveButton target="#submitChanges"/>
                 <DeleteButton target="#deleteThisGroup"/>
             </div>
 
@@ -67,9 +64,6 @@
         },
         methods: {
             ...mapActions(['editGroup', 'getGroups', 'deleteGroup']),
-            confirm() {
-
-            },
             allowEditSwitch(event) {
                 if (this.formDisabled) {
                     event.target.innerText = "Отключить редактирование"
