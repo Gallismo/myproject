@@ -2736,6 +2736,10 @@ __webpack_require__.r(__webpack_exports__);
     name: {
       type: String,
       "default": 'Создать'
+    },
+    col: {
+      type: String,
+      "default": 'col-12'
     }
   }
 });
@@ -3582,6 +3586,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3887,7 +3894,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     isDisabled: {
       type: Boolean,
-      required: true
+      "default": false
     },
     isDescription: {
       type: Boolean,
@@ -4059,7 +4066,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       getter: 'getCurrentGroup'
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentGroup', 'getDepartmentDropdown', 'getGroupsData'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentGroup', 'getDepartmentDropdown', 'getGroupsData', 'getCurrentDepartment'])), {}, {
     inputs: function inputs() {
       return {
         name: {
@@ -45769,7 +45776,8 @@ var render = function () {
   return _c(
     "button",
     {
-      staticClass: "btn btn-outline-success text-white col-12",
+      staticClass: "btn btn-outline-success text-white",
+      class: _vm.col,
       attrs: { type: "button" },
       on: {
         click: function ($event) {
@@ -46658,10 +46666,15 @@ var render = function () {
   return _c("div", [
     _c(
       "div",
-      { staticClass: "row justify-content-around" },
+      { staticClass: "row justify-content-between align-items-center" },
       [
+        _c("h5", { staticClass: "col" }, [_vm._v("Группы")]),
+        _vm._v(" "),
         _c("CreateButton", {
-          attrs: { name: "Добавить новую группу" },
+          attrs: {
+            col: "col-8 col-sm-6 col-lg-3",
+            name: "Добавить новую группу",
+          },
           on: { clickButton: _vm.openModalCreate },
         }),
       ],

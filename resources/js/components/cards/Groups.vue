@@ -7,7 +7,10 @@
 <!--                Требуется наличие хотя бы одного отделения для того, чтобы добавить группу-->
 <!--            </h5>-->
 <!--        </div>-->
-        <div class="row justify-content-around"><CreateButton name="Добавить новую группу" @clickButton="openModalCreate"/></div>
+        <div class="row justify-content-between align-items-center">
+            <h5 class="col">Группы</h5>
+            <CreateButton col="col-8 col-sm-6 col-lg-3" name="Добавить новую группу" @clickButton="openModalCreate"/>
+        </div>
 
         <hr>
 

@@ -74,7 +74,7 @@
             },
             isDisabled: {
                 type: Boolean,
-                required: true
+                default: false
             },
             isDescription: {
                 type: Boolean,

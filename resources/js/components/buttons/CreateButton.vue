@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-outline-success text-white col-12"
+    <button class="btn btn-outline-success text-white" :class="col"
             type="button" @click="$emit('clickButton')">{{name}}</button>
 </template>
 
@@ -10,6 +10,10 @@
             name: {
                 type: String,
                 default: 'Создать'
+            },
+            col: {
+                type: String,
+                default: 'col-12'
             }
         }
     }

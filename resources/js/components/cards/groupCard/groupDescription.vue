@@ -40,7 +40,7 @@
             }
         },
         computed: {
-            ...mapGetters(['getCurrentGroup', 'getDepartmentDropdown', 'getGroupsData']),
+            ...mapGetters(['getCurrentGroup', 'getDepartmentDropdown', 'getGroupsData', 'getCurrentDepartment']),
             inputs: function () {
                 return {
                     name: {
