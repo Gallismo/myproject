@@ -2,7 +2,7 @@
     <form class="card-body">
 
         <cardHeader>
-            Выбрать день недели
+            Выбрать пару
             <Dropdown id="LessonOrderDropdown" :header="getCurrentLessonOrder.name"
                       :items="getLessonOrderDropdown" @clickEvent="switcher"/>
         </cardHeader>

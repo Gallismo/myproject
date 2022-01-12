@@ -1,17 +1,13 @@
 <template>
     <ul class="list-group list-group-horizontal text-white" @click="switcher" :id="entity.code">
-<!--        <li class="list-group-item bg-dark col-4">{{group.name}}</li>-->
-<!--        <li class="list-group-item bg-dark col-4">{{group.department_name}}</li>-->
-<!--        <li class="list-group-item bg-dark col-4"><span>{{group.start_year}}</span> - <span>{{group.end_year}}</span></li>-->
         <li class="list-group-item bg-dark" :class="columns" v-for="(column, key) in  entity" :key="key" v-show="key!=='code'">{{column}}</li>
     </ul>
 </template>
 
 <script>
-    import {mapActions, mapGetters} from "vuex";
 
     export default {
-        name: "groupList",
+        name: "List",
         props: {
             entity: {
                 type: Object,
@@ -21,19 +17,17 @@
                 type: String,
                 default: 'col'
             },
-            scrollTo: {
+            data_switch: {
                 type: String,
                 required: true
             }
         },
         methods: {
-            ...mapActions(['switchCurrentGroup']),
             switcher(e) {
-                let top = $(this.scrollTo).offset().top - 50;
-                $('body,html').animate({scrollTop: top}, 300);
-
                 let parent = e.target.parentElement;
-                this.switchCurrentGroup(parent.id);
+                this.$store.dispatch(this.data_switch, parent.id);
+
+                this.$emit('clickEvent', parent.id);
             }
         }
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Audience;
 use App\Models\Department;
 use App\Models\Group;
+use App\Models\groupsPart;
 use App\Models\lessonsOrder;
 use App\Models\weekDay;
 use Illuminate\Http\Request;
@@ -69,5 +70,10 @@ class MainReadController extends Controller
     public function getAllLessonOrders(Request $request) {
         $lessonsOrder = lessonsOrder::get();
         return response()->json($lessonsOrder);
+    }
+
+    public function getAllGroupParts(Request $request) {
+        $groupsPart = groupsPart::get();
+        return response()->json($groupsPart);
     }
 }

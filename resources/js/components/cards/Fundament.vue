@@ -23,6 +23,12 @@
             <editCard v-if="getCurrentLessonOrder"><LessonOrderEdit/></editCard>
             <createCard><LessonOrderCreate/></createCard>
         </div>
+        <hr>
+        <div class="row justify-content-around group-parts">
+            <h5 class="card-title col-12">Подгруппы</h5>
+            <editCard v-if="getCurrentGroupPart"><GroupPartsEdit/></editCard>
+            <createCard><GroupPartsCreate/></createCard>
+        </div>
     </div>
 </template>
 
@@ -36,12 +42,13 @@
             this.getAllAudiences();
             this.getAllWeeks();
             this.getAllLessonOrders();
+            this.getAllGroupParts();
         },
         methods: {
-            ...mapActions(['getAllDepartments', 'getAllAudiences', 'getAllWeeks', 'getAllLessonOrders'])
+            ...mapActions(['getAllDepartments', 'getAllAudiences', 'getAllWeeks', 'getAllLessonOrders', 'getAllGroupParts'])
         },
         computed: {
-            ...mapGetters(['getCurrentDepartment', 'getCurrentAudience', 'getCurrentWeek', 'getCurrentLessonOrder'])
+            ...mapGetters(['getCurrentDepartment', 'getCurrentAudience', 'getCurrentWeek', 'getCurrentLessonOrder', 'getCurrentGroupPart'])
         }
     }
 </script>

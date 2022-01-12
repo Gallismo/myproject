@@ -15,15 +15,19 @@
             group: {
                 type: Object,
                 required: true
+            },
+            data_switch: {
+                type: String,
+                required: true
             }
         },
         methods: {
             ...mapActions(['switchCurrentGroup']),
             switcher(e) {
                 let parent = e.target.parentElement;
-                this.switchCurrentGroup(parent.id);
+                this.$store.dispatch(this.data_switch, parent.id);
 
-                this.$emit('clickEvent', e);
+                this.$emit('clickEvent', parent.id);
             }
         }
     }

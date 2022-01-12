@@ -26,6 +26,7 @@ Route::get('/Department', [\App\Http\Controllers\MainReadController::class, 'get
 Route::get('/Audience', [\App\Http\Controllers\MainReadController::class, 'getAllAudiences']);
 Route::get('/Week', [\App\Http\Controllers\MainReadController::class, 'getAllWeeks']);
 Route::get('/lessonsOrder', [\App\Http\Controllers\MainReadController::class, 'getAllLessonOrders']);
+Route::get('/groupsPart', [\App\Http\Controllers\MainReadController::class, 'getAllGroupParts']);
 
 
 //Route::middleware(['bearer', 'isAdmin'])->group(function () {

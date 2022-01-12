@@ -11,7 +11,7 @@ class GroupsPartsController extends Controller
 {
     public function createGroupsPart (Request $request) {
         $val = Validator::make($request->all(), [
-            'groups_part' => 'required|string|unique:groups_parts'
+            'name' => 'required|string|unique:groups_parts'
         ]);
 
         if ($val->fails()) {
@@ -21,7 +21,7 @@ class GroupsPartsController extends Controller
         }
         $code = $this->codeGenerate(groupsPart::class);
         groupsPart::create([
-            'groups_part' => $request->groups_part,
+            'name' => $request->name,
             'code' => $code
         ]);
 
@@ -33,7 +33,7 @@ class GroupsPartsController extends Controller
     public function editGroupsPart (Request $request) {
         $val = Validator::make($request->all(), [
             'code' => 'required|string',
-            'groups_part' => 'required|string|unique:groups_parts'
+            'name' => 'required|string|unique:groups_parts'
         ]);
 
         if ($val->fails()) {
@@ -50,7 +50,7 @@ class GroupsPartsController extends Controller
                 'errors' => $val->errors()], 422);
         }
 
-        $groupsPart->groups_part = $request->groups_part;
+        $groupsPart->name = $request->name;
 
         $groupsPart->save();
 

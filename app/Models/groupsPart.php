@@ -10,7 +10,7 @@ class groupsPart extends Model
     use HasFactory;
 
     protected $fillable = [
-        'groups_part',
+        'name',
         'code'
     ];
 

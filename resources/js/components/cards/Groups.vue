@@ -38,7 +38,7 @@
                     <li class="list-group-item bg-dark col-4">Годы</li>
                 </ul>
 
-                <groupList  v-for="group in getGroupsData" :group="group" :key="group.code" v-show="!loadingGroup" @clickEvent="openModalEdit"/>
+                <groupList  v-for="group in getGroupsData" :group="group" :key="group.code" v-show="!loadingGroup" data_switch="switchCurrentGroup" @clickEvent="openModalEdit"/>
             </div>
 
             <Loader v-show="loadingGroup"/>

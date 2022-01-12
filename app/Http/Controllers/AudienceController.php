@@ -11,17 +11,7 @@ class AudienceController extends Controller
 {
     public function createAudience(Request $request) {
         $val = Validator::make($request->all(), [
-           'name' => 'required|string|max:2|min:2|unique:audiences'
-        ]);
-
-        if ($val->fails()) {
-            return response()->json(['title' => 'Ошибка валидации',
-                'text' => 'Проверьте правильность заполнения полей',
-                'errors' => $val->errors()], 422);
-        }
-
-        $val = Validator::make($request->all(), [
-            'name' => 'integer'
+           'name' => 'required|string|max:18|min:2|unique:audiences'
         ]);
 
         if ($val->fails()) {
@@ -69,8 +59,8 @@ class AudienceController extends Controller
 
     public function editAudience (Request $request) {
         $val = Validator::make($request->all(), [
-            'code' => 'required|string',
-            'name' => 'required|string'
+            'name' => 'required|string|max:18|min:2|unique:audiences',
+            'code' => 'required|string'
         ]);
 
         if ($val->fails()) {
