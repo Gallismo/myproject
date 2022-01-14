@@ -68,7 +68,7 @@
             ...mapActions(['getGroups', 'getAllDepartments', 'switchCurrentGroup']),
             queryDep(event) {
                 this.query['department'] = event.target.id;
-                this.debounceHandler();
+                this.filter();
             },
             queryYear(event) {
                 const type = event.target.name;

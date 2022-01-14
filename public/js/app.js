@@ -3736,7 +3736,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)(['getGroups', 'getAllDepartments', 'switchCurrentGroup'])), {}, {
     queryDep: function queryDep(event) {
       this.query['department'] = event.target.id;
-      this.debounceHandler();
+      this.filter();
     },
     queryYear: function queryYear(event) {
       var type = event.target.name;
