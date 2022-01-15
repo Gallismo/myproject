@@ -35,11 +35,12 @@ class TeacherController extends Controller
             'errors' => $val->errors()], 200);
     }
 
-    public function editTeacher (Request $request, $code) {
+    public function editTeacher (Request $request) {
         $val = Validator::make($request->all(), [
             'name' => 'string|required_without_all:surname,middle_name',
             'surname' => 'required_without_all:name,middle_name|string',
-            'middle_name' => 'required_without_all:name,surname|string'
+            'middle_name' => 'required_without_all:name,surname|string',
+            'code' => 'required|string|exists:teachers,code'
         ]);
 
         if ($val->fails()) {
@@ -48,7 +49,7 @@ class TeacherController extends Controller
                 'errors' => $val->errors()], 422);
         }
 
-        $teacher = Teacher::where('code', $code)->first();
+        $teacher = Teacher::where('code', $request->code)->first();
 
         if (is_null($teacher)) {
             return response()->json(['title' => 'Ошибка',
@@ -67,19 +68,29 @@ class TeacherController extends Controller
             'errors' => $val->errors()], 200);
     }
 
-    public function deleteTeacher (Request $request, $code) {
-        $teacher = Teacher::where('code', $code)->first();
+    public function deleteTeacher (Request $request) {
+        $val = Validator::make($request->all(), [
+            'code' => 'required|string|exists:teachers,code'
+        ]);
+
+        if ($val->fails()) {
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
+        }
+
+        $teacher = Teacher::where('code', $request->code)->first();
 
         if (is_null($teacher)) {
             return response()->json(['title' => 'Ошибка',
                 'text' => 'Такого преподавателя не существует',
-                'errors' => new \stdClass()], 422);
+                'errors' => $val->errors()], 422);
         }
 
         $teacher->delete();
 
         return response()->json(['title' => 'Успешно',
             'text' => 'Преподаватель был успешно удалён',
-            'errors' => new \stdClass()], 200);
+            'errors' => $val->errors()], 200);
     }
 }

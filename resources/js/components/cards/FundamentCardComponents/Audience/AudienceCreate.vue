@@ -1,5 +1,5 @@
 <template>
-    <form class="card-body">
+    <form class="card-body" @keypress.enter="create">
 
         <cardHeader>Создать аудиторию</cardHeader>
 

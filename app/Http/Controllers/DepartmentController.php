@@ -33,7 +33,7 @@ class DepartmentController extends Controller
     public function editDepartment (Request $request) {
         $val = Validator::make($request->all(), [
             'code' => 'required|string',
-            'name' => 'required|string'
+            'name' => 'required|string|unique:departments'
         ]);
 
         if ($val->fails()) {
