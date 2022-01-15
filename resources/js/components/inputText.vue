@@ -1,7 +1,8 @@
 <template>
     <div class="form-group">
         <label v-if="code" :for="code">{{alias}}</label>
-        <input type="text" class="form-control btn-secondary" :placeholder="placeholder" :id="code" :name="inputName" :value="valueInput" @input="change">
+        <input type="text" class="form-control btn-secondary" :placeholder="placeholder" :id="code"
+               :name="inputName" :value="valueInput" @keypress.enter="change" @input="change">
     </div>
 </template>
 
@@ -30,6 +31,7 @@
         },
         methods: {
             change(event) {
+                event.preventDefault();
                 this.$emit('changeEvent', event);
             },
 

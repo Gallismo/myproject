@@ -1,12 +1,6 @@
 <template >
     <div>
-<!--        <div class="row justify-content-around">-->
-<!--            <groupDescription class="col-12 col-xl-6 col-lg-8" v-show="getGroupAction"/>-->
-<!--            <groupCreate class="col-12 col-xl-6 col-lg-8" v-show="getCurrentDepartment && !getGroupAction"/>-->
-<!--            <h5 class="card-title text-center" v-show="!getCurrentDepartment">-->
-<!--                Требуется наличие хотя бы одного отделения для того, чтобы добавить группу-->
-<!--            </h5>-->
-<!--        </div>-->
+
         <div class="row justify-content-between align-items-center">
             <h5 class="col">Группы</h5>
             <CreateButton col="col-8 col-sm-6 col-lg-3" name="Добавить новую группу" @clickButton="openModalCreate"/>
@@ -16,14 +10,6 @@
 
         <div class="row justify-content-around mt-3">
 
-<!--            <Dropdown :items="getDepartmentDropdown" @clickEvent="queryDep"></Dropdown>-->
-
-<!--            <ul class="list-group list-group-horizontal list-group-header">-->
-<!--                <li class="list-group-item bg-dark col-3">Фильтры</li>-->
-<!--                <li class="list-group-item bg-dark col-3">Отделение<SelectComp :items="getDepartmentDropdown" @clickEvent="queryDep" defaultValue="Все"/></li>-->
-<!--                <li class="list-group-item bg-dark col-3">Годы</li>-->
-<!--                <li class="list-group-item bg-dark col-3">Годы</li>-->
-<!--            </ul>-->
             <div class="col-12 filter-string p-2">Фильтры</div>
             <div class="row justify-content-between col-12 mt-3 filters">
                 <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3">Отделение<SelectComp class="w-50" :items="getDepartmentDropdown" @clickEvent="queryDep" defaultValue="Все"/></div>
@@ -67,7 +53,7 @@
         methods: {
             ...mapActions(['getGroups', 'getAllDepartments', 'switchCurrentGroup']),
             queryDep(event) {
-                this.query['department'] = event.target.id;
+                this.query['department'] = event.target.value;
                 this.filter();
             },
             queryYear(event) {

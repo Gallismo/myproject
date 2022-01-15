@@ -1,7 +1,7 @@
 <template>
     <div class="card bg-dark text-white">
 
-        <form class="card-body" @keypress.enter="submit">
+        <form class="card-body" >
 
             <h5 class="card-title text-center text-danger" v-show="!getCurrentDepartment">
                 Требуется наличие хотя бы одного отделения

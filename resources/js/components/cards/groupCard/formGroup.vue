@@ -2,7 +2,7 @@
     <div class="form-group">
         <label :for="name">{{title}}</label>
         <input type="text" class="form-control btn-secondary" :disabled="isDisabled"
-               :id="name" aria-describedby="emailHelp"
+               :id="name"
                v-model="value"
                @input="throwValue"
                v-if="inputType"
@@ -10,7 +10,7 @@
                :placeholder="title"
         >
         <select class="form-control btn-secondary" :disabled="isDisabled"
-                :id="name" aria-describedby="emailHelp"
+                :id="name"
                 v-model="value"
                 @change="throwValue"
                 v-else
