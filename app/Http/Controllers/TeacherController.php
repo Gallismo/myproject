@@ -11,9 +11,9 @@ class TeacherController extends Controller
 {
     public function createTeacher (Request $request) {
         $val = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'surname' => 'required|string',
-            'middle_name' => 'required|string'
+            'name' => 'required|string|min:1',
+            'surname' => 'required|string|min:1',
+            'middle_name' => 'required|string|min:1'
         ]);
 
         if ($val->fails()) {
@@ -37,9 +37,9 @@ class TeacherController extends Controller
 
     public function editTeacher (Request $request) {
         $val = Validator::make($request->all(), [
-            'name' => 'string|required_without_all:surname,middle_name',
-            'surname' => 'required_without_all:name,middle_name|string',
-            'middle_name' => 'required_without_all:name,surname|string',
+            'name' => 'string|required_without_all:surname,middle_name|min:1',
+            'surname' => 'required_without_all:name,middle_name|string|min:1',
+            'middle_name' => 'required_without_all:name,surname|string|min:1',
             'code' => 'required|string|exists:teachers,code'
         ]);
 

@@ -2,7 +2,7 @@
     <div>
         <div class="row justify-content-between align-items-center">
             <h5 class="col">Преподаватели</h5>
-            <CreateButton col="col-8 col-sm-6 col-lg-3" name="Добавить новую группу" @clickButton="openModalCreate"/>
+            <CreateButton col="col-8 col-sm-6 col-lg-3" name="Добавить преподавателя" @clickButton="openModalCreate"/>
         </div>
 
         <hr>
@@ -18,13 +18,13 @@
 
             <div class="row justify-content-center list">
                 <listHeader columns="col-4" :row="['Фамилия', 'Имя', 'Отчество']"/>
-                <List  v-for="row in getPrepodData" :row="row" :key="row.code" v-show="!getLoading" data_switch="switchCurrentPrepod" @clickEvent="openModalEdit"/>
+                <List  v-for="row in getPrepodData" :row="row" :key="row.code" v-show="!getLoading" data_switch_action="switchPrepod" @clickEvent="openModalEdit"/>
             </div>
 
             <Loader v-show="getLoading"/>
 
-            <BootstrapModal id="editModal" body="groupDescription" title="Редактирование"/>
-            <BootstrapModal id="createModal" body="groupCreate" title="Добавление"/>
+            <BootstrapModal id="editModal" body="PrepodEdit" title="Редактирование"/>
+            <BootstrapModal id="createModal" body="PrepodCreate" title="Добавление"/>
         </div>
 
     </div>
