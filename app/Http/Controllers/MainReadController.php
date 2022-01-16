@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Group;
 use App\Models\groupsPart;
 use App\Models\lessonsOrder;
+use App\Models\Teacher;
 use App\Models\weekDay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -75,5 +76,27 @@ class MainReadController extends Controller
     public function getAllGroupParts(Request $request) {
         $groupsPart = groupsPart::get();
         return response()->json($groupsPart);
+    }
+
+    public function getAllPrepods(Request $request) {
+        $queries = $request->query();
+
+        $prepodsModel = Teacher::orderBy('surname');
+
+        if (isset($queries['name'])) {
+            $prepodsModel = $prepodsModel->where('name', 'like', "%".$queries['name']."%");
+        }
+
+        if (isset($queries['surname'])) {
+            $prepodsModel = $prepodsModel->where('surname', 'like', "%".$queries['surname']."%");
+        }
+
+        if (isset($queries['middle_name'])) {
+            $prepodsModel = $prepodsModel->where('middle_name', 'like', "%".$queries['middle_name']."%");
+        }
+
+        $prepods = $prepodsModel->get();
+
+        return response()->json($prepods);
     }
 }

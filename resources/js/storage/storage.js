@@ -8,7 +8,13 @@ const store = new Vuex.Store({
         switchTab: (context, tabName) => context.commit('switchTab', tabName.target.id)
     },
     mutations: {
-        switchTab: (state, tabName) => state.currentTab = tabName
+        switchTab: (state, tabName) => state.currentTab = tabName,
+        setLoading(state, type) {
+            if (state.loading === type) {
+                return false;
+            }
+            state.loading = !state.loading;
+        }
     },
     state: {
         links: {
@@ -22,9 +28,6 @@ const store = new Vuex.Store({
                     items: {
                         Groups:'Группы',
                         Counter:'Счетчик остатка часов',
-                        Subjects:'Предметы',
-                        Audiences:'Аудитории',
-                        Department:'Отделения',
                         Fundament: 'Основные'
                     }
                 },
@@ -37,11 +40,13 @@ const store = new Vuex.Store({
                 }
             }
         },
-        currentTab: "Fundament"
+        currentTab: "Prepod",
+        loading: false
     },
     getters: {
         getLinks: state => state.links,
-        getCurrentTab: state => state.currentTab
+        getCurrentTab: state => state.currentTab,
+        getLoading: state => state.loading
     },
     modules: {
 

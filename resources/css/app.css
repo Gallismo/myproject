@@ -101,6 +101,14 @@ body {
     border-bottom: solid rgba(0, 0, 0, 0.125) 1px;
 }
 
+.list {
+    overflow: auto;
+    max-height: 80vh;
+    border-top: solid rgba(0, 0, 0, 0.125) 1px;
+    border-bottom: solid rgba(0, 0, 0, 0.125) 1px;
+    width: 95% !important;
+}
+
 .list-group-header {
     border-bottom: solid rgba(0, 0, 0, 0.425) 2px;
 }

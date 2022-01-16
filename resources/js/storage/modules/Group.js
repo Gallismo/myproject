@@ -2,13 +2,13 @@ import Notification from "./Notification";
 
 export default {
     actions: {
-        async getGroups({commit, dispatch}, query = []) {
+        async getGroups({commit, dispatch}, query = {}) {
             commit('setLoadingGroup', true);
             axios.get('/api/Group', {
                 params: {
-                    department: query['department'],
-                    start: query['start'],
-                    end: query['end']
+                    department: query.department,
+                    start: query.start,
+                    end: query.end
                 }
             })
                 .then(response => {
@@ -65,9 +65,6 @@ export default {
                     dispatch('showNotification', error.response.data);
                 });
         },
-        switchGroupAction({commit, dispatch}, type) {
-            commit('switchGroupAction', type);
-        }
     },
     mutations: {
         groupsDataFill: (state, response) => {
@@ -98,13 +95,6 @@ export default {
         switchCurrentGroup: (state, code) => {
             state.currentGroup = state.groupsData.find(obj => obj.code === code);
         },
-        switchGroupAction(state, type) {
-            if (state.groupAction === type) {
-                return false;
-            }
-            state.groupAction = !state.groupAction;
-            state.currentGroup = {name: 'Создать новую'}
-        },
         setLoadingGroup(state, type) {
             if (state.loadingGroup === type) {
                 return false;
@@ -115,8 +105,6 @@ export default {
     state: {
         groupsData: [],
         currentGroup: {},
-        // if true => edit, false => create
-        groupAction: true,
         loadingGroup: false
     },
     getters: {
@@ -129,7 +117,6 @@ export default {
             return DropdownProp;
         },
         getCurrentGroup: state => {return state.currentGroup},
-        getGroupAction: state => {return state.groupAction},
         loadingGroup(state) {return state.loadingGroup}
     }
 }

@@ -15,8 +15,8 @@ class Teachers extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('surname');
+            $table->string('name');
             $table->string('middle_name');
             $table->string('code')->unique();
             $table->timestamps();

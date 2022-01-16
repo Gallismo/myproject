@@ -27,7 +27,7 @@ Route::get('/Audience', [\App\Http\Controllers\MainReadController::class, 'getAl
 Route::get('/Week', [\App\Http\Controllers\MainReadController::class, 'getAllWeeks']);
 Route::get('/lessonsOrder', [\App\Http\Controllers\MainReadController::class, 'getAllLessonOrders']);
 Route::get('/groupsPart', [\App\Http\Controllers\MainReadController::class, 'getAllGroupParts']);
-
+Route::get('/Prepod', [\App\Http\Controllers\MainReadController::class, 'getAllPrepods']);
 
 //Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::post('/user/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
@@ -57,9 +57,9 @@ Route::get('/groupsPart', [\App\Http\Controllers\MainReadController::class, 'get
     Route::delete('/Week', [\App\Http\Controllers\WeekDaysController::class, 'deleteWeekDay']);
     Route::patch('/Week', [\App\Http\Controllers\WeekDaysController::class, 'editWeekDay']);
 
-    Route::post('/Teacher', [\App\Http\Controllers\TeacherController::class, 'createTeacher']);
-    Route::delete('/Teacher/{code}', [\App\Http\Controllers\TeacherController::class, 'deleteTeacher']);
-    Route::patch('/Teacher/{code}', [\App\Http\Controllers\TeacherController::class, 'editTeacher']);
+    Route::post('/Prepod', [\App\Http\Controllers\TeacherController::class, 'createTeacher']);
+    Route::delete('/Prepod', [\App\Http\Controllers\TeacherController::class, 'deleteTeacher']);
+    Route::patch('/Prepod', [\App\Http\Controllers\TeacherController::class, 'editTeacher']);
 
     Route::post('/Group', [\App\Http\Controllers\GroupController::class, 'createGroup']);
     Route::delete('/Group', [\App\Http\Controllers\GroupController::class, 'deleteGroup']);
