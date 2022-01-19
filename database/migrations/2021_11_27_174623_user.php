@@ -21,10 +21,9 @@ class User extends Migration
 
         Schema::create('users', function (Blueprint $table) {
            $table->id();
-           $table->string('name');
            $table->string('login')->unique();
            $table->string('password');
-           $table->unsignedBigInteger('role_id')->nullable()->unique();
+           $table->unsignedBigInteger('role_id')->nullable();
            $table->foreign('role_id')->references('id')->on('roles')->onDelete('SET NULL')->onUpdate('CASCADE');
            $table->string('jwt_token')->nullable();
            $table->timestamps();

@@ -19,7 +19,6 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
         'login',
         'password',
         'jwt_token',
@@ -33,7 +32,9 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'jwt_token'
+        'jwt_token',
+        'created_at',
+        'updated_at'
     ];
 
     /**

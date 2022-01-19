@@ -24,10 +24,10 @@
         },
         methods: {
             switcher(e) {
-                const parent = e.target.parentElement;
-                this.$store.dispatch(this.data_switch_action, parent.id);
+                const item = e.target.closest('.list-group');
+                this.$store.dispatch(this.data_switch_action, item.id);
 
-                this.$emit('clickEvent', parent.id);
+                this.$emit('clickEvent', item.id);
             }
         }
     }

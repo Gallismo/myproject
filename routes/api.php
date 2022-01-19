@@ -33,6 +33,7 @@ Route::get('/Prepod', [\App\Http\Controllers\MainReadController::class, 'getAllP
     Route::post('/User/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
     Route::delete('/User/delete', [\App\Http\Controllers\UserController::class, 'deleteUser']);
     Route::get('/User', [\App\Http\Controllers\MainReadController::class, 'getUsers']);
+    Route::get('/Roles', [\App\Http\Controllers\MainReadController::class, 'getRoles']);
 
     Route::post('/Audience', [\App\Http\Controllers\AudienceController::class, 'createAudience']);
     Route::delete('/Audience', [\App\Http\Controllers\AudienceController::class, 'deleteAudience']);

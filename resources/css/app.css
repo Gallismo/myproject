@@ -1,3 +1,4 @@
+@import "grid.css";
 
 * {
     -moz-hyphens: auto;
@@ -164,32 +165,14 @@ input.form-control {
     border-color: #545b62;
 }
 
-.grid-1 {
-    display: grid;
-    grid: auto-flow / 1fr;
-    grid-gap: 1rem;
+.grid-item > .card-body {
+    position: relative;
+    padding-bottom: calc(1.25rem * 2 + 0.9rem * 1.6);
 }
-
-@media (min-width: 768px) {
-    .grid-md-2 {
-        display: grid;
-        grid: auto-flow / 1fr 1fr;
-        grid-gap: 1rem;
-    }
-}
-
-@media (min-width: 992px) {
-    .grid-lg-3 {
-        display: grid;
-        grid: auto-flow / 1fr 1fr 1fr;
-        grid-gap: 1rem;
-    }
-}
-
-@media (min-width: 1200px) {
-    .grid-xl-4 {
-        display: grid;
-        grid: auto-flow / 1fr 1fr 1fr 1fr;
-        grid-gap: 1rem;
-    }
+.bottom-button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 1.25rem !important;
+    width: calc(100% - 1.25rem * 2);
 }

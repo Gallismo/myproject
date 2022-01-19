@@ -15,7 +15,6 @@ class UserController extends Controller
 {
     public function register(Request $request) {
         $val = Validator::make($request->all(), [
-            'name' => 'required|string',
             'login' => 'required|string|min:6|unique:users',
             'password' => 'required|string|min:6',
             'role_id' => 'integer|exists:roles,id|required'
@@ -29,7 +28,6 @@ class UserController extends Controller
 
         $jwt_token = Str::random(30);
         User::create([
-            'name' => $request->name,
             'login' => $request->login,
             'password' => Hash::make($request->password),
             'role_id' => $request->role_id,

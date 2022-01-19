@@ -21,7 +21,11 @@ class DatabaseSeeder extends Seeder
         ];
 
         $admin = [
-            ['id' => 1, 'name' => 'Admin', 'login' => 'sperecur', 'password' => 'qLZ2dpFvqptye6Cg', 'role_id' => '1']
+            [
+                'id' => 1, 'login' => 'sperecur',
+                'password' => '$2y$10$.tT/C.EqF4.Z9Z0hR.ebn.G/xOEc63d6n7rJVGjc3FlcRNNJqvms.', 'role_id' => '1',
+                'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')
+            ]
         ];
 
         DB::table('roles')->insert($roles);

@@ -11,13 +11,24 @@
         <div class="row justify-content-around mt-3">
 
             <div class="col-12 filter-string p-2">Фильтры</div>
-            <div class="row justify-content-between col-12 mt-3 filters">
-                <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3">Имя <inputText class="w-50" placeholder="Иванов" @changeEvent="queryPrepods" inputName="surname"/></div>
-                <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3">Логин <inputText class="w-50" placeholder="Иван" @changeEvent="queryPrepods" inputName="name"/></div>
-                <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3">Роль <inputText class="w-50" placeholder="Иванович" @changeEvent="queryPrepods" inputName="middle_name"/></div>
+            <div class="grid-1 grid-md-2 grid-gap-3 mb-3 col-12 mt-3 filters">
+                <div class="d-flex justify-content-between
+                justify-content-xl-around align-items-center">
+
+                    Логин <inputText class="w-50" placeholder="Иван" @changeEvent="queryPrepods" inputName="name"/>
+
+                </div>
+                <div class="d-flex justify-content-between
+                justify-content-xl-around align-items-center">
+
+                    Роль <inputText class="w-50" placeholder="Иванович" @changeEvent="queryPrepods" inputName="middle_name"/>
+
+                </div>
             </div>
 
-            <div class="grid-1 grid-md-2 grid-lg-3 grid-xl-4"><UserCard/></div>
+            <div class="grid-1 grid-sm-2 grid-md-3 grid-lg-4 grid-gap-2 w-100">
+                <UserCard v-for="user in getUserData" :user="user" class="grid-item"/>
+            </div>
 
 
             <Loader v-show="getLoading"/>
@@ -29,8 +40,24 @@
 </template>
 
 <script>
+    import {mapActions, mapGetters} from 'vuex';
+
     export default {
-        name: "User"
+        name: "User",
+        data() {
+            return {
+                query: {}
+            }
+        },
+        mounted() {
+            this.getAllUsers();
+        },
+        methods: {
+            ...mapActions(['getAllUsers', 'saveUser', 'deleteUser', 'createUser', 'switchUser'])
+        },
+        computed: {
+            ...mapGetters(['getUserData', 'getCurrentUser', 'getLoading'])
+        }
     }
 </script>
 

@@ -23,7 +23,7 @@
 
             <Loader v-show="getLoading"/>
 
-            <BootstrapModal id="editModal" body="PrepodEdit" title="Редактирование"/>
+            <BootstrapModal id="editModal" body="PrepodEdit" title="Редактирование" v-if="getCurrentPrepod"/>
             <BootstrapModal id="createModal" body="PrepodCreate" title="Добавление"/>
         </div>
 

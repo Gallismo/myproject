@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Group;
 use App\Models\groupsPart;
 use App\Models\lessonsOrder;
+use App\Models\Role;
 use App\Models\Teacher;
 use App\Models\User;
 use App\Models\weekDay;
@@ -108,6 +109,7 @@ class MainReadController extends Controller
     public function getUsers(Request $request) {
         $queries = $request->query();
 
+        $roles = Role::all();
         $userModel = User::orderBy('login');
 
         if (isset($queries['name'])) {
@@ -124,6 +126,32 @@ class MainReadController extends Controller
 
         $users = $userModel->get();
 
+        foreach ($users as $user) {
+            switch ($user->role_id) {
+                case 2:
+                    $teacher = Teacher::where('user_id', $user->id)->first();
+                    if (!is_null($teacher)) {
+                        $user->name = $teacher->surname." ".$teacher->name." ".$teacher->middle_name;
+                    }
+                    break;
+            }
+            foreach ($roles as $role) {
+                if ($role->id === $user->role_id) {
+                    $user->role = $role;
+                    unset($user->role_id);
+                }
+            }
+        }
+
         return response()->json($users);
+    }
+
+    public function getRoles(Request $request) {
+        $roles = Role::all();
+        $rolesData = [];
+        foreach ($roles as $role) {
+            $rolesData[] = [$role->id => $role->name];
+        }
+        return response()->json($rolesData);
     }
 }

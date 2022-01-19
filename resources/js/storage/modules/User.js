@@ -63,6 +63,15 @@ export default {
         },
         switchUser({commit, dispatch}, code) {
             commit('switchUser', code);
+        },
+        getRoles({commit, dispatch}) {
+            axios('/api/Roles')
+                .then(response => {
+                    commit('setRoles', response.data);
+                })
+                .catch(error => {
+                    dispatch('showNotification', error.response.data);
+                });
         }
     },
     mutations: {
@@ -92,10 +101,14 @@ export default {
                 }
             });
         },
+        setRoles(state, data) {
+            state.rolesData = data;
+        }
     },
     state: {
         userData: [],
-        currentUser: {}
+        currentUser: {},
+        rolesData: {}
     },
     getters: {
         getUserData: state => {
@@ -106,6 +119,7 @@ export default {
             state.userData.map(user => DropdownProp[user.code] = user.login);
             return DropdownProp;
         },
+        getRolesData: state => {return state.rolesData},
         getCurrentUser: state => {return state.currentUser}
     }
 }
