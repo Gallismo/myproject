@@ -8,6 +8,7 @@ use App\Models\Group;
 use App\Models\groupsPart;
 use App\Models\lessonsOrder;
 use App\Models\Teacher;
+use App\Models\User;
 use App\Models\weekDay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -95,8 +96,34 @@ class MainReadController extends Controller
             $prepodsModel = $prepodsModel->where('middle_name', 'like', "%".$queries['middle_name']."%");
         }
 
+        if (isset($queries['user_id'])) {
+            $prepodsModel = $prepodsModel->where('user_id', $queries['user_id']);
+        }
+
         $prepods = $prepodsModel->get();
 
         return response()->json($prepods);
+    }
+
+    public function getUsers(Request $request) {
+        $queries = $request->query();
+
+        $userModel = User::orderBy('login');
+
+        if (isset($queries['name'])) {
+            $userModel = $userModel->where('name', 'like', "%".$queries['name']."%");
+        }
+
+        if (isset($queries['role'])) {
+            $userModel = $userModel->where('role_id', $queries['role']);
+        }
+
+        if (isset($queries['login'])) {
+            $userModel = $userModel->where('login', $queries['login']);
+        }
+
+        $users = $userModel->get();
+
+        return response()->json($users);
     }
 }

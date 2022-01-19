@@ -40,7 +40,7 @@ const store = new Vuex.Store({
                 }
             }
         },
-        currentTab: "Prepod",
+        currentTab: "User",
         loading: false
     },
     getters: {

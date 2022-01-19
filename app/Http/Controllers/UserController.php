@@ -17,23 +17,14 @@ class UserController extends Controller
         $val = Validator::make($request->all(), [
             'name' => 'required|string',
             'login' => 'required|string|min:6|unique:users',
-            'teacher_id' => 'integer|unique:users',
             'password' => 'required|string|min:6',
-            'registerValue' => 'required|string',
-            'secretValue' => 'string'
+            'role_id' => 'integer|exists:roles,id|required'
         ]);
-        $is_admin = false;
 
         if ($val->fails()) {
-            return response()->json(['error' => ['code' => '422', 'message' => 'Validation error', 'errors' => $val->errors()]], 422);
-        }
-
-        if (!Hash::check('kutakBash', $request->registerValue)) {
-            return response()->json("Register code is incorrect, access denied", 422);
-        }
-        if (Hash::check('lox', $request->secretValue)) {
-//            return response()->json("Secret code is incorrect, access denied", 422);
-            $is_admin = true;
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $jwt_token = Str::random(30);
@@ -41,12 +32,13 @@ class UserController extends Controller
             'name' => $request->name,
             'login' => $request->login,
             'password' => Hash::make($request->password),
-            'teacher_id' => $request->teacher_id,
+            'role_id' => $request->role_id,
             'jwt_token' => Hash::make($jwt_token),
-            'is_admin' => $is_admin
         ]);
 
-        return response()->json("User created, token: ".$jwt_token, 201);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Пользователь был успешно создан',
+            'errors' => $val->errors()], 200);
     }
 
     public function login(Request $request) {
@@ -56,20 +48,24 @@ class UserController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error' => ['code' => '422', 'message' => 'Validation error', 'errors' => $val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $user = User::where('login', $request->login)->first();
 
         if (is_null($user) || !Hash::check($request->password, $user->password)) {
-            return response()->json(['error' => ['code' => '401', 'message' => 'Unauthorized', 'errors'  => 'phone or password incorrect']], 401);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Проверьте правильность заполения, логин или пароль неверны',
+                'errors' => $val->errors()], 422);
         }
 
         $token = Str::random(30);
         $user->jwt_token = Hash::make($token);
         $user->save();
 
-        return response()->json(['data' => ['token' => $token]], 200);
+        return response()->json(['data' => ['token' => $token, 'role' => $user->role_id]], 200);
     }
 
     public function changePassword (Request $request) {
@@ -79,13 +75,17 @@ class UserController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['error' => ['code' => '422', 'message' => 'Validation error', 'errors' => $val->errors()]], 422);
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
         }
 
         $user = User::where('login', $request->login)->first();
 
         if (is_null($user)) {
-            return response()->json(['error' => ['code' => '422', 'message' => 'User doesnt exist']], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такого пользователя не существует',
+                'errors' => $val->errors()], 422);
         }
 
         $user->password = Hash::make($request->password);
@@ -93,18 +93,24 @@ class UserController extends Controller
 
         $user->save();
 
-        return response()->json(['response' => 'Password changed'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Пароль был изменён',
+            'errors' => $val->errors()], 200);
     }
 
     public function deleteUser (Request $request) {
         $user = User::where('login', $request->login);
 
         if (is_null($user)) {
-            return response()->json(['response' => 'User doesnt exist'], 422);
+            return response()->json(['title' => 'Ошибка',
+                'text' => 'Такого пользователя не существует',
+                'errors' => new \stdClass()], 422);
         }
 
         $user->delete();
 
-        return response()->json(['response' => 'User has been deleted'], 200);
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Пользователь удалён',
+            'errors' => new \stdClass()], 200);
     }
 }

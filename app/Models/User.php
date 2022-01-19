@@ -21,10 +21,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'login',
-        'teacher_id',
         'password',
         'jwt_token',
-        'is_admin'
+        'role_id'
     ];
 
     /**
@@ -34,8 +33,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'jwt_token',
-        'is_admin'
+        'jwt_token'
     ];
 
     /**

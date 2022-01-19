@@ -10161,6 +10161,10 @@ body {
     background-color: #343a40 !important;
 }
 
+.list-group-header > li {
+    font-size: 1rem;
+}
+
 .list-group-item span {
     display: inline-block;
 }
@@ -10174,4 +10178,40 @@ body {
 }
 
 /*-----------------------------------------*/
+
+
+input.form-control {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.grid-1 {
+    display: grid;
+    grid: auto-flow / 1fr;
+    grid-gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .grid-md-2 {
+        display: grid;
+        grid: auto-flow / 1fr 1fr;
+        grid-gap: 1rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .grid-lg-3 {
+        display: grid;
+        grid: auto-flow / 1fr 1fr 1fr;
+        grid-gap: 1rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .grid-xl-4 {
+        display: grid;
+        grid: auto-flow / 1fr 1fr 1fr 1fr;
+        grid-gap: 1rem;
+    }
+}
 

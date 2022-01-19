@@ -18,11 +18,11 @@
                 </div>
                 <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between
                 justify-content-xl-around align-items-center mb-3">
-                    Начало <inputText class="w-50" placeholder="Год начала" @changeEvent="queryYear" inputName="start"/>
+                    Начало <inputText class="w-50" placeholder="2020" @changeEvent="queryYear" inputName="start"/>
                 </div>
                 <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between
                 justify-content-xl-around align-items-center mb-3">
-                    Конец <inputText class="w-50" placeholder="Год окончания" @changeEvent="queryYear" inputName="end"/>
+                    Конец <inputText class="w-50" placeholder="2024" @changeEvent="queryYear" inputName="end"/>
                 </div>
             </div>
 

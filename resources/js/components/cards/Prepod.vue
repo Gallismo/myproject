@@ -11,9 +11,9 @@
 
             <div class="col-12 filter-string p-2">Фильтры</div>
             <div class="row justify-content-between col-12 mt-3 filters">
-                <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3">Фамилия <inputText class="w-50" placeholder="Фамилия" @changeEvent="queryPrepods" inputName="surname"/></div>
-                <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3">Имя <inputText class="w-50" placeholder="Имя" @changeEvent="queryPrepods" inputName="name"/></div>
-                <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3">Отчество <inputText class="w-50" placeholder="Отчество" @changeEvent="queryPrepods" inputName="middle_name"/></div>
+                <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3">Фамилия <inputText class="w-50" placeholder="Иванов" @changeEvent="queryPrepods" inputName="surname"/></div>
+                <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3">Имя <inputText class="w-50" placeholder="Иван" @changeEvent="queryPrepods" inputName="name"/></div>
+                <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3">Отчество <inputText class="w-50" placeholder="Иванович" @changeEvent="queryPrepods" inputName="middle_name"/></div>
             </div>
 
             <div class="row justify-content-center list">

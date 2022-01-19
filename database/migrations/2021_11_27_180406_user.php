@@ -13,17 +13,23 @@ class User extends Migration
      */
     public function up()
     {
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
            $table->id();
            $table->string('name');
            $table->string('login')->unique();
            $table->string('password');
-           $table->unsignedBigInteger('teacher_id')->nullable()->unique();
-           $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('SET NULL')->onUpdate('CASCADE');
+           $table->unsignedBigInteger('role_id')->nullable()->unique();
+           $table->foreign('role_id')->references('id')->on('roles')->onDelete('SET NULL')->onUpdate('CASCADE');
            $table->string('jwt_token')->nullable();
-           $table->boolean('is_admin')->default(0);
            $table->timestamps();
         });
+
     }
 
     /**
@@ -33,6 +39,7 @@ class User extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('roles');
     }
 }

@@ -18,8 +18,7 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::post('/user/register', [\App\Http\Controllers\UserController::class, 'register']);
-Route::post('/user/login', [\App\Http\Controllers\UserController::class, 'login']);
+Route::post('/User/login', [\App\Http\Controllers\UserController::class, 'login']);
 
 Route::get('/Group', [\App\Http\Controllers\MainReadController::class, 'getAllGroups']);
 Route::get('/Department', [\App\Http\Controllers\MainReadController::class, 'getAllDepartments']);
@@ -30,8 +29,10 @@ Route::get('/groupsPart', [\App\Http\Controllers\MainReadController::class, 'get
 Route::get('/Prepod', [\App\Http\Controllers\MainReadController::class, 'getAllPrepods']);
 
 //Route::middleware(['bearer', 'isAdmin'])->group(function () {
-    Route::post('/user/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
-    Route::delete('/user/delete', [\App\Http\Controllers\UserController::class, 'deleteUser']);
+    Route::post('/User/register', [\App\Http\Controllers\UserController::class, 'register']);
+    Route::post('/User/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
+    Route::delete('/User/delete', [\App\Http\Controllers\UserController::class, 'deleteUser']);
+    Route::get('/User', [\App\Http\Controllers\MainReadController::class, 'getUsers']);
 
     Route::post('/Audience', [\App\Http\Controllers\AudienceController::class, 'createAudience']);
     Route::delete('/Audience', [\App\Http\Controllers\AudienceController::class, 'deleteAudience']);
