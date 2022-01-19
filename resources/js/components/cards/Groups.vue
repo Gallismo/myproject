@@ -14,7 +14,7 @@
             <div class="row justify-content-between col-12 mt-3 filters">
                 <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between
                 justify-content-xl-around align-items-center mb-3">
-                    Отделение <SelectComp class="w-50" :items="getDepartmentDropdown" @clickEvent="queryDep" defaultValue="Все"/>
+                    Отделение <SelectComp class="w-50" :items="getDepartmentDropdown" @clickEvent="queryDep" defaultTitle="Все"/>
                 </div>
                 <div class="col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between
                 justify-content-xl-around align-items-center mb-3">

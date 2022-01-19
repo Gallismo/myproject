@@ -6,8 +6,7 @@ export default {
             axios.get('/api/Prepod', {
                 params: {
                     name: query.name,
-                    surname: query.surname,
-                    middle_name: query.middle_name
+                    user: query.user
                 }
             })
                 .then(response => {
@@ -87,8 +86,7 @@ export default {
             state.prepodData.map((obj, index) => {
                 if (obj.code === data.code) {
                     data.name ? state.prepodData[index].name = data.name : false;
-                    data.surname ? state.prepodData[index].surname = data.surname : false;
-                    data.middle_name ? state.prepodData[index].middle_name = data.middle_name : false;
+                    data.login ? state.prepodData[index].login = data.login : false;
                 }
             });
         },

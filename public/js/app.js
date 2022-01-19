@@ -2652,10 +2652,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     defaultTitle: {
       type: String,
-      "default": 'Выберите'
+      "default": ''
+    },
+    select: {
+      type: String
     },
     defaultValue: {
-      type: Number,
+      type: String || Number,
       "default": ''
     }
   },
@@ -3780,7 +3783,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3858,13 +3860,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['createPrepod'])), {}, {
     create: function create() {
       var data = {
-        surname: $('form#prepodCreate input[name=surname]').val(),
         name: $('form#prepodCreate input[name=name]').val(),
-        middle_name: $('form#prepodCreate input[name=middle_name]').val()
+        user_id: $('form#prepodCreate select').val()
       };
       this.createPrepod(data);
     }
-  })
+  }),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getUserDropdown']))
 });
 
 /***/ }),
@@ -3910,13 +3912,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PrepodEdit",
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentPrepod'])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentPrepod', 'getUserDropdown', 'getCurrentUser'])),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['savePrepod', 'deletePrepod'])), {}, {
     save: function save() {
       var data = {
-        surname: $('form#prepodEdit input[name=surname]').val(),
         name: $('form#prepodEdit input[name=name]').val(),
-        middle_name: $('form#prepodEdit input[name=middle_name]').val(),
+        user_id: $('form#prepodEdit select').val(),
+        login: $('form#prepodEdit select option:selected').text(),
         code: this.getCurrentPrepod.code
       };
       this.savePrepod(data);
@@ -3988,7 +3990,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -4036,6 +4040,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "User",
@@ -4046,9 +4052,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     this.getAllUsers();
+    this.getRoles();
   },
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['getAllUsers', 'saveUser', 'deleteUser', 'createUser', 'switchUser'])),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getUserData', 'getCurrentUser', 'getLoading']))
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getAllUsers', 'saveUser', 'deleteUser', 'createUser', 'switchUser', 'getRoles'])), {}, {
+    queryRoles: function queryRoles(event) {
+      this.query.role = event.target.value;
+      this.filter();
+    },
+    queryUsers: function queryUsers(event) {
+      var type = event.target.name;
+      this.query[type] = event.target.value;
+      this.debounceHandler();
+    },
+    filter: function filter() {
+      this.getAllUsers(this.query);
+    },
+    debounceHandler: (0,lodash__WEBPACK_IMPORTED_MODULE_0__.debounce)(function () {
+      this.filter();
+    }, 700),
+    openModalEdit: function openModalEdit() {
+      $('#editModal').modal('show');
+    }
+  }),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getUserData', 'getCurrentUser', 'getLoading', 'getRolesData']))
 });
 
 /***/ }),
@@ -4081,12 +4107,23 @@ __webpack_require__.r(__webpack_exports__);
     user: {
       type: Object,
       required: true
+    },
+    data_switch_action: {
+      type: String,
+      required: true
     }
   },
   methods: {
     clickCard: function clickCard(event) {
       event.preventDefault();
-      this.$emit('clickCard', event.target.closest('.user-card'));
+      var element = event.target.closest('.user-card');
+      this.$store.dispatch(this.data_switch_action, element.id);
+      this.$emit('clickCard', element);
+    },
+    clickButton: function clickButton(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.$emit('clickButton', event.target.closest('.user-card'));
     }
   }
 });
@@ -4131,15 +4168,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "UserEdit",
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['saveUser', 'deleteUser'])), {}, {
     openModalSave: function openModalSave() {
       $('#saveConfirm').modal('show');
+    },
+    save: function save() {
+      var data = {
+        login: $('#userEdit .card-title').text(),
+        role_id: $('#userEdit select').val(),
+        role_name: $('#userEdit select option:selected').text()
+      };
+      this.saveUser(data);
     }
   }),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentUser']))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentUser', 'getRolesData']))
 });
 
 /***/ }),
@@ -4619,6 +4665,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     placeholder: {
       type: String
+    },
+    isDisabled: {
+      type: Boolean
     }
   },
   methods: {
@@ -5679,8 +5728,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/Prepod', {
         params: {
           name: query.name,
-          surname: query.surname,
-          middle_name: query.middle_name
+          user: query.user
         }
       }).then(function (response) {
         commit('getAllPrepods', response.data);
@@ -5762,8 +5810,7 @@ __webpack_require__.r(__webpack_exports__);
       state.prepodData.map(function (obj, index) {
         if (obj.code === data.code) {
           data.name ? state.prepodData[index].name = data.name : false;
-          data.surname ? state.prepodData[index].surname = data.surname : false;
-          data.middle_name ? state.prepodData[index].middle_name = data.middle_name : false;
+          data.login ? state.prepodData[index].login = data.login : false;
         }
       });
     }
@@ -5811,7 +5858,6 @@ __webpack_require__.r(__webpack_exports__);
       commit('setLoading', true);
       axios.get('/api/User', {
         params: {
-          name: query.name,
           login: query.login,
           role: query.role
         }
@@ -5865,10 +5911,10 @@ __webpack_require__.r(__webpack_exports__);
         dispatch('showNotification', error.response.data);
       });
     },
-    switchUser: function switchUser(_ref5, code) {
+    switchUser: function switchUser(_ref5, login) {
       var commit = _ref5.commit,
           dispatch = _ref5.dispatch;
-      commit('switchUser', code);
+      commit('switchUser', login);
     },
     getRoles: function getRoles(_ref6) {
       var commit = _ref6.commit,
@@ -5895,17 +5941,15 @@ __webpack_require__.r(__webpack_exports__);
     currentUserSet: function currentUserSet(state, response) {
       state.currentUser = response[0];
     },
-    switchUser: function switchUser(state, code) {
+    switchUser: function switchUser(state, login) {
       state.currentUser = state.userData.find(function (user) {
-        return user.code === code;
+        return user.login === login;
       });
     },
     updateUser: function updateUser(state, data) {
       state.userData.map(function (obj, index) {
         if (obj.code === data.code) {
-          data.name ? state.userData[index].name = data.name : false;
-          data.surname ? state.userData[index].surname = data.surname : false;
-          data.middle_name ? state.userData[index].middle_name = data.middle_name : false;
+          data.role_name ? state.userData[index].role.name = data.role_name : false;
         }
       });
     },
@@ -5925,7 +5969,7 @@ __webpack_require__.r(__webpack_exports__);
     getUserDropdown: function getUserDropdown(state) {
       var DropdownProp = {};
       state.userData.map(function (user) {
-        return DropdownProp[user.code] = user.login;
+        return DropdownProp[user.id] = user.login;
       });
       return DropdownProp;
     },
@@ -46302,59 +46346,63 @@ var render = function () {
     },
     [
       _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
-        _c("div", { staticClass: "modal-content bg-dark" }, [
-          _c("div", { staticClass: "modal-header border-secondary" }, [
-            _c(
-              "h5",
-              {
-                staticClass: "modal-title",
-                attrs: { id: "staticBackdropLabel" },
-              },
-              [_vm._v("Подтвердите действие")]
-            ),
+        _c(
+          "div",
+          { staticClass: "modal-content modal-confirm bg-dark w-75 m-auto" },
+          [
+            _c("div", { staticClass: "modal-header border-secondary" }, [
+              _c(
+                "h5",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "staticBackdropLabel" },
+                },
+                [_vm._v("Подтвердите действие")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: { type: "button", "data-close": _vm.id },
+                  on: { click: _vm.close },
+                },
+                [
+                  _c(
+                    "span",
+                    {
+                      attrs: { "aria-hidden": "true", "data-close": _vm.id },
+                      on: { click: _vm.close },
+                    },
+                    [_vm._v("×")]
+                  ),
+                ]
+              ),
+            ]),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "close",
-                attrs: { type: "button", "data-close": _vm.id },
-                on: { click: _vm.close },
-              },
-              [
-                _c(
-                  "span",
-                  {
-                    attrs: { "aria-hidden": "true", "data-close": _vm.id },
-                    on: { click: _vm.close },
-                  },
-                  [_vm._v("×")]
-                ),
-              ]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-footer border-secondary" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary text-white",
-                attrs: { type: "button", "data-close": _vm.id },
-                on: { click: _vm.confirmEvent },
-              },
-              [_vm._v("\n                    Подтвердить\n                ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-danger text-white",
-                attrs: { type: "button", "data-close": _vm.id },
-                on: { click: _vm.close },
-              },
-              [_vm._v("Отмена")]
-            ),
-          ]),
-        ]),
+            _c("div", { staticClass: "modal-footer border-secondary" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-primary text-white",
+                  attrs: { type: "button", "data-close": _vm.id },
+                  on: { click: _vm.confirmEvent },
+                },
+                [_vm._v("\n                    Подтвердить\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-danger text-white",
+                  attrs: { type: "button", "data-close": _vm.id },
+                  on: { click: _vm.close },
+                },
+                [_vm._v("Отмена")]
+              ),
+            ]),
+          ]
+        ),
       ]),
     ]
   )
@@ -46932,22 +46980,27 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "select",
-    {
-      staticClass: "form-control btn-secondary",
-      attrs: { disabled: _vm.isDisabled },
-      on: { change: _vm.change },
-    },
+    { staticClass: "form-control btn-secondary", on: { change: _vm.change } },
     [
-      _c(
-        "option",
-        { attrs: { selected: "" }, domProps: { value: _vm.defaultValue } },
-        [_vm._v(_vm._s(_vm.defaultTitle))]
-      ),
+      _vm.defaultValue || _vm.defaultTitle
+        ? _c(
+            "option",
+            {
+              attrs: { disabled: _vm.isDisabled },
+              domProps: { value: _vm.defaultValue, selected: _vm.defaultValue },
+            },
+            [_vm._v(_vm._s(_vm.defaultTitle))]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.items, function (name, code) {
         return _c(
           "option",
-          { key: code, attrs: { id: code }, domProps: { value: code } },
+          {
+            key: code,
+            attrs: { id: code },
+            domProps: { selected: name === _vm.select, value: code },
+          },
           [_vm._v(_vm._s(name))]
         )
       }),
@@ -48190,7 +48243,7 @@ var render = function () {
                   staticClass: "w-50",
                   attrs: {
                     items: _vm.getDepartmentDropdown,
-                    defaultValue: "Все",
+                    defaultTitle: "Все",
                   },
                   on: { clickEvent: _vm.queryDep },
                 }),
@@ -48372,19 +48425,25 @@ var render = function () {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "row justify-content-between col-12 mt-3 filters" },
+          {
+            staticClass:
+              "grid-1 grid-md-2 grid-gap-3 mb-3 justify-content-between col-12 mt-3 filters",
+          },
           [
             _c(
               "div",
               {
                 staticClass:
-                  "col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3",
+                  "d-flex justify-content-between justify-content-xl-around align-items-center",
               },
               [
-                _vm._v("Фамилия "),
+                _vm._v("ФИО "),
                 _c("inputText", {
                   staticClass: "w-50",
-                  attrs: { placeholder: "Иванов", inputName: "surname" },
+                  attrs: {
+                    placeholder: "Иванов Иван Иванович",
+                    inputName: "name",
+                  },
                   on: { changeEvent: _vm.queryPrepods },
                 }),
               ],
@@ -48395,30 +48454,13 @@ var render = function () {
               "div",
               {
                 staticClass:
-                  "col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3",
+                  "d-flex justify-content-between justify-content-xl-around align-items-center",
               },
               [
-                _vm._v("Имя "),
+                _vm._v("Пользователь "),
                 _c("inputText", {
                   staticClass: "w-50",
-                  attrs: { placeholder: "Иван", inputName: "name" },
-                  on: { changeEvent: _vm.queryPrepods },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "col-12 col-sm-9 col-md-7 col-xl-4 d-flex justify-content-between justify-content-xl-around align-items-center mb-3",
-              },
-              [
-                _vm._v("Отчество "),
-                _c("inputText", {
-                  staticClass: "w-50",
-                  attrs: { placeholder: "Иванович", inputName: "middle_name" },
+                  attrs: { placeholder: "Логин", inputName: "user" },
                   on: { changeEvent: _vm.queryPrepods },
                 }),
               ],
@@ -48432,7 +48474,7 @@ var render = function () {
           { staticClass: "row justify-content-center list" },
           [
             _c("listHeader", {
-              attrs: { columns: "col-4", row: ["Фамилия", "Имя", "Отчество"] },
+              attrs: { columns: "col-6", row: ["ФИО", "Пользователь"] },
             }),
             _vm._v(" "),
             _vm._l(_vm.getPrepodData, function (row) {
@@ -48530,18 +48572,18 @@ var render = function () {
       },
       [
         _c("inputText", {
-          attrs: { code: "surname", alias: "Фамилия", inputName: "surname" },
-        }),
-        _vm._v(" "),
-        _c("inputText", {
           attrs: { code: "name", alias: "Имя", inputName: "name" },
         }),
         _vm._v(" "),
-        _c("inputText", {
+        _c("label", { attrs: { for: "selectUser" } }, [_vm._v("Пользователь")]),
+        _vm._v(" "),
+        _c("SelectComp", {
           attrs: {
-            code: "middle_name",
-            alias: "Отчество",
-            inputName: "middle_name",
+            id: "selectUser",
+            items: _vm.getUserDropdown,
+            defaultTitle: "Пользователь",
+            defaultValue: "0",
+            isDisabled: true,
           },
         }),
         _vm._v(" "),
@@ -48607,15 +48649,6 @@ var render = function () {
         [
           _c("inputText", {
             attrs: {
-              code: "surname",
-              alias: "Фамилия",
-              inputName: "surname",
-              valueInput: _vm.getCurrentPrepod.surname,
-            },
-          }),
-          _vm._v(" "),
-          _c("inputText", {
-            attrs: {
               code: "name",
               alias: "Имя",
               inputName: "name",
@@ -48623,12 +48656,15 @@ var render = function () {
             },
           }),
           _vm._v(" "),
-          _c("inputText", {
+          _c("label", { attrs: { for: "selectUser" } }, [
+            _vm._v("Пользователь"),
+          ]),
+          _vm._v(" "),
+          _c("SelectComp", {
             attrs: {
-              code: "middle_name",
-              alias: "Отчество",
-              inputName: "middle_name",
-              valueInput: _vm.getCurrentPrepod.middle_name,
+              items: _vm.getUserDropdown,
+              select: _vm.getCurrentPrepod.login,
+              id: "selectUser",
             },
           }),
           _vm._v(" "),
@@ -48770,14 +48806,14 @@ var render = function () {
               "div",
               {
                 staticClass:
-                  "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
+                  "d-flex justify-content-between\n                justify-content-xl-around align-items-center",
               },
               [
-                _vm._v("\n\n                Логин "),
+                _vm._v("\n\n                    Пользователь "),
                 _c("inputText", {
                   staticClass: "w-50",
-                  attrs: { placeholder: "Иван", inputName: "name" },
-                  on: { changeEvent: _vm.queryPrepods },
+                  attrs: { placeholder: "Логин", inputName: "login" },
+                  on: { changeEvent: _vm.queryUsers },
                 }),
               ],
               1
@@ -48787,14 +48823,18 @@ var render = function () {
               "div",
               {
                 staticClass:
-                  "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
+                  "d-flex justify-content-between\n                justify-content-xl-around align-items-center",
               },
               [
-                _vm._v("\n\n                Роль "),
-                _c("inputText", {
+                _vm._v("\n\n                    Роль "),
+                _c("SelectComp", {
                   staticClass: "w-50",
-                  attrs: { placeholder: "Иванович", inputName: "middle_name" },
-                  on: { changeEvent: _vm.queryPrepods },
+                  attrs: {
+                    defaultTitle: "Все",
+                    items: _vm.getRolesData,
+                    id: "role",
+                  },
+                  on: { clickEvent: _vm.queryRoles },
                 }),
               ],
               1
@@ -48805,13 +48845,23 @@ var render = function () {
         _c(
           "div",
           {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: !_vm.getLoading,
+                expression: "!getLoading",
+              },
+            ],
             staticClass:
               "grid-1 grid-sm-2 grid-md-3 grid-lg-4 grid-gap-2 w-100",
           },
           _vm._l(_vm.getUserData, function (user) {
             return _c("UserCard", {
+              key: user.login,
               staticClass: "grid-item",
-              attrs: { user: user },
+              attrs: { user: user, data_switch_action: "switchUser" },
+              on: { clickCard: _vm.openModalEdit },
             })
           }),
           1
@@ -48829,19 +48879,7 @@ var render = function () {
         }),
         _vm._v(" "),
         _c("BootstrapModal", {
-          attrs: {
-            id: "editModal",
-            body: "PrepodEdit",
-            title: "Редактирование",
-          },
-        }),
-        _vm._v(" "),
-        _c("BootstrapModal", {
-          attrs: {
-            id: "createModal",
-            body: "PrepodCreate",
-            title: "Добавление",
-          },
+          attrs: { id: "editModal", body: "UserEdit", title: "Редактирование" },
         }),
       ],
       1
@@ -48875,7 +48913,7 @@ var render = function () {
     "div",
     {
       staticClass: "card bg-dark user-card",
-      attrs: { "data-user": _vm.user.login },
+      attrs: { id: _vm.user.login },
       on: { click: _vm.clickCard },
     },
     [
@@ -48953,20 +48991,17 @@ var render = function () {
           },
         },
         [
-          _c("inputText", {
-            attrs: {
-              code: "login",
-              alias: "Логин",
-              inputName: "login",
-              valueInput: _vm.getCurrentUser.login,
-            },
-          }),
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v(_vm._s(_vm.getCurrentUser.login)),
+          ]),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "role" } }, [_vm._v("Роль")]),
           _vm._v(" "),
           _c("SelectComp", {
             attrs: {
-              defaultTitle: _vm.getCurrentUser.role.name,
-              defaultValue: _vm.getCurrentUser.role.id,
+              select: _vm.getCurrentUser.role.name,
               items: _vm.getRolesData,
+              id: "role",
             },
           }),
           _vm._v(" "),
@@ -49455,6 +49490,7 @@ var render = function () {
         placeholder: _vm.placeholder,
         id: _vm.code,
         name: _vm.inputName,
+        disabled: _vm.isDisabled,
       },
       domProps: { value: _vm.valueInput },
       on: {

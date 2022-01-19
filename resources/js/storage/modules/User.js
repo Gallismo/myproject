@@ -5,7 +5,6 @@ export default {
 
             axios.get('/api/User', {
                 params: {
-                    name: query.name,
                     login: query.login,
                     role: query.role
                 }
@@ -61,8 +60,8 @@ export default {
                     dispatch('showNotification', error.response.data);
                 });
         },
-        switchUser({commit, dispatch}, code) {
-            commit('switchUser', code);
+        switchUser({commit, dispatch}, login) {
+            commit('switchUser', login);
         },
         getRoles({commit, dispatch}) {
             axios('/api/Roles')
@@ -89,15 +88,13 @@ export default {
         currentUserSet: (state, response) => {
             state.currentUser = response[0]
         },
-        switchUser(state, code) {
-            state.currentUser = state.userData.find(user => user.code === code);
+        switchUser(state, login) {
+            state.currentUser = state.userData.find(user => user.login === login);
         },
         updateUser: (state, data) => {
             state.userData.map((obj, index) => {
                 if (obj.code === data.code) {
-                    data.name ? state.userData[index].name = data.name : false;
-                    data.surname ? state.userData[index].surname = data.surname : false;
-                    data.middle_name ? state.userData[index].middle_name = data.middle_name : false;
+                    data.role_name ? state.userData[index].role.name = data.role_name : false;
                 }
             });
         },
@@ -116,7 +113,7 @@ export default {
         },
         getUserDropdown: state => {
             let DropdownProp = {};
-            state.userData.map(user => DropdownProp[user.code] = user.login);
+            state.userData.map(user => DropdownProp[user.id] = user.login);
             return DropdownProp;
         },
         getRolesData: state => {return state.rolesData},

@@ -169,6 +169,17 @@ input.form-control {
     position: relative;
     padding-bottom: calc(1.25rem * 2 + 0.9rem * 1.6);
 }
+
+.grid-item {
+    transition: box-shadow 0.5s;
+}
+
+.grid-item:hover  {
+    -webkit-box-shadow: 0px 0px 27px 7px rgba(0, 0, 0, 0.29) !important;
+    -moz-box-shadow: 0px 0px 27px 7px rgba(0, 0, 0, 0.29) !important;
+    box-shadow: 0px 0px 27px 7px rgba(0, 0, 0, 0.29) !important;
+}
+
 .bottom-button {
     position: absolute;
     bottom: 0;

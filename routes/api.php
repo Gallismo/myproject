@@ -31,7 +31,8 @@ Route::get('/Prepod', [\App\Http\Controllers\MainReadController::class, 'getAllP
 //Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::post('/User/register', [\App\Http\Controllers\UserController::class, 'register']);
     Route::post('/User/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
-    Route::delete('/User/delete', [\App\Http\Controllers\UserController::class, 'deleteUser']);
+    Route::delete('/User', [\App\Http\Controllers\UserController::class, 'deleteUser']);
+    Route::patch('/User', [\App\Http\Controllers\UserController::class, 'editUser']);
     Route::get('/User', [\App\Http\Controllers\MainReadController::class, 'getUsers']);
     Route::get('/Roles', [\App\Http\Controllers\MainReadController::class, 'getRoles']);
 

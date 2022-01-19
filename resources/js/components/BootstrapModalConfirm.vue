@@ -1,7 +1,7 @@
 <template>
     <div class="modal fade" :id="id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark">
+            <div class="modal-content modal-confirm bg-dark w-75 m-auto">
                 <div class="modal-header border-secondary">
                     <h5 class="modal-title" id="staticBackdropLabel">Подтвердите действие</h5>
                     <button type="button" class="close" @click="close" :data-close="id">

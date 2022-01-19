@@ -2,9 +2,10 @@
     <div class="card bg-dark text-white">
         <form class="card-body" id="userEdit" @keypress.enter="openModalSave">
 
-            <inputText code="login" alias="Логин" inputName="login" :valueInput="getCurrentUser.login"/>
-            <SelectComp :defaultTitle="getCurrentUser.role.name" :defaultValue="getCurrentUser.role.id"
-                        :items="getRolesData"/>
+            <h5 class="card-title">{{getCurrentUser.login}}</h5>
+            <label for="role">Роль</label>
+            <SelectComp :select="getCurrentUser.role.name"
+                        :items="getRolesData" id="role"/>
 
             <div class="row mt-4">
                 <SaveButton target="#saveConfirm"/>
@@ -27,10 +28,19 @@
             ...mapActions(['saveUser', 'deleteUser']),
             openModalSave() {
                 $('#saveConfirm').modal('show');
+            },
+            save() {
+                const data = {
+                    login: $('#userEdit .card-title').text(),
+                    role_id: $('#userEdit select').val(),
+                    role_name: $('#userEdit select option:selected').text()
+                };
+
+                this.saveUser(data);
             }
         },
         computed: {
-            ...mapGetters(['getCurrentUser'])
+            ...mapGetters(['getCurrentUser', 'getRolesData'])
         }
     }
 </script>

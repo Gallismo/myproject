@@ -111,4 +111,27 @@ class UserController extends Controller
             'text' => 'Пользователь удалён',
             'errors' => new \stdClass()], 200);
     }
+
+    public function editUser (Request $request) {
+        $val = Validator::make($request->all(), [
+            'login' => 'required|string|min:6|exists:users',
+            'role_id' => 'integer|exists:roles,id|required'
+        ]);
+
+        if ($val->fails()) {
+            return response()->json(['title' => 'Ошибка валидации',
+                'text' => 'Проверьте правильность заполнения полей',
+                'errors' => $val->errors()], 422);
+        }
+
+        $user = User::where('login', $request->login)->first();
+
+        $user->role_id = $request->role_id;
+
+        $user->save();
+
+        return response()->json(['title' => 'Успешно',
+            'text' => 'Роль была успешно изменена',
+            'errors' => $val->errors()], 200);
+    }
 }

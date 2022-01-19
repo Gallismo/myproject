@@ -83,22 +83,18 @@ class MainReadController extends Controller
     public function getAllPrepods(Request $request) {
         $queries = $request->query();
 
-        $prepodsModel = Teacher::orderBy('surname');
+        $prepodsModel = DB::table('teachers')
+            ->join('users', 'teachers.user_id', '=', 'users.id')
+            ->select('teachers.name', 'users.login as login', 'teachers.code')->orderBy('name');
 
         if (isset($queries['name'])) {
             $prepodsModel = $prepodsModel->where('name', 'like', "%".$queries['name']."%");
         }
 
-        if (isset($queries['surname'])) {
-            $prepodsModel = $prepodsModel->where('surname', 'like', "%".$queries['surname']."%");
-        }
-
-        if (isset($queries['middle_name'])) {
-            $prepodsModel = $prepodsModel->where('middle_name', 'like', "%".$queries['middle_name']."%");
-        }
-
-        if (isset($queries['user_id'])) {
-            $prepodsModel = $prepodsModel->where('user_id', $queries['user_id']);
+        if (isset($queries['user'])) {
+            $users = DB::table('users')
+                ->where('login', 'like', "%".$queries['user']."%")->pluck('id');
+            $prepodsModel = $prepodsModel->whereIn('user_id', $users);
         }
 
         $prepods = $prepodsModel->get();
@@ -112,29 +108,23 @@ class MainReadController extends Controller
         $roles = Role::all();
         $userModel = User::orderBy('login');
 
-        if (isset($queries['name'])) {
-            $userModel = $userModel->where('name', 'like', "%".$queries['name']."%");
+        if (isset($queries['login'])) {
+            $userModel = $userModel->where('login', 'like', "%".$queries['login']."%");
         }
 
         if (isset($queries['role'])) {
             $userModel = $userModel->where('role_id', $queries['role']);
         }
 
-        if (isset($queries['login'])) {
-            $userModel = $userModel->where('login', $queries['login']);
-        }
-
         $users = $userModel->get();
 
         foreach ($users as $user) {
-            switch ($user->role_id) {
-                case 2:
-                    $teacher = Teacher::where('user_id', $user->id)->first();
-                    if (!is_null($teacher)) {
-                        $user->name = $teacher->surname." ".$teacher->name." ".$teacher->middle_name;
-                    }
-                    break;
+
+            $teacher = Teacher::where('user_id', $user->id)->first();
+            if (!is_null($teacher)) {
+                $user->name = $teacher->name;
             }
+
             foreach ($roles as $role) {
                 if ($role->id === $user->role_id) {
                     $user->role = $role;
@@ -150,7 +140,7 @@ class MainReadController extends Controller
         $roles = Role::all();
         $rolesData = [];
         foreach ($roles as $role) {
-            $rolesData[] = [$role->id => $role->name];
+            $rolesData[$role->id] = $role->name;
         }
         return response()->json($rolesData);
     }

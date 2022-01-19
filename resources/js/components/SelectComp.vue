@@ -1,7 +1,7 @@
 <template>
-    <select class="form-control btn-secondary" :disabled="isDisabled" @change="change">
-        <option :value="defaultValue" selected>{{defaultTitle}}</option>
-        <option v-for="(name, code) in items" :key="code" :value="code" :id="code">{{name}}</option>
+    <select class="form-control btn-secondary" @change="change">
+        <option :value="defaultValue" :selected="defaultValue" :disabled="isDisabled" v-if="defaultValue || defaultTitle">{{defaultTitle}}</option>
+        <option v-for="(name, code) in items" :selected="name === select" :key="code" :value="code" :id="code">{{name}}</option>
     </select>
 </template>
 
@@ -19,10 +19,13 @@ export default {
         },
         defaultTitle: {
             type: String,
-            default: 'Выберите'
+            default: ''
+        },
+        select: {
+            type: String
         },
         defaultValue: {
-            type: Number,
+            type: String || Number,
             default: ''
         }
     },

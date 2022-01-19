@@ -15,9 +15,7 @@ class Teachers extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->string('surname');
             $table->string('name');
-            $table->string('middle_name');
             $table->unsignedBigInteger('user_id')->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->string('code')->unique();

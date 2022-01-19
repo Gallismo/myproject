@@ -1,5 +1,5 @@
 <template>
-    <div class="card bg-dark user-card" @click="clickCard" :data-user="user.login">
+    <div class="card bg-dark user-card" @click="clickCard" :id="user.login">
         <div class="card-body">
             <h5 class="card-title">{{user.login}}</h5>
             <p class="card-text mb-2">{{user.role.name}}</p>
@@ -16,13 +16,24 @@
             user: {
                 type: Object,
                 required: true
+            },
+            data_switch_action: {
+                type: String,
+                required: true
             }
         },
         methods: {
             clickCard(event) {
                 event.preventDefault();
+                const element = event.target.closest('.user-card');
+                this.$store.dispatch(this.data_switch_action, element.id);
+                this.$emit('clickCard', element);
+            },
+            clickButton(event) {
+                event.preventDefault();
+                event.stopPropagation();
 
-                this.$emit('clickCard', event.target.closest('.user-card'));
+                this.$emit('clickButton', event.target.closest('.user-card'));
             }
         }
     }

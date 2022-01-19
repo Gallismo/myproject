@@ -2,7 +2,7 @@
     <div class="form-group">
         <label v-if="code" :for="code">{{alias}}</label>
         <input type="text" class="form-control btn-secondary" :placeholder="placeholder" :id="code"
-               :name="inputName" :value="valueInput" @keypress.enter="change" @input="change">
+               :name="inputName" :value="valueInput" @keypress.enter="change" @input="change" :disabled="isDisabled">
     </div>
 </template>
 
@@ -27,6 +27,9 @@
             },
             placeholder: {
                 type:String
+            },
+            isDisabled: {
+                type: Boolean
             }
         },
         methods: {
