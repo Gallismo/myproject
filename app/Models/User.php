@@ -48,6 +48,6 @@ class User extends Authenticatable
 
     public function prunable()
     {
-        return static::where('updated_at', '<=', now()->subYear(3));
+        return static::where('updated_at', '<=', now()->subYear(5));
     }
 }

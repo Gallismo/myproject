@@ -63,7 +63,7 @@ class UserController extends Controller
         $user->jwt_token = Hash::make($token);
         $user->save();
 
-        return response()->json(['data' => ['token' => $token, 'role' => $user->role_id]], 200);
+        return response()->json(['data' => ['token' => $token, 'admin' => $user->role_id === 1]], 200);
     }
 
     public function changePassword (Request $request) {
