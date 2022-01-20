@@ -191,3 +191,21 @@ input.form-control {
     margin: 1.25rem !important;
     width: calc(100% - 1.25rem * 2);
 }
+
+.random-password {
+    width: 20px;
+    height: 20px;
+    padding: 0 !important;
+    border: none;
+    position: relative;
+}
+
+.random-password > svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.random-password {
+    margin-left: 1rem;
+}

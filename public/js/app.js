@@ -2696,11 +2696,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreateButton",
   props: {
@@ -4253,6 +4248,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PrepodCreate",
@@ -4264,6 +4268,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         role_id: $('form#userCreate select').val()
       };
       this.createUser(data);
+    },
+    generatePassword: function generatePassword() {
+      var length = Math.floor(Math.random() * 8) + 8,
+          charset = "0123456789abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+          retVal = "";
+
+      for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+      }
+
+      $('form#userCreate input[name=password]').val(retVal);
     }
   }),
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getRolesData']))
@@ -47347,30 +47362,7 @@ var render = function () {
         },
       },
     },
-    [
-      _vm._v("\n    " + _vm._s(_vm.name) + "\n    "),
-      _c(
-        "svg",
-        {
-          staticClass: "bi bi-patch-plus",
-          attrs: {
-            xmlns: "http://www.w3.org/2000/svg",
-            width: "24",
-            height: "24",
-            fill: "currentColor",
-            viewBox: "0 0 16 16",
-          },
-        },
-        [
-          _c("path", {
-            attrs: {
-              "fill-rule": "evenodd",
-              d: "M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z",
-            },
-          }),
-        ]
-      ),
-    ]
+    [_vm._v(_vm._s(_vm.name))]
   )
 }
 var staticRenderFns = []
@@ -49269,12 +49261,16 @@ var render = function () {
         "div",
         { staticClass: "card-body" },
         [
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v(_vm._s(_vm.user.login)),
+          ]),
+          _vm._v(" "),
           _c(
-            "h5",
-            { staticClass: "card-title d-flex justify-content-between" },
+            "p",
+            { staticClass: "card-text mb-2 d-flex justify-content-between" },
             [
               _vm._v(
-                "\n            " + _vm._s(_vm.user.login) + "\n            "
+                "\n            " + _vm._s(_vm.user.role.name) + "\n            "
               ),
               _c(
                 "svg",
@@ -49298,10 +49294,6 @@ var render = function () {
               ),
             ]
           ),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-text mb-2" }, [
-            _vm._v(_vm._s(_vm.user.role.name)),
-          ]),
           _vm._v(" "),
           _vm.user.name
             ? _c("p", { staticClass: "card-text mb-2" }, [
@@ -49451,14 +49443,62 @@ var render = function () {
           },
         }),
         _vm._v(" "),
-        _c("inputText", {
-          attrs: {
-            code: "password",
-            alias: "Пароль",
-            placeholder: "Пароль",
-            inputName: "password",
-          },
-        }),
+        _c(
+          "div",
+          { staticClass: "pass-div" },
+          [
+            _c(
+              "inputText",
+              {
+                attrs: {
+                  code: "password",
+                  alias: "Пароль",
+                  placeholder: "Пароль",
+                  inputName: "password",
+                },
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-secondary random-password",
+                    attrs: { type: "button" },
+                    on: { click: _vm.generatePassword },
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "bi bi-dice-5",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          width: "20",
+                          height: "20",
+                          fill: "currentColor",
+                          viewBox: "0 0 16 16",
+                        },
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            d: "M13 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10zM3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3z",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d: "M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm4-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z",
+                          },
+                        }),
+                      ]
+                    ),
+                  ]
+                ),
+              ]
+            ),
+          ],
+          1
+        ),
         _vm._v(" "),
         _c("label", { attrs: { for: "selectRole" } }, [_vm._v("Роль")]),
         _vm._v(" "),
@@ -50023,7 +50063,12 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "form-group" }, [
     _vm.code
-      ? _c("label", { attrs: { for: _vm.code } }, [_vm._v(_vm._s(_vm.alias))])
+      ? _c(
+          "label",
+          { attrs: { for: _vm.code } },
+          [_vm._v(_vm._s(_vm.alias)), _vm._t("default")],
+          2
+        )
       : _vm._e(),
     _vm._v(" "),
     _c("input", {

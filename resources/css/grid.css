@@ -1,4 +1,8 @@
 
+.grid {
+    display: grid;
+}
+
 /* <576px */
 .grid-1 {
     display: grid;
