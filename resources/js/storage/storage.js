@@ -40,7 +40,7 @@ const store = new Vuex.Store({
                 }
             }
         },
-        currentTab: "User",
+        currentTab: "Schedule",
         loading: false
     },
     getters: {

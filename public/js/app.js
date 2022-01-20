@@ -6324,7 +6324,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         }
       }
     },
-    currentTab: "User",
+    currentTab: "Schedule",
     loading: false
   },
   getters: {
