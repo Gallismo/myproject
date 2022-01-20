@@ -28,14 +28,15 @@
 
             <div class="grid-1 grid-sm-2 grid-md-3 grid-lg-4 grid-gap-2 w-100" v-show="!getLoading">
                 <UserCard v-for="user in getUserData" :user="user" class="grid-item"
-                          :key="user.login" @clickCard="openModalEdit" data_switch_action="switchUser"/>
+                          :key="user.login" @clickCard="openModalEdit" @clickButton="openModalPassword" data_switch_action="switchUser"/>
             </div>
 
 
             <Loader v-show="getLoading"/>
 
             <BootstrapModal id="editModal" body="UserEdit" title="Редактирование"/>
-<!--            <BootstrapModal id="createModal" body="PrepodCreate" title="Добавление"/>-->
+            <BootstrapModal id="createModal" body="UserCreate" title="Добавление"/>
+            <BootstrapModal id="passwordModal" body="UserChangePassword" title="Изменение пароля"/>
         </div>
     </div>
 </template>
@@ -74,6 +75,12 @@
             }, 700),
             openModalEdit() {
                 $('#editModal').modal('show');
+            },
+            openModalCreate() {
+                $('#createModal').modal('show');
+            },
+            openModalPassword() {
+                $('#passwordModal').modal('show');
             }
         },
         computed: {

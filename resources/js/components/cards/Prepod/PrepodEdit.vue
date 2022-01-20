@@ -2,7 +2,7 @@
     <div class="card bg-dark text-white">
         <form class="card-body" id="prepodEdit" @keypress.enter="openModalSave">
 
-            <inputText code="name" alias="Имя" inputName="name" :valueInput="getCurrentPrepod.name"/>
+            <inputText code="name"alias="ФИО" placeholder="Иванов Иван Иванович" inputName="name" :valueInput="getCurrentPrepod.name"/>
             <label for="selectUser">Пользователь</label>
             <SelectComp :items="getUserDropdown" :select="getCurrentPrepod.login" id="selectUser"/>
 

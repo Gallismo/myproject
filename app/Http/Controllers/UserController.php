@@ -17,7 +17,7 @@ class UserController extends Controller
         $val = Validator::make($request->all(), [
             'login' => 'required|string|min:6|unique:users',
             'password' => 'required|string|min:6',
-            'role_id' => 'integer|exists:roles,id|required'
+            'role_id' => 'required|integer|exists:roles,id'
         ]);
 
         if ($val->fails()) {

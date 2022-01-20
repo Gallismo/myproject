@@ -39,6 +39,8 @@ body {
 .toast {
     border-radius: 0.5rem;
     box-shadow: 4px 4px 15px 5px black;
+    -webkit-box-shadow: 4px 4px 15px 5px black;
+    -moz-box-shadow: 4px 4px 15px 5px black;
 }
 /*------------------------------*/
 
@@ -103,7 +105,8 @@ body {
 }
 
 .list {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     max-height: 80vh;
     border-top: solid rgba(0, 0, 0, 0.125) 1px;
     border-bottom: solid rgba(0, 0, 0, 0.125) 1px;
@@ -175,9 +178,10 @@ input.form-control {
 }
 
 .grid-item:hover  {
-    -webkit-box-shadow: 0px 0px 27px 7px rgba(0, 0, 0, 0.29) !important;
-    -moz-box-shadow: 0px 0px 27px 7px rgba(0, 0, 0, 0.29) !important;
-    box-shadow: 0px 0px 27px 7px rgba(0, 0, 0, 0.29) !important;
+    -webkit-box-shadow: 0px 0px 27px 7px rgba(0, 0, 0, 0.29);
+    -moz-box-shadow: 0px 0px 27px 7px rgba(0, 0, 0, 0.29);
+    box-shadow: 0px 0px 27px 7px rgba(0, 0, 0, 0.29);
+    cursor: pointer;
 }
 
 .bottom-button {

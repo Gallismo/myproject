@@ -4,7 +4,7 @@
 
             <h5 class="card-title">{{getCurrentUser.login}}</h5>
             <label for="role">Роль</label>
-            <SelectComp :select="getCurrentUser.role.name"
+            <SelectComp :select="getCurrentUser.role.name" v-if="getCurrentUser.role"
                         :items="getRolesData" id="role"/>
 
             <div class="row mt-4">
@@ -37,6 +37,12 @@
                 };
 
                 this.saveUser(data);
+            },
+            deleteD() {
+                const data = {
+                    login: $('#userEdit .card-title').text()
+                };
+                this.deleteUser(data);
             }
         },
         computed: {

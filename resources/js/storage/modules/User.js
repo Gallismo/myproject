@@ -32,6 +32,19 @@ export default {
                     dispatch('showNotification', error.response.data);
                 });
         },
+        changePassword({commit, dispatch}, data) {
+            axios({
+                method: 'post',
+                url: '/api/User/changePassword',
+                data: data
+            })
+                .then(response => {
+                    dispatch('showNotification', response.data);
+                })
+                .catch(error => {
+                    dispatch('showNotification', error.response.data);
+                });
+        },
         deleteUser: ({commit, dispatch}, data) => {
             axios({
                 method: 'delete',
@@ -49,7 +62,7 @@ export default {
         createUser: ({commit, dispatch}, data) => {
             axios({
                 method: 'post',
-                url: '/api/User',
+                url: '/api/User/register',
                 data: data
             })
                 .then(response => {
@@ -76,7 +89,7 @@ export default {
     mutations: {
         deleteUser(state, data) {
             state.userData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.login === data.login) {
                     state.userData.splice(index, 1)
                 }
             });
@@ -93,7 +106,7 @@ export default {
         },
         updateUser: (state, data) => {
             state.userData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.login === data.login) {
                     data.role_name ? state.userData[index].role.name = data.role_name : false;
                 }
             });

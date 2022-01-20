@@ -17,6 +17,7 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
 export default {
     name: "BootstrapModal",
     props: {
@@ -37,6 +38,9 @@ export default {
         confirmEvent() {
             this.$emit('confirmEvent')
         }
+    },
+    computed: {
+        ...mapGetters(['getLoading'])
     }
 }
 </script>

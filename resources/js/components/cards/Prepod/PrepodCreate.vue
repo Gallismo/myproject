@@ -2,7 +2,7 @@
     <div class="card bg-dark text-white">
         <form class="card-body" id="prepodCreate" @keypress.enter="create">
 
-            <inputText code="name" alias="Имя" inputName="name"/>
+            <inputText code="name" alias="ФИО" placeholder="Иванов Иван Иванович" inputName="name"/>
             <label for="selectUser">Пользователь</label>
             <SelectComp id="selectUser" :items="getUserDropdown" defaultTitle="Пользователь" defaultValue="0" :isDisabled="true"/>
 
