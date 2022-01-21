@@ -27,7 +27,7 @@ class Teachers extends Migration
             $table->string('name');
             $table->unsignedBigInteger('user_id')->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->unsignedBigInteger('group_id')->unique()->nullable();
+            $table->unsignedBigInteger('group_id')->nullable();
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('SET NULL')->onUpdate('CASCADE');
             $table->string('code')->unique();
             $table->timestamps();

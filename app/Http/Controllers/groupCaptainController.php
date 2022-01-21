@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\groupCaptain;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class groupCaptainController extends Controller
         $val = Validator::make($request->all(), [
             'name' => 'required|string|min:1',
             'user_id' => 'required|exists:users,id|unique:group_captains,user_id',
-            'group_id' => 'required|exists:groups,id'
+            'group_code' => 'required|exists:groups,code'
         ]);
 
         if ($val->fails()) {
@@ -22,11 +23,13 @@ class groupCaptainController extends Controller
                 'errors' => $val->errors()], 422);
         }
 
+        $group = Group::where('code', $request->group_code)->first();
+
         $code = $this->codeGenerate(groupCaptain::class);
         groupCaptain::create([
             'name' => $request->name,
             'user_id' => $request->user_id,
-            'group_id' => $request->group_id,
+            'group_id' => $group->id,
             'code' => $code
         ]);
 
@@ -39,8 +42,8 @@ class groupCaptainController extends Controller
         $val = Validator::make($request->all(), [
             'name' => 'string|required_without_all:user_id,group_id|min:1',
             'user_id' => 'required_without_all:name,group_id|integer|exists:users,id|unique:group_captains,user_id',
-            'group_id' => 'required_without_all:name,user_id|integer|exists:groups,id',
-            'code' => 'required|string|exists:teachers,code'
+            'group_code' => 'required_without_all:name,user_id|exists:groups,code',
+            'code' => 'required|string|exists:group_captains,code'
         ]);
 
         if ($val->fails()) {
@@ -57,9 +60,13 @@ class groupCaptainController extends Controller
                 'errors' => $val->errors()], 422);
         }
 
+        if (isset($request->group_code)) {
+            $group = Group::where('code', $request->group_code)->first();
+            $captain->group_id = $group->id;
+        }
+
         $request->name ? $captain->name=$request->name : false;
         $request->user_id ? $captain->user_id=$request->user_id : false;
-        $request->group_id ? $captain->group_id=$request->group_id : false;
 
         $captain->save();
 
@@ -68,7 +75,7 @@ class groupCaptainController extends Controller
             'errors' => $val->errors()], 200);
     }
 
-    public function deleteTeacher (Request $request) {
+    public function delete (Request $request) {
         $val = Validator::make($request->all(), [
             'code' => 'required|string|exists:group_captains,code'
         ]);

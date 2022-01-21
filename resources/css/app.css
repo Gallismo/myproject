@@ -168,7 +168,12 @@ input.form-control {
     border-color: #545b62;
 }
 
-.grid-item > .card-body {
+.user-card > .card-body {
+    position: relative;
+    padding-bottom: calc(1.25rem * 2 + 0.9rem * 1.6);
+}
+
+.captain-card > .card-body {
     position: relative;
     padding-bottom: calc(1.25rem * 2 + 0.9rem * 1.6);
 }

@@ -27,6 +27,8 @@ Route::get('/Week', [\App\Http\Controllers\MainReadController::class, 'getAllWee
 Route::get('/lessonsOrder', [\App\Http\Controllers\MainReadController::class, 'getAllLessonOrders']);
 Route::get('/groupsPart', [\App\Http\Controllers\MainReadController::class, 'getAllGroupParts']);
 Route::get('/Prepod', [\App\Http\Controllers\MainReadController::class, 'getAllPrepods']);
+Route::get('/Captain', [\App\Http\Controllers\MainReadController::class, 'getCaptains']);
+
 
 //Route::middleware(['bearer', 'isAdmin'])->group(function () {
     Route::post('/User/register', [\App\Http\Controllers\UserController::class, 'register']);
@@ -35,6 +37,10 @@ Route::get('/Prepod', [\App\Http\Controllers\MainReadController::class, 'getAllP
     Route::patch('/User', [\App\Http\Controllers\UserController::class, 'editUser']);
     Route::get('/User', [\App\Http\Controllers\MainReadController::class, 'getUsers']);
     Route::get('/Roles', [\App\Http\Controllers\MainReadController::class, 'getRoles']);
+
+    Route::post('/Captain', [\App\Http\Controllers\groupCaptainController::class, 'create']);
+    Route::delete('/Captain', [\App\Http\Controllers\groupCaptainController::class, 'delete']);
+    Route::patch('/Captain', [\App\Http\Controllers\groupCaptainController::class, 'edit']);
 
     Route::post('/Audience', [\App\Http\Controllers\AudienceController::class, 'createAudience']);
     Route::delete('/Audience', [\App\Http\Controllers\AudienceController::class, 'deleteAudience']);

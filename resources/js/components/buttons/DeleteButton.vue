@@ -1,7 +1,7 @@
 <template>
     <button class="btn btn-outline-danger text-white col-12"
             type="button" data-toggle="modal" :data-target="target"
-            :disabled="isDisabled">Удалить</button>
+            :disabled="isDisabled" @click="click">Удалить</button>
 </template>
 
 <script>
@@ -9,12 +9,16 @@
         name: "DeleteButton",
         props: {
             target: {
-                type: String,
-                required: true
+                type: String
             },
             isDisabled: {
                 type: Boolean,
                 default: false
+            }
+        },
+        methods: {
+            click(event) {
+                this.$emit('clickButton', event);
             }
         }
     }

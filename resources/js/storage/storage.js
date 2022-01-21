@@ -19,7 +19,6 @@ const store = new Vuex.Store({
     state: {
         links: {
             simpleLinks: {
-                Prepod:'Преподаватели',
                 User:'Пользователи'
             },
             dropdowns: {
@@ -37,10 +36,17 @@ const store = new Vuex.Store({
                         Schedule:'Расписание звонков',
                         Booking:'Расписание занятий'
                     }
+                },
+                dropdown3: {
+                    name: 'Преподаватели и старосты',
+                    items: {
+                        Prepod:'Преподаватели',
+                        Captain: 'Старосты'
+                    }
                 }
             }
         },
-        currentTab: "Schedule",
+        currentTab: "Captain",
         loading: false
     },
     getters: {

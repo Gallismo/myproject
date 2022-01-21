@@ -111,7 +111,7 @@ export default {
         getGroupsData: state => {
             return state.groupsData
         },
-        getDropdownData: state => {
+        getGroupDropdown: state => {
             let DropdownProp = {};
             state.groupsData.map(group => DropdownProp[group.code] = group.name);
             return DropdownProp;

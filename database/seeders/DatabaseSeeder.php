@@ -20,11 +20,48 @@ class DatabaseSeeder extends Seeder
             ['id' => 3, 'name' => 'Староста']
         ];
 
-        $admin = [
+        $groups = [
+            [
+                'name' => 'И-19-19',
+                'department_id' => '2',
+                'start_year' => 2019,
+                'end_year' => 2023,
+                'code' => $this->code()
+            ]
+        ];
+
+        $users = [
             [
                 'id' => 1, 'login' => 'sperecur',
                 'password' => '$2y$10$JYQwDahA9uP8KImn/73ngeKFSmXhCsbrZafi7Bz9z5lGMZs1sht7a', 'role_id' => '1',
                 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 2, 'login' => 'starosta',
+                'password' => '$2y$10$JYQwDahA9uP8KImn/73ngeKFSmXhCsbrZafi7Bz9z5lGMZs1sht7a', 'role_id' => '3',
+                'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 3, 'login' => 'prepod',
+                'password' => '$2y$10$JYQwDahA9uP8KImn/73ngeKFSmXhCsbrZafi7Bz9z5lGMZs1sht7a', 'role_id' => '2',
+                'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')
+            ],
+        ];
+
+        $teachers = [
+            [
+                'name' => 'Иванов Иван Иванович',
+                'user_id' => '3',
+                'code' => $this->code()
+            ]
+        ];
+
+        $starosts = [
+            [
+                'name' => 'Федоров Георгий Владимирович',
+                'user_id' => '2',
+                'group_id' => '1',
+                'code' => $this->code()
             ]
         ];
 
@@ -257,7 +294,7 @@ class DatabaseSeeder extends Seeder
 
 
         DB::table('roles')->insert($roles);
-        DB::table('users')->insert($admin);
+        DB::table('users')->insert($users);
         DB::table('departments')->insert($departments);
         DB::table('audiences')->insert($audiences);
         DB::table('groups_parts')->insert($groupPart);
@@ -265,7 +302,9 @@ class DatabaseSeeder extends Seeder
         DB::table('subjects')->insert($subjects);
         DB::table('week_days')->insert($weeks);
         DB::table('schedules')->insert($schedules);
-
+        DB::table('groups')->insert($groups);
+        DB::table('teachers')->insert($teachers);
+        DB::table('group_captains')->insert($starosts);
     }
 
     private function code() {
