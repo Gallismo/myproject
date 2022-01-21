@@ -19,4 +19,7 @@ class groupsPart extends Model
         'created_at',
         'updated_at'
     ];
+
+    protected $table = 'groups_parts';
+
 }

@@ -32,8 +32,10 @@ class lessonsBooking extends Model
         'updated_at'
     ];
 
+    protected $table = 'lessons_bookings';
+
     public function prunable()
     {
-        return static::where('updated_at', '<=', now()->subYear(2));
+        return static::where('updated_at', '<=', now()->subYear(5));
     }
 }

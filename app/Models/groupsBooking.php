@@ -22,4 +22,7 @@ class groupsBooking extends Model
         'created_at',
         'updated_at'
     ];
+
+    protected $table = 'groups_bookings';
+
 }

@@ -5,12 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class groupCaptain extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'id',
+        'name',
+        'user_id',
+        'group_id',
+        'code'
     ];
 
     protected $hidden = [
@@ -18,6 +22,5 @@ class Role extends Model
         'updated_at'
     ];
 
-    protected $table = 'roles';
-
+    protected $table = 'group_captains';
 }

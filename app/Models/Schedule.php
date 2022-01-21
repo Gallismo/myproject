@@ -24,4 +24,7 @@ class Schedule extends Model
         'created_at',
         'updated_at'
     ];
+
+    protected $table = 'schedules';
+
 }

@@ -19,4 +19,6 @@ class Audience extends Model
         'created_at',
         'updated_at'
     ];
+
+    protected $table = 'audiences';
 }

@@ -23,6 +23,7 @@ class Group extends Model
         'updated_at'
     ];
 
+    protected $table = 'groups';
 
 
 

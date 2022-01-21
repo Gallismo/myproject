@@ -46,6 +46,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $table = 'users';
+
+
     public function prunable()
     {
         return static::where('updated_at', '<=', now()->subYear(5));

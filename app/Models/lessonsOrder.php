@@ -19,4 +19,7 @@ class lessonsOrder extends Model
         'created_at',
         'updated_at'
     ];
+
+    protected $table = 'lessons_orders';
+
 }

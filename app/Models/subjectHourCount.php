@@ -22,4 +22,7 @@ class subjectHourCount extends Model
         'created_at',
         'updated_at'
     ];
+
+    protected $table = 'subject_hour_counts';
+
 }
