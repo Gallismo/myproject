@@ -10388,12 +10388,7 @@ input.form-control {
 
 .user-card > .card-body {
     position: relative;
-    padding-bottom: calc(1.25rem * 2 + 0.9rem * 1.6);
-}
-
-.captain-card > .card-body {
-    position: relative;
-    padding-bottom: calc(1.25rem * 2 + 0.9rem * 1.6);
+    padding-bottom: calc((0.75rem * 2 + (0.9rem * 1.6)) * 2 + 0.5rem + 1px);
 }
 
 .grid-item {
@@ -10429,5 +10424,9 @@ input.form-control {
 
 .random-password {
     margin-left: 1rem;
+}
+
+.w-35 {
+    width: 35% !important;
 }
 

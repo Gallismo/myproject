@@ -60,11 +60,9 @@
             },
             roleChanged() {
                 if ($('form#userEdit select#selectRole').val() != 3) {
-                    $('form#userEdit select#selectGroup').attr('disabled', 'disabled');
                     $('form#userEdit select#selectGroup').val('0');
                     $('form#userEdit div#selectGroupDiv').hide();
                 } else {
-                    $('form#userEdit select#selectGroup').removeAttr('disabled');
                     $('form#userEdit div#selectGroupDiv').show();
                 }
             }

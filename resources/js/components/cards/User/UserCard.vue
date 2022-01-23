@@ -12,7 +12,10 @@
                 <span>{{user.group_name}}</span>
             </p>
             <p class="card-text mb-2" v-if="user.name">{{user.name}}</p>
-            <editButton title="Изменить пароль" class="bottom-button" @clickButton="clickButton"/>
+            <div class="bottom-button">
+                <editButton title="Изменить пароль" @clickButton="clickButton"/>
+                <DeleteButton target="#deleteConfirm" name="delete" @clickButton="clickButton"/>
+            </div>
         </div>
     </div>
 </template>
@@ -42,7 +45,11 @@
                 event.stopPropagation();
                 const element = event.target.closest('.user-card');
                 this.$store.dispatch(this.data_switch_action, element.id);
-                this.$emit('clickButton', element);
+                if ($(event.target).attr('name') != 'delete') {
+                    this.$emit('clickButton', element);
+                } else {
+                    this.$emit('deleteEvent', element);
+                }
             }
         }
     }

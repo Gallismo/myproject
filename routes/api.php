@@ -28,6 +28,8 @@ Route::get('/lessonsOrder', [\App\Http\Controllers\MainReadController::class, 'g
 Route::get('/groupsPart', [\App\Http\Controllers\MainReadController::class, 'getAllGroupParts']);
 Route::get('/Prepod', [\App\Http\Controllers\MainReadController::class, 'getAllPrepods']);
 Route::get('/Captain', [\App\Http\Controllers\MainReadController::class, 'getCaptains']);
+Route::get('/Schedule', [\App\Http\Controllers\MainReadController::class, 'getSchedules']);
+
 
 
 //Route::middleware(['bearer', 'isAdmin'])->group(function () {

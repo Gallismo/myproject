@@ -6,7 +6,9 @@ export default {
             axios.get('/api/User', {
                 params: {
                     login: query.login,
-                    role: query.role
+                    role: query.role,
+                    group: query.group,
+                    name: query.name
                 }
             })
                 .then(response => {

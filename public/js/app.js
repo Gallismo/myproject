@@ -4353,6 +4353,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4390,7 +4400,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     openModalPassword: function openModalPassword() {
       $('#passwordModal').modal('show');
-    }
+    },
+    openModalDelete: function openModalDelete() {
+      $('#deleteConfirm').modal('show');
+    },
+    deleteD: function deleteD() {
+      var data = {
+        login: this.getCurrentUser.login
+      };
+      this.deleteUser(data);
+    } // clickCardButton(event) {
+    //     console.log(event.target);
+    //     console.log($(event.target).attr('name'));
+    //     if ($(event.target).attr('name')==='delete') {
+    //         this.openModalDelete();
+    //     } else {
+    //         this.openModalPassword();
+    //     }
+    // }
+
   }),
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getUserData', 'getCurrentUser', 'getLoading', 'getRolesData']))
 });
@@ -4408,6 +4436,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
 //
 //
 //
@@ -4451,7 +4482,12 @@ __webpack_require__.r(__webpack_exports__);
       event.stopPropagation();
       var element = event.target.closest('.user-card');
       this.$store.dispatch(this.data_switch_action, element.id);
-      this.$emit('clickButton', element);
+
+      if ($(event.target).attr('name') != 'delete') {
+        this.$emit('clickButton', element);
+      } else {
+        this.$emit('deleteEvent', element);
+      }
     }
   }
 });
@@ -4680,11 +4716,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     roleChanged: function roleChanged() {
       if ($('form#userEdit select#selectRole').val() != 3) {
-        $('form#userEdit select#selectGroup').attr('disabled', 'disabled');
         $('form#userEdit select#selectGroup').val('0');
         $('form#userEdit div#selectGroupDiv').hide();
       } else {
-        $('form#userEdit select#selectGroup').removeAttr('disabled');
         $('form#userEdit div#selectGroupDiv').show();
       }
     }
@@ -6501,7 +6535,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/User', {
         params: {
           login: query.login,
-          role: query.role
+          role: query.role,
+          group: query.group,
+          name: query.name
         }
       }).then(function (response) {
         commit('getAllUsers', response.data);
@@ -50362,7 +50398,8 @@ var render = function () {
                   "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
               },
               [
-                _vm._v("\n\n                Пользователь "),
+                _c("span", { staticClass: "w-35" }, [_vm._v("Пользователь")]),
+                _vm._v(" "),
                 _c("inputText", {
                   staticClass: "w-50",
                   attrs: { placeholder: "Логин", inputName: "login" },
@@ -50379,7 +50416,8 @@ var render = function () {
                   "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
               },
               [
-                _vm._v("\n\n                Роль "),
+                _c("span", { staticClass: "w-35" }, [_vm._v("Роль")]),
+                _vm._v(" "),
                 _c("SelectComp", {
                   staticClass: "w-50",
                   attrs: {
@@ -50388,6 +50426,42 @@ var render = function () {
                     id: "role",
                   },
                   on: { clickEvent: _vm.queryRoles },
+                }),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
+              },
+              [
+                _c("span", { staticClass: "w-35" }, [_vm._v("ФИО")]),
+                _vm._v(" "),
+                _c("inputText", {
+                  staticClass: "w-50",
+                  attrs: { placeholder: "ФИО", inputName: "name" },
+                  on: { changeEvent: _vm.queryUsers },
+                }),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
+              },
+              [
+                _c("span", { staticClass: "w-35" }, [_vm._v("Группа")]),
+                _vm._v(" "),
+                _c("inputText", {
+                  staticClass: "w-50",
+                  attrs: { placeholder: "Название группы", inputName: "group" },
+                  on: { changeEvent: _vm.queryUsers },
                 }),
               ],
               1
@@ -50416,6 +50490,7 @@ var render = function () {
               attrs: { user: user, data_switch_action: "switchUser" },
               on: {
                 clickCard: _vm.openModalEdit,
+                deleteEvent: _vm.openModalDelete,
                 clickButton: _vm.openModalPassword,
               },
             })
@@ -50432,6 +50507,11 @@ var render = function () {
               expression: "getLoading",
             },
           ],
+        }),
+        _vm._v(" "),
+        _c("BootstrapModalConfirm", {
+          attrs: { id: "deleteConfirm" },
+          on: { confirmEvent: _vm.deleteD },
         }),
         _vm._v(" "),
         _c("BootstrapModal", {
@@ -50485,65 +50565,65 @@ var render = function () {
       on: { click: _vm.clickCard },
     },
     [
-      _c(
-        "div",
-        { staticClass: "card-body" },
-        [
+      _c("div", { staticClass: "card-body" }, [
+        _c("h5", { staticClass: "card-title d-flex justify-content-between" }, [
+          _vm._v("\n            " + _vm._s(_vm.user.login) + "\n            "),
           _c(
-            "h5",
-            { staticClass: "card-title d-flex justify-content-between" },
+            "svg",
+            {
+              staticClass: "bi bi-pencil",
+              attrs: {
+                xmlns: "http://www.w3.org/2000/svg",
+                width: "16",
+                height: "16",
+                fill: "currentColor",
+                viewBox: "0 0 16 16",
+              },
+            },
             [
-              _vm._v(
-                "\n            " + _vm._s(_vm.user.login) + "\n            "
-              ),
-              _c(
-                "svg",
-                {
-                  staticClass: "bi bi-pencil",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "16",
-                    height: "16",
-                    fill: "currentColor",
-                    viewBox: "0 0 16 16",
-                  },
+              _c("path", {
+                attrs: {
+                  d: "M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z",
                 },
-                [
-                  _c("path", {
-                    attrs: {
-                      d: "M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z",
-                    },
-                  }),
-                ]
-              ),
+              }),
             ]
           ),
-          _vm._v(" "),
-          _c(
-            "p",
-            { staticClass: "card-text mb-2 d-flex justify-content-between" },
-            [
-              _vm._v(
-                "\n            " + _vm._s(_vm.user.role.name) + "\n            "
-              ),
-              _c("span", [_vm._v(_vm._s(_vm.user.group_name))]),
-            ]
-          ),
-          _vm._v(" "),
-          _vm.user.name
-            ? _c("p", { staticClass: "card-text mb-2" }, [
-                _vm._v(_vm._s(_vm.user.name)),
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("editButton", {
-            staticClass: "bottom-button",
-            attrs: { title: "Изменить пароль" },
-            on: { clickButton: _vm.clickButton },
-          }),
-        ],
-        1
-      ),
+        ]),
+        _vm._v(" "),
+        _c(
+          "p",
+          { staticClass: "card-text mb-2 d-flex justify-content-between" },
+          [
+            _vm._v(
+              "\n            " + _vm._s(_vm.user.role.name) + "\n            "
+            ),
+            _c("span", [_vm._v(_vm._s(_vm.user.group_name))]),
+          ]
+        ),
+        _vm._v(" "),
+        _vm.user.name
+          ? _c("p", { staticClass: "card-text mb-2" }, [
+              _vm._v(_vm._s(_vm.user.name)),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "bottom-button" },
+          [
+            _c("editButton", {
+              attrs: { title: "Изменить пароль" },
+              on: { clickButton: _vm.clickButton },
+            }),
+            _vm._v(" "),
+            _c("DeleteButton", {
+              attrs: { target: "#deleteConfirm", name: "delete" },
+              on: { clickButton: _vm.clickButton },
+            }),
+          ],
+          1
+        ),
+      ]),
     ]
   )
 }

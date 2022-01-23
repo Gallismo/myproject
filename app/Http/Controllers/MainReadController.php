@@ -107,22 +107,24 @@ class MainReadController extends Controller
         $queries = $request->query();
 
         $roles = Role::all();
-        $userModel = User::orderBy('login');
+        $userModel = DB::table('users')->leftJoin('groups', 'users.group_id', '=', 'groups.id')
+            ->select('users.name', 'users.role_id', 'users.login', 'groups.name as group_name', 'users.group_id')
+            ->orderBy('users.login');
 
         if (isset($queries['login'])) {
-            $userModel = $userModel->where('login', 'like', "%".$queries['login']."%");
+            $userModel = $userModel->where('users.login', 'like', "%".$queries['login']."%");
         }
 
         if (isset($queries['role'])) {
-            $userModel = $userModel->where('role_id', $queries['role']);
+            $userModel = $userModel->where('users.role_id', $queries['role']);
         }
 
         if (isset($queries['name'])) {
-            $userModel = $userModel->where('role_id', $queries['role']);
+            $userModel = $userModel->where('users.name', 'like', "%".$queries['name']."%");
         }
 
         if (isset($queries['group'])) {
-            $userModel = $userModel->where('role_id', $queries['role']);
+            $userModel = $userModel->where('groups.name', 'like', "%".$queries['group']."%");
         }
 
         $users = $userModel->get();
@@ -131,14 +133,9 @@ class MainReadController extends Controller
             foreach ($roles as $role) {
                 if ($role->id === $user->role_id) {
                     $user->role = $role;
-                    unset($user->role_id);
                 }
             }
-
-            if (!empty($user->group_id)) {
-                $group = Group::where('id', $user->group_id)->first();
-                $user->group_name = $group->name;
-            }
+            unset($user->role_id);
         }
 
         return response()->json($users);
@@ -178,5 +175,37 @@ class MainReadController extends Controller
         $captains = $captainModel->get();
 
         return response()->json($captains);
+    }
+
+    public function getSchedules(Request $request) {
+        $queries = $request->query();
+
+        $scheduleModel = DB::table('schedules')
+            ->join('week_days', 'schedules.week_day_id', '=', 'week_days.id')
+            ->join('lessons_orders', 'schedules.lesson_order_id', '=', 'lessons_orders.id')
+            ->join('departments', 'schedules.department_id', '=', 'departments.id')
+            ->select('schedules.id', 'schedules.week_day_id', 'week_days.name as week_day_name',
+                'schedules.lesson_order_id', 'lessons_orders.name as lesson_order_name',
+                'schedules.department_id', 'departments.name as department_name',
+                'schedules.start_time', 'schedules.end_time', 'schedules.break', 'schedules.code')
+            ->orderBy('schedules.department_id')
+            ->orderBy('schedules.week_day_id')
+            ->orderBy('schedules.lesson_order_id');
+
+        if(isset($queries['department'])) {
+            $scheduleModel = $scheduleModel->where('schedules.department_id', $queries['department']);
+        }
+
+        if(isset($queries['week_day'])) {
+            $scheduleModel = $scheduleModel->where('schedules.week_day_id', $queries['week_day']);
+        }
+
+        if(isset($queries['lesson'])) {
+            $scheduleModel = $scheduleModel->where('schedules.lesson_order_id', $queries['lesson']);
+        }
+
+        $schedules = $scheduleModel->get();
+
+        return response()->json($schedules);
     }
 }
