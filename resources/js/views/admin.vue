@@ -8,7 +8,10 @@
 
 <script>
     export default {
-        name: "admin"
+        name: "admin",
+        mounted() {
+            this.$store.dispatch('callAllData');
+        }
     }
 </script>
 

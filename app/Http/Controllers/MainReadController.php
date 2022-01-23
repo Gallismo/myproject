@@ -117,20 +117,27 @@ class MainReadController extends Controller
             $userModel = $userModel->where('role_id', $queries['role']);
         }
 
+        if (isset($queries['name'])) {
+            $userModel = $userModel->where('role_id', $queries['role']);
+        }
+
+        if (isset($queries['group'])) {
+            $userModel = $userModel->where('role_id', $queries['role']);
+        }
+
         $users = $userModel->get();
 
         foreach ($users as $user) {
-
-            $teacher = Teacher::where('user_id', $user->id)->first();
-            if (!is_null($teacher)) {
-                $user->name = $teacher->name;
-            }
-
             foreach ($roles as $role) {
                 if ($role->id === $user->role_id) {
                     $user->role = $role;
                     unset($user->role_id);
                 }
+            }
+
+            if (!empty($user->group_id)) {
+                $group = Group::where('id', $user->group_id)->first();
+                $user->group_name = $group->name;
             }
         }
 

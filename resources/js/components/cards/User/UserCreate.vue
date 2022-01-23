@@ -2,7 +2,8 @@
     <div class="card bg-dark text-white">
         <form class="card-body" id="userCreate" @keypress.enter="create">
 
-            <inputText code="login" alias="Имя пользователя" placeholder="Логин" inputName="login"/>
+            <inputText code="login" alias="Логин" placeholder="Логин" inputName="login"/>
+            <inputText code="name" alias="ФИО" placeholder="ФИО" inputName="name"/>
             <div class="pass-div">
                 <inputText code="password" alias="Пароль" placeholder="Пароль" inputName="password">
                     <button type="button" class="btn btn-outline-secondary random-password" @click="generatePassword">
@@ -14,7 +15,11 @@
                 </inputText>
             </div>
             <label for="selectRole">Роль</label>
-            <SelectComp id="selectRole" :items="getRolesData" defaultTitle="Роль" defaultValue="0" :isDisabled="true"/>
+            <SelectComp id="selectRole" :items="getRolesData" defaultTitle="Роль" defaultValue="0"
+                        :isDisabled="true" @clickEvent="roleChanged"/>
+            <label for="selectGroup">Группа</label>
+            <SelectComp id="selectGroup" :items="getGroupDropdown" defaultTitle="Группа" defaultValue="0" :isDisabled="true"/>
+            <small class="form-text text-muted">Для роли "Староста"</small>
 
             <div class="row mt-4">
                 <CreateButton @clickButton="create"/>
@@ -34,9 +39,13 @@
             create() {
                 const data = {
                     login: $('form#userCreate input[name=login]').val(),
+                    name: $('form#userCreate input[name=name]').val(),
                     password: $('form#userCreate input[name=password]').val(),
-                    role_id: $('form#userCreate select').val()
+                    role_id: $('form#userCreate select#selectRole').val()
                 };
+
+                $('form#userCreate select#selectGroup').val() && $('form#userCreate select#selectGroup').val() != 0 ?
+                    data.group_code = $('form#userCreate select#selectGroup').val() : false;
 
                 this.createUser(data);
             },
@@ -50,10 +59,19 @@
                 }
 
                 $('form#userCreate input[name=password]').val(retVal)
+            },
+            roleChanged() {
+                if ($('form#userCreate select#selectRole').val() != 3) {
+                    $('form#userCreate select#selectGroup').attr('disabled', 'disabled');
+                    $('form#userCreate select#selectGroup').val('0');
+                    $('form#userCreate select#selectGroup').change();
+                } else {
+                    $('form#userCreate select#selectGroup').removeAttr('disabled');
+                }
             }
         },
         computed: {
-            ...mapGetters(['getRolesData'])
+            ...mapGetters(['getRolesData', 'getGroupDropdown'])
         }
     }
 </script>

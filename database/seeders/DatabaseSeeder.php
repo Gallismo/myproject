@@ -32,18 +32,18 @@ class DatabaseSeeder extends Seeder
 
         $users = [
             [
-                'id' => 1, 'login' => 'sperecur',
-                'password' => '$2y$10$JYQwDahA9uP8KImn/73ngeKFSmXhCsbrZafi7Bz9z5lGMZs1sht7a', 'role_id' => '1',
+                'id' => 1, 'login' => 'sperecur', 'name' => 'Администратор',
+                'password' => '$2y$10$JYQwDahA9uP8KImn/73ngeKFSmXhCsbrZafi7Bz9z5lGMZs1sht7a', 'role_id' => '1', 'group_id' => null,
                 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'id' => 2, 'login' => 'starosta',
-                'password' => '$2y$10$JYQwDahA9uP8KImn/73ngeKFSmXhCsbrZafi7Bz9z5lGMZs1sht7a', 'role_id' => '3',
+                'id' => 2, 'login' => 'starosta', 'name' => 'Федоров Георгий Владимирович',
+                'password' => '$2y$10$JYQwDahA9uP8KImn/73ngeKFSmXhCsbrZafi7Bz9z5lGMZs1sht7a', 'role_id' => '3', 'group_id' => 1,
                 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'id' => 3, 'login' => 'prepod',
-                'password' => '$2y$10$JYQwDahA9uP8KImn/73ngeKFSmXhCsbrZafi7Bz9z5lGMZs1sht7a', 'role_id' => '2',
+                'id' => 3, 'name' => 'Иванов Иван Иванович', 'login' => 'prepod',
+                'password' => '$2y$10$JYQwDahA9uP8KImn/73ngeKFSmXhCsbrZafi7Bz9z5lGMZs1sht7a', 'role_id' => '2', 'group_id' => null,
                 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')
             ],
         ];
@@ -291,18 +291,16 @@ class DatabaseSeeder extends Seeder
                 'start_time' => '13:15:00', 'end_time' => '14:35:00', 'break' => 0, 'code' => $this->code()],
         ];
 
-
-
+        DB::table('departments')->insert($departments);
+        DB::table('groups')->insert($groups);
         DB::table('roles')->insert($roles);
         DB::table('users')->insert($users);
-        DB::table('departments')->insert($departments);
         DB::table('audiences')->insert($audiences);
         DB::table('groups_parts')->insert($groupPart);
         DB::table('lessons_orders')->insert($lessonOrd);
         DB::table('subjects')->insert($subjects);
         DB::table('week_days')->insert($weeks);
         DB::table('schedules')->insert($schedules);
-        DB::table('groups')->insert($groups);
         DB::table('teachers')->insert($teachers);
         DB::table('group_captains')->insert($starosts);
     }

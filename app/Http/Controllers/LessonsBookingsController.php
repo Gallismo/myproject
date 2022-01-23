@@ -17,7 +17,7 @@ class LessonsBookingsController extends Controller
             'lesson_order_id' => 'required|exists:lessons_orders,id|integer',
             'audience_id' => 'required|exists:audiences,id|integer',
             'subject_id' => 'required|exists:subjects,id|integer',
-            'teacher_id' => 'required|exists:teachers,id|integer',
+            'teacher_id' => 'required|exists:users,id|integer',
             'is_remote' => 'boolean'
         ]);
 
@@ -59,7 +59,7 @@ class LessonsBookingsController extends Controller
         $warning = '';
         if (array_key_exists(0, $teacherArr)) {
             $warning = (object)[
-                'warning' => 'Предупреждение! Данный преподаватель уже закреплен за другой(-ими) парами!'
+                'Предупреждение' => 'Данный преподаватель уже закреплен за другой(-ими) парами!'
             ];
         }
 
@@ -119,7 +119,7 @@ class LessonsBookingsController extends Controller
             'lesson_order_id' => 'required_without_all:subject_id,teacher_id,is_remote|exists:lessons_orders,id|integer',
             'audience_id' => 'required_without_all:subject_id,teacher_id,is_remote|exists:audiences,id|integer',
             'subject_id' => 'required_without_all:lesson_date,lesson_order_id,audience_id,teacher_id,is_remote|exists:subjects,id|integer',
-            'teacher_id' => 'required_without_all:lesson_date,lesson_order_id,audience_id,subject_id,is_remote|exists:teachers,id|integer',
+            'teacher_id' => 'required_without_all:lesson_date,lesson_order_id,audience_id,subject_id,is_remote|exists:users,id|integer',
             'is_remote' => 'boolean|required_without_all:lesson_date,lesson_order_id,audience_id,subject_id,teacher_id'
         ]);
 
@@ -162,7 +162,7 @@ class LessonsBookingsController extends Controller
         $warning = '';
         if (array_key_exists(0, $teacherArr)) {
             $warning = (object)[
-                'warning' => 'Предупреждение! Данный преподаватель уже закреплен за другой(-ими) парами!'
+                'Предупреждение' => 'Данный преподаватель уже закреплен за другой(-ими) парами!'
             ];
         }
 

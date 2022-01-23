@@ -108,6 +108,9 @@ export default {
             state.userData.map((obj, index) => {
                 if (obj.login === data.login) {
                     data.role_name ? state.userData[index].role.name = data.role_name : false;
+                    data.role_id ? state.userData[index].role.id = data.role_id : false;
+                    data.name ? state.userData[index].name = data.name : false;
+                    state.userData[index].group_name = data.group_name;
                 }
             });
         },

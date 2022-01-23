@@ -5,7 +5,18 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     actions: {
-        switchTab: (context, tabName) => context.commit('switchTab', tabName.target.id)
+        switchTab: (context, tabName) => context.commit('switchTab', tabName.target.id),
+        callAllData({commit, dispatch}) {
+            dispatch('getAllAudiences');
+            dispatch('getAllDepartments');
+            dispatch('getGroups');
+            dispatch('getAllGroupParts');
+            dispatch('getAllLessonOrders');
+            dispatch('getAllPrepods');
+            dispatch('getAllUsers');
+            dispatch('getAllWeeks');
+            dispatch('getRoles');
+        }
     },
     mutations: {
         switchTab: (state, tabName) => state.currentTab = tabName,
@@ -37,16 +48,16 @@ const store = new Vuex.Store({
                         Booking:'Расписание занятий'
                     }
                 },
-                dropdown3: {
-                    name: 'Преподаватели и старосты',
-                    items: {
-                        Prepod:'Преподаватели',
-                        Captain: 'Старосты'
-                    }
-                }
+                // dropdown3: {
+                //     name: 'Преподаватели и старосты',
+                //     items: {
+                //         Prepod:'Преподаватели',
+                //         Captain: 'Старосты'
+                //     }
+                // }
             }
         },
-        currentTab: "Captain",
+        currentTab: "User",
         loading: false
     },
     getters: {

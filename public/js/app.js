@@ -2672,9 +2672,13 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    change: function change(event) {
+    change: function change() {
+      var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       this.$emit('clickEvent', event);
     }
+  },
+  mounted: function mounted() {
+    this.change();
   }
 });
 
@@ -4420,6 +4424,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "UserCard",
   props: {
@@ -4551,6 +4558,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PrepodCreate",
@@ -4558,9 +4570,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     create: function create() {
       var data = {
         login: $('form#userCreate input[name=login]').val(),
+        name: $('form#userCreate input[name=name]').val(),
         password: $('form#userCreate input[name=password]').val(),
-        role_id: $('form#userCreate select').val()
+        role_id: $('form#userCreate select#selectRole').val()
       };
+      $('form#userCreate select#selectGroup').val() && $('form#userCreate select#selectGroup').val() != 0 ? data.group_code = $('form#userCreate select#selectGroup').val() : false;
       this.createUser(data);
     },
     generatePassword: function generatePassword() {
@@ -4573,9 +4587,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       $('form#userCreate input[name=password]').val(retVal);
+    },
+    roleChanged: function roleChanged() {
+      if ($('form#userCreate select#selectRole').val() != 3) {
+        $('form#userCreate select#selectGroup').attr('disabled', 'disabled');
+        $('form#userCreate select#selectGroup').val('0');
+        $('form#userCreate select#selectGroup').change();
+      } else {
+        $('form#userCreate select#selectGroup').removeAttr('disabled');
+      }
     }
   }),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getRolesData']))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getRolesData', 'getGroupDropdown']))
 });
 
 /***/ }),
@@ -4619,6 +4642,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "UserEdit",
@@ -4629,9 +4659,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     save: function save() {
       var data = {
         login: $('#userEdit .card-title').text(),
-        role_id: $('#userEdit select').val(),
-        role_name: $('#userEdit select option:selected').text()
+        role_id: $('#userEdit select#selectRole').val(),
+        role_name: $('#userEdit select#selectRole option:selected').text()
       };
+
+      if ($('form#userEdit select#selectGroup').val() != 0 && !$('form#userEdit div#selectGroupDiv').attr('disabled')) {
+        data.group_code = $('form#userEdit select#selectGroup').val();
+        data.group_name = $('form#userEdit select#selectGroup option:selected').text();
+      } else {
+        data.group_name = '';
+      }
+
       this.saveUser(data);
     },
     deleteD: function deleteD() {
@@ -4639,9 +4677,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         login: $('#userEdit .card-title').text()
       };
       this.deleteUser(data);
+    },
+    roleChanged: function roleChanged() {
+      if ($('form#userEdit select#selectRole').val() != 3) {
+        $('form#userEdit select#selectGroup').attr('disabled', 'disabled');
+        $('form#userEdit select#selectGroup').val('0');
+        $('form#userEdit div#selectGroupDiv').hide();
+      } else {
+        $('form#userEdit select#selectGroup').removeAttr('disabled');
+        $('form#userEdit div#selectGroupDiv').show();
+      }
     }
   }),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentUser', 'getRolesData']))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentUser', 'getRolesData', 'getGroupDropdown']))
 });
 
 /***/ }),
@@ -5258,7 +5306,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "admin"
+  name: "admin",
+  mounted: function mounted() {
+    this.$store.dispatch('callAllData');
+  }
 });
 
 /***/ }),
@@ -6554,6 +6605,9 @@ __webpack_require__.r(__webpack_exports__);
       state.userData.map(function (obj, index) {
         if (obj.login === data.login) {
           data.role_name ? state.userData[index].role.name = data.role_name : false;
+          data.role_id ? state.userData[index].role.id = data.role_id : false;
+          data.name ? state.userData[index].name = data.name : false;
+          state.userData[index].group_name = data.group_name;
         }
       });
     },
@@ -6730,6 +6784,19 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   actions: {
     switchTab: function switchTab(context, tabName) {
       return context.commit('switchTab', tabName.target.id);
+    },
+    callAllData: function callAllData(_ref) {
+      var commit = _ref.commit,
+          dispatch = _ref.dispatch;
+      dispatch('getAllAudiences');
+      dispatch('getAllDepartments');
+      dispatch('getGroups');
+      dispatch('getAllGroupParts');
+      dispatch('getAllLessonOrders');
+      dispatch('getAllPrepods');
+      dispatch('getAllUsers');
+      dispatch('getAllWeeks');
+      dispatch('getRoles');
     }
   },
   mutations: {
@@ -6764,17 +6831,17 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
             Schedule: 'Расписание звонков',
             Booking: 'Расписание занятий'
           }
-        },
-        dropdown3: {
-          name: 'Преподаватели и старосты',
-          items: {
-            Prepod: 'Преподаватели',
-            Captain: 'Старосты'
-          }
-        }
+        } // dropdown3: {
+        //     name: 'Преподаватели и старосты',
+        //     items: {
+        //         Prepod:'Преподаватели',
+        //         Captain: 'Старосты'
+        //     }
+        // }
+
       }
     },
-    currentTab: "Captain",
+    currentTab: "User",
     loading: false
   },
   getters: {
@@ -48029,7 +48096,7 @@ var render = function () {
             "option",
             {
               attrs: { disabled: _vm.isDisabled },
-              domProps: { value: _vm.defaultValue, selected: _vm.defaultValue },
+              domProps: { value: _vm.defaultValue },
             },
             [_vm._v(_vm._s(_vm.defaultTitle))]
           )
@@ -50422,16 +50489,12 @@ var render = function () {
         "div",
         { staticClass: "card-body" },
         [
-          _c("h5", { staticClass: "card-title" }, [
-            _vm._v(_vm._s(_vm.user.login)),
-          ]),
-          _vm._v(" "),
           _c(
-            "p",
-            { staticClass: "card-text mb-2 d-flex justify-content-between" },
+            "h5",
+            { staticClass: "card-title d-flex justify-content-between" },
             [
               _vm._v(
-                "\n            " + _vm._s(_vm.user.role.name) + "\n            "
+                "\n            " + _vm._s(_vm.user.login) + "\n            "
               ),
               _c(
                 "svg",
@@ -50453,6 +50516,17 @@ var render = function () {
                   }),
                 ]
               ),
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "p",
+            { staticClass: "card-text mb-2 d-flex justify-content-between" },
+            [
+              _vm._v(
+                "\n            " + _vm._s(_vm.user.role.name) + "\n            "
+              ),
+              _c("span", [_vm._v(_vm._s(_vm.user.group_name))]),
             ]
           ),
           _vm._v(" "),
@@ -50598,9 +50672,18 @@ var render = function () {
         _c("inputText", {
           attrs: {
             code: "login",
-            alias: "Имя пользователя",
+            alias: "Логин",
             placeholder: "Логин",
             inputName: "login",
+          },
+        }),
+        _vm._v(" "),
+        _c("inputText", {
+          attrs: {
+            code: "name",
+            alias: "ФИО",
+            placeholder: "ФИО",
+            inputName: "name",
           },
         }),
         _vm._v(" "),
@@ -50671,7 +50754,24 @@ var render = function () {
             defaultValue: "0",
             isDisabled: true,
           },
+          on: { clickEvent: _vm.roleChanged },
         }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "selectGroup" } }, [_vm._v("Группа")]),
+        _vm._v(" "),
+        _c("SelectComp", {
+          attrs: {
+            id: "selectGroup",
+            items: _vm.getGroupDropdown,
+            defaultTitle: "Группа",
+            defaultValue: "0",
+            isDisabled: true,
+          },
+        }),
+        _vm._v(" "),
+        _c("small", { staticClass: "form-text text-muted" }, [
+          _vm._v('Для роли "Староста"'),
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -50737,17 +50837,63 @@ var render = function () {
             _vm._v(_vm._s(_vm.getCurrentUser.login)),
           ]),
           _vm._v(" "),
-          _c("label", { attrs: { for: "role" } }, [_vm._v("Роль")]),
+          _c("inputText", {
+            attrs: {
+              code: "name",
+              alias: "ФИО",
+              placeholder: "ФИО",
+              inputName: "name",
+              valueInput: _vm.getCurrentUser.name,
+            },
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "selectRole" } }, [_vm._v("Роль")]),
           _vm._v(" "),
           _vm.getCurrentUser.role
             ? _c("SelectComp", {
                 attrs: {
                   select: _vm.getCurrentUser.role.name,
                   items: _vm.getRolesData,
-                  id: "role",
+                  id: "selectRole",
                 },
+                on: { clickEvent: _vm.roleChanged },
               })
             : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.getCurrentUser.role.id == 3,
+                  expression: "getCurrentUser.role.id == 3",
+                },
+              ],
+              attrs: { id: "selectGroupDiv" },
+            },
+            [
+              _c("label", { attrs: { for: "selectGroup" } }, [
+                _vm._v("Группа"),
+              ]),
+              _vm._v(" "),
+              _c("SelectComp", {
+                attrs: {
+                  id: "selectGroup",
+                  items: _vm.getGroupDropdown,
+                  select: _vm.getCurrentUser.group_name,
+                  defaultTitle: "Группа",
+                  defaultValue: "0",
+                },
+              }),
+              _vm._v(" "),
+              _c("small", { staticClass: "form-text text-muted" }, [
+                _vm._v('Для роли "Староста"'),
+              ]),
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
             "div",
