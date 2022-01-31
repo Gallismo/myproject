@@ -13,31 +13,6 @@ use Illuminate\Support\Facades\Validator;
 class ScheduleController extends Controller
 {
 
-    public function massCreateSchedule (Request $request) {
-        $weekDays = weekDay::all();
-        $lessonOrders = lessonsOrder::all();
-        $departments = Department::all();
-        Schedule::truncate();
-        foreach ($weekDays as $weekDay) {
-            foreach ($departments as $department) {
-                foreach ($lessonOrders as $lessonOrder) {
-                    Schedule::create([
-                        'week_day_id' => $weekDay->id,
-                        'lesson_order_id' => $lessonOrder->id,
-                        'department_id' => $department->id,
-                        'start_time' => '11:00',
-                        'end_time' => '12:00',
-                        'break' => 5
-                    ]);
-                }
-            }
-        }
-
-        return response()->json(['title' => 'Успешно',
-            'text' => 'Расписания были успешно добавлены',
-            'errors' => new \stdClass()], 200);
-    }
-
     public function createSchedule (Request $request) {
         $val = Validator::make($request->all(), [
             'week_day_id' => 'required|integer',

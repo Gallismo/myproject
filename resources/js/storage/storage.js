@@ -16,6 +16,7 @@ const store = new Vuex.Store({
             dispatch('getAllUsers');
             dispatch('getAllWeeks');
             dispatch('getRoles');
+            dispatch('getSchedule');
         }
     },
     mutations: {
@@ -57,7 +58,7 @@ const store = new Vuex.Store({
                 // }
             }
         },
-        currentTab: "User",
+        currentTab: "Schedule",
         loading: false
     },
     getters: {

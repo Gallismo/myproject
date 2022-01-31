@@ -213,3 +213,7 @@ input.form-control {
 .w-35 {
     width: 35% !important;
 }
+
+select.form-control:disabled, input.form-control:disabled {
+    opacity: 0.5;
+}

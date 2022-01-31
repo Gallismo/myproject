@@ -77,7 +77,6 @@ Route::get('/Schedule', [\App\Http\Controllers\MainReadController::class, 'getSc
     Route::patch('/Group', [\App\Http\Controllers\GroupController::class, 'editGroup']);
 
     Route::post('/Schedule', [\App\Http\Controllers\ScheduleController::class, 'createSchedule']);
-    Route::post('/Schedule/massCreate', [\App\Http\Controllers\ScheduleController::class, 'massCreateSchedule']);
     Route::patch('/Schedule', [\App\Http\Controllers\ScheduleController::class, 'editSchedule']);
     Route::delete('/Schedule', [\App\Http\Controllers\ScheduleController::class, 'deleteSchedule']);
 

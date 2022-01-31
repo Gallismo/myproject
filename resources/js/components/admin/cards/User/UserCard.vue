@@ -11,7 +11,7 @@
                 {{user.role.name}}
                 <span>{{user.group_name}}</span>
             </p>
-            <p class="card-text mb-2" v-if="user.name">{{user.name}}</p>
+            <p class="card-text mb-2">{{user.name}}</p>
             <div class="bottom-button">
                 <editButton title="Изменить пароль" @clickButton="clickButton"/>
                 <DeleteButton target="#deleteConfirm" name="delete" @clickButton="clickButton"/>
