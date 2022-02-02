@@ -3308,7 +3308,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3368,11 +3370,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Schedule",
@@ -3384,8 +3382,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.getSchedule();
   },
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['getSchedule'])),
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getScheduleData', 'getDepartmentsData', 'getWeeksData'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getSchedule'])), {}, {
+    querySchedule: function querySchedule(event) {
+      var type = event.target.id;
+      this.query[type] = event.target.value;
+      this.filter();
+    },
+    filter: function filter() {
+      this.getSchedule(this.query);
+    }
+  }),
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getScheduleData', 'getDepartmentsData', 'getWeeksData', 'getLoading', 'getDepartmentDropdown', 'getWeekDropdown', 'getLessonOrderDropdown'])), {}, {
     groupedSchedules: function groupedSchedules() {
       var _this = this;
 
@@ -3401,7 +3408,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               data[department.name][week.name].push(schedule);
             }
           });
+
+          if (data[department.name][week.name].length === 0) {
+            delete data[department.name][week.name];
+          }
         });
+
+        if (Object.keys(data[department.name]).length === 0) {
+          delete data[department.name];
+        }
       });
       return data;
     }
@@ -3421,6 +3436,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
 //
 //
 //
@@ -6603,9 +6621,9 @@ __webpack_require__.r(__webpack_exports__);
       commit('setLoading', true);
       axios.get('/api/Schedule', {
         params: {
-          week_day: query.week_day,
-          department: query.department,
-          lesson: query.lesson
+          week_day: query.week_filter,
+          department: query.dep_filter,
+          lesson: query.les_filter
         }
       }).then(function (response) {
         commit('setSchedules', response.data);
@@ -49168,7 +49186,7 @@ var render = function () {
       "div",
       { staticClass: "row justify-content-between align-items-center" },
       [
-        _c("h5", { staticClass: "col" }, [_vm._v("Пользователи")]),
+        _c("h5", { staticClass: "col" }, [_vm._v("Расписания звонков")]),
         _vm._v(" "),
         _c("CreateButton", {
           attrs: {
@@ -49194,7 +49212,7 @@ var render = function () {
         _c(
           "div",
           {
-            staticClass: "grid-1 grid-md-2 grid-gap-3 mb-3 col-12 mt-3 filters",
+            staticClass: "grid-1 grid-lg-3 grid-gap-3 mb-3 col-12 mt-3 filters",
           },
           [
             _c(
@@ -49204,34 +49222,16 @@ var render = function () {
                   "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
               },
               [
-                _c("span", { staticClass: "w-35" }, [_vm._v("Пользователь")]),
-                _vm._v(" "),
-                _c("inputText", {
-                  staticClass: "w-50",
-                  attrs: { placeholder: "Логин", inputName: "login" },
-                  on: { changeEvent: _vm.queryUsers },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
-              },
-              [
-                _c("span", { staticClass: "w-35" }, [_vm._v("Роль")]),
+                _c("span", { staticClass: "w-35" }, [_vm._v("Отделение")]),
                 _vm._v(" "),
                 _c("SelectComp", {
                   staticClass: "w-50",
                   attrs: {
                     defaultTitle: "Все",
-                    items: _vm.getRolesData,
-                    id: "role",
+                    items: _vm.getDepartmentDropdown,
+                    id: "dep_filter",
                   },
-                  on: { clickEvent: _vm.queryRoles },
+                  on: { clickEvent: _vm.querySchedule },
                 }),
               ],
               1
@@ -49244,12 +49244,16 @@ var render = function () {
                   "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
               },
               [
-                _c("span", { staticClass: "w-35" }, [_vm._v("ФИО")]),
+                _c("span", { staticClass: "w-35" }, [_vm._v("День недели")]),
                 _vm._v(" "),
-                _c("inputText", {
+                _c("SelectComp", {
                   staticClass: "w-50",
-                  attrs: { placeholder: "ФИО", inputName: "name" },
-                  on: { changeEvent: _vm.queryUsers },
+                  attrs: {
+                    defaultTitle: "Все",
+                    items: _vm.getWeekDropdown,
+                    id: "week_filter",
+                  },
+                  on: { clickEvent: _vm.querySchedule },
                 }),
               ],
               1
@@ -49262,12 +49266,16 @@ var render = function () {
                   "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
               },
               [
-                _c("span", { staticClass: "w-35" }, [_vm._v("Группа")]),
+                _c("span", { staticClass: "w-35" }, [_vm._v("Пара")]),
                 _vm._v(" "),
-                _c("inputText", {
+                _c("SelectComp", {
                   staticClass: "w-50",
-                  attrs: { placeholder: "Название группы", inputName: "group" },
-                  on: { changeEvent: _vm.queryUsers },
+                  attrs: {
+                    defaultTitle: "Все",
+                    items: _vm.getLessonOrderDropdown,
+                    id: "les_filter",
+                  },
+                  on: { clickEvent: _vm.querySchedule },
                 }),
               ],
               1
@@ -49293,7 +49301,7 @@ var render = function () {
               "div",
               { key: department, staticClass: "mt-3" },
               [
-                _c("h5", [_vm._v(_vm._s(department))]),
+                _c("h3", [_vm._v(_vm._s(department))]),
                 _vm._v(" "),
                 _c("hr"),
                 _vm._v(" "),
@@ -49307,7 +49315,7 @@ var render = function () {
                       "div",
                       {
                         staticClass:
-                          "grid-1 grid-sm-2 grid-lg-3 grid-xl-4 grid-gap-2",
+                          "grid-xs-1 grid-2 grid-md-3 grid-lg-4 grid-gap-2",
                       },
                       _vm._l(schedules, function (schedule) {
                         return _c("ScheduleCard", {
@@ -49365,54 +49373,90 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card bg-dark" }, [
-    _c(
-      "div",
-      { staticClass: "card-body" },
-      [
-        _c("h5", { staticClass: "card-title d-flex justify-content-between" }, [
-          _vm._v(
-            "\n            " +
-              _vm._s(_vm.schedule.lesson_order_name) +
-              "\n            "
-          ),
+  return _c(
+    "div",
+    {
+      staticClass: "card bg-dark schedule-card",
+      attrs: { "data-id": _vm.schedule.id },
+    },
+    [
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
           _c(
-            "svg",
-            {
-              staticClass: "bi bi-pencil",
-              attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                width: "16",
-                height: "16",
-                fill: "currentColor",
-                viewBox: "0 0 16 16",
-              },
-            },
+            "h5",
+            { staticClass: "card-title d-flex justify-content-between" },
             [
-              _c("path", {
-                attrs: {
-                  d: "M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z",
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.schedule.lesson_order_name) +
+                  "\n            "
+              ),
+              _c(
+                "svg",
+                {
+                  staticClass: "bi bi-pencil",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    width: "16",
+                    height: "16",
+                    fill: "currentColor",
+                    viewBox: "0 0 16 16",
+                  },
                 },
-              }),
+                [
+                  _c("path", {
+                    attrs: {
+                      d: "M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z",
+                    },
+                  }),
+                ]
+              ),
             ]
           ),
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [
-          _vm._v(
-            "\n            " +
-              _vm._s(_vm.schedule.start_time + " - " + _vm.schedule.end_time) +
-              "\n        "
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "\n            " +
+                _vm._s(
+                  _vm.schedule.start_time + " - " + _vm.schedule.end_time
+                ) +
+                "\n        "
+            ),
+          ]),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.schedule.break,
+                  expression: "schedule.break",
+                },
+              ],
+              staticClass: "card-text",
+            },
+            [
+              _vm._v(
+                "\n            " +
+                  _vm._s("Перерыв: " + _vm.schedule.break + " минут") +
+                  "\n        "
+              ),
+            ]
           ),
-        ]),
-        _vm._v(" "),
-        _c("DeleteButton", {
-          attrs: { target: "#deleteConfirm", name: "delete" },
-        }),
-      ],
-      1
-    ),
-  ])
+          _vm._v(" "),
+          _c("DeleteButton", {
+            staticClass: "bottom-button",
+            attrs: { target: "#deleteConfirm", name: "delete" },
+          }),
+        ],
+        1
+      ),
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

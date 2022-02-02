@@ -173,6 +173,11 @@ input.form-control {
     padding-bottom: calc((0.75rem * 2 + (0.9rem * 1.6)) * 2 + 0.5rem + 1px);
 }
 
+.schedule-card > .card-body {
+    position: relative;
+    padding-bottom: calc((0.75rem * 2 + (0.9rem * 1.6)) + 0.5rem + 1px);
+}
+
 .grid-item {
     transition: box-shadow 0.5s;
 }

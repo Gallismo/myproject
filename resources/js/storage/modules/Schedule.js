@@ -5,9 +5,9 @@ export default {
 
             axios.get('/api/Schedule', {
                 params: {
-                    week_day: query.week_day,
-                    department: query.department,
-                    lesson: query.lesson
+                    week_day: query.week_filter,
+                    department: query.dep_filter,
+                    lesson: query.les_filter
                 }
             })
                 .then(response => {

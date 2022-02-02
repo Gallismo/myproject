@@ -1,5 +1,5 @@
 <template>
-    <div class="card bg-dark">
+    <div class="card bg-dark schedule-card" :data-id="schedule.id">
         <div class="card-body">
             <h5 class="card-title d-flex justify-content-between">
                 {{schedule.lesson_order_name}}
@@ -10,7 +10,10 @@
             <p class="card-text">
                 {{schedule.start_time + ' - ' + schedule.end_time}}
             </p>
-            <DeleteButton target="#deleteConfirm" name="delete"/>
+            <p class="card-text" v-show="schedule.break">
+                {{'Перерыв: ' + schedule.break + ' минут'}}
+            </p>
+            <DeleteButton class="bottom-button" target="#deleteConfirm" name="delete"/>
         </div>
     </div>
 </template>

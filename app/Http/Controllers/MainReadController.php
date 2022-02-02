@@ -196,15 +196,18 @@ class MainReadController extends Controller
 
 
         if(isset($queries['department'])) {
-            $scheduleModel = $scheduleModel->where('schedules.department_id', $queries['department']);
+            $department = Department::where('code', $queries['department'])->first();
+            $scheduleModel = $scheduleModel->where('schedules.department_id', $department->id);
         }
 
         if(isset($queries['week_day'])) {
-            $scheduleModel = $scheduleModel->where('schedules.week_day_id', $queries['week_day']);
+            $week_day = weekDay::where('code', $queries['week_day'])->first();
+            $scheduleModel = $scheduleModel->where('schedules.week_day_id', $week_day->id);
         }
 
         if(isset($queries['lesson'])) {
-            $scheduleModel = $scheduleModel->where('schedules.lesson_order_id', $queries['lesson']);
+            $lesson_order = lessonsOrder::where('code', $queries['lesson'])->first();
+            $scheduleModel = $scheduleModel->where('schedules.lesson_order_id', $lesson_order->id);
         }
 
         $schedules = $scheduleModel->get();
