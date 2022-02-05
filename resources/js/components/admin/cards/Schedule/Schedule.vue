@@ -29,14 +29,14 @@
                 </div>
             </div>
 
-            <div class="w-100" v-show="!getLoading">
-                <div v-for="(weeks, department) in groupedSchedules" :key="department" class="mt-3">
+            <div class="w-100 grid-3" v-show="!getLoading">
+                <div v-for="(weeks, department) in groupedSchedules" :key="department" class="mt-3 p-1">
                     <h3>{{department}}</h3>
                     <hr>
                     <div v-for="(schedules, week) in weeks" class="p-2">
                         <h5>{{week}}</h5>
                         <hr>
-                        <div class="grid-xs-1 grid-2 grid-md-3 grid-lg-4 grid-gap-2">
+                        <div class="grid-1 grid-gap-2">
                             <ScheduleCard v-for="schedule in schedules" :schedule="schedule"
                                           :key="'sch'+schedule.id" class="grid-item"/>
                         </div>

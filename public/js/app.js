@@ -49294,12 +49294,12 @@ var render = function () {
                 expression: "!getLoading",
               },
             ],
-            staticClass: "w-100",
+            staticClass: "w-100 grid-3",
           },
           _vm._l(_vm.groupedSchedules, function (weeks, department) {
             return _c(
               "div",
-              { key: department, staticClass: "mt-3" },
+              { key: department, staticClass: "mt-3 p-1" },
               [
                 _c("h3", [_vm._v(_vm._s(department))]),
                 _vm._v(" "),
@@ -49313,10 +49313,7 @@ var render = function () {
                     _vm._v(" "),
                     _c(
                       "div",
-                      {
-                        staticClass:
-                          "grid-xs-1 grid-2 grid-md-3 grid-lg-4 grid-gap-2",
-                      },
+                      { staticClass: "grid-1 grid-gap-2" },
                       _vm._l(schedules, function (schedule) {
                         return _c("ScheduleCard", {
                           key: "sch" + schedule.id,
@@ -49426,27 +49423,13 @@ var render = function () {
             ),
           ]),
           _vm._v(" "),
-          _c(
-            "p",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.schedule.break,
-                  expression: "schedule.break",
-                },
-              ],
-              staticClass: "card-text",
-            },
-            [
-              _vm._v(
-                "\n            " +
-                  _vm._s("Перерыв: " + _vm.schedule.break + " минут") +
-                  "\n        "
-              ),
-            ]
-          ),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "\n            " +
+                _vm._s("Перерыв: " + _vm.schedule.break + " минут") +
+                "\n        "
+            ),
+          ]),
           _vm._v(" "),
           _c("DeleteButton", {
             staticClass: "bottom-button",

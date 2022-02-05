@@ -10,7 +10,7 @@
             <p class="card-text">
                 {{schedule.start_time + ' - ' + schedule.end_time}}
             </p>
-            <p class="card-text" v-show="schedule.break">
+            <p class="card-text">
                 {{'Перерыв: ' + schedule.break + ' минут'}}
             </p>
             <DeleteButton class="bottom-button" target="#deleteConfirm" name="delete"/>
