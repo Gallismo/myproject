@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AudienceFormRequest;
 use App\Models\Audience;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -9,79 +10,40 @@ use Illuminate\Support\Facades\Validator;
 
 class AudienceController extends Controller
 {
-    public function createAudience(Request $request) {
-        $val = Validator::make($request->all(), [
-           'name' => 'required|string|max:18|min:2|unique:audiences'
-        ]);
-
-        if ($val->fails()) {
-            return response()->json(['title' => 'Ошибка валидации',
-                'text' => 'Проверьте правильность заполнения полей',
-                'errors' => $val->errors()], 422);
-        }
+    public function createAudience(AudienceFormRequest $req) {
+        $request = $req->validated();
 
         $code = $this->codeGenerate(Audience::class);
         Audience::create([
-            'name' => $request->name,
+            'name' => $request['name'],
             'code' => $code
         ]);
 
         return response()->json(['title' => 'Успешно',
             'text' => 'Аудитория была успешно добавлена',
-            'errors' => $val->errors()], 200);
+            'errors' => new \stdClass()], 200);
     }
 
-    public function deleteAudience(Request $request) {
-        $val = Validator::make($request->all(), [
-            'code' => 'required|string'
-        ]);
+    public function deleteAudience(AudienceFormRequest $req) {
+        $request = $req->validated();
 
-        if ($val->fails()) {
-            return response()->json(['title' => 'Ошибка валидации',
-                'text' => 'Проверьте правильность заполнения полей',
-                'errors' => $val->errors()], 422);
-        }
-
-        $audience = Audience::where('code', '=', $request->code)->first();
-
-        if (is_null($audience)) {
-            return response()->json(['title' => 'Ошибка',
-                'text' => 'Такой аудитории не существует',
-                'errors' => $val->errors()], 422);
-        }
-
+        $audience = Audience::where('code', '=', $request['code'])->first();
         $audience->delete();
 
         return response()->json(['title' => 'Успешно',
             'text' => 'Аудитория была успешно удалена',
-            'errors' => $val->errors()], 200);
+            'errors' => new \stdClass()], 200);
     }
 
-    public function editAudience (Request $request) {
-        $val = Validator::make($request->all(), [
-            'name' => 'required|string|max:18|min:2|unique:audiences',
-            'code' => 'required|string'
-        ]);
+    public function editAudience (AudienceFormRequest $req) {
+        $request = $req->validated();
 
-        if ($val->fails()) {
-            return response()->json(['title' => 'Ошибка валидации',
-                'text' => 'Проверьте правильность заполнения полей',
-                'errors' => $val->errors()], 422);
-        }
-
-        $audience = Audience::where('code', '=', $request->code)->first();
-
-        if (is_null($audience)) {
-            return response()->json(['title' => 'Ошибка',
-                'text' => 'Аудитория не существует',
-                'errors' => $val->errors()], 422);
-        }
-
-        $audience->name = $request->name;
+        $audience = Audience::where('code', '=', $request['code'])->first();
+        $audience->name = $request['name'];
         $audience->save();
 
         return response()->json(['title' => 'Успешно',
             'text' => 'Аудитория была успешно отредактирована',
-            'errors' => $val->errors()], 200);
+            'errors' => new \stdClass()], 200);
     }
 }

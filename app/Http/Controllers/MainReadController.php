@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AudienceFormRequest;
 use App\Models\Audience;
 use App\Models\Department;
 use App\Models\Group;
@@ -61,7 +62,7 @@ class MainReadController extends Controller
         return response()->json($departments);
     }
 
-    public function getAllAudiences(Request $request) {
+    public function getAllAudiences(AudienceFormRequest $request) {
         $audiences = Audience::orderBy('name')->get();
         return response()->json($audiences);
     }
