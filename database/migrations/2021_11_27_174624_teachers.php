@@ -21,17 +21,6 @@ class Teachers extends Migration
             $table->string('code')->unique();
             $table->timestamps();
         });
-
-        Schema::create('group_captains', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->unsignedBigInteger('group_id')->nullable();
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('SET NULL')->onUpdate('CASCADE');
-            $table->string('code')->unique();
-            $table->timestamps();
-        });
     }
 
     /**
@@ -42,6 +31,5 @@ class Teachers extends Migration
     public function down()
     {
         Schema::dropIfExists('teachers');
-        Schema::dropIfExists('group_captains');
     }
 }
