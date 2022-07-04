@@ -85,11 +85,10 @@ export default {
         },
         updateSchedule: (state, data) => {
             state.scheduleData.map((obj, index) => {
-                if (obj.login === data.login) {
-                    data.role_name ? state.scheduleData[index].role.name = data.role_name : false;
-                    data.role_id ? state.scheduleData[index].role.id = data.role_id : false;
-                    data.name ? state.scheduleData[index].name = data.name : false;
-                    state.scheduleData[index].group_name = data.group_name;
+                if (obj.code === data.code) {
+                    data.start_time ? state.scheduleData[index].start_time = data.start_time : false;
+                    data.end_time ? state.scheduleData[index].end_time = data.end_time : false;
+                    data.break ? state.scheduleData[index].break = data.break : false;
                 }
             });
         }
