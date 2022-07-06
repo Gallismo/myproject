@@ -151,32 +151,32 @@ class MainReadController extends Controller
         return response()->json($rolesData);
     }
 
-    public function getCaptains(Request $request) {
-        $captainModel = DB::table('group_captains')
-            ->join('users', 'group_captains.user_id', '=', 'users.id')
-            ->join('groups', 'group_captains.group_id', '=', 'groups.id')
-            ->select('group_captains.name', 'group_captains.user_id',
-                'users.login as user_name', 'groups.code as group_code', 'groups.name as group_name', 'group_captains.code')
-            ->orderBy('group_id');
-
-        $queries = $request->query();
-
-        if (isset($queries['group_name'])) {
-            $captainModel = $captainModel->where('groups.name', 'like', "%".$queries['group_name']."%");
-        }
-
-        if (isset($queries['name'])) {
-            $captainModel = $captainModel->where('group_captains.name', 'like', "%".$queries['name']."%");
-        }
-
-        if (isset($queries['user'])) {
-            $captainModel = $captainModel->where('users.login', 'like', "%".$queries['user']."%");
-        }
-
-        $captains = $captainModel->get();
-
-        return response()->json($captains);
-    }
+//    public function getCaptains(Request $request) {
+//        $captainModel = DB::table('group_captains')
+//            ->join('users', 'group_captains.user_id', '=', 'users.id')
+//            ->join('groups', 'group_captains.group_id', '=', 'groups.id')
+//            ->select('group_captains.name', 'group_captains.user_id',
+//                'users.login as user_name', 'groups.code as group_code', 'groups.name as group_name', 'group_captains.code')
+//            ->orderBy('group_id');
+//
+//        $queries = $request->query();
+//
+//        if (isset($queries['group_name'])) {
+//            $captainModel = $captainModel->where('groups.name', 'like', "%".$queries['group_name']."%");
+//        }
+//
+//        if (isset($queries['name'])) {
+//            $captainModel = $captainModel->where('group_captains.name', 'like', "%".$queries['name']."%");
+//        }
+//
+//        if (isset($queries['user'])) {
+//            $captainModel = $captainModel->where('users.login', 'like', "%".$queries['user']."%");
+//        }
+//
+//        $captains = $captainModel->get();
+//
+//        return response()->json($captains);
+//    }
 
     public function getSchedules(Request $request) {
         $queries = $request->query();

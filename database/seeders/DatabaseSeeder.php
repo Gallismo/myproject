@@ -56,14 +56,14 @@ class DatabaseSeeder extends Seeder
             ]
         ];
 
-        $starosts = [
-            [
-                'name' => 'Федоров Георгий Владимирович',
-                'user_id' => '2',
-                'group_id' => '1',
-                'code' => $this->code()
-            ]
-        ];
+//        $starosts = [
+//            [
+//                'name' => 'Федоров Георгий Владимирович',
+//                'user_id' => '2',
+//                'group_id' => '1',
+//                'code' => $this->code()
+//            ]
+//        ];
 
         $departments = [
             ['id' => 1, 'name' => 'Технологическое', 'code' => $this->code()],
@@ -387,7 +387,7 @@ class DatabaseSeeder extends Seeder
         DB::table('week_days')->insert($weeks);
         DB::table('schedules')->insert($schedules);
         DB::table('teachers')->insert($teachers);
-        DB::table('group_captains')->insert($starosts);
+//        DB::table('group_captains')->insert($starosts);
     }
 
     private function code() {

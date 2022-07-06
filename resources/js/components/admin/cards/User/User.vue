@@ -41,6 +41,7 @@
             </div>
 
 
+
             <Loader v-show="getLoading"/>
 
             <BootstrapModalConfirm id="deleteConfirm" @confirmEvent="deleteD"/>
