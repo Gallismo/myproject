@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Actions\FindByCode;
+use App\Contracts\FindByCodeContract;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 

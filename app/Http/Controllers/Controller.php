@@ -10,6 +10,8 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
+    protected $val;
+
     protected function codeGenerate ($model) {
         $symbols = "QWERTYUIOPASDFGHJKLZXCVBNM123456789qwertyuiopasdfghjklzxcvbnm";
         $code = "";
@@ -24,10 +26,10 @@ class Controller extends BaseController
         $record = $model::where('code', $code)->first();
 
         if ($record || !$code) {
-            $this->codeGenerate($model);
-        } elseif (!$record && $code) {
-            return $code;
+            $code = $this->codeGenerate($model);
         }
+
+        return $code;
     }
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

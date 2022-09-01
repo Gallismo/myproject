@@ -2,75 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\ErrorResponseContract;
+use App\Contracts\FindByCodeContract;
+use App\Contracts\ResponeContract;
 use App\Http\Requests\GroupFormRequest;
 use App\Models\Department;
 use App\Models\Group;
-use App\Models\Teacher;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 
 class GroupController extends Controller
 {
-    public function createGroup (GroupFormRequest $req) {
+
+    public function createGroup (GroupFormRequest $req, FindByCodeContract $findByCode,
+                                 ResponeContract $sendResp, ErrorResponseContract $sendError): JsonResponse
+    {
         $request = $req->validated();
 
-        $val = Validator::make($request, [
-            'start_year' => 'integer',
-            'end_year' => 'integer'
-        ]);
-
-        if ($val->fails()) {
-            return response()->json(['title' => 'Ошибка валидации',
-                'text' => 'Проверьте правильность заполнения полей',
-                'errors' => $val->errors()], 422);
+        if (!$this->isValidYears($request)) {
+            return $sendError('Ошибка валидации', 'Проверьте правильность заполнения полей', $this->val, 422);
         }
 
-        $department = Department::where('code', $request['department_code'])->first();
+        $department = $findByCode($request['department_code'], new Department);
 
-        $code = $this->codeGenerate(Group::class);
-        Group::create([
+        $group = Group::create([
             'name' => $request['name'],
             'department_id' => $department['id'],
             'start_year' => $request['start_year'],
             'end_year' => $request['end_year'],
-            'code' => $code
+            'code' => $this->codeGenerate(new Group)
         ]);
 
-        return response()->json(['title' => 'Успешно',
-            'text' => 'Группа была успешно добавлена',
-            'errors' => new \stdClass()], 200);
+        return $sendResp('Успешно', 'Группа была успешно добавлена', 200);
     }
 
-    public function deleteGroup (GroupFormRequest $req) {
+    public function deleteGroup (GroupFormRequest $req, FindByCodeContract $findByCode,
+                                 ResponeContract $sendResp) :JsonResponse
+    {
         $request = $req->validated();
 
-        $group = Group::where('code', $request['code'])->first();
+        $group = $findByCode($request['code'], new Group);
 
         $group->delete();
 
-        return response()->json(['title' => 'Успешно',
-            'text' => 'Группа была успешно удалена',
-            'errors' => new \stdClass()], 200);
+        return $sendResp('Успешно', 'Группа была успешно удалена', 200);
     }
 
-    public function editGroup (GroupFormRequest $req) {
+    public function editGroup (GroupFormRequest $req, FindByCodeContract $findByCode,
+                               ErrorResponseContract $sendError, ResponeContract $sendResp): JsonResponse
+    {
         $request = $req->validated();
 
-        $val = Validator::make($request, [
-            'start_year' => 'integer',
-            'end_year' => 'integer'
-        ]);
-
-        if ($val->fails()) {
-            return response()->json(['title' => 'Ошибка валидации',
-                'text' => 'Проверьте правильность заполнения полей',
-                'errors' => $val->errors()], 422);
+        if (!$this->isValidYears($request)) {
+            return $sendError('Ошибка валидации', 'Проверьте правильность заполнения полей', $this->val, 422);
         }
 
-        $group = Group::where('code', $request['code'])->first();
+        $group = $findByCode($request['code'], new Group);
 
         if (isset($request['department_code'])) {
-            $department = Department::where('code', $request['department_code'])->first();
+            $department = $findByCode($request['department_code'], new Department);
             $group->department_id = $department->id;
         }
 
@@ -80,8 +70,20 @@ class GroupController extends Controller
 
         $group->save();
 
-        return response()->json(['title' => 'Успешно',
-            'text' => 'Группа была успешно отредактирована',
-            'errors' => $val->errors()], 200);
+        return $sendResp('Успешно', 'Группа была успешно отредактирована', 200);
+    }
+
+    private function isValidYears(array $request): bool
+    {
+        $this->val = Validator::make($request, [
+            'start_year' => 'integer',
+            'end_year' => 'integer'
+        ]);
+
+        if ($this->val->fails()) {
+            return false;
+        }
+
+        return true;
     }
 }
