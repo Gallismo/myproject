@@ -18,31 +18,28 @@ class DepartmentController extends Controller
         $request = $req->validated();
 
         Department::create([
-            'name' => $request['name'],
-            'code' => $this->codeGenerate(new Department)
+            'name' => $request['name']
         ]);
 
         return $sendResp('Успешно', 'Отделение было успешно добавлено', 200);
     }
 
-    public function editDepartment (DepartmentFormRequest $req, FindByCodeContract $findByCode,
-                                    ResponeContract $sendResp): JsonResponse
+    public function editDepartment (DepartmentFormRequest $req, ResponeContract $sendResp): JsonResponse
     {
         $request = $req->validated();
 
-        $department = $findByCode($request['code'], new Department);
+        $department = Department::find($request['id']);
         $department->name = $request['name'];
         $department->save();
 
         return $sendResp('Успешно', 'Отделение было успешно отредактировано', 200);
     }
 
-    public function deleteDepartment (DepartmentFormRequest $req, FindByCodeContract $findByCode,
-                                      ResponeContract $sendResp): JsonResponse
+    public function deleteDepartment (DepartmentFormRequest $req, ResponeContract $sendResp): JsonResponse
     {
         $request = $req->validated();
 
-        $department = $findByCode($request['code'], new Department);
+        $department = Department::find($request['id']);
         $department->delete();
 
         return $sendResp('Успешно', 'Отделение было успешно удалено', 200);

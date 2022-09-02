@@ -18,30 +18,27 @@ class AudienceController extends Controller
         $request = $req->validated();
 
         Audience::create([
-            'name' => $request['name'],
-            'code' => $this->codeGenerate(new Audience)
+            'name' => $request['name']
         ]);
 
         return $sendResp('Успешно', 'Аудитория была успешно добавлена', 200);
     }
 
-    public function deleteAudience(AudienceFormRequest $req, FindByCodeContract $findByCode,
-                                   ResponeContract $sendResp): JsonResponse
+    public function deleteAudience(AudienceFormRequest $req, ResponeContract $sendResp): JsonResponse
     {
         $request = $req->validated();
 
-        $audience = $findByCode($request['code'], new Audience);
+        $audience = Audience::find($request['id']);
         $audience->delete();
 
         return $sendResp('Успешно', 'Аудитория была успешно удалена', 200);
     }
 
-    public function editAudience (AudienceFormRequest $req, FindByCodeContract $findByCode,
-                                  ResponeContract $sendResp): JsonResponse
+    public function editAudience (AudienceFormRequest $req, ResponeContract $sendResp): JsonResponse
     {
         $request = $req->validated();
 
-        $audience = $findByCode($request['code'], new Audience);
+        $audience = Audience::find($request['id']);
         $audience->name = $request['name'];
         $audience->save();
 

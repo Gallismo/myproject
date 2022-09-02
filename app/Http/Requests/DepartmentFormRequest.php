@@ -37,14 +37,14 @@ class DepartmentFormRequest extends FormRequest
 
             case 'DELETE': {
                 return [
-                    'code' => ['required', 'string', new EntityExist(Department::class)],
+                    'id' => ['required', 'string', 'exists:departments,id'],
                 ];
             } break;
 
             case 'PATCH': {
                 return [
                     'name' => ['required', 'string', 'unique:departments'],
-                    'code' => ['required', 'string', new EntityExist(Department::class)],
+                    'id' => ['required', 'string', 'exists:departments,id'],
                 ];
             } break;
 

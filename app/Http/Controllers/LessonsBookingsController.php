@@ -63,15 +63,13 @@ class LessonsBookingsController extends Controller
             ];
         }
 
-        $code = $this->codeGenerate(lessonsBooking::class);
         lessonsBooking::create([
             'lesson_date' => $request->lesson_date,
             'lesson_order_id' => $request->lesson_order_id,
             'audience_id' => $request->audience_id,
             'subject_id' => $request->subject_id,
             'teacher_id' => $request->teacher_id,
-            'is_remote' => $request->is_remote,
-            'code' => $code
+            'is_remote' => $request->is_remote
         ]);
 
         return response()->json(['title' => 'Успешно',

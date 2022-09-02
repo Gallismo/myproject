@@ -37,14 +37,14 @@ class AudienceFormRequest extends FormRequest
 
             case 'DELETE': {
                 return [
-                    'code' => ['required', 'string', new EntityExist(Audience::class)],
+                    'id' => ['required', 'string', 'exists:audiences,id'],
                 ];
             } break;
 
             case 'PATCH': {
                 return [
                     'name' => ['required', 'string', 'max:18', 'min:2', 'unique:audiences'],
-                    'code' => ['required', 'string', new EntityExist(Audience::class)],
+                    'id' => ['required', 'string', 'exists:audiences,id'],
                 ];
             } break;
 

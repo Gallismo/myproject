@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Validator;
 
 class GroupController extends Controller
 {
+    private $val;
 
-    public function createGroup (GroupFormRequest $req, FindByCodeContract $findByCode,
-                                 ResponeContract $sendResp, ErrorResponseContract $sendError): JsonResponse
+    public function createGroup (GroupFormRequest $req, ResponeContract $sendResp,
+                                 ErrorResponseContract $sendError): JsonResponse
     {
         $request = $req->validated();
 
@@ -23,33 +24,28 @@ class GroupController extends Controller
             return $sendError('Ошибка валидации', 'Проверьте правильность заполнения полей', $this->val, 422);
         }
 
-        $department = $findByCode($request['department_code'], new Department);
-
-        $group = Group::create([
+        Group::create([
             'name' => $request['name'],
-            'department_id' => $department['id'],
+            'department_id' => $request['department_id'],
             'start_year' => $request['start_year'],
-            'end_year' => $request['end_year'],
-            'code' => $this->codeGenerate(new Group)
+            'end_year' => $request['end_year']
         ]);
 
         return $sendResp('Успешно', 'Группа была успешно добавлена', 200);
     }
 
-    public function deleteGroup (GroupFormRequest $req, FindByCodeContract $findByCode,
-                                 ResponeContract $sendResp) :JsonResponse
+    public function deleteGroup (GroupFormRequest $req, ResponeContract $sendResp) :JsonResponse
     {
         $request = $req->validated();
 
-        $group = $findByCode($request['code'], new Group);
-
+        $group = Group::find($request['id']);
         $group->delete();
 
         return $sendResp('Успешно', 'Группа была успешно удалена', 200);
     }
 
-    public function editGroup (GroupFormRequest $req, FindByCodeContract $findByCode,
-                               ErrorResponseContract $sendError, ResponeContract $sendResp): JsonResponse
+    public function editGroup (GroupFormRequest $req, ErrorResponseContract $sendError,
+                               ResponeContract $sendResp): JsonResponse
     {
         $request = $req->validated();
 
@@ -57,16 +53,12 @@ class GroupController extends Controller
             return $sendError('Ошибка валидации', 'Проверьте правильность заполнения полей', $this->val, 422);
         }
 
-        $group = $findByCode($request['code'], new Group);
+        $group = Group::find($request['id']);
 
-        if (isset($request['department_code'])) {
-            $department = $findByCode($request['department_code'], new Department);
-            $group->department_id = $department->id;
-        }
-
-        isset($request['name']) ? $group->name = $request['name'] : false;
-        isset($request['start_year']) ? $group->start_year = $request['start_year'] : false;
-        isset($request['end_year']) ? $group->end_year = $request['end_year'] : false;
+        $group->department_id = $request['department_id'] ?? $group->department_id;
+        $group->name = $request['name'] ?? $group->name;
+        $group->start_year = $request['start_year'] ?? $group->start_year;
+        $group->end_year = $request['end_year'] ?? $group->end_year;
 
         $group->save();
 
