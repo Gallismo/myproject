@@ -36,7 +36,7 @@ class GroupsBookingsController extends Controller
     }
 
     public function editGroupBooking (GroupsBookingsRequest $request, ErrorResponseContract $sendError,
-                                      FindByCodeContract $findByCode, ResponeContract $sendResp): JsonResponse
+                                      ResponeContract $sendResp): JsonResponse
     {
         $request = $request->validated();
 
@@ -58,8 +58,7 @@ class GroupsBookingsController extends Controller
         return $sendResp('Успешно', 'Группа была успешно изменена и добавлена', 200);
     }
 
-    public function deleteGroupBooking (GroupsBookingsRequest $request, FindByCodeContract $findByCode,
-                                        ResponeContract $sendResp): JsonResponse
+    public function deleteGroupBooking (GroupsBookingsRequest $request, ResponeContract $sendResp): JsonResponse
     {
         $request = $request->validated();
 
