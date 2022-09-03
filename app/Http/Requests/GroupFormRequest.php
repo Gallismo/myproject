@@ -42,13 +42,13 @@ class GroupFormRequest extends FormRequest
 
             case 'DELETE': {
                 return [
-                    'id' => ['required', 'string', 'exists:groups,id'],
+                    'id' => ['required', 'integer', 'exists:groups,id'],
                 ];
             } break;
 
             case 'PATCH': {
                 return [
-                    'id' => ['required', 'string', 'exists:groups,id'],
+                    'id' => ['required', 'integer', 'exists:groups,id'],
                     'name' => ['required_without_all:start_year,end_year,department_code',
                         'string', 'unique:groups,name', 'max:14'],
                     'department_id' => ['required_without_all:start_year,end_year,name',

@@ -15,13 +15,12 @@ class GroupController extends Controller
 {
     private $val;
 
-    public function createGroup (GroupFormRequest $req, ResponeContract $sendResp,
-                                 ErrorResponseContract $sendError): JsonResponse
+    public function createGroup (GroupFormRequest $req): JsonResponse
     {
         $request = $req->validated();
 
         if (!$this->isValidYears($request)) {
-            return $sendError('Ошибка валидации', 'Проверьте правильность заполнения полей', $this->val, 422);
+            return $this->sendError('Ошибка валидации', 'Проверьте правильность заполнения полей', $this->val, 422);
         }
 
         Group::create([
@@ -31,26 +30,25 @@ class GroupController extends Controller
             'end_year' => $request['end_year']
         ]);
 
-        return $sendResp('Успешно', 'Группа была успешно добавлена', 200);
+        return $this->sendResp('Успешно', 'Группа была успешно добавлена', 200);
     }
 
-    public function deleteGroup (GroupFormRequest $req, ResponeContract $sendResp) :JsonResponse
+    public function deleteGroup (GroupFormRequest $req) :JsonResponse
     {
         $request = $req->validated();
 
         $group = Group::find($request['id']);
         $group->delete();
 
-        return $sendResp('Успешно', 'Группа была успешно удалена', 200);
+        return $this->sendResp('Успешно', 'Группа была успешно удалена', 200);
     }
 
-    public function editGroup (GroupFormRequest $req, ErrorResponseContract $sendError,
-                               ResponeContract $sendResp): JsonResponse
+    public function editGroup (GroupFormRequest $req): JsonResponse
     {
         $request = $req->validated();
 
         if (!$this->isValidYears($request)) {
-            return $sendError('Ошибка валидации', 'Проверьте правильность заполнения полей', $this->val, 422);
+            return $this->sendError('Ошибка валидации', 'Проверьте правильность заполнения полей', $this->val, 422);
         }
 
         $group = Group::find($request['id']);
@@ -62,7 +60,7 @@ class GroupController extends Controller
 
         $group->save();
 
-        return $sendResp('Успешно', 'Группа была успешно отредактирована', 200);
+        return $this->sendResp('Успешно', 'Группа была успешно отредактирована', 200);
     }
 
     private function isValidYears(array $request): bool

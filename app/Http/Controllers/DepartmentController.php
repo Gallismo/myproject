@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class DepartmentController extends Controller
 {
-    public function createDepartment (DepartmentFormRequest $req,  ResponeContract $sendResp): JsonResponse
+    public function createDepartment (DepartmentFormRequest $req): JsonResponse
     {
         $request = $req->validated();
 
@@ -21,10 +21,10 @@ class DepartmentController extends Controller
             'name' => $request['name']
         ]);
 
-        return $sendResp('Успешно', 'Отделение было успешно добавлено', 200);
+        return $this->sendResp('Успешно', 'Отделение было успешно добавлено', 200);
     }
 
-    public function editDepartment (DepartmentFormRequest $req, ResponeContract $sendResp): JsonResponse
+    public function editDepartment (DepartmentFormRequest $req): JsonResponse
     {
         $request = $req->validated();
 
@@ -32,16 +32,16 @@ class DepartmentController extends Controller
         $department->name = $request['name'];
         $department->save();
 
-        return $sendResp('Успешно', 'Отделение было успешно отредактировано', 200);
+        return $this->sendResp('Успешно', 'Отделение было успешно отредактировано', 200);
     }
 
-    public function deleteDepartment (DepartmentFormRequest $req, ResponeContract $sendResp): JsonResponse
+    public function deleteDepartment (DepartmentFormRequest $req): JsonResponse
     {
         $request = $req->validated();
 
         $department = Department::find($request['id']);
         $department->delete();
 
-        return $sendResp('Успешно', 'Отделение было успешно удалено', 200);
+        return $this->sendResp('Успешно', 'Отделение было успешно удалено', 200);
     }
 }

@@ -3,19 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\ErrorResponseContract;
-use App\Contracts\FindByCodeContract;
 use App\Contracts\ResponeContract;
 use App\Http\Requests\GroupsBookingsRequest;
-use App\Models\Group;
 use App\Models\groupsBooking;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class GroupsBookingsController extends Controller
 {
-    public function createGroupBooking (GroupsBookingsRequest $request, ErrorResponseContract $sendError,
-                                        ResponeContract $sendResp): JsonResponse
+    public function createGroupBooking (GroupsBookingsRequest $request): JsonResponse
     {
         $request = $request->validated();
 
@@ -23,7 +19,7 @@ class GroupsBookingsController extends Controller
             ->where('group_id', $request['group_id'])->first();
 
         if (!is_null($groupBookingCheck)) {
-            return $sendError('Ошибка', 'Группа уже была добавлена ранее на пару', Validator::make([], []), 422);
+            return $this->sendError('Ошибка', 'Такая группа уже была добавлена на пару', Validator::make([], []), 422);
         }
 
         groupsBooking::create([
@@ -32,11 +28,10 @@ class GroupsBookingsController extends Controller
             'group_part_id' => $request['group_part_id']
         ]);
 
-        return $sendResp('Успешно', 'Группа была успешно добавлена на пару', 200);
+        return $this->sendResp('Успешно', 'Группа была успешно добавлена на пару', 200);
     }
 
-    public function editGroupBooking (GroupsBookingsRequest $request, ErrorResponseContract $sendError,
-                                      ResponeContract $sendResp): JsonResponse
+    public function editGroupBooking (GroupsBookingsRequest $request): JsonResponse
     {
         $request = $request->validated();
 
@@ -44,7 +39,7 @@ class GroupsBookingsController extends Controller
             ->where('group_id', $request['group_id'])->first();
 
         if (!is_null($groupBookingCheck)) {
-            return $sendError('Ошибка', 'Такая группа уже была добавлена на пару', Validator::make([], []), 422);
+            return $this->sendError('Ошибка', 'Такая группа уже была добавлена на пару', Validator::make([], []), 422);
         }
 
         $groupBooking = groupsBooking::find($request['id']);
@@ -55,16 +50,16 @@ class GroupsBookingsController extends Controller
 
         $groupBooking->save();
 
-        return $sendResp('Успешно', 'Группа была успешно изменена и добавлена', 200);
+        return $this->sendResp('Успешно', 'Группа была успешно изменена и добавлена', 200);
     }
 
-    public function deleteGroupBooking (GroupsBookingsRequest $request, ResponeContract $sendResp): JsonResponse
+    public function deleteGroupBooking (GroupsBookingsRequest $request): JsonResponse
     {
         $request = $request->validated();
 
         $groupBooking = groupsBooking::find($request['id']);
         $groupBooking->delete();
 
-        return $sendResp('Успешно', 'Группа была успешно удалена с пары', 200);
+        return $this->sendResp('Успешно', 'Группа была успешно удалена с пары', 200);
     }
 }

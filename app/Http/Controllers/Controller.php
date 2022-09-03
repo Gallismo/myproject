@@ -3,13 +3,37 @@
 namespace App\Http\Controllers;
 
 
+use App\Contracts\ErrorResponseContract;
+use App\Contracts\ResponeContract;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Validation\Validator;
 
 class Controller extends BaseController
 {
+    protected $sendResp;
+    protected $sendError;
+
+    public function __construct(ResponeContract $responseContract, ErrorResponseContract $errorResponseContract)
+    {
+        $this->sendResp = $responseContract;
+        $this->sendError = $errorResponseContract;
+    }
+
+    protected function sendResp(string $title, string $text, int $code): JsonResponse
+    {
+        $sendResp = $this->sendResp;
+        return $sendResp($title, $text, $code);
+    }
+
+    protected function sendError(string $title, string $text, Validator $validator, int $code): JsonResponse
+    {
+        $sendResp = $this->sendError;
+        return $sendResp($title, $text, $validator, $code);
+    }
 
     protected function codeGenerate ($model) {
         $symbols = "QWERTYUIOPASDFGHJKLZXCVBNM123456789qwertyuiopasdfghjklzxcvbnm";

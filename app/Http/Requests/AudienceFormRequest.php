@@ -37,14 +37,14 @@ class AudienceFormRequest extends FormRequest
 
             case 'DELETE': {
                 return [
-                    'id' => ['required', 'string', 'exists:audiences,id'],
+                    'id' => ['required', 'integer', 'exists:audiences,id'],
                 ];
             } break;
 
             case 'PATCH': {
                 return [
                     'name' => ['required', 'string', 'max:18', 'min:2', 'unique:audiences'],
-                    'id' => ['required', 'string', 'exists:audiences,id'],
+                    'id' => ['required', 'integer', 'exists:audiences,id'],
                 ];
             } break;
 
