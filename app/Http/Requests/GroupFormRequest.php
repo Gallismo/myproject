@@ -34,7 +34,7 @@ class GroupFormRequest extends FormRequest
             case 'POST': {
                 return [
                     'name' => ['required','unique:groups','string','max:14'],
-                    'department_code' => ['required','string', new EntityExist(Department::class)],
+                    'department_id' => ['required','string', 'exists:departments,id'],
                     'start_year' => ['required', 'min:4', 'max:4','string'],
                     'end_year' => ['required', 'min:4', 'max:4','string']
                 ];
@@ -42,17 +42,17 @@ class GroupFormRequest extends FormRequest
 
             case 'DELETE': {
                 return [
-                    'code' => ['required', 'string', new EntityExist(Group::class)],
+                    'id' => ['required', 'integer', 'exists:groups,id'],
                 ];
             } break;
 
             case 'PATCH': {
                 return [
-                    'code' => ['required', 'string'],
+                    'id' => ['required', 'integer', 'exists:groups,id'],
                     'name' => ['required_without_all:start_year,end_year,department_code',
                         'string', 'unique:groups,name', 'max:14'],
-                    'department_code' => ['required_without_all:start_year,end_year,name',
-                        'string', new EntityExist(Department::class)],
+                    'department_id' => ['required_without_all:start_year,end_year,name',
+                        'string', 'exists:departments,id'],
                     'start_year' => ['required_without_all:department_code,end_year,name', 'string', 'min:4', 'max:4'],
                     'end_year' => ['required_without_all:department_code,start_year,name', 'string', 'min:4', 'max:4']
                 ];

@@ -38,14 +38,19 @@
                         <hr>
                         <div class="grid-1 grid-gap-2">
                             <ScheduleCard v-for="schedule in schedules" :schedule="schedule"
-                                          :key="'sch'+schedule.id" class="grid-item"/>
+                                          :key="'sch'+schedule.id" class="grid-item" data_switch_action="switchSchedule"
+                                          @clickCard="openModalEdit"
+                                          />
                         </div>
                     </div>
 
                 </div>
             </div>
 
-
+            <BootstrapModalConfirm id="deleteConfirm" @confirmEvent="deleteD"/>
+            <BootstrapModal id="editModal" body="Scheduleedit" title="Редактирование"/>
+            <BootstrapModal id="createModal" body="UserCreate" title="Добавление"/>
+            
             <Loader v-show="getLoading"/>
         </div>
     </div>
@@ -73,6 +78,9 @@
             },
             filter() {
                 this.getSchedule(this.query);
+            },
+            openModalEdit() {
+                $('#editModal').modal('show');
             },
         },
         computed: {

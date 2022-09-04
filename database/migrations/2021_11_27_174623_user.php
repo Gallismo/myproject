@@ -26,8 +26,6 @@ class User extends Migration
            $table->string('password');
            $table->unsignedBigInteger('role_id')->nullable();
            $table->foreign('role_id')->references('id')->on('roles')->onDelete('SET NULL')->onUpdate('CASCADE');
-           $table->unsignedBigInteger('group_id')->nullable();
-           $table->foreign('group_id')->references('id')->on('groups')->onDelete('SET NULL')->onUpdate('CASCADE');
            $table->string('jwt_token')->nullable();
            $table->timestamps();
         });

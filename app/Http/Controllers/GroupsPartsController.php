@@ -2,86 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\ResponeContract;
+use App\Http\Requests\GroupsPartsRequest;
 use App\Models\Group;
 use App\Models\groupsPart;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class GroupsPartsController extends Controller
 {
-    public function createGroupsPart (Request $request) {
-        $val = Validator::make($request->all(), [
-            'name' => 'required|string|unique:groups_parts'
-        ]);
+    public function createGroupsPart (GroupsPartsRequest $request): JsonResponse
+    {
+        $request = $request->validated();
 
-        if ($val->fails()) {
-            return response()->json(['title' => 'Ошибка валидации',
-                'text' => 'Проверьте правильность заполнения полей',
-                'errors' => $val->errors()], 422);
-        }
-        $code = $this->codeGenerate(groupsPart::class);
         groupsPart::create([
-            'name' => $request->name,
-            'code' => $code
+            'name' => $request['name']
         ]);
 
-        return response()->json(['title' => 'Успешно',
-            'text' => 'Раздел для групп был успешно добавлен',
-            'errors' => $val->errors()], 200);
+        return $this->sendResp('Успешно', 'Раздел для групп был успешно добавлен', 200);
     }
 
-    public function editGroupsPart (Request $request) {
-        $val = Validator::make($request->all(), [
-            'code' => 'required|string',
-            'name' => 'required|string|unique:groups_parts'
-        ]);
+    public function editGroupsPart (GroupsPartsRequest $request): JsonResponse
+    {
+        $request = $request->validated();
 
-        if ($val->fails()) {
-            return response()->json(['title' => 'Ошибка валидации',
-                'text' => 'Проверьте правильность заполнения полей',
-                'errors' => $val->errors()], 422);
-        }
-
-        $groupsPart = groupsPart::where('code', '=', $request->code)->first();
-
-        if(is_null($groupsPart)) {
-            return response()->json(['title' => 'Ошибка',
-                'text' => 'Такого раздела групп не существует',
-                'errors' => $val->errors()], 422);
-        }
-
-        $groupsPart->name = $request->name;
+        $groupsPart = groupsPart::find($request['id']);
+        $groupsPart->name = $request['name'];
 
         $groupsPart->save();
 
-        return response()->json(['title' => 'Успешно',
-            'text' => 'Раздел групп был успешно отредактирован',
-            'errors' => $val->errors()], 200);
+        return $this->sendResp('Успешно', 'Раздел групп был успешно отредактирован', 200);
     }
 
-    public function deleteGroupsPart (Request $request) {
-        $val = Validator::make($request->all(), [
-            'code' => 'required|string'
-        ]);
+    public function deleteGroupsPart (GroupsPartsRequest $request): JsonResponse
+    {
+        $request = $request->validated();
 
-        if ($val->fails()) {
-            return response()->json(['title' => 'Ошибка валидации',
-                'text' => 'Проверьте правильность заполнения полей',
-                'errors' => $val->errors()], 422);
-        }
-
-        $groupsPart = groupsPart::where('code', '=', $request->code)->first();
-
-        if(is_null($groupsPart)) {
-            return response()->json(['title' => 'Ошибка',
-                'text' => 'Такого раздела групп не существует',
-                'errors' => $val->errors()], 422);
-        }
-
+        $groupsPart = groupsPart::find($request['id']);
         $groupsPart->delete();
 
-        return response()->json(['title' => 'Успешно',
-            'text' => 'Раздел групп был успешно удален',
-            'errors' => $val->errors()], 200);
+        return $this->sendResp('Успешно', 'Раздел групп был успешно удален', 200);
     }
 }

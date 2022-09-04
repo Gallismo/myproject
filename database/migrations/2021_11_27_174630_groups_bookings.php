@@ -31,7 +31,6 @@ class GroupsBookings extends Migration
 //
 //            $table->unsignedBigInteger('group_id_fourth')->nullable();
 //            $table->foreign('group_id_fourth')->references('id')->on('groups');
-            $table->string('code')->unique();
             $table->timestamps();
         });
     }

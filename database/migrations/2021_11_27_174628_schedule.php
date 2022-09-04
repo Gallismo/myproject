@@ -25,7 +25,6 @@ class Schedule extends Migration
             $table->time('start_time')->default(1);
             $table->time('end_time')->default(1);
             $table->integer('break')->default(0)->nullable();
-            $table->string('code')->unique();
             $table->timestamps();
         });
 
