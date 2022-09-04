@@ -42,7 +42,7 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, MassPrunable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -80,10 +80,4 @@ class User extends Authenticatable
     ];
 
     protected $table = 'users';
-
-
-    public function prunable()
-    {
-        return static::where('updated_at', '<=', now()->subYear(5));
-    }
 }

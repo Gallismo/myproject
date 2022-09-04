@@ -37,8 +37,7 @@ class Group extends Model
         'name',
         'department_id',
         'start_year',
-        'end_year',
-        'code'
+        'end_year'
     ];
 
     protected $hidden = [

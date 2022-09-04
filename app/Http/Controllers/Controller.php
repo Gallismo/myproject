@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Contracts\ErrorResponseContract;
-use App\Contracts\ResponeContract;
+use App\Contracts\ResponseContract;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -17,7 +17,7 @@ class Controller extends BaseController
     protected $sendResp;
     protected $sendError;
 
-    public function __construct(ResponeContract $responseContract, ErrorResponseContract $errorResponseContract)
+    public function __construct(ResponseContract $responseContract, ErrorResponseContract $errorResponseContract)
     {
         $this->sendResp = $responseContract;
         $this->sendError = $errorResponseContract;
@@ -29,10 +29,10 @@ class Controller extends BaseController
         return $sendResp($title, $text, $code);
     }
 
-    protected function sendError(string $title, string $text, Validator $validator, int $code): JsonResponse
+    protected function sendError(string $title, string $text, $errors, int $code): JsonResponse
     {
         $sendResp = $this->sendError;
-        return $sendResp($title, $text, $validator, $code);
+        return $sendResp($title, $text, $errors, $code);
     }
 
     protected function codeGenerate ($model) {

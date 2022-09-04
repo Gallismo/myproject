@@ -28,8 +28,7 @@ class lessonsOrder extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'code'
+        'name'
     ];
 
     protected $hidden = [

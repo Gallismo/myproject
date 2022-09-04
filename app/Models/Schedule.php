@@ -43,8 +43,7 @@ class Schedule extends Model
         'department_id',
         'start_time',
         'end_time',
-        'break',
-        'code'
+        'break'
     ];
 
     protected $hidden = [

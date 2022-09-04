@@ -7,5 +7,5 @@ use Illuminate\Validation\Validator;
 
 interface ErrorResponseContract
 {
-    public function __invoke(string $title, string $text, Validator $val, int $resCode): JsonResponse;
+    public function __invoke(string $title, string $text, $errors, int $resCode): JsonResponse;
 }

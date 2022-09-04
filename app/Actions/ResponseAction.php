@@ -4,7 +4,7 @@ namespace App\Actions;
 
 use Illuminate\Http\JsonResponse;
 
-class ResponseAction implements \App\Contracts\ResponeContract
+class ResponseAction implements \App\Contracts\ResponseContract
 {
 
     public function __invoke(string $title, string $text, int $resCode): JsonResponse

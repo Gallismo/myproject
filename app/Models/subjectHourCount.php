@@ -37,8 +37,7 @@ class subjectHourCount extends Model
         'group_id',
         'subject_id',
         'hours_all',
-        'hours_left',
-        'code'
+        'hours_left'
     ];
 
     protected $hidden = [

@@ -48,7 +48,7 @@ class GroupController extends Controller
         $request = $req->validated();
 
         if (!$this->isValidYears($request)) {
-            return $this->sendError('Ошибка валидации', 'Проверьте правильность заполнения полей', $this->val, 422);
+            return $this->sendError('Ошибка валидации', 'Проверьте правильность заполнения полей', $this->val->errors(), 422);
         }
 
         $group = Group::find($request['id']);
