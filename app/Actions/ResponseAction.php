@@ -7,10 +7,10 @@ use Illuminate\Http\JsonResponse;
 class ResponseAction implements \App\Contracts\ResponseContract
 {
 
-    public function __invoke(string $title, string $text, int $resCode): JsonResponse
+    public function __invoke(string $title, string|array $body, int $resCode): JsonResponse
     {
         return response()->json(['title' => $title,
-            'text' => $text,
+            'body' => $body,
             'errors' => new \stdClass()], $resCode);
     }
 }
