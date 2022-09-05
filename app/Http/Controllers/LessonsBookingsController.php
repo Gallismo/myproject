@@ -57,12 +57,12 @@ class LessonsBookingsController extends Controller
 
         $lessonEdited = $lessonEdit($request, lessonsBooking::find($request['id']));
 
-        if ($lesson = $audienceCheck([], $lessonEdited)) {
+        if ($lesson = $audienceCheck(array(), $lessonEdited)) {
             return $this->sendError('Ошибка', 'Аудитория занята',
                 $this->generateAudMessage($lesson), 422);
         }
 
-        if ($lesson = $teacherCheck([], $lessonEdited)) {
+        if ($lesson = $teacherCheck(array(), $lessonEdited)) {
             return $this->sendError('Ошибка', 'Преподаватель уже закреплен за другой парой',
                 $this->generateTeachMessage($lesson), 422);
         }
