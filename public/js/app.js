@@ -5715,6 +5715,7 @@ __webpack_require__.r(__webpack_exports__);
       //     });
       dispatch('sendRequest', {
         entity: 'Audience',
+        method: 'get',
         toDoArr: ['getAllAudiences', 'currentAudienceSet']
       });
     },

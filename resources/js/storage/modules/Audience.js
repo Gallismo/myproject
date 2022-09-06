@@ -11,6 +11,7 @@ export default {
             //     });
             dispatch('sendRequest', {
                 entity: 'Audience',
+                method: 'get',
                 toDoArr: [
                     'getAllAudiences',
                     'currentAudienceSet'
