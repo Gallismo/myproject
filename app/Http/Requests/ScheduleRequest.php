@@ -44,40 +44,34 @@ class ScheduleRequest extends FormRequest
 
             case 'DELETE': {
                 return [
-                    'id' => 'required|exists:lessons_bookings,id'
+                    'id' => 'required|integer|exists:schedules,id'
                 ];
             } break;
 
             case 'PATCH': {
                 return [
-                    'id' => 'required|exists:lessons_bookings,id|integer',
+                    'id' => 'required|integer|exists:schedules,id',
 
-                    'lesson_date' => 'required_without_all:lesson_order_id,audience_id,subject_id,
-                    teacher_id,is_remote,conference_url,lesson_topic,lesson_homework|date-format:Y-m-d',
+                    'week_day_id' => 'required_without_all:start_time,end_time,break,lesson_order_id,department_id|
+                    integer|exists:week_days,id',
+                    'lesson_order_id' => 'required_without_all:start_time,end_time,break,week_day_id,department_id|
+                    integer|exists:lessons_orders,id',
+                    'department_id' => 'required_without_all:start_time,end_time,break,week_day_id,lesson_order_id|
+                    integer|exists:departments,id',
 
-                    'lesson_order_id' => 'required_without_all:lesson_date,audience_id,subject_id,
-                    teacher_id,is_remote,conference_url,lesson_topic,lesson_homework|exists:lessons_orders,id|integer',
+                    'start_time' => 'required_without_all:week_day_id,lesson_order_id,department_id,end_time,break|
+                    required_with:end_time|array:hours,minutes',
 
-                    'audience_id' => 'required_without_all:lesson_date,lesson_order_id,subject_id,
-                    teacher_id,is_remote,conference_url,lesson_topic,lesson_homework|exists:audiences,id|integer',
+                    'start_time.hours' => "required_with_all:end_time,start_time|min:2|max:2|string",
+                    'start_time.minutes' => "required_with_all:end_time,start_time|min:2|max:2|string",
 
-                    'subject_id' => 'required_without_all:lesson_date,audience_id,lesson_order_id,
-                    teacher_id,is_remote,conference_url,lesson_topic,lesson_homework|exists:subjects,id|integer',
+                    'end_time' => 'required_without_all:week_day_id,lesson_order_id,department_id,start_time,break|
+                    required_with:start_time|array:hours,minutes',
 
-                    'teacher_id' => 'required_without_all:lesson_date,audience_id,subject_id,
-                    lesson_order_id,is_remote,conference_url,lesson_topic,lesson_homework|exists:users,id|integer',
+                    'end_time.hours' => "required_with_all:end_time,start_time|min:2|max:2|string",
+                    'end_time.minutes' => "required_with_all:end_time,start_time|min:2|max:2|string",
 
-                    'is_remote' => 'boolean|required_without_all:lesson_date,audience_id,subject_id,
-                    teacher_id,lesson_order_id,conference_url,lesson_topic,lesson_homework',
-
-                    'conference_url' => 'string|url|required_without_all:lesson_date,audience_id,subject_id,
-                    teacher_id,is_remote,lesson_order_id,lesson_topic,lesson_homework',
-
-                    'lesson_topic' => 'string|required_without_all:lesson_date,audience_id,subject_id,
-                    teacher_id,is_remote,conference_url,lesson_order_id,lesson_homework',
-
-                    'lesson_homework' => 'string|required_without_all:lesson_date,audience_id,subject_id,
-                    teacher_id,is_remote,conference_url,lesson_topic,lesson_order_id'
+                    'break' => 'integer|required_without_all:week_day_id,lesson_order_id,start_time,end_time,department_id'
                 ];
             } break;
 
