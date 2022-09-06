@@ -40,9 +40,9 @@ Route::get('/Schedule', [\App\Http\Controllers\MainReadController::class, 'getSc
     Route::get('/User', [\App\Http\Controllers\MainReadController::class, 'getUsers']);
     Route::get('/Roles', [\App\Http\Controllers\MainReadController::class, 'getRoles']);
 
-    Route::post('/Captain', [\App\Http\Controllers\groupCaptainController::class, 'create']);
-    Route::delete('/Captain', [\App\Http\Controllers\groupCaptainController::class, 'delete']);
-    Route::patch('/Captain', [\App\Http\Controllers\groupCaptainController::class, 'edit']);
+//    Route::post('/Captain', [\App\Http\Controllers\groupCaptainController::class, 'create']);
+//    Route::delete('/Captain', [\App\Http\Controllers\groupCaptainController::class, 'delete']);
+//    Route::patch('/Captain', [\App\Http\Controllers\groupCaptainController::class, 'edit']);
 
     Route::post('/Audience', [\App\Http\Controllers\AudienceController::class, 'createAudience']);
     Route::delete('/Audience', [\App\Http\Controllers\AudienceController::class, 'deleteAudience']);

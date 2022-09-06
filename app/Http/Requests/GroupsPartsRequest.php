@@ -2,13 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Audience;
-use App\Rules\EntityExist;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class AudienceFormRequest extends FormRequest
+class GroupsPartsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,20 +29,20 @@ class AudienceFormRequest extends FormRequest
 
             case 'POST': {
                 return [
-                    'name' => ['required', 'string', 'max:18', 'min:2', 'unique:audiences'],
+                    'name' => 'required|string|unique:groups_parts'
                 ];
             } break;
 
             case 'DELETE': {
                 return [
-                    'id' => ['required', 'integer', 'exists:audiences,id'],
+                    'id' => 'required|integer|exists:groups_parts,id'
                 ];
             } break;
 
             case 'PATCH': {
                 return [
-                    'name' => ['required', 'string', 'max:18', 'min:2', 'unique:audiences'],
-                    'id' => ['required', 'integer', 'exists:audiences,id'],
+                    'id' => 'required|integer|exists:groups_parts,id',
+                    'name' => 'required|string|unique:groups_parts'
                 ];
             } break;
 
@@ -52,7 +50,6 @@ class AudienceFormRequest extends FormRequest
                 return [];
             } break;
         }
-
     }
 
     protected function failedValidation(Validator $validator)

@@ -16,7 +16,6 @@ class LessonOrders extends Migration
         Schema::create('lessons_orders', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('code')->unique();
             $table->timestamps();
         });
     }

@@ -2,48 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\FindByCodeContract;
+use App\Contracts\ResponeContract;
 use App\Http\Requests\DepartmentFormRequest;
 use App\Models\Department;
 use App\Models\Teacher;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class DepartmentController extends Controller
 {
-    public function createDepartment (DepartmentFormRequest $req) {
+    public function createDepartment (DepartmentFormRequest $req): JsonResponse
+    {
         $request = $req->validated();
 
-        $code = $this->codeGenerate(Department::class);
         Department::create([
-            'name' => $request['name'],
-            'code' => $code
+            'name' => $request['name']
         ]);
 
-        return response()->json(['title' => 'Успешно',
-            'text' => 'Отделение было успешно добавлено',
-            'errors' => new \stdClass()], 200);
+        return $this->sendResp('Успешно', 'Отделение было успешно добавлено', 200);
     }
 
-    public function editDepartment (DepartmentFormRequest $req) {
+    public function editDepartment (DepartmentFormRequest $req): JsonResponse
+    {
         $request = $req->validated();
 
-        $department = Department::where('code', '=', $request['code'])->first();
+        $department = Department::find($request['id']);
         $department->name = $request['name'];
         $department->save();
 
-        return response()->json(['title' => 'Успешно',
-            'text' => 'Отделение было успешно отредактировано',
-            'errors' => new \stdClass()], 200);
+        return $this->sendResp('Успешно', 'Отделение было успешно отредактировано', 200);
     }
 
-    public function deleteDepartment (DepartmentFormRequest $req) {
+    public function deleteDepartment (DepartmentFormRequest $req): JsonResponse
+    {
         $request = $req->validated();
 
-        $department = Department::where('code', '=', $request['code'])->first();
+        $department = Department::find($request['id']);
         $department->delete();
 
-        return response()->json(['title' => 'Успешно',
-            'text' => 'Отделение было успешно удалено',
-            'errors' => new \stdClass()], 200);
+        return $this->sendResp('Успешно', 'Отделение было успешно удалено', 200);
     }
 }

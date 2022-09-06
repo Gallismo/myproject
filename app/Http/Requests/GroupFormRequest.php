@@ -2,13 +2,15 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Audience;
+use App\Models\Department;
+use App\Models\Group;
 use App\Rules\EntityExist;
+use App\Rules\StringAndInteger;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class AudienceFormRequest extends FormRequest
+class GroupFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,20 +33,28 @@ class AudienceFormRequest extends FormRequest
 
             case 'POST': {
                 return [
-                    'name' => ['required', 'string', 'max:18', 'min:2', 'unique:audiences'],
+                    'name' => ['required','unique:groups','string','max:14'],
+                    'department_id' => ['required','string', 'exists:departments,id'],
+                    'start_year' => ['required', 'min:4', 'max:4','string'],
+                    'end_year' => ['required', 'min:4', 'max:4','string']
                 ];
             } break;
 
             case 'DELETE': {
                 return [
-                    'id' => ['required', 'integer', 'exists:audiences,id'],
+                    'id' => ['required', 'integer', 'exists:groups,id'],
                 ];
             } break;
 
             case 'PATCH': {
                 return [
-                    'name' => ['required', 'string', 'max:18', 'min:2', 'unique:audiences'],
-                    'id' => ['required', 'integer', 'exists:audiences,id'],
+                    'id' => ['required', 'integer', 'exists:groups,id'],
+                    'name' => ['required_without_all:start_year,end_year,department_code',
+                        'string', 'unique:groups,name', 'max:14'],
+                    'department_id' => ['required_without_all:start_year,end_year,name',
+                        'string', 'exists:departments,id'],
+                    'start_year' => ['required_without_all:department_code,end_year,name', 'string', 'min:4', 'max:4'],
+                    'end_year' => ['required_without_all:department_code,start_year,name', 'string', 'min:4', 'max:4']
                 ];
             } break;
 

@@ -31,20 +31,20 @@ class DepartmentFormRequest extends FormRequest
 
             case 'POST': {
                 return [
-                    'name' => ['required', 'string', 'unique:departments'],
+                    'name' => ['required', 'integer', 'unique:departments'],
                 ];
             } break;
 
             case 'DELETE': {
                 return [
-                    'code' => ['required', 'string', new EntityExist(Department::class)],
+                    'id' => ['required', 'integer', 'exists:departments,id'],
                 ];
             } break;
 
             case 'PATCH': {
                 return [
                     'name' => ['required', 'string', 'unique:departments'],
-                    'code' => ['required', 'string', new EntityExist(Department::class)],
+                    'id' => ['required', 'integer', 'exists:departments,id'],
                 ];
             } break;
 
