@@ -12,53 +12,79 @@ export default {
             dispatch('sendRequest', {
                 entity: 'Audience',
                 method: 'get',
-                toDoArr: [
+                data: {},
+                toDoComm: [
                     'getAllAudiences',
                     'currentAudienceSet'
                 ]
             });
         },
         saveAudience({commit, dispatch}, data) {
-            axios({
+            // axios({
+            //     method: 'patch',
+            //     url: '/api/Audience',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('updateAudience', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Audience',
                 method: 'patch',
-                url: '/api/Audience',
-                data: data
-            })
-                .then(response => {
-                    commit('updateAudience', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm: [
+                    'updateAudience',
+                ]
+            });
         },
         deleteAudience: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'delete',
+            //     url: '/api/Audience',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('deleteAudience', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Audience',
                 method: 'delete',
-                url: '/api/Audience',
-                data: data
-            })
-                .then(response => {
-                    commit('deleteAudience', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm: [
+                    'deleteAudience',
+                ]
+            });
         },
         createAudience: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'post',
+            //     url: '/api/Audience',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         dispatch('getAllAudiences');
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Audience',
                 method: 'post',
-                url: '/api/Audience',
-                data: data
-            })
-                .then(response => {
-                    dispatch('getAllAudiences');
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoDisp:[
+                    'getAllAudiences'
+                ]
+            });
+
         },
         switchAudience({commit, dispatch}, code) {
             commit('switchAudience', code);
@@ -67,7 +93,7 @@ export default {
     mutations: {
         deleteAudience(state, data) {
             state.audienceData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.id === data.code) {
                     state.audienceData.splice(index, 1)
                 }
             });
@@ -80,11 +106,11 @@ export default {
             state.currentAudience = response[0]
         },
         switchAudience(state, code) {
-            state.currentAudience = state.audienceData.find(department => department.code === code);
+            state.currentAudience = state.audienceData.find(audience => audience.id === code);
         },
         updateAudience: (state, data) => {
             state.audienceData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.id === data.code) {
                     data.name ? state.audienceData[index].name = data.name : false;
                 }
             });

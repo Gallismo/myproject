@@ -27,9 +27,16 @@ const store = new Vuex.Store({
                 method: request.method ?? 'get',
                 data: request.data ?? {}
             }).then(response => {
-                request.toDoArr.map(item => {
-                    commit(item, response.data);
-                })
+                if (request.toDoComm.length !== 0 && Array.isArray(request.toDoComm)) {
+                    request.toDoComm.map(item => {
+                        commit(item, response.data);
+                    })
+                }
+                if (request.toDoDisp.length !== 0 && Array.isArray(request.toDoDisp)) {
+                    request.toDoDisp.map(item => {
+                        dispatch(item, response.data);
+                    })
+                }
                 dispatch('showNotification', response.data);
             }).catch(error => {
                 dispatch('showNotification', error.response.data);

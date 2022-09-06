@@ -21,59 +21,89 @@ export default {
                 });
         },
         saveUser({commit, dispatch}, data) {
-            axios({
+            // axios({
+            //     method: 'patch',
+            //     url: '/api/User',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('updateUser', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'User',
                 method: 'patch',
-                url: '/api/User',
-                data: data
-            })
-                .then(response => {
-                    commit('updateUser', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'updateUser'
+                ]
+            });
         },
         changePassword({commit, dispatch}, data) {
-            axios({
+            // axios({
+            //     method: 'post',
+            //     url: '/api/User/changePassword',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'changePassword',
                 method: 'post',
-                url: '/api/User/changePassword',
-                data: data
-            })
-                .then(response => {
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+
+            });
         },
         deleteUser: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'delete',
+            //     url: '/api/User',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('deleteUser', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'User',
                 method: 'delete',
-                url: '/api/User',
-                data: data
-            })
-                .then(response => {
-                    commit('deleteUser', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'deleteUser'
+                ]
+            });
         },
         createUser: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'post',
+            //     url: '/api/User/register',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         dispatch('getAllUsers');
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'register',
                 method: 'post',
-                url: '/api/User/register',
-                data: data
-            })
-                .then(response => {
-                    dispatch('getAllUsers');
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoDisp:[
+                    'getAllUsers'
+                ]
+            });
         },
         switchUser({commit, dispatch}, login) {
             commit('switchUser', login);

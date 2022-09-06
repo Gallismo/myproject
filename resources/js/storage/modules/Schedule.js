@@ -20,46 +20,70 @@ export default {
                 });
         },
         saveSchedule({commit, dispatch}, data) {
-            axios({
+            // axios({
+            //     method: 'patch',
+            //     url: '/api/Schedule',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('updateSchedule', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Schedule',
                 method: 'patch',
-                url: '/api/Schedule',
-                data: data
-            })
-                .then(response => {
-                    commit('updateSchedule', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'updateSchedule'
+                ]
+            });
         },
         deleteSchedule: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'delete',
+            //     url: '/api/Schedule',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('deleteSchedule', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Schedule',
                 method: 'delete',
-                url: '/api/Schedule',
-                data: data
-            })
-                .then(response => {
-                    commit('deleteSchedule', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'deleteSchedule'
+                ]
+            });
         },
         createSchedule: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'post',
+            //     url: '/api/Schedule',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         dispatch('getSchedule');
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Schedule',
                 method: 'post',
-                url: '/api/Schedule',
-                data: data
-            })
-                .then(response => {
-                    dispatch('getSchedule');
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoDisp:[
+                    'getSchedule'
+                ]
+            });
         },
         switchSchedule({commit, dispatch}, code) {
             commit('switchSchedule', code);

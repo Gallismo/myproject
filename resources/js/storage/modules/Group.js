@@ -24,46 +24,69 @@ export default {
             commit('switchCurrentGroup', code)
         },
         editGroup: ({commit, dispatch}, data) => {
-            axios({
-                    method: 'patch',
-                    url: '/api/Group',
-                    data: data
-                })
-                .then(response => {
-                    commit('updateGroup', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
-
+            // axios({
+            //             //         method: 'patch',
+            //             //         url: '/api/Group',
+            //             //         data: data
+            //             //     })
+            //             //     .then(response => {
+            //             //         commit('updateGroup', data);
+            //             //         dispatch('showNotification', response.data);
+            //             //     })
+            //             //     .catch(error => {
+            //             //         dispatch('showNotification', error.response.data);
+            //             //     });
+            dispatch('sendRequest', {
+                entity: 'Group',
+                method: 'patch',
+                data: data,
+                toDoComm:[
+                    'updateGroup'
+                ]
+            });
         },
         deleteGroup: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'delete',
+            //     url: '/api/Group',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('deleteGroupData', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Group',
                 method: 'delete',
-                url: '/api/Group',
-                data: data
-            })
-                .then(response => {
-                    commit('deleteGroupData', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'deleteGroupData'
+                ]
+            });
         },
         createGroup: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'post',
+            //     url: '/api/Group',
+            //     data: data
+            // }).then(response => {
+            //         dispatch('showNotification', response.data);
+            //         dispatch('getGroups');
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Group',
                 method: 'post',
-                url: '/api/Group',
-                data: data
-            }).then(response => {
-                    dispatch('showNotification', response.data);
-                    dispatch('getGroups');
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoDisp:[
+                    'getGroups'
+                ]
+            });
         },
     },
     mutations: {

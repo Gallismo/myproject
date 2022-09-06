@@ -19,46 +19,70 @@ export default {
                 });
         },
         savePrepod({commit, dispatch}, data) {
-            axios({
+            // axios({
+            //     method: 'patch',
+            //     url: '/api/Prepod',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('updatePrepod', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Prepod',
                 method: 'patch',
-                url: '/api/Prepod',
-                data: data
-            })
-                .then(response => {
-                    commit('updatePrepod', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'updatePrepod'
+                ]
+            });
         },
         deletePrepod: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'delete',
+            //     url: '/api/Prepod',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('deletePrepod', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Prepod',
                 method: 'delete',
-                url: '/api/Prepod',
-                data: data
-            })
-                .then(response => {
-                    commit('deletePrepod', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'deletePrepod'
+                ]
+            });
         },
         createPrepod: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'post',
+            //     url: '/api/Prepod',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         dispatch('getAllPrepods');
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Prepod',
                 method: 'post',
-                url: '/api/Prepod',
-                data: data
-            })
-                .then(response => {
-                    dispatch('getAllPrepods');
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoDisp:[
+                    'getAllPrepods'
+                ]
+            });
         },
         switchPrepod({commit, dispatch}, code) {
             commit('switchPrepod', code);

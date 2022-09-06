@@ -1,56 +1,88 @@
 export default {
     actions: {
         getAllDepartments: function ({commit, dispatch}) {
-            axios('/api/Department')
-                .then(response => {
-                    commit('getAllDepartments', response.data);
-                    commit('currentDepartmentSet', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+            // axios('/api/Department')
+            //     .then(response => {
+            //         commit('getAllDepartments', response.data);
+            //         commit('currentDepartmentSet', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Department',
+                toDoComm:[
+                    'getAllDepartments',
+                    'currentDepartmentSet'
+                ]
+            });
         },
         saveDepartment({commit, dispatch}, data) {
-            axios({
+            // axios({
+            //     method: 'patch',
+            //     url: '/api/Department',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('updateDepartment', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Department',
                 method: 'patch',
-                url: '/api/Department',
-                data: data
-            })
-                .then(response => {
-                    commit('updateDepartment', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'updateDepartment'
+                ]
+            });
         },
         deleteDepartment: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'delete',
+            //     url: '/api/Department',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('deleteDepartment', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Department',
                 method: 'delete',
-                url: '/api/Department',
-                data: data
-            })
-                .then(response => {
-                    commit('deleteDepartment', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'deleteDepartment'
+                ]
+            });
+
         },
         createDepartment: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'post',
+            //     url: '/api/Department',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         dispatch('getAllDepartments');
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Department',
                 method: 'post',
-                url: '/api/Department',
-                data: data
-            })
-                .then(response => {
-                    dispatch('getAllDepartments');
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoDisp:[
+                    'getAllDepartments'
+                ]
+            });
         },
         switchDepartment({commit, dispatch}, code) {
             commit('switchDepartment', code);

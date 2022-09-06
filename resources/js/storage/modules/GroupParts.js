@@ -11,46 +11,70 @@ export default {
                 });
         },
         saveGroupPart({commit, dispatch}, data) {
-            axios({
+            // axios({
+            //     method: 'patch',
+            //     url: '/api/groupsPart',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('updateGroupPart', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'groupsPart',
                 method: 'patch',
-                url: '/api/groupsPart',
-                data: data
-            })
-                .then(response => {
-                    commit('updateGroupPart', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'updateGroupPart'
+                ]
+            });
         },
         deleteGroupPart: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'delete',
+            //     url: '/api/groupsPart',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('deleteGroupPart', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'groupsPart',
                 method: 'delete',
-                url: '/api/groupsPart',
-                data: data
-            })
-                .then(response => {
-                    commit('deleteGroupPart', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'deleteGroupPart'
+                ]
+            });
         },
         createGroupPart: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'post',
+            //     url: '/api/groupsPart',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         dispatch('getAllGroupParts');
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'groupsPart',
                 method: 'post',
-                url: '/api/groupsPart',
-                data: data
-            })
-                .then(response => {
-                    dispatch('getAllGroupParts');
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoDisp:[
+                    'getAllGroupParts'
+                ]
+            });
         },
         switchGroupPart({commit, dispatch}, code) {
             commit('switchGroupPart', code);

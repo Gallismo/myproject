@@ -11,46 +11,70 @@ export default {
                 });
         },
         saveWeek({commit, dispatch}, data) {
-            axios({
+            // axios({
+            // //     method: 'patch',
+            // //     url: '/api/Week',
+            // //     data: data
+            // // })
+            // //     .then(response => {
+            // //         commit('updateWeek', data);
+            // //         dispatch('showNotification', response.data);
+            // //     })
+            // //     .catch(error => {
+            // //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Week',
                 method: 'patch',
-                url: '/api/Week',
-                data: data
-            })
-                .then(response => {
-                    commit('updateWeek', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'updateWeek'
+                ]
+            });
         },
         deleteWeek: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'delete',
+            //     url: '/api/Week',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('deleteWeek', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Week',
                 method: 'delete',
-                url: '/api/Week',
-                data: data
-            })
-                .then(response => {
-                    commit('deleteWeek', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'deleteWeek'
+                ]
+            });
         },
         createWeek: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'post',
+            //     url: '/api/Week',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         dispatch('getAllWeeks');
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Week',
                 method: 'post',
-                url: '/api/Week',
-                data: data
-            })
-                .then(response => {
-                    dispatch('getAllWeeks');
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoDisp:[
+                    'getAllWeeks'
+                ]
+            });
         },
         switchWeek({commit, dispatch}, code) {
             commit('switchWeek', code);

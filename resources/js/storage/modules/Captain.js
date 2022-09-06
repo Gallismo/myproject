@@ -20,46 +20,70 @@ export default {
                 });
         },
         saveCaptain({commit, dispatch}, data) {
-            axios({
+            // axios({
+            //     method: 'patch',
+            //     url: '/api/Captain',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('updateCaptain', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Captain',
                 method: 'patch',
-                url: '/api/Captain',
-                data: data
-            })
-                .then(response => {
-                    commit('updateCaptain', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'updateGroup'
+                ]
+            });
         },
         deleteCaptain: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'delete',
+            //     url: '/api/Captain',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('deleteCaptain', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Captain',
                 method: 'delete',
-                url: '/api/Captain',
-                data: data
-            })
-                .then(response => {
-                    commit('deleteCaptain', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'deleteCaptain'
+                ]
+            });
         },
         createCaptain: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'post',
+            //     url: '/api/Captain',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         dispatch('getAllCaptains');
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Captain',
                 method: 'post',
-                url: '/api/Captain',
-                data: data
-            })
-                .then(response => {
-                    dispatch('getAllCaptains');
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoDisp:[
+                    'getAllCaptains'
+                ]
+            });
         },
         switchCaptain({commit, dispatch}, code) {
             commit('switchCaptain', code);

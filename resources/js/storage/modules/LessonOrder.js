@@ -11,46 +11,70 @@ export default {
                 });
         },
         saveLessonOrder({commit, dispatch}, data) {
-            axios({
+            // axios({
+            //     method: 'patch',
+            //     url: '/api/lessonsOrder',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('updateLessonOrder', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'lessonsOrder',
                 method: 'patch',
-                url: '/api/lessonsOrder',
-                data: data
-            })
-                .then(response => {
-                    commit('updateLessonOrder', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'updateLessonOrder'
+                ]
+            });
         },
         deleteLessonOrder: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'delete',
+            //     url: '/api/lessonsOrder',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         commit('deleteLessonOrder', data);
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'lessonsOrder',
                 method: 'delete',
-                url: '/api/lessonsOrder',
-                data: data
-            })
-                .then(response => {
-                    commit('deleteLessonOrder', data);
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoComm:[
+                    'deleteLessonOrder'
+                ]
+            });
         },
         createLessonOrder: ({commit, dispatch}, data) => {
-            axios({
+            // axios({
+            //     method: 'post',
+            //     url: '/api/lessonsOrder',
+            //     data: data
+            // })
+            //     .then(response => {
+            //         dispatch('getAllLessonOrders');
+            //         dispatch('showNotification', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'lessonsOrder',
                 method: 'post',
-                url: '/api/lessonsOrder',
-                data: data
-            })
-                .then(response => {
-                    dispatch('getAllLessonOrders');
-                    dispatch('showNotification', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                data: data,
+                toDoDisp:[
+                    'getAllLessonOrders'
+                ]
+            });
         },
         switchLessonOrder({commit, dispatch}, code) {
             commit('switchLessonOrder', code);

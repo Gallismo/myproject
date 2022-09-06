@@ -39,7 +39,7 @@
             },
             save() {
                 const data = {
-                    code: this.getCurrentAudience.code
+                    id: this.getCurrentAudience.id
                 }
 
                 $(`div.audiences input[name=editName]`).val() ? data.name = $('div.audiences input[name=editName]').val() : false;
