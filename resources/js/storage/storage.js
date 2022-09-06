@@ -17,6 +17,23 @@ const store = new Vuex.Store({
             dispatch('getAllWeeks');
             dispatch('getRoles');
             dispatch('getSchedule');
+        },
+        sendRequest({commit, dispatch}, request) {
+            const instance = axios.create({
+                baseURL: '/api/'
+            })
+            instance.request({
+                url: request.entity,
+                method: request.method ?? 'get',
+                data: request.data ?? {}
+            }).then(response => {
+                request.toDoArr.map(item => {
+                    commit(item, response.data);
+                })
+                dispatch('showNotification', response.data);
+            }).catch(error => {
+                dispatch('showNotification', error.response.data);
+            });
         }
     },
     mutations: {

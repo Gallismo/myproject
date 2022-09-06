@@ -5705,11 +5705,17 @@ __webpack_require__.r(__webpack_exports__);
     getAllAudiences: function getAllAudiences(_ref) {
       var commit = _ref.commit,
           dispatch = _ref.dispatch;
-      axios('/api/Audience').then(function (response) {
-        commit('getAllAudiences', response.data);
-        commit('currentAudienceSet', response.data);
-      })["catch"](function (error) {
-        dispatch('showNotification', error.response.data);
+      // axios('/api/Audience')
+      //     .then(response => {
+      //         commit('getAllAudiences', response.data);
+      //         commit('currentAudienceSet', response.data);
+      //     })
+      //     .catch(error => {
+      //         dispatch('showNotification', error.response.data);
+      //     });
+      dispatch('sendRequest', {
+        entity: 'Audience',
+        toDoArr: ['getAllAudiences', 'currentAudienceSet']
       });
     },
     saveAudience: function saveAudience(_ref2, data) {
@@ -5799,7 +5805,7 @@ __webpack_require__.r(__webpack_exports__);
     getAudienceDropdown: function getAudienceDropdown(state) {
       var DropdownProp = {};
       state.audienceData.map(function (audience) {
-        return DropdownProp[audience.code] = audience.name;
+        return DropdownProp[audience.id] = audience.name;
       });
       return DropdownProp;
     },
@@ -7156,6 +7162,27 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       dispatch('getAllWeeks');
       dispatch('getRoles');
       dispatch('getSchedule');
+    },
+    sendRequest: function sendRequest(_ref2, request) {
+      var _request$method, _request$data;
+
+      var commit = _ref2.commit,
+          dispatch = _ref2.dispatch;
+      var instance = axios.create({
+        baseURL: '/api/'
+      });
+      instance.request({
+        url: request.entity,
+        method: (_request$method = request.method) !== null && _request$method !== void 0 ? _request$method : 'get',
+        data: (_request$data = request.data) !== null && _request$data !== void 0 ? _request$data : {}
+      }).then(function (response) {
+        request.toDoArr.map(function (item) {
+          commit(item, response.data);
+        });
+        dispatch('showNotification', response.data);
+      })["catch"](function (error) {
+        dispatch('showNotification', error.response.data);
+      });
     }
   },
   mutations: {

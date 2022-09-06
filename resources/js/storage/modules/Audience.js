@@ -1,14 +1,21 @@
 export default {
     actions: {
         getAllAudiences: function ({commit, dispatch}) {
-            axios('/api/Audience')
-                .then(response => {
-                    commit('getAllAudiences', response.data);
-                    commit('currentAudienceSet', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+            // axios('/api/Audience')
+            //     .then(response => {
+            //         commit('getAllAudiences', response.data);
+            //         commit('currentAudienceSet', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Audience',
+                toDoArr: [
+                    'getAllAudiences',
+                    'currentAudienceSet'
+                ]
+            });
         },
         saveAudience({commit, dispatch}, data) {
             axios({
@@ -92,7 +99,7 @@ export default {
         },
         getAudienceDropdown: state => {
             let DropdownProp = {};
-            state.audienceData.map(audience => DropdownProp[audience.code] = audience.name);
+            state.audienceData.map(audience => DropdownProp[audience.id] = audience.name);
             return DropdownProp;
         },
         getCurrentAudience: state => {return state.currentAudience}
