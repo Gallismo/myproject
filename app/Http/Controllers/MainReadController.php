@@ -187,10 +187,10 @@ class MainReadController extends Controller
             ->join('departments', 'schedules.department_id', '=', 'departments.id')
             ->select('schedules.id', 'schedules.week_day_id', 'week_days.name as week_day_name',
                 'schedules.lesson_order_id', 'lessons_orders.name as lesson_order_name',
-                'schedules.department_id', 'departments.name as department_name', 'departments.code as department_code',
+                'schedules.department_id', 'departments.name as department_name',
                 DB::raw('DATE_FORMAT(schedules.start_time,"%H:%i") as start_time'),
                 DB::raw('DATE_FORMAT(schedules.end_time,"%H:%i") as end_time'),
-                'schedules.break', 'schedules.code')
+                'schedules.break')
             ->orderBy('schedules.department_id')
             ->orderBy('schedules.week_day_id')
             ->orderBy('schedules.start_time');

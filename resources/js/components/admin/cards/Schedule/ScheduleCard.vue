@@ -1,5 +1,5 @@
 <template>
-    <div class="card bg-dark schedule-card" :id="schedule.code" @click="clickCard" >
+    <div class="card bg-dark schedule-card" :data-id="schedule.id" @click="clickCard" >
         <div class="card-body">
             <h5 class="card-title d-flex justify-content-between">
                 {{schedule.lesson_order_name}}
@@ -25,7 +25,7 @@
             schedule: {
                 type: Object,
                 required: true
-                
+
             },
             data_switch_action:{
                 type: String,
@@ -36,7 +36,7 @@
             clickCard(event) {
                 event.preventDefault();
                 const element = event.target.closest('.schedule-card');
-                this.$store.dispatch(this.data_switch_action, element.id);
+                this.$store.dispatch(this.data_switch_action, $(element).attr('data-id'));
                 this.$emit('clickCard', element);
             },
             clickButton(event) {
@@ -44,7 +44,7 @@
                 event.stopPropagation();
                 const element = event.target.closest('.user-card');
                 this.$store.dispatch(this.data_switch_action, element.id);
-                if ($(event.target).attr('name') != 'delete') {
+                if ($(event.target).attr('name') !== 'delete') {
                     this.$emit('clickButton', element);
                 } else {
                     this.$emit('deleteEvent', element);
