@@ -33,19 +33,21 @@
                 <div v-for="(weeks, department) in groupedSchedules" :key="department" class="mt-3 p-1">
                     <h3>{{department}}</h3>
                     <hr>
-                    <div v-for="(schedules, week) in weeks" class="p-2">
-                        <h5>{{week}}</h5>
-                        <hr>
-                        <div class="grid-1 grid-gap-2">
-                            <ScheduleCard v-for="schedule in schedules" :schedule="schedule"
-                                          :key="'sch'+schedule.id" class="grid-item" data_switch_action="switchSchedule"
-                                          @clickCard="openModalEdit"
-                                          />
-                        </div>
-                    </div>
+                    <ScheduleDay v-for="(schedules, week) in weeks" :week_day="week" :schedules="schedules" :key="schedules[0].id" class="m-1"/>
+<!--                    <div v-for="(schedules, week) in weeks" class="p-2">-->
+<!--                        <h5>{{week}}</h5>-->
+<!--                        <hr>-->
+<!--                        <div class="grid-1 grid-gap-2">-->
+<!--                            <ScheduleCard v-for="schedule in schedules" :schedule="schedule"-->
+<!--                                          :key="'sch'+schedule.id" class="grid-item" data_switch_action="switchSchedule"-->
+<!--                                          @clickCard="openModalEdit"-->
+<!--                                          />-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                 </div>
             </div>
+
 
             <BootstrapModalConfirm id="deleteConfirm" @confirmEvent="deleteD"/>
             <BootstrapModal id="editModal" body="Scheduleedit" title="Редактирование"/>

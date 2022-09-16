@@ -1,51 +1,25 @@
 <template >
     <div class="card bg-dark text-white">
-    <div class="card-body">
-    <h5 class="card-title">
-        Понедельник
-    </h5>
-        <div class="card bg-dark text-white">
-            <div class="card-body">
-                <h5 class="card-title">
-                    1 Пара
-                </h5>
-                <p class="card-text">
-                    9:00-9:45
-               <img src="/img/break.svg" class="card-img-break">
-                    10м
-                </p>
-            </div>
-        </div>
-         <div class="card bg-dark text-white">
-            <div class="card-body">
-                <h5 class="card-title">
-                    1 Пара
-                </h5>
-                <p class="card-text">
-                    9:00-9:45
-               <img src="/img/break.svg" class="card-img-break">
-                    10м
-                </p>
-            </div>
-        </div>
-         <div class="card bg-dark text-white">
-            <div class="card-body">
-                <h5 class="card-title">
-                    1 Пара
-                </h5>
-                <p class="card-text">
-                    9:00-9:45
-               <img src="/img/break.svg" class="card-img-break">
-                    10м
-                </p>
-            </div>
-        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                {{ week_day }}
+            </h5>
+            <ScheduleLesson v-for="schedule in schedules" :key="schedule.id + 'key'" :schedule="schedule"/>
         </div>
     </div>
 </template>
 <script>
 export default {
-    
+    props: {
+        week_day: {
+            type: String,
+            required: true
+        },
+        schedules: {
+            type: Object,
+            required: true
+        }
+    }
 }
 </script>
 <style>
