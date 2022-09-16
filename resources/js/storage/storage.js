@@ -25,7 +25,8 @@ const store = new Vuex.Store({
             instance.request({
                 url: request.entity,
                 method: request.method ?? 'get',
-                data: request.data ?? {}
+                data: request.data ?? {},
+                params: request.params ?? {}
             }).then(response => {
                 if (request.toDoComm.length !== 0 && Array.isArray(request.toDoComm)) {
                     request.toDoComm.map(item => {
@@ -37,7 +38,9 @@ const store = new Vuex.Store({
                         dispatch(item, response.data);
                     })
                 }
-                dispatch('showNotification', response.data);
+                if (request.method && request.method !== 'get') {
+                    dispatch('showNotification', response.data);
+                }
             }).catch(error => {
                 dispatch('showNotification', error.response.data);
             });
@@ -45,7 +48,7 @@ const store = new Vuex.Store({
     },
     mutations: {
         switchTab: (state, tabName) => state.currentTab = tabName,
-        setLoading(state, type) {
+        setLoading(state, type = false) {
             if (state.loading === type) {
                 return false;
             }

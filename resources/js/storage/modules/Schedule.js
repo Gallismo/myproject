@@ -3,21 +3,36 @@ export default {
         getSchedule: function ({commit, dispatch}, query = {}) {
             commit('setLoading', true);
 
-            axios.get('/api/Schedule', {
+            // axios.get('/api/Schedule', {
+            //     params: {
+            //         week_day: query.week_filter,
+            //         department: query.dep_filter,
+            //         lesson: query.les_filter
+            //     }
+            // })
+            //     .then(response => {
+            //         commit('setSchedules', response.data);
+            //         commit('currentScheduleSet', response.data);
+            //         commit('setLoading', false);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'Schedule',
+                method: 'get',
                 params: {
                     week_day: query.week_filter,
                     department: query.dep_filter,
                     lesson: query.les_filter
-                }
-            })
-                .then(response => {
-                    commit('setSchedules', response.data);
-                    commit('currentScheduleSet', response.data);
-                    commit('setLoading', false);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                },
+                toDoComm:[
+                    'setSchedules',
+                    'currentScheduleSet',
+                    'setLoading'
+                ]
+            });
+            commit('setLoading', false);
         },
         saveSchedule({commit, dispatch}, data) {
             // axios({
@@ -85,14 +100,14 @@ export default {
                 ]
             });
         },
-        switchSchedule({commit, dispatch}, code) {
-            commit('switchSchedule', code);
+        switchSchedule({commit, dispatch}, id) {
+            commit('switchSchedule', id);
         }
     },
     mutations: {
         deleteSchedule(state, data) {
             state.scheduleData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.id === data.id) {
                     state.scheduleData.splice(index, 1)
                 }
             });
@@ -104,12 +119,14 @@ export default {
         currentScheduleSet: (state, response) => {
             state.currentSchedule = response[0]
         },
-        switchSchedule(state, code) {
-            state.currentSchedule = state.scheduleData.find(schedule => schedule.code === code);
+        switchSchedule(state, id) {
+            state.currentSchedule = state.scheduleData.find(schedule => {
+                return schedule.id == id;
+            });
         },
         updateSchedule: (state, data) => {
             state.scheduleData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.id === data.id) {
                     data.start_time ? state.scheduleData[index].start_time = data.start_time : false;
                     data.end_time ? state.scheduleData[index].end_time = data.end_time : false;
                     data.break ? state.scheduleData[index].break = data.break : false;
@@ -127,7 +144,7 @@ export default {
         },
         getScheduleDropdown: state => {
             let DropdownProp = {};
-            state.scheduleData.map(schedule => DropdownProp[schedule.code] = schedule.code);
+            state.scheduleData.map(schedule => DropdownProp[schedule.id] = schedule.id);
             return DropdownProp;
         },
         getCurrentSchedule: state => {return state.currentSchedule},
