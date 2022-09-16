@@ -3523,6 +3523,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     week_day: {
@@ -50589,21 +50593,33 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card bg-dark text-white" }, [
     _c(
+      "button",
+      {
+        staticClass: "card-header",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#schCollapse" + _vm.schedules[0].id,
+          "aria-expanded": "false",
+          "aria-controls": "schCollapse" + _vm.schedules[0].id,
+        },
+      },
+      [_c("h5", [_vm._v(_vm._s(_vm.week_day))])]
+    ),
+    _vm._v(" "),
+    _c(
       "div",
-      { staticClass: "card-body" },
-      [
-        _c("h5", { staticClass: "card-title" }, [
-          _vm._v("\n            " + _vm._s(_vm.week_day) + "\n        "),
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.schedules, function (schedule) {
-          return _c("ScheduleLesson", {
-            key: schedule.id + "key",
-            attrs: { schedule: schedule },
-          })
-        }),
-      ],
-      2
+      {
+        staticClass: "card-body collapse",
+        attrs: { id: "schCollapse" + _vm.schedules[0].id },
+      },
+      _vm._l(_vm.schedules, function (schedule) {
+        return _c("ScheduleLesson", {
+          key: schedule.id + "key",
+          attrs: { schedule: schedule },
+        })
+      }),
+      1
     ),
   ])
 }

@@ -223,3 +223,9 @@ input.form-control {
 select.form-control:disabled, input.form-control:disabled {
     opacity: 0.5;
 }
+
+button.card-header {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    color: white;
+    text-align: left;
+}
