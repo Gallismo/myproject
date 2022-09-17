@@ -53,15 +53,16 @@ const store = new Vuex.Store({
                     });
                 }
             });
+            commit('setLoading', false);
         }
     },
     mutations: {
         switchTab: (state, tabName) => state.currentTab = tabName,
         setLoading(state, type = false) {
             if (state.loading === type) {
-                return false;
+                return;
             }
-            state.loading = !state.loading;
+            state.loading = type;
         }
     },
     state: {

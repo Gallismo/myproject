@@ -30,8 +30,7 @@ export default {
                 },
                 toDoComm:[
                     'getAllUsers',
-                    'currentUserSet',
-                    'setLoading'
+                    'currentUserSet'
                 ]
             });
             commit('setLoading', false);

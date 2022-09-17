@@ -7005,7 +7005,7 @@ __webpack_require__.r(__webpack_exports__);
           department: query.dep_filter,
           lesson: query.les_filter
         },
-        toDoComm: ['setSchedules', 'currentScheduleSet', 'setLoading']
+        toDoComm: ['setSchedules', 'currentScheduleSet']
       });
       commit('setLoading', false);
     },
@@ -7177,7 +7177,7 @@ __webpack_require__.r(__webpack_exports__);
           group: query.group,
           name: query.name
         },
-        toDoComm: ['getAllUsers', 'currentUserSet', 'setLoading']
+        toDoComm: ['getAllUsers', 'currentUserSet']
       });
       commit('setLoading', false);
     },
@@ -7565,6 +7565,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
           });
         }
       });
+      commit('setLoading', false);
     }
   },
   mutations: {
@@ -7575,10 +7576,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
       if (state.loading === type) {
-        return false;
+        return;
       }
 
-      state.loading = !state.loading;
+      state.loading = type;
     }
   },
   state: {

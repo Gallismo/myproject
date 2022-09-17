@@ -28,8 +28,7 @@ export default {
                 },
                 toDoComm:[
                     'setSchedules',
-                    'currentScheduleSet',
-                    'setLoading'
+                    'currentScheduleSet'
                 ]
             });
             commit('setLoading', false);
