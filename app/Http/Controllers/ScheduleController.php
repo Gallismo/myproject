@@ -89,6 +89,6 @@ class ScheduleController extends Controller
 
         Schedule::find($request['id']);
 
-        $this->sendResp('Успешно', 'Расписание было успешно удалено', 200);
+        return $this->sendResp('Успешно', 'Расписание было успешно удалено', 200);
     }
 }

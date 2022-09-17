@@ -26,9 +26,12 @@ export default {
         }
     },
     methods: {
-        ...mapActions([''])
-        deleteD() {
-
+        ...mapActions(['deleteSchedule']),
+        deleteD(event) {
+            console.log();
+            const item = $(event.target).parents('.grid-item')[0];
+            const id = $(item).attr('data-id');
+            this.deleteSchedule({id})
         }
     }
 }

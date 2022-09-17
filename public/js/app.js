@@ -3552,9 +3552,56 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/Schedule/ScheduleLesson.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************************************************************************************************************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Programs\\OpenServer\\domains\\myproject\\resources\\js\\components\\admin\\cards\\Schedule\\ScheduleLesson.vue: Unexpected token, expected \",\" (30:8)\n\n\u001b[0m \u001b[90m 28 |\u001b[39m     methods\u001b[33m:\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 29 |\u001b[39m         \u001b[33m...\u001b[39mmapActions([\u001b[32m''\u001b[39m])\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 30 |\u001b[39m         deleteD() {\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 31 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 32 |\u001b[39m         }\u001b[0m\n\u001b[0m \u001b[90m 33 |\u001b[39m     }\u001b[0m\n    at Parser._raise (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:569:17)\n    at Parser.raiseWithData (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:562:17)\n    at Parser.raise (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:523:17)\n    at Parser.unexpected (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:3601:16)\n    at Parser.expect (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:3575:28)\n    at Parser.parseObjectLike (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:12543:14)\n    at Parser.parseExprAtom (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11986:23)\n    at Parser.parseExprSubscripts (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11654:23)\n    at Parser.parseUpdate (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11634:21)\n    at Parser.parseMaybeUnary (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11609:23)\n    at Parser.parseMaybeUnaryOrPrivate (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11421:61)\n    at Parser.parseExprOps (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11428:23)\n    at Parser.parseMaybeConditional (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11398:23)\n    at Parser.parseMaybeAssign (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11358:21)\n    at D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11316:39\n    at Parser.allowInAnd (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:13232:12)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "ScheduleLesson",
+  props: {
+    schedule: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['deleteSchedule'])), {}, {
+    deleteD: function deleteD(event) {
+      console.log();
+      var item = $(event.target).parents('.grid-item')[0];
+      var id = $(item).attr('data-id');
+      this.deleteSchedule({
+        id: id
+      });
+    }
+  })
+});
 
 /***/ }),
 
@@ -4905,7 +4952,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "DeleteIcon"
+  name: "DeleteIcon",
+  methods: {
+    deleteEvent: function deleteEvent(event) {
+      this.$emit('clickDelete', event);
+    }
+  }
 });
 
 /***/ }),
@@ -6112,6 +6164,7 @@ __webpack_require__.r(__webpack_exports__);
 
       dispatch('sendRequest', {
         entity: 'Department',
+        method: 'get',
         toDoComm: ['getAllDepartments', 'currentDepartmentSet']
       });
     },
@@ -6785,7 +6838,7 @@ __webpack_require__.r(__webpack_exports__);
   mutations: {
     showNotification: function showNotification(state, data) {
       state.notification.title = data.title;
-      state.notification.text = data.text;
+      state.notification.text = data.body;
       Object.values(data.errors).map(function (errorArr) {
         errorArr.map(function (error) {
           return state.notification.errors.push(error);
@@ -7109,14 +7162,14 @@ __webpack_require__.r(__webpack_exports__);
   mutations: {
     deleteSchedule: function deleteSchedule(state, data) {
       state.scheduleData.map(function (obj, index) {
-        if (obj.id === data.id) {
+        if (obj.id == data.id) {
           state.scheduleData.splice(index, 1);
         }
       });
       state.currentSchedule = state.scheduleData[0];
     },
     setSchedules: function setSchedules(state, response) {
-      state.scheduleData = response;
+      state.scheduleData = Object.values(response);
     },
     currentScheduleSet: function currentScheduleSet(state, response) {
       state.currentSchedule = response[0];
@@ -7570,9 +7623,17 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         params: (_request$params = request.params) !== null && _request$params !== void 0 ? _request$params : {}
       }).then(function (response) {
         if (Array.isArray(request.toDoComm) && request.toDoComm.length !== 0) {
-          request.toDoComm.map(function (item) {
-            commit(item, response.data);
-          });
+          if (request.method && request.method === 'get') {
+            request.toDoComm.map(function (item) {
+              commit(item, response.data);
+            });
+          }
+
+          if (request.method && request.method !== 'get') {
+            request.toDoComm.map(function (item) {
+              commit(item, request.data);
+            });
+          }
         }
 
         if (Array.isArray(request.toDoDisp) && request.toDoDisp.length !== 0) {
@@ -52591,14 +52652,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "delete-icon",
-      on: {
-        click: function ($event) {
-          return _vm.$emit("clickDelete")
-        },
-      },
-    },
+    { staticClass: "delete-icon", on: { click: _vm.deleteEvent } },
     [_c("img", { attrs: { src: "/img/delete-icon.svg" } })]
   )
 }

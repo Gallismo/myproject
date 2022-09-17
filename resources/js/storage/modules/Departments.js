@@ -12,6 +12,7 @@ export default {
             //     });
             dispatch('sendRequest', {
                 entity: 'Department',
+                method: 'get',
                 toDoComm:[
                     'getAllDepartments',
                     'currentDepartmentSet'

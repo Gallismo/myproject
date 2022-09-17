@@ -26,7 +26,7 @@ export default {
     mutations: {
         showNotification(state, data) {
             state.notification.title = data.title;
-            state.notification.text = data.text;
+            state.notification.text = data.body;
             Object.values(data.errors).map(errorArr => {
                 errorArr.map(error => state.notification.errors.push(error));
             });

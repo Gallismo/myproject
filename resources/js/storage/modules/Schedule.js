@@ -105,14 +105,14 @@ export default {
     mutations: {
         deleteSchedule(state, data) {
             state.scheduleData.map((obj, index) => {
-                if (obj.id === data.id) {
+                if (obj.id == data.id) {
                     state.scheduleData.splice(index, 1)
                 }
             });
             state.currentSchedule = state.scheduleData[0]
         },
         setSchedules: (state, response) => {
-            state.scheduleData = response;
+            state.scheduleData = Object.values(response);
         },
         currentScheduleSet: (state, response) => {
             state.currentSchedule = response[0]
@@ -145,7 +145,6 @@ export default {
             state.scheduleData.map(schedule => DropdownProp[schedule.id] = schedule.id);
             return DropdownProp;
         },
-        getCurrentSchedule: state => {return state.currentSchedule},
-
+        getCurrentSchedule: state => {return state.currentSchedule}
     }
 }

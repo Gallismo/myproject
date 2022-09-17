@@ -118,7 +118,6 @@
                         delete data[department.name];
                     }
                 })
-
                 return data;
             }
         }

@@ -28,9 +28,16 @@ const store = new Vuex.Store({
                 params: request.params ?? {}
             }).then(response => {
                 if (Array.isArray(request.toDoComm) && request.toDoComm.length !== 0) {
-                    request.toDoComm.map(item => {
-                        commit(item, response.data)
-                    })
+                    if (request.method && request.method === 'get') {
+                        request.toDoComm.map(item => {
+                            commit(item, response.data)
+                        })
+                    }
+                    if (request.method && request.method !== 'get') {
+                        request.toDoComm.map(item => {
+                            commit(item, request.data)
+                        })
+                    }
                 }
                 if (Array.isArray(request.toDoDisp) && request.toDoDisp.length !== 0) {
                     request.toDoDisp.map(item => {
