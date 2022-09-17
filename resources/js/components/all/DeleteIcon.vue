@@ -1,15 +1,30 @@
 <template>
-    <div class="delete-icon" @click="deleteEvent">
-        <img src="/img/delete-icon.svg">
-    </div>
+        <button type="button" class="delete-icon" @click="deleteEvent" data-toggle="modal" :data-target="target">
+            <img src="/img/delete-icon.svg">
+        </button>
 </template>
 
 <script>
 export default {
     name: "DeleteIcon",
+    props: {
+        target: {
+            type: String,
+            required: true
+        },
+        data_switch_action:{
+            type: String,
+            required: true
+        }
+    },
     methods: {
         deleteEvent(event) {
-            this.$emit('clickDelete', event)
+            event.preventDefault();
+            event.stopPropagation();
+            const item = $(event.target).parents('.grid-item')[0];
+            const id = $(item).attr('data-id');
+            this.$store.dispatch(this.data_switch_action, id);
+            $(this.target).modal('show');
         }
     }
 }

@@ -3,7 +3,7 @@
         <div class="card-body">
             <h5 class="card-title justify-content-between d-flex">
                 {{ schedule.lesson_order_name }}
-                <DeleteIcon @clickDelete="deleteD"/>
+                <DeleteIcon target="#deleteConfirm" data_switch_action="switchSchedule"/>
             </h5>
             <p class="card-text">
                 {{ schedule.start_time }}-{{ schedule.end_time }}
@@ -23,15 +23,6 @@ export default {
         schedule: {
             type: Object,
             required: true
-        }
-    },
-    methods: {
-        ...mapActions(['deleteSchedule']),
-        deleteD(event) {
-            console.log();
-            const item = $(event.target).parents('.grid-item')[0];
-            const id = $(item).attr('data-id');
-            this.deleteSchedule({id})
         }
     }
 }

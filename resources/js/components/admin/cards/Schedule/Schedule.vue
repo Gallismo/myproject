@@ -33,7 +33,8 @@
                 <div v-for="(weeks, department) in groupedSchedules" :key="department" class="mt-3 p-1">
                     <h3>{{department}}</h3>
                     <hr>
-                    <ScheduleDay v-for="(schedules, week) in weeks" :week_day="week" :schedules="schedules" :key="schedules[0].id" class="m-1"/>
+                    <ScheduleDay v-for="(schedules, week) in weeks"
+                                 :week_day="week" :schedules="schedules" :key="schedules[0].id" class="m-1"/>
 <!--                    <div v-for="(schedules, week) in weeks" class="p-2">-->
 <!--                        <h5>{{week}}</h5>-->
 <!--                        <hr>-->
@@ -49,7 +50,7 @@
             </div>
 
 
-            <BootstrapModalConfirm id="deleteConfirm" @confirmEvent="deleteD"/>
+            <BootstrapModalConfirm id="deleteConfirm" @confirmEvent="del"/>
             <BootstrapModal id="editModal" body="Scheduleedit" title="Редактирование"/>
             <BootstrapModal id="createModal" body="UserCreate" title="Добавление"/>
 
@@ -72,7 +73,7 @@
             this.getSchedule();
         },
         methods: {
-            ...mapActions(['getSchedule']),
+            ...mapActions(['getSchedule', 'deleteSchedule']),
             querySchedule(event) {
                 const type = event.target.id;
                 this.query[type] = event.target.value;
@@ -87,39 +88,39 @@
             openModalCreate() {
                 $('#createModal').modal('show');
             },
-            deleteD() {
-                return 1;
+            del() {
+                this.deleteSchedule({id: this.getCurrentSchedule.id})
             }
         },
         computed: {
             ...mapGetters(['getScheduleData', 'getDepartmentsData', 'getWeeksData', 'getLoading',
-                'getDepartmentDropdown', 'getWeekDropdown', 'getLessonOrderDropdown']),
-            groupedSchedules() {
-                const data = {};
+                'getDepartmentDropdown', 'getWeekDropdown', 'getLessonOrderDropdown', 'getCurrentSchedule']),
+                groupedSchedules() {
+                    const data = {};
 
-                this.getDepartmentsData.map(department => {
-                    data[department.name] = {};
+                    this.getDepartmentsData.map(department => {
+                        data[department.name] = {};
 
-                    this.getWeeksData.map(week => {
-                        data[department.name][week.name] = [];
+                        this.getWeeksData.map(week => {
+                            data[department.name][week.name] = [];
 
-                        this.getScheduleData.map(schedule => {
-                            if (schedule.department_name === department.name && schedule.week_day_name === week.name) {
-                                data[department.name][week.name].push(schedule);
+                            this.getScheduleData.map(schedule => {
+                                if (schedule.department_name === department.name && schedule.week_day_name === week.name) {
+                                    data[department.name][week.name].push(schedule);
+                                }
+                            })
+
+                            if (data[department.name][week.name].length === 0) {
+                                delete data[department.name][week.name];
                             }
                         })
 
-                        if (data[department.name][week.name].length === 0) {
-                            delete data[department.name][week.name];
+                        if (Object.keys(data[department.name]).length === 0) {
+                            delete data[department.name];
                         }
                     })
-
-                    if (Object.keys(data[department.name]).length === 0) {
-                        delete data[department.name];
-                    }
-                })
-                return data;
-            }
+                    return data;
+                }
         }
     }
 </script>

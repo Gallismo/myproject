@@ -3377,6 +3377,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3389,7 +3390,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.getSchedule();
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getSchedule'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getSchedule', 'deleteSchedule'])), {}, {
     querySchedule: function querySchedule(event) {
       var type = event.target.id;
       this.query[type] = event.target.value;
@@ -3404,11 +3405,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     openModalCreate: function openModalCreate() {
       $('#createModal').modal('show');
     },
-    deleteD: function deleteD() {
-      return 1;
+    del: function del() {
+      this.deleteSchedule({
+        id: this.getCurrentSchedule.id
+      });
     }
   }),
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getScheduleData', 'getDepartmentsData', 'getWeeksData', 'getLoading', 'getDepartmentDropdown', 'getWeekDropdown', 'getLessonOrderDropdown'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getScheduleData', 'getDepartmentsData', 'getWeeksData', 'getLoading', 'getDepartmentDropdown', 'getWeekDropdown', 'getLessonOrderDropdown', 'getCurrentSchedule'])), {}, {
     groupedSchedules: function groupedSchedules() {
       var _this = this;
 
@@ -3559,13 +3562,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -3590,17 +3586,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: Object,
       required: true
     }
-  },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['deleteSchedule'])), {}, {
-    deleteD: function deleteD(event) {
-      console.log();
-      var item = $(event.target).parents('.grid-item')[0];
-      var id = $(item).attr('data-id');
-      this.deleteSchedule({
-        id: id
-      });
-    }
-  })
+  }
 });
 
 /***/ }),
@@ -4953,9 +4939,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "DeleteIcon",
+  props: {
+    target: {
+      type: String,
+      required: true
+    },
+    data_switch_action: {
+      type: String,
+      required: true
+    }
+  },
   methods: {
     deleteEvent: function deleteEvent(event) {
-      this.$emit('clickDelete', event);
+      event.preventDefault();
+      event.stopPropagation();
+      var item = $(event.target).parents('.grid-item')[0];
+      var id = $(item).attr('data-id');
+      this.$store.dispatch(this.data_switch_action, id);
+      $(this.target).modal('show');
     }
   }
 });
@@ -50640,7 +50641,7 @@ var render = function () {
         _vm._v(" "),
         _c("BootstrapModalConfirm", {
           attrs: { id: "deleteConfirm" },
-          on: { confirmEvent: _vm.deleteD },
+          on: { confirmEvent: _vm.del },
         }),
         _vm._v(" "),
         _c("BootstrapModal", {
@@ -50860,7 +50861,12 @@ var render = function () {
                 _vm._s(_vm.schedule.lesson_order_name) +
                 "\n            "
             ),
-            _c("DeleteIcon", { on: { clickDelete: _vm.deleteD } }),
+            _c("DeleteIcon", {
+              attrs: {
+                target: "#deleteConfirm",
+                data_switch_action: "switchSchedule",
+              },
+            }),
           ],
           1
         ),
@@ -52651,8 +52657,16 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    { staticClass: "delete-icon", on: { click: _vm.deleteEvent } },
+    "button",
+    {
+      staticClass: "delete-icon",
+      attrs: {
+        type: "button",
+        "data-toggle": "modal",
+        "data-target": _vm.target,
+      },
+      on: { click: _vm.deleteEvent },
+    },
     [_c("img", { attrs: { src: "/img/delete-icon.svg" } })]
   )
 }

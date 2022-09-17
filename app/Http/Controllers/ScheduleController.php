@@ -87,7 +87,7 @@ class ScheduleController extends Controller
     public function deleteSchedule (ScheduleRequest $request) {
         $request = $request->validated();
 
-        Schedule::find($request['id']);
+        Schedule::find($request['id'])->delete();
 
         return $this->sendResp('Успешно', 'Расписание было успешно удалено', 200);
     }
