@@ -3400,6 +3400,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     openModalEdit: function openModalEdit() {
       $('#editModal').modal('show');
+    },
+    openModalCreate: function openModalCreate() {
+      $('#createModal').modal('show');
+    },
+    deleteD: function deleteD() {
+      return 1;
     }
   }),
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getScheduleData', 'getDepartmentsData', 'getWeeksData', 'getLoading', 'getDepartmentDropdown', 'getWeekDropdown', 'getLessonOrderDropdown'])), {}, {
@@ -3534,7 +3540,7 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     schedules: {
-      type: Object,
+      type: Array,
       required: true
     }
   }
@@ -3575,9 +3581,6 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       required: true
     }
-  },
-  mounted: function mounted() {
-    console.log(this.schedule);
   }
 });
 
@@ -3626,7 +3629,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "UserEdit",
+  name: "ScheduleEdit",
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['saveSchedule', 'deleteSchedule'])), {}, {
     openModalSave: function openModalSave() {
       $('#saveConfirm').modal('show');
@@ -5275,7 +5278,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "NotificationBootstrap",
@@ -5334,13 +5336,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    change: function change() {
-      var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    change: function change(event) {
       this.$emit('clickEvent', event);
     }
-  },
-  mounted: function mounted() {
-    this.change();
   }
 });
 
@@ -5373,7 +5371,6 @@ __webpack_require__.r(__webpack_exports__);
       "default": ''
     },
     valueInput: {
-      type: String,
       "default": ''
     },
     inputName: {
@@ -7154,21 +7151,35 @@ __webpack_require__.r(__webpack_exports__);
       var commit = _ref.commit,
           dispatch = _ref.dispatch;
       var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      commit('setLoading', true);
-      axios.get('/api/User', {
+      commit('setLoading', true); // axios.get('/api/User', {
+      //     params: {
+      //         login: query.login,
+      //         role: query.role,
+      //         group: query.group,
+      //         name: query.name
+      //     }
+      // })
+      //     .then(response => {
+      //         commit('getAllUsers', response.data);
+      //         commit('currentUserSet', response.data);
+      //         commit('setLoading', false);
+      //     })
+      //     .catch(error => {
+      //         dispatch('showNotification', error.response.data);
+      //     });
+
+      dispatch('sendRequest', {
+        entity: 'User',
+        method: 'get',
         params: {
           login: query.login,
           role: query.role,
           group: query.group,
           name: query.name
-        }
-      }).then(function (response) {
-        commit('getAllUsers', response.data);
-        commit('currentUserSet', response.data);
-        commit('setLoading', false);
-      })["catch"](function (error) {
-        dispatch('showNotification', error.response.data);
+        },
+        toDoComm: ['getAllUsers', 'currentUserSet', 'setLoading']
       });
+      commit('setLoading', false);
     },
     saveUser: function saveUser(_ref2, data) {
       var commit = _ref2.commit,
@@ -7507,7 +7518,6 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       dispatch('getGroups');
       dispatch('getAllGroupParts');
       dispatch('getAllLessonOrders');
-      dispatch('getAllPrepods');
       dispatch('getAllUsers');
       dispatch('getAllWeeks');
       dispatch('getRoles');
@@ -7527,13 +7537,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         data: (_request$data = request.data) !== null && _request$data !== void 0 ? _request$data : {},
         params: (_request$params = request.params) !== null && _request$params !== void 0 ? _request$params : {}
       }).then(function (response) {
-        if (request.toDoComm.length !== 0 && Array.isArray(request.toDoComm)) {
+        if (Array.isArray(request.toDoComm) && request.toDoComm.length !== 0) {
           request.toDoComm.map(function (item) {
             commit(item, response.data);
           });
         }
 
-        if (request.toDoDisp.length !== 0 && Array.isArray(request.toDoDisp)) {
+        if (Array.isArray(request.toDoDisp) && request.toDoDisp.length !== 0) {
           request.toDoDisp.map(function (item) {
             dispatch(item, response.data);
           });
@@ -7543,7 +7553,17 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
           dispatch('showNotification', response.data);
         }
       })["catch"](function (error) {
-        dispatch('showNotification', error.response.data);
+        if (error.response.status !== 500) {
+          dispatch('showNotification', error.response.data);
+        }
+
+        if (error.response.status === 500) {
+          dispatch('showNotification', {
+            title: 'Серверная ошибка',
+            text: 'Произошла серверная ошибка, в случае повторения сообщите техническому специалисту',
+            errors: {}
+          });
+        }
       });
     }
   },

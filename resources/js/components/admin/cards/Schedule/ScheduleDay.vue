@@ -20,7 +20,7 @@ export default {
             required: true
         },
         schedules: {
-            type: Object,
+            type: Array,
             required: true
         }
     }

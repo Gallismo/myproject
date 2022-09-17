@@ -12,7 +12,6 @@ const store = new Vuex.Store({
             dispatch('getGroups');
             dispatch('getAllGroupParts');
             dispatch('getAllLessonOrders');
-            dispatch('getAllPrepods');
             dispatch('getAllUsers');
             dispatch('getAllWeeks');
             dispatch('getRoles');
@@ -28,12 +27,12 @@ const store = new Vuex.Store({
                 data: request.data ?? {},
                 params: request.params ?? {}
             }).then(response => {
-                if (request.toDoComm.length !== 0 && Array.isArray(request.toDoComm)) {
+                if (Array.isArray(request.toDoComm) && request.toDoComm.length !== 0) {
                     request.toDoComm.map(item => {
                         commit(item, response.data);
                     })
                 }
-                if (request.toDoDisp.length !== 0 && Array.isArray(request.toDoDisp)) {
+                if (Array.isArray(request.toDoDisp) && request.toDoDisp.length !== 0) {
                     request.toDoDisp.map(item => {
                         dispatch(item, response.data);
                     })
@@ -42,7 +41,17 @@ const store = new Vuex.Store({
                     dispatch('showNotification', response.data);
                 }
             }).catch(error => {
-                dispatch('showNotification', error.response.data);
+                if (error.response.status !== 500) {
+                    dispatch('showNotification', error.response.data);
+                }
+
+                if (error.response.status === 500) {
+                    dispatch('showNotification', {
+                        title: 'Серверная ошибка',
+                        text: 'Произошла серверная ошибка, в случае повторения сообщите техническому специалисту',
+                        errors: {},
+                    });
+                }
             });
         }
     },

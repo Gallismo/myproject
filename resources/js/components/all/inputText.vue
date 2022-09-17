@@ -15,7 +15,6 @@
                 default: ''
             },
             valueInput: {
-                type: String,
                 default: ''
             },
             inputName: {

@@ -3,22 +3,38 @@ export default {
         getAllUsers: function ({commit, dispatch}, query = {}) {
             commit('setLoading', true);
 
-            axios.get('/api/User', {
+            // axios.get('/api/User', {
+            //     params: {
+            //         login: query.login,
+            //         role: query.role,
+            //         group: query.group,
+            //         name: query.name
+            //     }
+            // })
+            //     .then(response => {
+            //         commit('getAllUsers', response.data);
+            //         commit('currentUserSet', response.data);
+            //         commit('setLoading', false);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+            dispatch('sendRequest', {
+                entity: 'User',
+                method: 'get',
                 params: {
                     login: query.login,
                     role: query.role,
                     group: query.group,
                     name: query.name
-                }
-            })
-                .then(response => {
-                    commit('getAllUsers', response.data);
-                    commit('currentUserSet', response.data);
-                    commit('setLoading', false);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+                },
+                toDoComm:[
+                    'getAllUsers',
+                    'currentUserSet',
+                    'setLoading'
+                ]
+            });
+            commit('setLoading', false);
         },
         saveUser({commit, dispatch}, data) {
             // axios({

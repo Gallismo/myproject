@@ -25,7 +25,7 @@
     import {mapActions, mapGetters} from "vuex";
 
     export default {
-        name: "UserEdit",
+        name: "ScheduleEdit",
         methods: {
             ...mapActions(['saveSchedule', 'deleteSchedule']),
             openModalSave() {

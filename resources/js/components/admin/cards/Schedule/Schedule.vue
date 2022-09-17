@@ -84,6 +84,12 @@
             openModalEdit() {
                 $('#editModal').modal('show');
             },
+            openModalCreate() {
+                $('#createModal').modal('show');
+            },
+            deleteD() {
+                return 1;
+            }
         },
         computed: {
             ...mapGetters(['getScheduleData', 'getDepartmentsData', 'getWeeksData', 'getLoading',

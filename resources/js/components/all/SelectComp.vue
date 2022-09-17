@@ -30,12 +30,9 @@ export default {
         }
     },
     methods: {
-        change(event = null) {
+        change(event) {
             this.$emit('clickEvent', event)
         }
-    },
-    mounted() {
-        this.change();
     }
 }
 </script>

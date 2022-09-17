@@ -7,7 +7,6 @@ export default {
             clearTimeout(state.hideId);
             // Переменный для того чтобы запомнить счеткики для очистки
             let showId, hideId;
-
             commit('showNotification', data);
             // Счетчик для скрытия уведомления
             showId = setTimeout(function () {
