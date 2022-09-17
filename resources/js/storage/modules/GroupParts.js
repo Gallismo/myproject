@@ -1,14 +1,24 @@
 export default {
     actions: {
         getAllGroupParts: function ({commit, dispatch}) {
-            axios('/api/groupsPart')
-                .then(response => {
-                    commit('getAllGroupParts', response.data);
-                    commit('currentGroupPartSet', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+            commit('setLoading', true)
+            // axios('/api/groupsPart')
+            //     .then(response => {
+            //         commit('getAllGroupParts', response.data);
+            //         commit('currentGroupPartSet', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+
+            dispatch('sendRequest', {
+                entity: 'groupsPart',
+                method: 'get',
+                toDoComm: [
+                    'getAllGroupParts',
+                    'currentGroupPartSet'
+                ]
+            });
         },
         saveGroupPart({commit, dispatch}, data) {
             // axios({

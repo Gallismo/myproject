@@ -1,6 +1,7 @@
 export default {
     actions: {
         getAllAudiences: function ({commit, dispatch}) {
+            commit('setLoading', true)
             // axios('/api/Audience')
             //     .then(response => {
             //         commit('getAllAudiences', response.data);

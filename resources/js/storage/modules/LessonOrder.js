@@ -1,14 +1,24 @@
 export default {
     actions: {
         getAllLessonOrders: function ({commit, dispatch}) {
-            axios('/api/lessonsOrder')
-                .then(response => {
-                    commit('getAllLessonOrders', response.data);
-                    commit('currentLessonOrderSet', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+            commit('setLoading', true)
+            // axios('/api/lessonsOrder')
+            //     .then(response => {
+            //         commit('getAllLessonOrders', response.data);
+            //         commit('currentLessonOrderSet', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+
+            dispatch('sendRequest', {
+                entity: 'lessonsOrder',
+                method: 'get',
+                toDoComm: [
+                    'getAllLessonOrders',
+                    'currentLessonOrderSet'
+                ]
+            });
         },
         saveLessonOrder({commit, dispatch}, data) {
             // axios({

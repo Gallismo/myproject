@@ -3,22 +3,30 @@ import Notification from "./Notification";
 export default {
     actions: {
         async getGroups({commit, dispatch}, query = {}) {
-            commit('setLoadingGroup', true);
-            axios.get('/api/Group', {
-                params: {
-                    department: query.department,
-                    start: query.start,
-                    end: query.end
-                }
-            })
-                .then(response => {
-                    commit('groupsDataFill', response.data);
-                    commit('currentGroupFill', response.data);
-                    commit('setLoadingGroup', false);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+            commit('setLoading', true);
+            // axios.get('/api/Group', {
+            //     params: {
+            //         department: query.department,
+            //         start: query.start,
+            //         end: query.end
+            //     }
+            // }).then(response => {
+            //         commit('groupsDataFill', response.data);
+            //         commit('currentGroupFill', response.data);
+            //         commit('setLoadingGroup', false);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+
+            dispatch('sendRequest', {
+                entity: 'Group',
+                method: 'get',
+                toDoComm: [
+                    'groupsDataFill',
+                    'currentGroupFill'
+                ]
+            });
         },
         switchCurrentGroup: ({commit, dispatch}, code) => {
             commit('switchCurrentGroup', code)

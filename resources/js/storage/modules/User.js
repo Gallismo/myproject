@@ -33,7 +33,6 @@ export default {
                     'currentUserSet'
                 ]
             });
-            commit('setLoading', false);
         },
         saveUser({commit, dispatch}, data) {
             // axios({

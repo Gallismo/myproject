@@ -29,7 +29,7 @@ const store = new Vuex.Store({
             }).then(response => {
                 if (Array.isArray(request.toDoComm) && request.toDoComm.length !== 0) {
                     request.toDoComm.map(item => {
-                        commit(item, response.data);
+                        commit(item, response.data)
                     })
                 }
                 if (Array.isArray(request.toDoDisp) && request.toDoDisp.length !== 0) {
@@ -40,6 +40,8 @@ const store = new Vuex.Store({
                 if (request.method && request.method !== 'get') {
                     dispatch('showNotification', response.data);
                 }
+
+                commit('setLoading')
             }).catch(error => {
                 if (error.response.status !== 500) {
                     dispatch('showNotification', error.response.data);
@@ -53,7 +55,6 @@ const store = new Vuex.Store({
                     });
                 }
             });
-            commit('setLoading', false);
         }
     },
     mutations: {

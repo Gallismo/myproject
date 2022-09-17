@@ -1,14 +1,24 @@
 export default {
     actions: {
         getAllWeeks: function ({commit, dispatch}) {
-            axios('/api/Week')
-                .then(response => {
-                    commit('getAllWeeks', response.data);
-                    commit('currentWeekSet', response.data);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+            commit('setLoading', true)
+            // axios('/api/Week')
+            //     .then(response => {
+            //         commit('getAllWeeks', response.data);
+            //         commit('currentWeekSet', response.data);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+
+            dispatch('sendRequest', {
+                entity: 'Week',
+                method: 'get',
+                toDoComm: [
+                    'getAllWeeks',
+                    'currentWeekSet'
+                ]
+            });
         },
         saveWeek({commit, dispatch}, data) {
             // axios({

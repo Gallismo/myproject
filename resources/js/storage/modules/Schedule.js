@@ -31,7 +31,6 @@ export default {
                     'currentScheduleSet'
                 ]
             });
-            commit('setLoading', false);
         },
         saveSchedule({commit, dispatch}, data) {
             // axios({

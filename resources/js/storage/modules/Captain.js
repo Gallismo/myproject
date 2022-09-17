@@ -3,21 +3,30 @@ export default {
         getAllCaptains: function ({commit, dispatch}, query = {}) {
             commit('setLoading', true);
 
-            axios.get('/api/Captain', {
-                params: {
-                    name: query.name,
-                    user: query.user,
-                    group_name: query.group_name
-                }
-            })
-                .then(response => {
-                    commit('getAllCaptains', response.data);
-                    commit('currentCaptainSet', response.data);
-                    commit('setLoading', false);
-                })
-                .catch(error => {
-                    dispatch('showNotification', error.response.data);
-                });
+            // axios.get('/api/Captain', {
+            //     params: {
+            //         name: query.name,
+            //         user: query.user,
+            //         group_name: query.group_name
+            //     }
+            // }).then(response => {
+            //         commit('getAllCaptains', response.data);
+            //         commit('currentCaptainSet', response.data);
+            //         commit('setLoading', false);
+            //     })
+            //     .catch(error => {
+            //         dispatch('showNotification', error.response.data);
+            //     });
+
+            dispatch('sendRequest', {
+                entity: 'Captain',
+                method: 'get',
+                data: {},
+                toDoComm: [
+                    'getAllCaptains',
+                    'currentCaptainSet'
+                ]
+            });
         },
         saveCaptain({commit, dispatch}, data) {
             // axios({

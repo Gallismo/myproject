@@ -1,6 +1,7 @@
 export default {
     actions: {
         getAllDepartments: function ({commit, dispatch}) {
+            commit('setLoading', true)
             // axios('/api/Department')
             //     .then(response => {
             //         commit('getAllDepartments', response.data);

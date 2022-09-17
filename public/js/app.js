@@ -3552,37 +3552,9 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/Schedule/ScheduleLesson.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "ScheduleLesson",
-  props: {
-    schedule: {
-      type: Object,
-      required: true
-    }
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Programs\\OpenServer\\domains\\myproject\\resources\\js\\components\\admin\\cards\\Schedule\\ScheduleLesson.vue: Unexpected token, expected \",\" (30:8)\n\n\u001b[0m \u001b[90m 28 |\u001b[39m     methods\u001b[33m:\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 29 |\u001b[39m         \u001b[33m...\u001b[39mmapActions([\u001b[32m''\u001b[39m])\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 30 |\u001b[39m         deleteD() {\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 31 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 32 |\u001b[39m         }\u001b[0m\n\u001b[0m \u001b[90m 33 |\u001b[39m     }\u001b[0m\n    at Parser._raise (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:569:17)\n    at Parser.raiseWithData (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:562:17)\n    at Parser.raise (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:523:17)\n    at Parser.unexpected (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:3601:16)\n    at Parser.expect (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:3575:28)\n    at Parser.parseObjectLike (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:12543:14)\n    at Parser.parseExprAtom (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11986:23)\n    at Parser.parseExprSubscripts (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11654:23)\n    at Parser.parseUpdate (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11634:21)\n    at Parser.parseMaybeUnary (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11609:23)\n    at Parser.parseMaybeUnaryOrPrivate (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11421:61)\n    at Parser.parseExprOps (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11428:23)\n    at Parser.parseMaybeConditional (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11398:23)\n    at Parser.parseMaybeAssign (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11358:21)\n    at D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:11316:39\n    at Parser.allowInAnd (D:\\Programs\\OpenServer\\domains\\myproject\\node_modules\\@babel\\parser\\lib\\index.js:13232:12)");
 
 /***/ }),
 
@@ -4915,6 +4887,29 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/DeleteIcon.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/DeleteIcon.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "DeleteIcon"
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/Dropdown.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/Dropdown.vue?vue&type=script&lang=js& ***!
@@ -5785,7 +5780,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllAudiences: function getAllAudiences(_ref) {
       var commit = _ref.commit,
           dispatch = _ref.dispatch;
-      // axios('/api/Audience')
+      commit('setLoading', true); // axios('/api/Audience')
       //     .then(response => {
       //         commit('getAllAudiences', response.data);
       //         commit('currentAudienceSet', response.data);
@@ -5793,6 +5788,7 @@ __webpack_require__.r(__webpack_exports__);
       //     .catch(error => {
       //         dispatch('showNotification', error.response.data);
       //     });
+
       dispatch('sendRequest', {
         entity: 'Audience',
         method: 'get',
@@ -5940,19 +5936,26 @@ __webpack_require__.r(__webpack_exports__);
       var commit = _ref.commit,
           dispatch = _ref.dispatch;
       var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      commit('setLoading', true);
-      axios.get('/api/Captain', {
-        params: {
-          name: query.name,
-          user: query.user,
-          group_name: query.group_name
-        }
-      }).then(function (response) {
-        commit('getAllCaptains', response.data);
-        commit('currentCaptainSet', response.data);
-        commit('setLoading', false);
-      })["catch"](function (error) {
-        dispatch('showNotification', error.response.data);
+      commit('setLoading', true); // axios.get('/api/Captain', {
+      //     params: {
+      //         name: query.name,
+      //         user: query.user,
+      //         group_name: query.group_name
+      //     }
+      // }).then(response => {
+      //         commit('getAllCaptains', response.data);
+      //         commit('currentCaptainSet', response.data);
+      //         commit('setLoading', false);
+      //     })
+      //     .catch(error => {
+      //         dispatch('showNotification', error.response.data);
+      //     });
+
+      dispatch('sendRequest', {
+        entity: 'Captain',
+        method: 'get',
+        data: {},
+        toDoComm: ['getAllCaptains', 'currentCaptainSet']
       });
     },
     saveCaptain: function saveCaptain(_ref2, data) {
@@ -6098,7 +6101,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllDepartments: function getAllDepartments(_ref) {
       var commit = _ref.commit,
           dispatch = _ref.dispatch;
-      // axios('/api/Department')
+      commit('setLoading', true); // axios('/api/Department')
       //     .then(response => {
       //         commit('getAllDepartments', response.data);
       //         commit('currentDepartmentSet', response.data);
@@ -6106,6 +6109,7 @@ __webpack_require__.r(__webpack_exports__);
       //     .catch(error => {
       //         dispatch('showNotification', error.response.data);
       //     });
+
       dispatch('sendRequest', {
         entity: 'Department',
         toDoComm: ['getAllDepartments', 'currentDepartmentSet']
@@ -6267,19 +6271,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 commit = _ref.commit, dispatch = _ref.dispatch;
                 query = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : {};
-                commit('setLoadingGroup', true);
-                axios.get('/api/Group', {
-                  params: {
-                    department: query.department,
-                    start: query.start,
-                    end: query.end
-                  }
-                }).then(function (response) {
-                  commit('groupsDataFill', response.data);
-                  commit('currentGroupFill', response.data);
-                  commit('setLoadingGroup', false);
-                })["catch"](function (error) {
-                  dispatch('showNotification', error.response.data);
+                commit('setLoading', true); // axios.get('/api/Group', {
+                //     params: {
+                //         department: query.department,
+                //         start: query.start,
+                //         end: query.end
+                //     }
+                // }).then(response => {
+                //         commit('groupsDataFill', response.data);
+                //         commit('currentGroupFill', response.data);
+                //         commit('setLoadingGroup', false);
+                //     })
+                //     .catch(error => {
+                //         dispatch('showNotification', error.response.data);
+                //     });
+
+                dispatch('sendRequest', {
+                  entity: 'Group',
+                  method: 'get',
+                  toDoComm: ['groupsDataFill', 'currentGroupFill']
                 });
 
               case 4:
@@ -6443,11 +6453,19 @@ __webpack_require__.r(__webpack_exports__);
     getAllGroupParts: function getAllGroupParts(_ref) {
       var commit = _ref.commit,
           dispatch = _ref.dispatch;
-      axios('/api/groupsPart').then(function (response) {
-        commit('getAllGroupParts', response.data);
-        commit('currentGroupPartSet', response.data);
-      })["catch"](function (error) {
-        dispatch('showNotification', error.response.data);
+      commit('setLoading', true); // axios('/api/groupsPart')
+      //     .then(response => {
+      //         commit('getAllGroupParts', response.data);
+      //         commit('currentGroupPartSet', response.data);
+      //     })
+      //     .catch(error => {
+      //         dispatch('showNotification', error.response.data);
+      //     });
+
+      dispatch('sendRequest', {
+        entity: 'groupsPart',
+        method: 'get',
+        toDoComm: ['getAllGroupParts', 'currentGroupPartSet']
       });
     },
     saveGroupPart: function saveGroupPart(_ref2, data) {
@@ -6589,11 +6607,19 @@ __webpack_require__.r(__webpack_exports__);
     getAllLessonOrders: function getAllLessonOrders(_ref) {
       var commit = _ref.commit,
           dispatch = _ref.dispatch;
-      axios('/api/lessonsOrder').then(function (response) {
-        commit('getAllLessonOrders', response.data);
-        commit('currentLessonOrderSet', response.data);
-      })["catch"](function (error) {
-        dispatch('showNotification', error.response.data);
+      commit('setLoading', true); // axios('/api/lessonsOrder')
+      //     .then(response => {
+      //         commit('getAllLessonOrders', response.data);
+      //         commit('currentLessonOrderSet', response.data);
+      //     })
+      //     .catch(error => {
+      //         dispatch('showNotification', error.response.data);
+      //     });
+
+      dispatch('sendRequest', {
+        entity: 'lessonsOrder',
+        method: 'get',
+        toDoComm: ['getAllLessonOrders', 'currentLessonOrderSet']
       });
     },
     saveLessonOrder: function saveLessonOrder(_ref2, data) {
@@ -7007,7 +7033,6 @@ __webpack_require__.r(__webpack_exports__);
         },
         toDoComm: ['setSchedules', 'currentScheduleSet']
       });
-      commit('setLoading', false);
     },
     saveSchedule: function saveSchedule(_ref2, data) {
       var commit = _ref2.commit,
@@ -7179,7 +7204,6 @@ __webpack_require__.r(__webpack_exports__);
         },
         toDoComm: ['getAllUsers', 'currentUserSet']
       });
-      commit('setLoading', false);
     },
     saveUser: function saveUser(_ref2, data) {
       var commit = _ref2.commit,
@@ -7359,11 +7383,19 @@ __webpack_require__.r(__webpack_exports__);
     getAllWeeks: function getAllWeeks(_ref) {
       var commit = _ref.commit,
           dispatch = _ref.dispatch;
-      axios('/api/Week').then(function (response) {
-        commit('getAllWeeks', response.data);
-        commit('currentWeekSet', response.data);
-      })["catch"](function (error) {
-        dispatch('showNotification', error.response.data);
+      commit('setLoading', true); // axios('/api/Week')
+      //     .then(response => {
+      //         commit('getAllWeeks', response.data);
+      //         commit('currentWeekSet', response.data);
+      //     })
+      //     .catch(error => {
+      //         dispatch('showNotification', error.response.data);
+      //     });
+
+      dispatch('sendRequest', {
+        entity: 'Week',
+        method: 'get',
+        toDoComm: ['getAllWeeks', 'currentWeekSet']
       });
     },
     saveWeek: function saveWeek(_ref2, data) {
@@ -7552,6 +7584,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         if (request.method && request.method !== 'get') {
           dispatch('showNotification', response.data);
         }
+
+        commit('setLoading');
       })["catch"](function (error) {
         if (error.response.status !== 500) {
           dispatch('showNotification', error.response.data);
@@ -7565,7 +7599,6 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
           });
         }
       });
-      commit('setLoading', false);
     }
   },
   mutations: {
@@ -45811,6 +45844,45 @@ component.options.__file = "resources/js/components/all/CollapseToggler.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/all/DeleteIcon.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/all/DeleteIcon.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DeleteIcon_vue_vue_type_template_id_028c541d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteIcon.vue?vue&type=template&id=028c541d&scoped=true& */ "./resources/js/components/all/DeleteIcon.vue?vue&type=template&id=028c541d&scoped=true&");
+/* harmony import */ var _DeleteIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeleteIcon.vue?vue&type=script&lang=js& */ "./resources/js/components/all/DeleteIcon.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DeleteIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DeleteIcon_vue_vue_type_template_id_028c541d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DeleteIcon_vue_vue_type_template_id_028c541d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "028c541d",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/all/DeleteIcon.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/all/Dropdown.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/all/Dropdown.vue ***!
@@ -47240,6 +47312,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/all/DeleteIcon.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/all/DeleteIcon.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DeleteIcon.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/DeleteIcon.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/all/Dropdown.vue?vue&type=script&lang=js&":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/all/Dropdown.vue?vue&type=script&lang=js& ***!
@@ -48284,6 +48372,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseToggler_vue_vue_type_template_id_4bb3c1b0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapseToggler_vue_vue_type_template_id_4bb3c1b0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CollapseToggler.vue?vue&type=template&id=4bb3c1b0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/CollapseToggler.vue?vue&type=template&id=4bb3c1b0&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/all/DeleteIcon.vue?vue&type=template&id=028c541d&scoped=true&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/all/DeleteIcon.vue?vue&type=template&id=028c541d&scoped=true& ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteIcon_vue_vue_type_template_id_028c541d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteIcon_vue_vue_type_template_id_028c541d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteIcon_vue_vue_type_template_id_028c541d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DeleteIcon.vue?vue&type=template&id=028c541d&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/DeleteIcon.vue?vue&type=template&id=028c541d&scoped=true&");
 
 
 /***/ }),
@@ -50438,7 +50543,17 @@ var render = function () {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "w-100 grid-3" },
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: !_vm.getLoading,
+                expression: "!getLoading",
+              },
+            ],
+            staticClass: "w-100 grid-3",
+          },
           _vm._l(_vm.groupedSchedules, function (weeks, department) {
             return _c(
               "div",
@@ -50675,13 +50790,19 @@ var render = function () {
     },
     [
       _c("div", { staticClass: "card-body" }, [
-        _c("h5", { staticClass: "card-title" }, [
-          _vm._v(
-            "\n            " +
-              _vm._s(_vm.schedule.lesson_order_name) +
-              "\n        "
-          ),
-        ]),
+        _c(
+          "h5",
+          { staticClass: "card-title justify-content-between d-flex" },
+          [
+            _vm._v(
+              "\n            " +
+                _vm._s(_vm.schedule.lesson_order_name) +
+                "\n            "
+            ),
+            _c("DeleteIcon", { on: { clickDelete: _vm.deleteD } }),
+          ],
+          1
+        ),
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
           _vm._v(
@@ -52443,6 +52564,42 @@ var render = function () {
       },
     },
     [_c("span", { staticClass: "navbar-toggler-icon" })]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/DeleteIcon.vue?vue&type=template&id=028c541d&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/DeleteIcon.vue?vue&type=template&id=028c541d&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "delete-icon",
+      on: {
+        click: function ($event) {
+          return _vm.$emit("clickDelete")
+        },
+      },
+    },
+    [_c("img", { attrs: { src: "/img/delete-icon.svg" } })]
   )
 }
 var staticRenderFns = []
@@ -69955,6 +70112,7 @@ var map = {
 	"./all/BootstrapModalConfirm.vue": "./resources/js/components/all/BootstrapModalConfirm.vue",
 	"./all/Card.vue": "./resources/js/components/all/Card.vue",
 	"./all/CollapseToggler.vue": "./resources/js/components/all/CollapseToggler.vue",
+	"./all/DeleteIcon.vue": "./resources/js/components/all/DeleteIcon.vue",
 	"./all/Dropdown.vue": "./resources/js/components/all/Dropdown.vue",
 	"./all/Footer.vue": "./resources/js/components/all/Footer.vue",
 	"./all/Header.vue": "./resources/js/components/all/Header.vue",

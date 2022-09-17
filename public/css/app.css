@@ -10485,3 +10485,14 @@ button.card-header {
     text-align: left;
 }
 
+.delete-icon img {
+    width: 24px;
+    height: auto;
+    opacity: 0.6;
+    transition: .1s linear;
+}
+
+.delete-icon:hover img {
+    opacity: 1;
+}
+
