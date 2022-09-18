@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
-        <label v-if="code" :for="code">{{alias}}<slot></slot></label>
-        <input type="text" class="form-control btn-secondary" :placeholder="placeholder" :id="code" autocomplete="off"
+        <label v-if="id" :for="id">{{alias}}<slot></slot></label>
+        <input type="text" class="form-control btn-secondary" :placeholder="placeholder" :id="id" autocomplete="off"
                :name="inputName" :value="valueInput" @keypress.enter="change" @input="change" :disabled="isDisabled">
     </div>
 </template>
@@ -21,7 +21,7 @@
                 type: String,
                 default: '...'
             },
-            code: {
+            id: {
                 type: String
             },
             placeholder: {

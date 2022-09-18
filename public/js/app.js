@@ -5442,7 +5442,7 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": '...'
     },
-    code: {
+    id: {
       type: String
     },
     placeholder: {
@@ -51095,7 +51095,7 @@ var render = function () {
           _vm._v(" "),
           _c("inputText", {
             attrs: {
-              code: "name",
+              id: "start_time",
               alias: "Начало",
               placeholder: "Начало",
               inputName: "start_time",
@@ -51105,7 +51105,7 @@ var render = function () {
           _vm._v(" "),
           _c("inputText", {
             attrs: {
-              code: "name",
+              id: "end_time",
               alias: "Конец",
               placeholder: "Конец",
               inputName: "end_time",
@@ -51115,7 +51115,7 @@ var render = function () {
           _vm._v(" "),
           _c("inputText", {
             attrs: {
-              code: "name",
+              id: "break",
               alias: "Перемена (Минут)",
               placeholder: "Перемена",
               inputName: "break",
@@ -53360,10 +53360,10 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "form-group" }, [
-    _vm.code
+    _vm.id
       ? _c(
           "label",
-          { attrs: { for: _vm.code } },
+          { attrs: { for: _vm.id } },
           [_vm._v(_vm._s(_vm.alias)), _vm._t("default")],
           2
         )
@@ -53374,7 +53374,7 @@ var render = function () {
       attrs: {
         type: "text",
         placeholder: _vm.placeholder,
-        id: _vm.code,
+        id: _vm.id,
         autocomplete: "off",
         name: _vm.inputName,
         disabled: _vm.isDisabled,

@@ -5,9 +5,9 @@
                 <h5 >{{getCurrentSchedule.department_name}}</h5>
                 <h5 >{{getCurrentSchedule.week_day_name + " " + getCurrentSchedule.lesson_order_name}}</h5>
             </div>
-            <inputText code="name" alias="Начало" placeholder="Начало"  inputName="start_time" :valueInput="getCurrentSchedule.start_time"/>
-            <inputText code="name" alias="Конец" placeholder="Конец"  inputName="end_time" :valueInput="getCurrentSchedule.end_time"/>
-            <inputText code="name" alias="Перемена (Минут)" placeholder="Перемена"  inputName="break" :valueInput="getCurrentSchedule.break"/>
+            <inputText id="start_time" alias="Начало" placeholder="Начало"  inputName="start_time" :valueInput="getCurrentSchedule.start_time"/>
+            <inputText id="end_time" alias="Конец" placeholder="Конец"  inputName="end_time" :valueInput="getCurrentSchedule.end_time"/>
+            <inputText id="break" alias="Перемена (Минут)" placeholder="Перемена"  inputName="break" :valueInput="getCurrentSchedule.break"/>
 
             <div class="row mt-4">
                 <SaveButton target="#saveConfirm"/>
