@@ -124,7 +124,7 @@ export default {
         },
         updateSchedule: (state, data) => {
             state.scheduleData.map((obj, index) => {
-                if (obj.id === data.id) {
+                if (obj.id == data.id) {
                     data.start_time ? state.scheduleData[index].start_time = data.start_time : false;
                     data.end_time ? state.scheduleData[index].end_time = data.end_time : false;
                     data.break ? state.scheduleData[index].break = data.break : false;

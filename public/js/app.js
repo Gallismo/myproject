@@ -7254,7 +7254,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateSchedule: function updateSchedule(state, data) {
       state.scheduleData.map(function (obj, index) {
-        if (obj.id === data.id) {
+        if (obj.id == data.id) {
           data.start_time ? state.scheduleData[index].start_time = data.start_time : false;
           data.end_time ? state.scheduleData[index].end_time = data.end_time : false;
           data["break"] ? state.scheduleData[index]["break"] = data["break"] : false;
