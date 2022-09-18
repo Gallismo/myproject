@@ -3605,7 +3605,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _mixins_checkTimeFormat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../mixins/checkTimeFormat */ "./resources/js/mixins/checkTimeFormat.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -3634,19 +3635,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ScheduleEdit",
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['saveSchedule', 'deleteSchedule'])), {}, {
+  mixins: [_mixins_checkTimeFormat__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['saveSchedule', 'deleteSchedule'])), {}, {
     openModalSave: function openModalSave() {
       $('#saveConfirm').modal('show');
-    },
-    checkTimeFormat: function checkTimeFormat() {
-      var start_time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-      var end_time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-      var regExp = new RegExp('^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$');
-      if (!regExp.test(start_time)) return false;
-      if (!regExp.test(end_time)) return false;
-      return true;
     },
     save: function save() {
       var start_time = $('#scheduleEdit input[name=start_time]').val().trim();
@@ -3670,7 +3665,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.saveSchedule(data);
     }
   }),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentSchedule', 'getRolesData', 'getGroupDropdown']))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getCurrentSchedule', 'getRolesData', 'getGroupDropdown']))
 });
 
 /***/ }),
@@ -5850,6 +5845,32 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process..env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/mixins/checkTimeFormat.js":
+/*!************************************************!*\
+  !*** ./resources/js/mixins/checkTimeFormat.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  methods: {
+    checkTimeFormat: function checkTimeFormat() {
+      var start_time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var end_time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+      var regExp = new RegExp('^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$');
+      if (!regExp.test(start_time)) return false;
+      if (!regExp.test(end_time)) return false;
+      return true;
+    }
+  }
+});
 
 /***/ }),
 
