@@ -1,5 +1,5 @@
 <template>
-    <div class="card bg-dark text-white grid-item mb-1" :data-id="schedule.id">
+    <div class="card bg-dark text-white grid-item mb-1" :data-id="schedule.id" @click="openModalEdit">
         <div class="card-body">
             <h5 class="card-title justify-content-between d-flex">
                 {{ schedule.lesson_order_name }}
@@ -24,6 +24,12 @@ export default {
             type: Object,
             required: true
         }
+    },
+    methods: {
+        openModalEdit() {
+            this.$store.dispatch('switchSchedule', this.schedule.id)
+            $('#editModal').modal('show');
+        },
     }
 }
 </script>

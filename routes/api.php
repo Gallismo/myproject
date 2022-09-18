@@ -76,8 +76,8 @@ Route::get('/Schedule', [\App\Http\Controllers\MainReadController::class, 'getSc
     Route::delete('/Group', [\App\Http\Controllers\GroupController::class, 'deleteGroup']);
     Route::patch('/Group', [\App\Http\Controllers\GroupController::class, 'editGroup']);
 
-    Route::post('/Schedule', [\App\Http\Controllers\ScheduleController::class, 'createSchedule']);
-    Route::patch('/Schedule', [\App\Http\Controllers\ScheduleController::class, 'editSchedule']);
+    Route::post('/Schedule', [\App\Http\Controllers\ScheduleController::class, 'createSchedule'])->middleware('timeConvert');
+    Route::patch('/Schedule', [\App\Http\Controllers\ScheduleController::class, 'editSchedule'])->middleware('timeConvert');
     Route::delete('/Schedule', [\App\Http\Controllers\ScheduleController::class, 'deleteSchedule']);
 
     Route::post('/lessonBooking', [\App\Http\Controllers\LessonsBookingsController::class, 'createLessonBooking']);

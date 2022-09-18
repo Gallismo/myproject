@@ -82,9 +82,6 @@
             filter() {
                 this.getSchedule(this.query);
             },
-            openModalEdit() {
-                $('#editModal').modal('show');
-            },
             openModalCreate() {
                 $('#createModal').modal('show');
             },

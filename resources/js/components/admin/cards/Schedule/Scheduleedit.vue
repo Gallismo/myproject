@@ -1,6 +1,6 @@
 <template>
     <div class="card bg-dark text-white">
-        <form class="card-body" id="scheduleEdit" :data-id="getCurrentSchedule.code" @keypress.enter="openModalSave">
+        <form class="card-body" id="scheduleEdit" :data-id="getCurrentSchedule.id" @keypress.enter="openModalSave">
             <div class="card-title">
                 <h5 >{{getCurrentSchedule.department_name}}</h5>
                 <h5 >{{getCurrentSchedule.week_day_name + " " + getCurrentSchedule.lesson_order_name}}</h5>
@@ -11,13 +11,11 @@
 
             <div class="row mt-4">
                 <SaveButton target="#saveConfirm"/>
-                <DeleteButton target="#deleteConfirm"/>
             </div>
 
         </form>
 
         <BootstrapModalConfirm id="saveConfirm" @confirmEvent="save"></BootstrapModalConfirm>
-        <BootstrapModalConfirm id="deleteConfirm" @confirmEvent="deleteD"></BootstrapModalConfirm>
     </div>
 </template>
 
@@ -31,22 +29,44 @@
             openModalSave() {
                 $('#saveConfirm').modal('show');
             },
+            checkTimeFormat(start_time = '', end_time = '') {
+                const startTimeArr = start_time.split(":");
+                const endTimeArr = end_time.split(":");
+                const startHour = startTimeArr[0];
+                const startMin = startTimeArr[1];
+                const endHour = endTimeArr[0];
+                const endMin = endTimeArr[1];
+                if ((Number.isNaN(startHour) || startHour === undefined || startHour.length !== 2) ||
+                    (Number.isNaN(startMin)  || startMin === undefined  || startMin.length !== 2)) return false;
+
+                if ((Number.isNaN(endHour)   || endHour === undefined   || endHour.length !== 2)   ||
+                    (Number.isNaN(endMin)    || endMin === undefined    || endMin.length !== 2)) return false;
+
+                return true;
+            },
             save() {
+                const start_time = $('#scheduleEdit input[name=start_time]').val().trim();
+                const end_time = $('#scheduleEdit input[name=end_time]').val().trim();
+                if(!this.checkTimeFormat(start_time, end_time)) {
+                    this.$store.dispatch('showNotification', {
+                        title: 'Ошибка ввода',
+                        body: 'Неправильный формат ввода времени, требуется вводить в формате ЧЧ:ММ (например 12:30)',
+                        errors: [
+                            [`Вы ввели: " ${start_time} " и " ${end_time} "`]
+                        ]
+                    });
+                    return;
+                }
+
                 const data = {
-                    code: $('#scheduleEdit').attr('data-id'),
-                    start_time: $('#scheduleEdit input[name=start_time]').val(),
-                    end_time: $('#scheduleEdit input[name=end_time]').val(),
+                    id: $('#scheduleEdit').attr('data-id'),
+                    start_time: start_time,
+                    end_time: end_time,
                     break: $('#scheduleEdit input[name=break]').val(),
                 };
 
                 this.saveSchedule(data);
-            },
-            deleteD() {
-                const data = {
-                    login: $('#userEdit .card-title').text()
-                };
-                this.deleteUser(data);
-            },
+            }
         },
         computed: {
             ...mapGetters(['getCurrentSchedule', 'getRolesData', 'getGroupDropdown'])
