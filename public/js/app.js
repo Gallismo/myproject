@@ -3643,14 +3643,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     checkTimeFormat: function checkTimeFormat() {
       var start_time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       var end_time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-      var startTimeArr = start_time.split(":");
-      var endTimeArr = end_time.split(":");
-      var startHour = startTimeArr[0];
-      var startMin = startTimeArr[1];
-      var endHour = endTimeArr[0];
-      var endMin = endTimeArr[1];
-      if (Number.isNaN(startHour) || startHour === undefined || startHour.length !== 2 || Number.isNaN(startMin) || startMin === undefined || startMin.length !== 2) return false;
-      if (Number.isNaN(endHour) || endHour === undefined || endHour.length !== 2 || Number.isNaN(endMin) || endMin === undefined || endMin.length !== 2) return false;
+      var regExp = new RegExp('^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$');
+      if (!regExp.test(start_time)) return false;
+      if (!regExp.test(end_time)) return false;
       return true;
     },
     save: function save() {

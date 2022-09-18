@@ -30,17 +30,11 @@
                 $('#saveConfirm').modal('show');
             },
             checkTimeFormat(start_time = '', end_time = '') {
-                const startTimeArr = start_time.split(":");
-                const endTimeArr = end_time.split(":");
-                const startHour = startTimeArr[0];
-                const startMin = startTimeArr[1];
-                const endHour = endTimeArr[0];
-                const endMin = endTimeArr[1];
-                if ((Number.isNaN(startHour) || startHour === undefined || startHour.length !== 2) ||
-                    (Number.isNaN(startMin)  || startMin === undefined  || startMin.length !== 2)) return false;
+                const regExp = new RegExp('^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$')
 
-                if ((Number.isNaN(endHour)   || endHour === undefined   || endHour.length !== 2)   ||
-                    (Number.isNaN(endMin)    || endMin === undefined    || endMin.length !== 2)) return false;
+                if (!regExp.test(start_time)) return false;
+
+                if (!regExp.test(end_time)) return false;
 
                 return true;
             },
