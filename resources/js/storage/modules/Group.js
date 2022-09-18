@@ -22,14 +22,19 @@ export default {
             dispatch('sendRequest', {
                 entity: 'Group',
                 method: 'get',
+                params: {
+                    department: query.department,
+                    start: query.start,
+                    end: query.end
+                },
                 toDoComm: [
                     'groupsDataFill',
                     'currentGroupFill'
                 ]
             });
         },
-        switchCurrentGroup: ({commit, dispatch}, code) => {
-            commit('switchCurrentGroup', code)
+        switchCurrentGroup: ({commit, dispatch}, id) => {
+            commit('switchCurrentGroup', id)
         },
         editGroup: ({commit, dispatch}, data) => {
             // axios({
@@ -106,37 +111,29 @@ export default {
         },
         updateGroup: (state, data) => {
             state.groupsData.map((obj, index) => {
-                if (obj.code === data.code) {
-                    console.log(data.department_name);
-                    data.name ? state.groupsData[index].name = data.name : false;
-                    data.department_name ? state.groupsData[index].department_name = data.department_name : false;
-                    data.start_year ? state.groupsData[index].start_year = data.start_year : false;
-                    data.end_year ? state.groupsData[index].end_year = data.end_year : false;
+                if (obj.id == data.id) {
+                    state.groupsData[index].name            = data.name             ?? state.groupsData[index].name;
+                    state.groupsData[index].department_name = data.department_name  ?? state.groupsData[index].department_name;
+                    state.groupsData[index].start_year      = data.start_year       ?? state.groupsData[index].start_year;
+                    state.groupsData[index].end_year        = data.end_year         ?? state.groupsData[index].end_year;
                 }
             });
         },
         deleteGroupData: (state, data) => {
             state.groupsData.map((obj, index) => {
-                    if (obj.code === data.code) {
+                    if (obj.id == data.id) {
                         state.groupsData.splice(index, 1)
                     }
             });
             state.currentGroup = state.groupsData[0]
         },
-        switchCurrentGroup: (state, code) => {
-            state.currentGroup = state.groupsData.find(obj => obj.code === code);
+        switchCurrentGroup: (state, id) => {
+            state.currentGroup = state.groupsData.find(obj => obj.id == id);
         },
-        setLoadingGroup(state, type) {
-            if (state.loadingGroup === type) {
-                return false;
-            }
-            state.loadingGroup = !state.loadingGroup;
-        }
     },
     state: {
         groupsData: [],
         currentGroup: {},
-        loadingGroup: false
     },
     getters: {
         getGroupsData: state => {
@@ -144,10 +141,9 @@ export default {
         },
         getGroupDropdown: state => {
             let DropdownProp = {};
-            state.groupsData.map(group => DropdownProp[group.code] = group.name);
+            state.groupsData.map(group => DropdownProp[group.id] = group.name);
             return DropdownProp;
         },
         getCurrentGroup: state => {return state.currentGroup},
-        loadingGroup(state) {return state.loadingGroup}
     }
 }

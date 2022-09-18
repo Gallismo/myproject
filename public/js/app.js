@@ -4282,7 +4282,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       $('#createModal').modal('show');
     }
   }),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['getCurrentGroup', 'getGroupsData', 'getCurrentDepartment', 'getDepartmentDropdown', 'loadingGroup']))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['getCurrentGroup', 'getGroupsData', 'getCurrentDepartment', 'getDepartmentDropdown', 'getLoading']))
 });
 
 /***/ }),
@@ -4474,7 +4474,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.inputs.name.value ? data['name'] = this.inputs.name.value : false;
 
       if (this.inputs.department_name.value) {
-        data['department_code'] = Object.keys(this.getDepartmentDropdown).find(function (key) {
+        data['department_id'] = Object.keys(this.getDepartmentDropdown).find(function (key) {
           return _this.getDepartmentDropdown[key] === _this.inputs.department_name.value;
         });
       }
@@ -4586,7 +4586,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       var data = {
-        code: this.getCurrentGroup.code
+        id: this.getCurrentGroup.id
       };
       this.inputs.name.value ? data['name'] = this.inputs.name.value : false;
 
@@ -4656,10 +4656,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['switchCurrentGroup'])), {}, {
-    switcher: function switcher(e) {
-      var parent = e.target.parentElement;
-      this.$store.dispatch(this.data_switch, parent.id);
-      this.$emit('clickEvent', parent.id);
+    switcher: function switcher(event) {
+      var element = $(event.target).parents('.list-group')[0];
+      var id = $(element).attr('data-id');
+      console.log(id);
+      this.$store.dispatch(this.data_switch, id);
+      this.$emit('clickEvent', id);
     }
   })
 });
@@ -6280,7 +6282,7 @@ __webpack_require__.r(__webpack_exports__);
     getDepartmentDropdown: function getDepartmentDropdown(state) {
       var DropdownProp = {};
       state.departmentsData.map(function (department) {
-        return DropdownProp[department.code] = department.name;
+        return DropdownProp[department.id] = department.name;
       });
       return DropdownProp;
     },
@@ -6343,6 +6345,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 dispatch('sendRequest', {
                   entity: 'Group',
                   method: 'get',
+                  params: {
+                    department: query.department,
+                    start: query.start,
+                    end: query.end
+                  },
                   toDoComm: ['groupsDataFill', 'currentGroupFill']
                 });
 
@@ -6354,10 +6361,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    switchCurrentGroup: function switchCurrentGroup(_ref2, code) {
+    switchCurrentGroup: function switchCurrentGroup(_ref2, id) {
       var commit = _ref2.commit,
           dispatch = _ref2.dispatch;
-      commit('switchCurrentGroup', code);
+      commit('switchCurrentGroup', id);
     },
     editGroup: function editGroup(_ref3, data) {
       var commit = _ref3.commit,
@@ -6434,40 +6441,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     updateGroup: function updateGroup(state, data) {
       state.groupsData.map(function (obj, index) {
-        if (obj.code === data.code) {
-          console.log(data.department_name);
-          data.name ? state.groupsData[index].name = data.name : false;
-          data.department_name ? state.groupsData[index].department_name = data.department_name : false;
-          data.start_year ? state.groupsData[index].start_year = data.start_year : false;
-          data.end_year ? state.groupsData[index].end_year = data.end_year : false;
+        if (obj.id == data.id) {
+          var _data$name, _data$department_name, _data$start_year, _data$end_year;
+
+          state.groupsData[index].name = (_data$name = data.name) !== null && _data$name !== void 0 ? _data$name : state.groupsData[index].name;
+          state.groupsData[index].department_name = (_data$department_name = data.department_name) !== null && _data$department_name !== void 0 ? _data$department_name : state.groupsData[index].department_name;
+          state.groupsData[index].start_year = (_data$start_year = data.start_year) !== null && _data$start_year !== void 0 ? _data$start_year : state.groupsData[index].start_year;
+          state.groupsData[index].end_year = (_data$end_year = data.end_year) !== null && _data$end_year !== void 0 ? _data$end_year : state.groupsData[index].end_year;
         }
       });
     },
     deleteGroupData: function deleteGroupData(state, data) {
       state.groupsData.map(function (obj, index) {
-        if (obj.code === data.code) {
+        if (obj.id == data.id) {
           state.groupsData.splice(index, 1);
         }
       });
       state.currentGroup = state.groupsData[0];
     },
-    switchCurrentGroup: function switchCurrentGroup(state, code) {
+    switchCurrentGroup: function switchCurrentGroup(state, id) {
       state.currentGroup = state.groupsData.find(function (obj) {
-        return obj.code === code;
+        return obj.id == id;
       });
-    },
-    setLoadingGroup: function setLoadingGroup(state, type) {
-      if (state.loadingGroup === type) {
-        return false;
-      }
-
-      state.loadingGroup = !state.loadingGroup;
     }
   },
   state: {
     groupsData: [],
-    currentGroup: {},
-    loadingGroup: false
+    currentGroup: {}
   },
   getters: {
     getGroupsData: function getGroupsData(state) {
@@ -6476,15 +6476,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getGroupDropdown: function getGroupDropdown(state) {
       var DropdownProp = {};
       state.groupsData.map(function (group) {
-        return DropdownProp[group.code] = group.name;
+        return DropdownProp[group.id] = group.name;
       });
       return DropdownProp;
     },
     getCurrentGroup: function getCurrentGroup(state) {
       return state.currentGroup;
-    },
-    loadingGroup: function loadingGroup(state) {
-      return state.loadingGroup;
     }
   }
 });
@@ -51736,7 +51733,7 @@ var render = function () {
               {
                 key: index,
                 staticClass: "dropdown-item",
-                attrs: { id: index },
+                attrs: { "data-id": index },
                 on: { click: _vm.switcher },
               },
               [_vm._v("\n            " + _vm._s(item) + "\n        ")]
@@ -51871,8 +51868,8 @@ var render = function () {
                       {
                         name: "show",
                         rawName: "v-show",
-                        value: !_vm.loadingGroup,
-                        expression: "!loadingGroup",
+                        value: !_vm.getLoading,
+                        expression: "!getLoading",
                       },
                     ],
                     staticClass:
@@ -51900,8 +51897,8 @@ var render = function () {
                   {
                     name: "show",
                     rawName: "v-show",
-                    value: !_vm.loadingGroup,
-                    expression: "!loadingGroup",
+                    value: !_vm.getLoading,
+                    expression: "!getLoading",
                   },
                 ],
                 key: group.code,
@@ -51918,8 +51915,8 @@ var render = function () {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.loadingGroup,
-              expression: "loadingGroup",
+              value: _vm.getLoading,
+              expression: "getLoading",
             },
           ],
         }),
@@ -52270,7 +52267,7 @@ var render = function () {
     "ul",
     {
       staticClass: "list-group list-group-horizontal text-white",
-      attrs: { id: _vm.group.code },
+      attrs: { "data-id": _vm.group.id },
       on: { click: _vm.switcher },
     },
     [
@@ -53185,13 +53182,13 @@ var render = function () {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm._l(_vm.items, function (name, code) {
+      _vm._l(_vm.items, function (name, id) {
         return _c(
           "option",
           {
-            key: code,
-            attrs: { id: code },
-            domProps: { selected: name === _vm.select, value: code },
+            key: "drop" + id,
+            attrs: { "data-id": id },
+            domProps: { selected: name === _vm.select, value: id },
           },
           [_vm._v(_vm._s(name))]
         )

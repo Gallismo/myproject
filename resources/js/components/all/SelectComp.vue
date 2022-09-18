@@ -1,7 +1,7 @@
 <template>
     <select class="form-control btn-secondary" @change="change">
         <option :value="defaultValue" :disabled="isDisabled" v-if="defaultValue || defaultTitle">{{defaultTitle}}</option>
-        <option v-for="(name, code) in items" :selected="name === select" :key="code" :value="code" :id="code">{{name}}</option>
+        <option v-for="(name, id) in items" :selected="name === select" :key="'drop'+id" :value="id" :data-id="id">{{name}}</option>
     </select>
 </template>
 

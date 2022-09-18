@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 //})->where('any', '.*');
 
 Route::get('/', function () {
-    return view('index');
+    return redirect('/admin');
 });
 Route::get('/admin', function () {
     return view('index');

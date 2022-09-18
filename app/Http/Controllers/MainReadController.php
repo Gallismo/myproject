@@ -24,8 +24,7 @@ class MainReadController extends Controller
         $groups = Group::orderBy('name');
 
         if (isset($queries['department'])) {
-            $department = Department::where('code', $queries['department'])->first();
-            $groups = $groups->where('department_id', $department->id);
+            $groups = $groups->where('department_id', $queries['department']);
         }
 
         if (isset($queries['start'])) {

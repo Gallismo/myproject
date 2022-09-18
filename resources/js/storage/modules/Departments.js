@@ -124,7 +124,7 @@ export default {
         getDepartmentsData: state => {return state.departmentsData},
         getDepartmentDropdown: state => {
             let DropdownProp = {};
-            state.departmentsData.map(department => DropdownProp[department.code] = department.name);
+            state.departmentsData.map(department => DropdownProp[department.id] = department.name);
             return DropdownProp;
         },
         getCurrentDepartment: state => {return state.currentDepartment}

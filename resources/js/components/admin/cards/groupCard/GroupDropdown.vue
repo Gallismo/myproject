@@ -6,7 +6,7 @@
         <div class="dropdown-menu bg-dark mt-1 col-11" :aria-labelledby="id">
             <a class="dropdown-item" id="createGroup" @click="switcher">Создать новую</a>
             <a class="dropdown-item" v-for="(item, index) in getDropdownData"
-               :id="index" :key="index" @click="switcher">
+               :data-id="index" :key="index" @click="switcher">
                 {{item}}
             </a>
         </div>

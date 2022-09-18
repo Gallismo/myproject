@@ -27,16 +27,16 @@
             </div>
 
             <div class="row justify-content-center listGroups">
-                <ul class="list-group list-group-horizontal list-group-header" v-if="getCurrentGroup" v-show="!loadingGroup">
+                <ul class="list-group list-group-horizontal list-group-header" v-if="getCurrentGroup" v-show="!getLoading">
                     <li class="list-group-item bg-dark col-4">Название группы</li>
                     <li class="list-group-item bg-dark col-4">Отделение</li>
                     <li class="list-group-item bg-dark col-4">Годы</li>
                 </ul>
 
-                <groupList  v-for="group in getGroupsData" :group="group" :key="group.code" v-show="!loadingGroup" data_switch="switchCurrentGroup" @clickEvent="openModalEdit"/>
+                <groupList  v-for="group in getGroupsData" :group="group" :key="group.code" v-show="!getLoading" data_switch="switchCurrentGroup" @clickEvent="openModalEdit"/>
             </div>
 
-            <Loader v-show="loadingGroup"/>
+            <Loader v-show="getLoading"/>
 
             <BootstrapModal id="editModal" body="groupDescription" title="Редактирование"/>
             <BootstrapModal id="createModal" body="groupCreate" title="Добавление"/>
@@ -83,7 +83,7 @@
             }
         },
         computed: {
-            ...mapGetters(['getCurrentGroup', 'getGroupsData', 'getCurrentDepartment', 'getDepartmentDropdown', 'loadingGroup'])
+            ...mapGetters(['getCurrentGroup', 'getGroupsData', 'getCurrentDepartment', 'getDepartmentDropdown', 'getLoading'])
         }
     }
 </script>

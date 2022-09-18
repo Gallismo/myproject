@@ -74,7 +74,7 @@
             },
             submitChanges() {
                 const data = {
-                    code: this.getCurrentGroup.code
+                    id: this.getCurrentGroup.id
                 };
                 this.inputs.name.value ? data['name'] = this.inputs.name.value : false;
                 if (this.inputs.department_name.value) {

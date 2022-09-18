@@ -66,7 +66,7 @@
                 this.inputs.name.value ? data['name'] = this.inputs.name.value : false;
                 if (this.inputs.department_name.value) {
 
-                    data['department_code'] = Object.keys(this.getDepartmentDropdown)
+                    data['department_id'] = Object.keys(this.getDepartmentDropdown)
                                                 .find(key =>
                                                     this.getDepartmentDropdown[key] === this.inputs.department_name.value
                                                 )
