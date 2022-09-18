@@ -56,8 +56,7 @@ class ScheduleController extends Controller
         return $this->sendResp('Успешно', 'Расписание было успешно добавлено', 200);
     }
 
-    public function editSchedule (ScheduleRequest $request, ScheduleEditContract $scheduleEdit,
-                                  ScheduleCheckContract $scheduleCheck): JsonResponse
+    public function editSchedule (ScheduleRequest $request, ScheduleEditContract $scheduleEdit): JsonResponse
     {
         $request = $request->validated();
 
@@ -74,11 +73,6 @@ class ScheduleController extends Controller
         }
 
         $schedule = $scheduleEdit($request, Schedule::find($request['id']));
-
-        if ($scheduleCheck([], $schedule)) {
-            return $this->sendResp('Ошибка', 'Для выбранного отделения, дня недели и пары уже существует расписание', 422);
-        }
-
         $schedule->save();
 
         return $this->sendResp('Успешно', 'Расписание было успешно отредактировано', 200);

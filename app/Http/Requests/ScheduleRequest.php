@@ -52,12 +52,9 @@ class ScheduleRequest extends FormRequest
                 return [
                     'id' => 'required|integer|exists:schedules,id',
 
-                    'week_day_id' => 'required_without_all:start_time,end_time,break,lesson_order_id,department_id|
-                    integer|exists:week_days,id',
-                    'lesson_order_id' => 'required_without_all:start_time,end_time,break,week_day_id,department_id|
-                    integer|exists:lessons_orders,id',
-                    'department_id' => 'required_without_all:start_time,end_time,break,week_day_id,lesson_order_id|
-                    integer|exists:departments,id',
+                    'week_day_id' => 'exclude',
+                    'lesson_order_id' => 'exclude',
+                    'department_id' => 'exclude',
 
                     'start_time' => 'required_without_all:week_day_id,lesson_order_id,department_id,end_time,break|
                     required_with:end_time|array:hours,minutes',
