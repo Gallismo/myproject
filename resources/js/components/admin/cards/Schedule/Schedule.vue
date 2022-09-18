@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="w-100 grid-3" v-show="!getLoading">
+            <div class="w-100 grid-1 grid-md-2 grid-xl-3" v-show="!getLoading">
                 <div v-for="(weeks, department) in groupedSchedules" :key="department" class="mt-3 p-1">
                     <h3>{{department}}</h3>
                     <hr>

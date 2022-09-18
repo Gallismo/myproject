@@ -50611,7 +50611,7 @@ var render = function () {
                 expression: "!getLoading",
               },
             ],
-            staticClass: "w-100 grid-3",
+            staticClass: "w-100 grid-1 grid-md-2 grid-xl-3",
           },
           _vm._l(_vm.groupedSchedules, function (weeks, department) {
             return _c(
