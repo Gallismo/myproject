@@ -2,7 +2,7 @@
     <div>
         <div class="row justify-content-between align-items-center">
             <h5 class="col">Расписания звонков</h5>
-            <CreateButton col="col-8 col-sm-6 col-lg-3" name="Добавить пользователя" @clickButton="openModalCreate"/>
+            <CreateButton col="col-8 col-sm-6 col-lg-3" name="Добавить пару" @clickButton="openModalCreate"/>
         </div>
 
         <hr>
@@ -35,24 +35,13 @@
                     <hr>
                     <ScheduleDay v-for="(schedules, week) in weeks"
                                  :week_day="week" :schedules="schedules" :key="schedules[0].id" class="m-1"/>
-<!--                    <div v-for="(schedules, week) in weeks" class="p-2">-->
-<!--                        <h5>{{week}}</h5>-->
-<!--                        <hr>-->
-<!--                        <div class="grid-1 grid-gap-2">-->
-<!--                            <ScheduleCard v-for="schedule in schedules" :schedule="schedule"-->
-<!--                                          :key="'sch'+schedule.id" class="grid-item" data_switch_action="switchSchedule"-->
-<!--                                          @clickCard="openModalEdit"-->
-<!--                                          />-->
-<!--                        </div>-->
-<!--                    </div>-->
-
                 </div>
             </div>
 
 
             <BootstrapModalConfirm id="deleteConfirm" @confirmEvent="del"/>
             <BootstrapModal id="editModal" body="Scheduleedit" title="Редактирование"/>
-            <BootstrapModal id="createModal" body="UserCreate" title="Добавление"/>
+            <BootstrapModal id="createModal" body="SheduleCreate" title="Добавление"/>
 
             <Loader v-show="getLoading"/>
         </div>

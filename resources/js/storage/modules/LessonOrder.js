@@ -86,14 +86,14 @@ export default {
                 ]
             });
         },
-        switchLessonOrder({commit, dispatch}, code) {
-            commit('switchLessonOrder', code);
+        switchLessonOrder({commit, dispatch}, id) {
+            commit('switchLessonOrder', id);
         }
     },
     mutations: {
         deleteLessonOrder(state, data) {
             state.lessonOrdersData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.id == data.id) {
                     state.lessonOrdersData.splice(index, 1)
                 }
             });
@@ -105,12 +105,12 @@ export default {
         currentLessonOrderSet: (state, response) => {
             state.currentLessonOrder = response[0]
         },
-        switchLessonOrder(state, code) {
-            state.currentLessonOrder = state.lessonOrdersData.find(lessonOrder => lessonOrder.code === code);
+        switchLessonOrder(state, id) {
+            state.currentLessonOrder = state.lessonOrdersData.find(lessonOrder => lessonOrder.id == id);
         },
         updateLessonOrder: (state, data) => {
             state.lessonOrdersData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.id == data.id) {
                     data.name ? state.lessonOrdersData[index].name = data.name : false;
                 }
             });
@@ -126,7 +126,7 @@ export default {
         },
         getLessonOrderDropdown: state => {
             let DropdownProp = {};
-            state.lessonOrdersData.map(lessonOrder => DropdownProp[lessonOrder.code] = lessonOrder.name);
+            state.lessonOrdersData.map(lessonOrder => DropdownProp[lessonOrder.id] = lessonOrder.name);
             return DropdownProp;
         },
         getCurrentLessonOrder: state => {return state.currentLessonOrder}

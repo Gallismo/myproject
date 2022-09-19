@@ -10506,3 +10506,38 @@ button.delete-icon {
     opacity: 1;
 }
 
+button.plus-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.plus-icon img {
+    width: 24px;
+    height: auto;
+    opacity: 0.6;
+    transition: .1s linear;
+
+}
+
+.plus-icon:hover img {
+    opacity: 1;
+}
+#addLessonModal .modal-dialog {
+    max-width: 85%;
+}
+#addLessonModal .form-control{
+    width:auto;
+}
+#addLessonModal form{
+    display:flex;
+    justify-content: space-between;
+}
+

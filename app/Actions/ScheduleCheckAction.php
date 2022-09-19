@@ -8,7 +8,7 @@ use App\Models\Schedule;
 class ScheduleCheckAction implements \App\Contracts\ScheduleCheckContract
 {
 
-    public function __invoke(array $request, Schedule $schedule = null): Schedule
+    public function __invoke(array $request, Schedule $schedule = null): Schedule | null
     {
         if (empty($request) && !is_null($schedule)) {
             return Schedule::where('week_day_id', $schedule->week_day_id)

@@ -86,14 +86,14 @@ export default {
                 ]
             });
         },
-        switchWeek({commit, dispatch}, code) {
-            commit('switchWeek', code);
+        switchWeek({commit, dispatch}, id) {
+            commit('switchWeek', id);
         }
     },
     mutations: {
         deleteWeek(state, data) {
             state.weeksData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.id == data.id) {
                     state.weeksData.splice(index, 1)
                 }
             });
@@ -105,12 +105,12 @@ export default {
         currentWeekSet: (state, response) => {
             state.currentWeek = response[0]
         },
-        switchWeek(state, code) {
-            state.currentWeek = state.weeksData.find(week => week.code === code);
+        switchWeek(state, id) {
+            state.currentWeek = state.weeksData.find(week => week.id == id);
         },
         updateWeek: (state, data) => {
             state.weeksData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.id == data.id) {
                     data.name ? state.weeksData[index].name = data.name : false;
                 }
             });
@@ -126,7 +126,7 @@ export default {
         },
         getWeekDropdown: state => {
             let DropdownProp = {};
-            state.weeksData.map(week => DropdownProp[week.code] = week.name);
+            state.weeksData.map(week => DropdownProp[week.id] = week.name);
             return DropdownProp;
         },
         getCurrentWeek: state => {return state.currentWeek}

@@ -103,7 +103,7 @@ const store = new Vuex.Store({
                 // }
             }
         },
-        currentTab: "Schedule",
+        currentTab: "Booking",
         loading: false
     },
     getters: {
