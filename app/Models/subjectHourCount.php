@@ -11,9 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int|null $group_id
  * @property int|null $subject_id
- * @property int $hours_all
- * @property int $hours_left
- * @property string $code
+ * @property int $hours
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|subjectHourCount newModelQuery()
@@ -36,8 +34,7 @@ class subjectHourCount extends Model
     protected $fillable = [
         'group_id',
         'subject_id',
-        'hours_all',
-        'hours_left'
+        'hours',
     ];
 
     protected $hidden = [
