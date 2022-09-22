@@ -11,36 +11,310 @@
                 "tags": [
                     "Audience"
                 ],
+                "description": "Добавить аудиторию",
                 "operationId": "9e4c1746f1bf414877327907efadeafd",
                 "requestBody": {
-                    "description": "Название для созданной аудитории",
+                    "description": "Тело запроса для создания аудитории",
                     "required": true,
                     "content": {
                         "application/json": {
-                            "schema": {},
-                            "example": {
-                                "name": "38"
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Название аудитории",
+                                        "type": "string",
+                                        "example": "38"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Аудитория добавлена"
+                        "description": "Аудитория добавлена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessRespone"
+                                }
+                            }
+                        }
                     },
                     "422": {
                         "description": "Валидация не пройдена",
                         "content": {
                             "application/json": {
-                                "schema": {},
-                                "example": {
-                                    "title": "Ошибка валидации",
-                                    "text": "Проверьте правильность заполнения полей",
-                                    "errors": {
-                                        "name": [
-                                            "Поле `Название` обязательно для заполнения."
-                                        ]
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Audience"
+                ],
+                "description": "Удалить аудиторию",
+                "operationId": "7fbe0bdd3a5d10c64821b61651b5b145",
+                "requestBody": {
+                    "description": "Тело запроса для удаления аудитории",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "ID аудитории",
+                                        "type": "integer",
+                                        "example": "1"
                                     }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Аудитория удалена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessRespone"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Валидация не пройдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Audience"
+                ],
+                "description": "Отредактировать аудиторию",
+                "operationId": "841d1024c22595e4be88ab82b070e718",
+                "requestBody": {
+                    "description": "Тело запроса для редактирования аудитории",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "ID аудитории",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "description": "Название аудитории",
+                                        "type": "string",
+                                        "example": "38"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Аудитория отредактирована",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessRespone"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Валидация не пройдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Department": {
+            "post": {
+                "tags": [
+                    "Department"
+                ],
+                "description": "Добавить отделение",
+                "operationId": "fad5692be39ecfcf6fee28a9944e6256",
+                "requestBody": {
+                    "description": "Тело запроса для создания отделения",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Название отделения",
+                                        "type": "string",
+                                        "example": "Технологическое"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Отделение добавлено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessRespone"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Валидация не пройдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Department"
+                ],
+                "description": "Удалить отделение",
+                "operationId": "339ba953fe61b1513316c5ac9a210b44",
+                "requestBody": {
+                    "description": "Тело запроса для удаления отделения",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "ID отделения",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Отделение удалено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessRespone"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Валидация не пройдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Department"
+                ],
+                "description": "Отредактировать отделение",
+                "operationId": "0155b1ef48f1dfc20164b7ca1af061c1",
+                "requestBody": {
+                    "description": "Тело запроса для редактирования отделения",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Название отделения",
+                                        "type": "string",
+                                        "example": "Технологическое"
+                                    },
+                                    "id": {
+                                        "description": "ID отделения",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Отделение отредактировано",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessRespone"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Валидация не пройдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
                                 }
                             }
                         }
@@ -49,10 +323,60 @@
             }
         }
     },
+    "components": {
+        "schemas": {
+            "ErrorResponse": {
+                "properties": {
+                    "title": {
+                        "description": "Заголовок ошибки",
+                        "type": "string"
+                    },
+                    "text": {
+                        "description": "Текст ошибки",
+                        "type": "string"
+                    },
+                    "errors": {
+                        "description": "Список с названиями полей и найденными ошибками",
+                        "type": "object",
+                        "additionalProperties": {
+                            "description": "Массив ошибок по конкретному полю",
+                            "type": "array",
+                            "items": {
+                                "description": "Найденная ошибка",
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "SuccessRespone": {
+                "properties": {
+                    "title": {
+                        "description": "Заголовок ответа",
+                        "type": "string"
+                    },
+                    "text": {
+                        "description": "Текст ответа",
+                        "type": "string"
+                    },
+                    "errors": {
+                        "description": "Список с названиями полей и найденными ошибками",
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
     "tags": [
         {
             "name": "Audience",
-            "description": "Работа с аудиториями"
+            "description": "Аудитории"
+        },
+        {
+            "name": "Department",
+            "description": "Отделения"
         }
     ]
 }
