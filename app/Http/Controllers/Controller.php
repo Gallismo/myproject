@@ -12,10 +12,21 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Validation\Validator;
 
+/**
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="API Расписание УГКТиД",
+ *      description="Документация для REST API сервиса Онлайн-расписание ГБПОУ УГКТиД",
+ * )
+ * @OA\Tag(
+ *     name="Audience",
+ *     description="Работа с аудиториями"
+ * )
+ */
 class Controller extends BaseController
 {
-    protected $sendResp;
-    protected $sendError;
+    protected ResponseContract $sendResp;
+    protected ErrorResponseContract $sendError;
 
     public function __construct(ResponseContract $responseContract, ErrorResponseContract $errorResponseContract)
     {

@@ -1,0 +1,58 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Расписание УГКТиД",
+        "description": "Документация для REST API сервиса Онлайн-расписание ГБПОУ УГКТиД",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/Audience": {
+            "post": {
+                "tags": [
+                    "Audience"
+                ],
+                "operationId": "9e4c1746f1bf414877327907efadeafd",
+                "requestBody": {
+                    "description": "Название для созданной аудитории",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "name": "38"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Аудитория добавлена"
+                    },
+                    "422": {
+                        "description": "Валидация не пройдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "title": "Ошибка валидации",
+                                    "text": "Проверьте правильность заполнения полей",
+                                    "errors": {
+                                        "name": [
+                                            "Поле `Название` обязательно для заполнения."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Audience",
+            "description": "Работа с аудиториями"
+        }
+    ]
+}
