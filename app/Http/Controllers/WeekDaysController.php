@@ -2,86 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WeekRequest;
 use App\Models\Group;
 use App\Models\weekDay;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class WeekDaysController extends Controller
 {
-    public function createWeekDay (Request $request) {
-        $val = Validator::make($request->all(), [
-            'name' => 'required|string|unique:week_days'
-        ]);
+    public function createWeekDay (WeekRequest $request): JsonResponse
+    {
+        $request = $request->validated();
 
-        if ($val->fails()) {
-            return response()->json(['title' => 'Ошибка валидации',
-                'text' => 'Проверьте правильность заполнения полей',
-                'errors' => $val->errors()], 422);
-        }
-        $code = $this->codeGenerate(weekDay::class);
         weekDay::create([
-            'name' => $request->name,
-            'code' => $code
+            'name' => $request['name']
         ]);
 
-        return response()->json(['title' => 'Успешно',
-            'text' => 'День недели был успешно добавлен',
-            'errors' => $val->errors()], 200);
+        return $this->sendResp('Успешно', 'День недели был успешно добавлен', 200);
     }
 
-    public function editWeekDay (Request $request) {
-        $val = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'code' => 'required|string'
-        ]);
+    public function editWeekDay (WeekRequest $request): JsonResponse
+    {
+        $request = $request->validated();
 
-        if ($val->fails()) {
-            return response()->json(['title' => 'Ошибка валидации',
-                'text' => 'Проверьте правильность заполнения полей',
-                'errors' => $val->errors()], 422);
-        }
-
-        $weekDay = weekDay::where('code', '=', $request->code)->first();
-
-        if(is_null($weekDay)) {
-            return response()->json(['title' => 'Ошибка',
-                'text' => 'Такого дня недели не существует',
-                'errors' => $val->errors()], 422);
-        }
-
-        $weekDay->name = $request->name;
-
+        $weekDay = weekDay::find($request['id']);
+        $weekDay->name = $request['name'];
         $weekDay->save();
 
-        return response()->json(['title' => 'Успешно',
-            'text' => 'День недели был успешно отредактирован',
-            'errors' => $val->errors()], 200);
+        return $this->sendResp('Успешно', 'День недели был успешно отредактирован', 200);
     }
 
-    public function deleteWeekDay (Request $request) {
-        $val = Validator::make($request->all(), [
-            'code' => 'required|string'
-        ]);
+    public function deleteWeekDay (WeekRequest $request): JsonResponse
+    {
+        $request = $request->validated();
 
-        if ($val->fails()) {
-            return response()->json(['title' => 'Ошибка валидации',
-                'text' => 'Проверьте правильность заполнения полей',
-                'errors' => $val->errors()], 422);
-        }
+        weekDay::find($request['id'])->delete();
 
-        $weekDay = weekDay::where('code', '=', $request->code)->first();
-
-        if(is_null($weekDay)) {
-            return response()->json(['title' => 'Ошибка',
-                'text' => 'Такого дня недели не существует',
-                'errors' => $val->errors()], 422);
-        }
-
-        $weekDay->delete();
-
-        return response()->json(['title' => 'Успешно',
-            'text' => 'День недели был успешно удален',
-            'errors' => $val->errors()], 200);
+        return $this->sendResp('Успешно', 'День недели был успешно удален', 200);
     }
 }
