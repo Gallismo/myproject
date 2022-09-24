@@ -11,11 +11,7 @@
             </div>
             <div class="form-group">
                 <label for="department">Отделение</label>
-                <select-comp class="" id="group" :items="{
-                    1: 'И-19-19',
-                    2: 'исп-19-19',
-
-                }"></select-comp>
+                <b-form-datepicker locale="ru" :date-format-options="{'year': 'numeric', 'month': 'numeric', 'day': 'numeric'}"></b-form-datepicker>
             </div>
             <div class="form-group">
                 <label for="department">Отделение</label>
@@ -35,9 +31,12 @@
     </div>
 </template>
 
+
 <script>
+import {BFormDatepicker} from 'bootstrap-vue';
 export default {
-    name: "SchedulAddLesson"
+    name: "BookingAddLesson",
+    components: {BFormDatepicker}
 }
 </script>
 
