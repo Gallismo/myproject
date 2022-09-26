@@ -519,6 +519,185 @@
                     }
                 }
             }
+        },
+        "/api/groupBooking": {
+            "post": {
+                "tags": [
+                    "Group"
+                ],
+                "description": "Добавить группу к паре",
+                "operationId": "8380b0d35a9430a6f0395a44874513cb",
+                "requestBody": {
+                    "description": "Тело запроса для добавления группы в пару",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "booking_id",
+                                    "group_id",
+                                    "group_part_id"
+                                ],
+                                "properties": {
+                                    "booking_id": {
+                                        "description": "ID пары",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "group_id": {
+                                        "description": "ID группы",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "group_part_id": {
+                                        "description": "ID подгруппы",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Группа добавлена на пару",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessRespone"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Валидация не пройдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Group"
+                ],
+                "description": "Удалить группу с пары",
+                "operationId": "57e62de027de1b5c179ea00d9b57cb7b",
+                "requestBody": {
+                    "description": "Тело запроса для удаления группы в паре",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "ID добавления группы",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Группа на паре удалена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessRespone"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Валидация не пройдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Group"
+                ],
+                "description": "Отредактировать группу в паре",
+                "operationId": "fd278dc2dc0aeb34ea8a4bb60ae1f11c",
+                "requestBody": {
+                    "description": "Тело запроса для редактирования группы в паре",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "ID добавления группы",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "booking_id": {
+                                        "description": "ID пары",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "group_id": {
+                                        "description": "ID группы",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "group_part_id": {
+                                        "description": "ID подгруппы",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Группа на паре отредактирована",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessRespone"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Валидация не пройдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
