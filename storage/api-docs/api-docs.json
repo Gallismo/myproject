@@ -321,6 +321,204 @@
                     }
                 }
             }
+        },
+        "/api/Group": {
+            "post": {
+                "tags": [
+                    "Group"
+                ],
+                "description": "Создать группу",
+                "operationId": "5f0812dbc53873f57eabc20f86aaa70c",
+                "requestBody": {
+                    "description": "Тело запроса для создания группы",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "department_id",
+                                    "start_year",
+                                    "end_year"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Название группы",
+                                        "type": "string",
+                                        "example": "К-20-19"
+                                    },
+                                    "department_id": {
+                                        "description": "ID отделения",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "start_year": {
+                                        "description": "Год поступления",
+                                        "type": "integer",
+                                        "maxLength": 4,
+                                        "minLength": 4,
+                                        "example": "2018"
+                                    },
+                                    "end_year": {
+                                        "description": "Год выпуска",
+                                        "type": "integer",
+                                        "maxLength": 4,
+                                        "minLength": 4,
+                                        "example": "2022"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Группа создана",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessRespone"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Валидация не пройдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Group"
+                ],
+                "description": "Удалить группу",
+                "operationId": "f9d02c61c64e151349761e2d5654cded",
+                "requestBody": {
+                    "description": "Тело запроса для создания группы",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "ID группы",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Группа удалена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessRespone"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Валидация не пройдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Group"
+                ],
+                "description": "Отредактировать группу",
+                "operationId": "493dad9439c34a25ab8c8e0f70a77c33",
+                "requestBody": {
+                    "description": "Тело запроса для редактирования группы",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "ID группы",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "description": "Название группы",
+                                        "type": "string",
+                                        "example": "К-20-19"
+                                    },
+                                    "department_id": {
+                                        "description": "ID отделения",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "start_year": {
+                                        "description": "Год поступления",
+                                        "type": "integer",
+                                        "maxLength": 4,
+                                        "minLength": 4,
+                                        "example": "2018"
+                                    },
+                                    "end_year": {
+                                        "description": "Год выпуска",
+                                        "type": "integer",
+                                        "maxLength": 4,
+                                        "minLength": 4,
+                                        "example": "2022"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Группа отредактирована",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessRespone"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Валидация не пройдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -377,6 +575,10 @@
         {
             "name": "Department",
             "description": "Отделения"
+        },
+        {
+            "name": "Group",
+            "description": "Группы"
         }
     ]
 }

@@ -27,6 +27,10 @@ use OpenApi\Annotations as OA;
  *     name="Department",
  *     description="Отделения"
  * ),
+ * @OA\Tag(
+ *     name="Group",
+ *     description="Группы"
+ * ),
  * @OA\Schema(
  *     schema="ErrorResponse",
  *     @OA\Property(

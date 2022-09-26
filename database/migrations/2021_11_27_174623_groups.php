@@ -20,8 +20,8 @@ class Groups extends Migration
             $table->foreign('department_id')->references('id')
                                             ->on('departments')
                                             ->onDelete('SET NULL')->onUpdate('CASCADE');
-            $table->year('start_year');
-            $table->year('end_year');
+            $table->integer('start_year');
+            $table->integer('end_year');
             $table->timestamps();
         });
     }

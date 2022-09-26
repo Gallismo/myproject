@@ -6,6 +6,7 @@ use App\Models\Department;
 use App\Models\Group;
 use App\Rules\EntityExist;
 use App\Rules\StringAndInteger;
+use App\Rules\Year;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -34,9 +35,9 @@ class GroupFormRequest extends FormRequest
             case 'POST': {
                 return [
                     'name' => ['required','unique:groups','string','max:14'],
-                    'department_id' => ['required','string', 'exists:departments,id'],
-                    'start_year' => ['required', 'min:4', 'max:4','string'],
-                    'end_year' => ['required', 'min:4', 'max:4','string']
+                    'department_id' => ['required','integer', 'exists:departments,id'],
+                    'start_year' => ['required', 'integer', new Year()],
+                    'end_year' => ['required', 'integer', new Year()]
                 ];
             } break;
 
@@ -53,8 +54,8 @@ class GroupFormRequest extends FormRequest
                         'string', 'unique:groups,name', 'max:14'],
                     'department_id' => ['required_without_all:start_year,end_year,name',
                         'string', 'exists:departments,id'],
-                    'start_year' => ['required_without_all:department_code,end_year,name', 'string', 'min:4', 'max:4'],
-                    'end_year' => ['required_without_all:department_code,start_year,name', 'string', 'min:4', 'max:4']
+                    'start_year' => ['required_without_all:department_code,end_year,name', 'integer', new Year()],
+                    'end_year' => ['required_without_all:department_code,start_year,name', 'integer', new Year()]
                 ];
             } break;
 
