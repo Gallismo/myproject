@@ -10540,4 +10540,23 @@ button.plus-icon {
     display:flex;
     justify-content: space-between;
 }
+.b-form-datepicker {
+    display: flex;
+    padding: 0;
+    height: auto;
+}
+
+.b-form-datepicker label {
+    margin: 0;
+    border: none;
+}
+
+.b-form-datepicker .dropdown-menu {
+    width: auto !important;
+}
+
+.b-form-datepicker .b-calendar-inner {
+    width: auto !important;
+    min-width: 400px;
+}
 
