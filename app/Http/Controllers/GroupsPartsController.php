@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\ResponeContract;
-use App\Http\Requests\GroupsPartsRequest;
-use App\Models\Group;
+use App\Http\Requests\Admin\GroupsPartsRequest;
 use App\Models\groupsPart;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class GroupsPartsController extends Controller
 {

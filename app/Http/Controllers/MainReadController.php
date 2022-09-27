@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AudienceFormRequest;
+use App\Http\Requests\Admin\AudienceFormRequest;
 use App\Models\Audience;
 use App\Models\Department;
 use App\Models\Group;
@@ -11,7 +11,6 @@ use App\Models\groupsPart;
 use App\Models\lessonsOrder;
 use App\Models\Role;
 use App\Models\Teacher;
-use App\Models\User;
 use App\Models\weekDay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

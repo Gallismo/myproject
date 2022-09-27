@@ -2,22 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\UserRegisterRequest;
+use App\Http\Requests\Admin\UserRequest;
 use App\Http\Requests\UserChPassRequest;
 use App\Http\Requests\UserLoginRequest;
-use App\Http\Requests\UserRegisterRequest;
-use App\Http\Requests\UserRequest;
-use App\Models\Group;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use App\Models\User;
-use Illuminate\Testing\Fluent\Concerns\Has;
-use Illuminate\Validation\Rule;
-use phpDocumentor\Reflection\Types\Boolean;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {

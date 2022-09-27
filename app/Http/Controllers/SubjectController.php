@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SubjectFormRequest;
-use App\Models\Group;
+use App\Http\Requests\Admin\SubjectFormRequest;
 use App\Models\Subject;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class SubjectController extends Controller
 {

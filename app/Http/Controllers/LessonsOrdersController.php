@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LessonsOrdersRequest;
-use App\Models\Group;
+use App\Http\Requests\Admin\LessonsOrdersRequest;
 use App\Models\lessonsOrder;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class LessonsOrdersController extends Controller
 {

@@ -4,17 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Contracts\ScheduleCheckContract;
 use App\Contracts\ScheduleEditContract;
-use App\Http\Requests\ScheduleRequest;
-use App\Models\Audience;
-use App\Models\Department;
-use App\Models\Group;
-use App\Models\lessonsOrder;
+use App\Http\Requests\Admin\ScheduleRequest;
 use App\Models\Schedule;
-use App\Models\Subject;
-use App\Models\User;
-use App\Models\weekDay;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ScheduleController extends Controller

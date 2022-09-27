@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\ErrorResponseContract;
 use App\Contracts\ResponeContract;
-use App\Http\Requests\GroupsBookingsRequest;
+use App\Http\Requests\Admin\GroupsBookingsRequest;
 use App\Models\groupsBooking;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;

@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\FindByCodeContract;
 use App\Contracts\ResponeContract;
-use App\Http\Requests\DepartmentFormRequest;
+use App\Http\Requests\Admin\DepartmentFormRequest;
 use App\Models\Department;
 use App\Models\Teacher;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use OpenApi\Annotations as OA;
 
 /**

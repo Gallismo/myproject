@@ -1,27 +1,13 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
-use App\Models\Department;
-use App\Models\Group;
-use App\Rules\EntityExist;
+use App\Http\Requests\AdminRequest;
 use App\Rules\StringAndInteger;
 use App\Rules\Year;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class GroupFormRequest extends FormRequest
+class GroupFormRequest extends AdminRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -64,12 +50,5 @@ class GroupFormRequest extends FormRequest
             } break;
         }
 
-    }
-
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json(['title' => 'Ошибка валидации',
-            'text' => 'Проверьте правильность заполнения полей',
-            'errors' => $validator->errors()], 422));
     }
 }

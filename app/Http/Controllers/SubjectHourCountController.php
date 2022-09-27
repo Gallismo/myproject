@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\HourCountRequest;
-use App\Models\Group;
+use App\Http\Requests\Admin\HourCountRequest;
 use App\Models\subjectHourCount;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class SubjectHourCountController extends Controller
 {

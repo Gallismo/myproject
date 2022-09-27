@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\WeekRequest;
-use App\Models\Group;
+use App\Http\Requests\Admin\WeekRequest;
 use App\Models\weekDay;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class WeekDaysController extends Controller
 {

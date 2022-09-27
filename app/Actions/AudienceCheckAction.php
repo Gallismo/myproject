@@ -2,7 +2,6 @@
 
 namespace App\Actions;
 
-use App\Http\Requests\LessonsBookingsRequest;
 use App\Models\lessonsBooking;
 
 class AudienceCheckAction implements \App\Contracts\AudienceCheckContract

@@ -5,18 +5,13 @@ namespace App\Http\Controllers;
 use App\Contracts\AudienceCheckContract;
 use App\Contracts\LessonEditContract;
 use App\Contracts\TeacherCheckContract;
-use App\Http\Requests\LessonsBookingsRequest;
+use App\Http\Requests\Admin\LessonsBookingsRequest;
 use App\Models\Audience;
-use App\Models\Group;
-use App\Models\groupsBooking;
 use App\Models\lessonsBooking;
 use App\Models\lessonsOrder;
 use App\Models\Subject;
-use App\Models\subjectHourCount;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class LessonsBookingsController extends Controller
 {

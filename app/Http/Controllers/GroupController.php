@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\ErrorResponseContract;
-use App\Contracts\FindByCodeContract;
 use App\Contracts\ResponeContract;
-use App\Http\Requests\DepartmentFormRequest;
-use App\Http\Requests\GroupFormRequest;
-use App\Models\Department;
+use App\Http\Requests\Admin\GroupFormRequest;
 use App\Models\Group;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Validator;
 use OpenApi\Annotations as OA;
 
 class GroupController extends Controller

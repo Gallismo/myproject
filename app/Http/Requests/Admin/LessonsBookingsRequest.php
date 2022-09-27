@@ -1,24 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
-use App\Contracts\ErrorResponseContract;
-use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Http\Requests\AdminRequest;
 
-class LessonsBookingsRequest extends FormRequest
+class LessonsBookingsRequest extends AdminRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -86,12 +73,5 @@ class LessonsBookingsRequest extends FormRequest
                 return [];
             } break;
         }
-    }
-
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json(['title' => 'Ошибка валидации',
-            'text' => 'Проверьте правильность заполнения полей',
-            'errors' => $validator->errors()], 422));
     }
 }

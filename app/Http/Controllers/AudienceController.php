@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AudienceFormRequest;
+use App\Http\Requests\Admin\AudienceFormRequest;
 use App\Models\Audience;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
