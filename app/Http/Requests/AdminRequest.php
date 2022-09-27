@@ -14,6 +14,9 @@ class AdminRequest extends MyRequest
      */
     public function authorize()
     {
-        return Auth::user()->role_id === 1;
+        if (!Auth::check()) {
+            return false;
+        }
+        return Auth::user()->isAdmin();
     }
 }

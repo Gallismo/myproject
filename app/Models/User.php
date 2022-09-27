@@ -69,4 +69,19 @@ class User extends Authenticatable
     ];
 
     protected $table = 'users';
+
+    public function isAdmin(): bool
+    {
+        return $this->role_id === 1;
+    }
+
+    public function isTeacher(): bool
+    {
+        return $this->role_id === 2;
+    }
+
+    public function isStarosta(): bool
+    {
+        return $this->role_id === 3;
+    }
 }
