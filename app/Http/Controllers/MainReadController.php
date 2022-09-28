@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AudienceFormRequest;
+use App\Http\Requests\Admin\AudienceFormRequest;
 use App\Models\Audience;
 use App\Models\Department;
 use App\Models\Group;
@@ -11,7 +11,6 @@ use App\Models\groupsPart;
 use App\Models\lessonsOrder;
 use App\Models\Role;
 use App\Models\Teacher;
-use App\Models\User;
 use App\Models\weekDay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +20,9 @@ class MainReadController extends Controller
     public function getAllGroups (Request $request) {
         $queries = $request->query();
 
-        $groups = Group::orderBy('name');
+        $groups = DB::table('groups')
+            ->join('departments', 'groups.department_id', '=', 'departments.id')
+            ->select('groups.*', 'departments.name as department_name');
 
         if (isset($queries['department'])) {
             $groups = $groups->where('department_id', $queries['department']);
@@ -36,22 +37,6 @@ class MainReadController extends Controller
         }
 
         $groupsData = $groups->get();
-        $departments = Department::all();
-
-        foreach ($groupsData as $group) {
-
-            foreach ($departments as $department) {
-                if ($department->id === $group->department_id) {
-                    $group->department_name = $department->name;
-                }
-            }
-
-            if ($group->department_id == null) {
-                $group->department_name = 'Не указано';
-            }
-
-            unset($group->department_id);
-        }
 
         return response()->json($groupsData);
     }
@@ -79,28 +64,6 @@ class MainReadController extends Controller
     public function getAllGroupParts(Request $request) {
         $groupsPart = groupsPart::get();
         return response()->json($groupsPart);
-    }
-
-    public function getAllPrepods(Request $request) {
-        $queries = $request->query();
-
-        $prepodsModel = DB::table('teachers')
-            ->join('users', 'teachers.user_id', '=', 'users.id')
-            ->select('teachers.name', 'users.login as login', 'teachers.code')->orderBy('name');
-
-        if (isset($queries['name'])) {
-            $prepodsModel = $prepodsModel->where('name', 'like', "%".$queries['name']."%");
-        }
-
-        if (isset($queries['user'])) {
-            $users = DB::table('users')
-                ->where('login', 'like', "%".$queries['user']."%")->pluck('id');
-            $prepodsModel = $prepodsModel->whereIn('user_id', $users);
-        }
-
-        $prepods = $prepodsModel->get();
-
-        return response()->json($prepods);
     }
 
     public function getUsers(Request $request) {
@@ -150,33 +113,6 @@ class MainReadController extends Controller
         return response()->json($rolesData);
     }
 
-//    public function getCaptains(Request $request) {
-//        $captainModel = DB::table('group_captains')
-//            ->join('users', 'group_captains.user_id', '=', 'users.id')
-//            ->join('groups', 'group_captains.group_id', '=', 'groups.id')
-//            ->select('group_captains.name', 'group_captains.user_id',
-//                'users.login as user_name', 'groups.code as group_code', 'groups.name as group_name', 'group_captains.code')
-//            ->orderBy('group_id');
-//
-//        $queries = $request->query();
-//
-//        if (isset($queries['group_name'])) {
-//            $captainModel = $captainModel->where('groups.name', 'like', "%".$queries['group_name']."%");
-//        }
-//
-//        if (isset($queries['name'])) {
-//            $captainModel = $captainModel->where('group_captains.name', 'like', "%".$queries['name']."%");
-//        }
-//
-//        if (isset($queries['user'])) {
-//            $captainModel = $captainModel->where('users.login', 'like', "%".$queries['user']."%");
-//        }
-//
-//        $captains = $captainModel->get();
-//
-//        return response()->json($captains);
-//    }
-
     public function getSchedules(Request $request) {
         $queries = $request->query();
 
@@ -196,18 +132,15 @@ class MainReadController extends Controller
 
 
         if(isset($queries['department'])) {
-            $department = Department::where('code', $queries['department'])->first();
-            $scheduleModel = $scheduleModel->where('schedules.department_id', $department->id);
+            $scheduleModel = $scheduleModel->where('schedules.department_id', $queries['department']);
         }
 
         if(isset($queries['week_day'])) {
-            $week_day = weekDay::where('code', $queries['week_day'])->first();
-            $scheduleModel = $scheduleModel->where('schedules.week_day_id', $week_day->id);
+            $scheduleModel = $scheduleModel->where('schedules.week_day_id', $queries['week_day']);
         }
 
         if(isset($queries['lesson'])) {
-            $lesson_order = lessonsOrder::where('code', $queries['lesson'])->first();
-            $scheduleModel = $scheduleModel->where('schedules.lesson_order_id', $lesson_order->id);
+            $scheduleModel = $scheduleModel->where('schedules.lesson_order_id', $queries['lesson']);
         }
 
         $schedules = $scheduleModel->get();

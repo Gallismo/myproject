@@ -2,7 +2,6 @@
 
 namespace App\Contracts;
 
-use App\Http\Requests\LessonsBookingsRequest;
 use App\Models\lessonsBooking;
 
 interface AudienceCheckContract

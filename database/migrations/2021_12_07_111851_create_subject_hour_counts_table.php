@@ -21,8 +21,7 @@ class CreateSubjectHourCountsTable extends Migration
             $table->unsignedBigInteger('subject_id')->nullable();
             $table->foreign('subject_id')->references('id')->on('subjects')
                 ->onDelete('SET NULL')->onUpdate('CASCADE');
-            $table->bigInteger('hours_all');
-            $table->bigInteger('hours_left');
+            $table->bigInteger('hours');
             $table->timestamps();
         });
     }

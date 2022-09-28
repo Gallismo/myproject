@@ -53,7 +53,6 @@ class User extends Authenticatable
         'name',
         'login',
         'password',
-        'jwt_token',
         'role_id',
         'group_id'
     ];
@@ -65,19 +64,24 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'jwt_token',
         'created_at',
         'updated_at'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
     protected $table = 'users';
+
+    public function isAdmin(): bool
+    {
+        return $this->role_id === 1;
+    }
+
+    public function isTeacher(): bool
+    {
+        return $this->role_id === 2;
+    }
+
+    public function isStarosta(): bool
+    {
+        return $this->role_id === 3;
+    }
 }

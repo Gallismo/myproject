@@ -11,11 +11,71 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Validation\Validator;
+use OpenApi\Annotations as OA;
 
+/**
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="API Расписание УГКТиД",
+ *      description="Документация для REST API сервиса Онлайн-расписание ГБПОУ УГКТиД",
+ * ),
+ * @OA\Tag(
+ *     name="Audience",
+ *     description="Аудитории"
+ * ),
+ * @OA\Tag(
+ *     name="Department",
+ *     description="Отделения"
+ * ),
+ * @OA\Tag(
+ *     name="Group",
+ *     description="Группы"
+ * ),
+ * @OA\Schema(
+ *     schema="ErrorResponse",
+ *     @OA\Property(
+ *          property="title",
+ *          type="string",
+ *          description="Заголовок ошибки"
+ *     ),
+ *     @OA\Property(
+ *          property="text",
+ *          type="string",
+ *          description="Текст ошибки"
+ *     ),
+ *     @OA\Property(
+ *          property="errors",
+ *          type="object",
+ *          description="Список с названиями полей и найденными ошибками",
+ *          @OA\AdditionalProperties(type="array", description="Массив ошибок по конкретному полю",
+ *              @OA\Items(type="string", description="Найденная ошибка")
+ *          )
+ *     )
+ * ),
+ * @OA\Schema(
+ *     schema="SuccessRespone",
+ *     @OA\Property(
+ *          property="title",
+ *          type="string",
+ *          description="Заголовок ответа"
+ *     ),
+ *     @OA\Property(
+ *          property="text",
+ *          type="string",
+ *          description="Текст ответа"
+ *     ),
+ *     @OA\Property(
+ *          property="errors",
+ *          type="object",
+ *          description="Список с названиями полей и найденными ошибками",
+ *
+ *     )
+ * ),
+ */
 class Controller extends BaseController
 {
-    protected $sendResp;
-    protected $sendError;
+    protected ResponseContract $sendResp;
+    protected ErrorResponseContract $sendError;
 
     public function __construct(ResponseContract $responseContract, ErrorResponseContract $errorResponseContract)
     {
@@ -33,26 +93,6 @@ class Controller extends BaseController
     {
         $sendResp = $this->sendError;
         return $sendResp($title, $text, $errors, $code);
-    }
-
-    protected function codeGenerate ($model) {
-        $symbols = "QWERTYUIOPASDFGHJKLZXCVBNM123456789qwertyuiopasdfghjklzxcvbnm";
-        $code = "";
-
-        for ($i=0;$i<30;$i++) {
-            if ($i % 10 == 0 && $i>1) {
-                $code .= '-';
-            }
-            $code .= substr($symbols, rand(1, 61) - 1, 1);
-        }
-
-        $record = $model::where('code', $code)->first();
-
-        if ($record || !$code) {
-            $code = $this->codeGenerate($model);
-        }
-
-        return $code;
     }
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

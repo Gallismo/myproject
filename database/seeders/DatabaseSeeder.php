@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         $roles = [
             ['id' => 1, 'name' => 'Администратор'],
-            ['id' => 2, 'name' => 'Преподаватель']
+            ['id' => 2, 'name' => 'Преподаватель'],
+            ['id' => 3, 'name' => 'Староста'],
         ];
 
         $groups = [
@@ -31,12 +33,16 @@ class DatabaseSeeder extends Seeder
         $users = [
             [
                 'id' => 1, 'login' => 'sperecur', 'name' => 'Администратор',
-                'password' => '$2y$10$JYQwDahA9uP8KImn/73ngeKFSmXhCsbrZafi7Bz9z5lGMZs1sht7a', 'role_id' => '1',
+                'password' => Hash::make('123456'), 'role_id' => '1', 'group_id' => null,
                 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
                 'id' => 2, 'name' => 'Иванов Иван Иванович', 'login' => 'prepod',
-                'password' => '$2y$10$JYQwDahA9uP8KImn/73ngeKFSmXhCsbrZafi7Bz9z5lGMZs1sht7a', 'role_id' => '2',
+                'password' => Hash::make('123456'), 'role_id' => '2', 'group_id' => null,
+                'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')
+            ],[
+                'id' => 3, 'name' => 'Галилов Гоша', 'login' => 'starosta',
+                'password' => Hash::make('123456'), 'role_id' => '3', 'group_id' => '1',
                 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')
             ],
         ];
