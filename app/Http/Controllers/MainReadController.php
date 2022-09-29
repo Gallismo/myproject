@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Admin\AudienceFormRequest;
+use App\Http\Requests\Admin\GetRequests\GetBookingAudienceRequest;
+use App\Http\Requests\Admin\GetRequests\GetBookingGroupRequest;
+use App\Http\Requests\Admin\GetRequests\GetBookingTeacherRequest;
 use App\Models\Audience;
 use App\Models\Department;
-use App\Models\Group;
 use App\Models\groupCaptain;
 use App\Models\groupsPart;
 use App\Models\lessonsOrder;
@@ -146,5 +148,37 @@ class MainReadController extends Controller
         $schedules = $scheduleModel->get();
 
         return response()->json($schedules);
+    }
+
+    public function getGroupBooking(GetBookingGroupRequest $request) {
+        $queries = $request->validated();
+
+        $db = DB::table('lessons_bookings')
+            ->join('groups_bookings', 'lessons_bookings.id', '=', 'groups_bookings.booking_id')
+            ->select('lessons_bookings.*', 'groups_bookings.group_id', 'groups_bookings.group_part_id');
+
+        return $db->where('lessons_bookings.lesson_date', $queries['date'])
+            ->where('lessons_bookings.lesson_order_id', $queries['lesson_order_id'])
+            ->where('groups_bookings.group_id', $queries['group_id'])->first() ?? 'Группа свободна';
+    }
+
+    public function getTeacherBooking(GetBookingTeacherRequest $request) {
+        $queries = $request->query();
+
+        $db = DB::table('lessons_bookings');
+
+        return $db->where('lesson_date', $queries['date'])
+            ->where('lesson_order_id', $queries['lesson_order_id'])
+            ->where('teacher_id', $queries['teacher_id'])->first() ?? 'Преподаватель свободен';
+    }
+
+    public function getAudienceBooking(GetBookingAudienceRequest $request) {
+        $queries = $request->query();
+
+        $db = DB::table('lessons_bookings');
+
+        return $db->where('lesson_date', $queries['date'])
+                ->where('lesson_order_id', $queries['lesson_order_id'])
+                ->where('audience_id', $queries['audience_id'])->first() ?? 'Кабинет свободен';
     }
 }

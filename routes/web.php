@@ -48,6 +48,12 @@ Route::prefix('api')->group(function () {
     Route::get('/Captain', [\App\Http\Controllers\MainReadController::class, 'getCaptains']);
     Route::get('/Schedule', [\App\Http\Controllers\MainReadController::class, 'getSchedules']);
 
+//    Route::get('/Booking', [\App\Http\Controllers\MainReadController::class, '']);
+    Route::get('/Booking/group', [\App\Http\Controllers\MainReadController::class, 'getGroupBooking']);
+    Route::get('/Booking/teacher', [\App\Http\Controllers\MainReadController::class, 'getTeacherBooking']);
+    Route::get('/Booking/audience', [\App\Http\Controllers\MainReadController::class, 'getAudienceBooking']);
+
+
     Route::post('/User/register', [\App\Http\Controllers\UserController::class, 'register']);
     Route::post('/User/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
     Route::delete('/User', [\App\Http\Controllers\UserController::class, 'deleteUser']);

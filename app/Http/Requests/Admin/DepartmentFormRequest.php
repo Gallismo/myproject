@@ -18,7 +18,7 @@ class DepartmentFormRequest extends AdminRequest
 
             case 'POST': {
                 return [
-                    'name' => ['required', 'integer', 'unique:departments'],
+                    'name' => ['required', 'string', 'unique:departments'],
                 ];
             } break;
 

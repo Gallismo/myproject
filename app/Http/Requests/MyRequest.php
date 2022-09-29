@@ -12,7 +12,7 @@ class MyRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json(['title' => 'Ошибка валидации',
-            'text' => 'Проверьте правильность заполнения полей',
+            'body' => 'Проверьте правильность заполнения полей',
             'errors' => $validator->errors()], 422));
     }
 }

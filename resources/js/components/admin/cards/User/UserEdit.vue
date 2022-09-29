@@ -44,7 +44,7 @@
                 };
 
                 if ($('form#userEdit select#selectGroup').val() != 0 && !$('form#userEdit div#selectGroupDiv').attr('disabled')) {
-                    data.group_code = $('form#userEdit select#selectGroup').val();
+                    data.group_id = $('form#userEdit select#selectGroup').val();
                     data.group_name = $('form#userEdit select#selectGroup option:selected').text();
                 } else {
                     data.group_name = '';
