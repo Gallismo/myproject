@@ -93,7 +93,7 @@ export default {
     mutations: {
         deleteDepartment(state, data) {
             state.departmentsData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.id == data.id) {
                     state.departmentsData.splice(index, 1)
                 }
             });
@@ -105,12 +105,12 @@ export default {
         currentDepartmentSet: (state, response) => {
             state.currentDepartment = response[0]
         },
-        switchDepartment(state, code) {
-            state.currentDepartment = state.departmentsData.find(department => department.code === code);
+        switchDepartment(state, id) {
+            state.currentDepartment = state.departmentsData.find(department => department.id == id);
         },
         updateDepartment: (state, data) => {
             state.departmentsData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.id == data.id) {
                     data.name ? state.departmentsData[index].name = data.name : false;
                 }
             });

@@ -178,6 +178,15 @@ export default {
             state.userData.map(user => DropdownProp[user.id] = user.login);
             return DropdownProp;
         },
+        getTeacherDropdown: state => {
+            let DropdownProp = {};
+            state.userData.map(user => {
+                if (user.role.id === 2) {
+                    DropdownProp[user.id] = user.login
+                }
+            });
+            return DropdownProp;
+        },
         getRolesData: state => {return state.rolesData},
         getCurrentUser: state => {return state.currentUser}
     }

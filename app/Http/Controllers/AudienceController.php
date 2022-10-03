@@ -81,10 +81,8 @@ class AudienceController extends Controller
     {
         $request = $req->validated();
 
-        $audience = Audience::find($request['id']);
-        $audience->delete();
-
-        return $this->sendResp('Успешно', 'Аудитория была успешно удалена', 200);
+        return $this->deleteSomething(new Audience(), $request['id'],
+            $this->sendResp('Успешно', 'Аудитория была успешно удалена', 200));
     }
 
     /**

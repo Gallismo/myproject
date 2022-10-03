@@ -16,6 +16,7 @@ const store = new Vuex.Store({
             dispatch('getAllWeeks');
             dispatch('getRoles');
             dispatch('getSchedule');
+            dispatch('getAllSubjects')
         },
         sendRequest({commit, dispatch}, request) {
             const instance = axios.create({

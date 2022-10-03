@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use App\Http\Requests\AdminRequest;
+use App\Rules\isTeacher;
 
 class LessonsBookingsRequest extends AdminRequest
 {
@@ -22,7 +23,7 @@ class LessonsBookingsRequest extends AdminRequest
                     'lesson_order_id' => 'required|exists:lessons_orders,id|integer',
                     'audience_id' => 'required|exists:audiences,id|integer',
                     'subject_id' => 'required|exists:subjects,id|integer',
-                    'teacher_id' => 'required|exists:users,id|integer',
+                    'teacher_id' => ['required', 'exists:users,id', 'integer', new isTeacher()],
                     'is_remote' => 'boolean',
                     'conference_url' => 'string|url',
                     'lesson_topic' => 'string',
@@ -32,7 +33,7 @@ class LessonsBookingsRequest extends AdminRequest
 
             case 'DELETE': {
                 return [
-                    'id' => 'required|exists:lessons_bookings,id'
+                    'id' => 'required|exists:lessons_bookings,id|integer'
                 ];
             } break;
 
@@ -52,8 +53,9 @@ class LessonsBookingsRequest extends AdminRequest
                     'subject_id' => 'required_without_all:lesson_date,audience_id,lesson_order_id,
                     teacher_id,is_remote,conference_url,lesson_topic,lesson_homework|exists:subjects,id|integer',
 
-                    'teacher_id' => 'required_without_all:lesson_date,audience_id,subject_id,
-                    lesson_order_id,is_remote,conference_url,lesson_topic,lesson_homework|exists:users,id|integer',
+                    'teacher_id' => ['required_without_all:lesson_date,audience_id,subject_id,
+                    lesson_order_id,is_remote,conference_url,lesson_topic,lesson_homework',
+                        'exists:users,id', 'integer', new isTeacher()],
 
                     'is_remote' => 'boolean|required_without_all:lesson_date,audience_id,subject_id,
                     teacher_id,lesson_order_id,conference_url,lesson_topic,lesson_homework',

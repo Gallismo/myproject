@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\ResponeContract;
 use App\Http\Requests\Admin\GroupsPartsRequest;
+use App\Models\Audience;
 use App\Models\groupsPart;
 use Illuminate\Http\JsonResponse;
 
@@ -36,9 +37,7 @@ class GroupsPartsController extends Controller
     {
         $request = $request->validated();
 
-        $groupsPart = groupsPart::find($request['id']);
-        $groupsPart->delete();
-
-        return $this->sendResp('Успешно', 'Раздел групп был успешно удален', 200);
+        return $this->deleteSomething(new groupsPart(), $request['id'],
+            $this->sendResp('Успешно', 'Раздел групп был успешно удален', 200));
     }
 }

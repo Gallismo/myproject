@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\ResponeContract;
 use App\Http\Requests\Admin\GroupsBookingsRequest;
+use App\Models\Audience;
 use App\Models\groupsBooking;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
@@ -144,9 +145,7 @@ class GroupsBookingsController extends Controller
     {
         $request = $request->validated();
 
-        $groupBooking = groupsBooking::find($request['id']);
-        $groupBooking->delete();
-
-        return $this->sendResp('Успешно', 'Группа была успешно удалена с пары', 200);
+        return $this->deleteSomething(new groupsBooking(), $request['id'],
+            $this->sendResp('Успешно', 'Группа была успешно удалена с пары', 200));
     }
 }

@@ -39,7 +39,7 @@
             },
             save() {
                 const data = {
-                    code: this.getCurrentLessonOrder.code
+                    id: this.getCurrentLessonOrder.id
                 }
 
                 $(`div.lesson-orders input[name=editName]`).val() ? data.name = $('div.lesson-orders input[name=editName]').val() : false;
@@ -48,7 +48,7 @@
             },
             deleteD() {
                 const data = {
-                    code: this.getCurrentLessonOrder.code
+                    id: this.getCurrentLessonOrder.id
                 }
                 this.deleteLessonOrder(data);
             }

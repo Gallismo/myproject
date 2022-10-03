@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\ScheduleCheckContract;
 use App\Contracts\ScheduleEditContract;
 use App\Http\Requests\Admin\ScheduleRequest;
+use App\Models\Audience;
 use App\Models\Schedule;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
@@ -73,8 +74,7 @@ class ScheduleController extends Controller
     public function deleteSchedule (ScheduleRequest $request) {
         $request = $request->validated();
 
-        Schedule::find($request['id'])->delete();
-
-        return $this->sendResp('Успешно', 'Расписание было успешно удалено', 200);
+        return $this->deleteSomething(new Schedule(), $request['id'],
+            $this->sendResp('Успешно', 'Расписание было успешно удалено', 200));
     }
 }

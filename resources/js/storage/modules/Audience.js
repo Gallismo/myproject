@@ -94,7 +94,7 @@ export default {
     mutations: {
         deleteAudience(state, data) {
             state.audienceData.map((obj, index) => {
-                if (obj.id === data.code) {
+                if (obj.id == data.id) {
                     state.audienceData.splice(index, 1)
                 }
             });
@@ -106,12 +106,12 @@ export default {
         currentAudienceSet: (state, response) => {
             state.currentAudience = response[0]
         },
-        switchAudience(state, code) {
-            state.currentAudience = state.audienceData.find(audience => audience.id === code);
+        switchAudience(state, id) {
+            state.currentAudience = state.audienceData.find(audience => audience.id == id);
         },
         updateAudience: (state, data) => {
             state.audienceData.map((obj, index) => {
-                if (obj.id === data.code) {
+                if (obj.id == data.id) {
                     data.name ? state.audienceData[index].name = data.name : false;
                 }
             });

@@ -24,14 +24,14 @@ class LessonsOrdersRequest extends AdminRequest
 
             case 'DELETE': {
                 return [
-                    'id' => 'required|exists:lessons_orders,id'
+                    'id' => 'required|exists:lessons_orders,id|integer'
                 ];
             } break;
 
             case 'PATCH': {
                 return [
                     'name' => 'required|string|unique:lessons_orders',
-                    'id' => 'required|string|exists:lessons_orders,id'
+                    'id' => 'required|integer|exists:lessons_orders,id'
                 ];
             } break;
 

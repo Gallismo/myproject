@@ -48,7 +48,7 @@
             },
             deleteD() {
                 const data = {
-                    code: this.getCurrentAudience.code
+                    id: this.getCurrentAudience.id
                 }
                 this.deleteAudience(data);
             }

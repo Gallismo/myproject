@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\ResponeContract;
 use App\Http\Requests\Admin\DepartmentFormRequest;
+use App\Models\Audience;
 use App\Models\Department;
 use App\Models\Teacher;
 use Illuminate\Http\JsonResponse;
@@ -128,9 +129,7 @@ class DepartmentController extends Controller
     {
         $request = $req->validated();
 
-        $department = Department::find($request['id']);
-        $department->delete();
-
-        return $this->sendResp('Успешно', 'Отделение было успешно удалено', 200);
+        return $this->deleteSomething(new Department(), $request['id'],
+            $this->sendResp('Успешно', 'Отделение было успешно удалено', 200));
     }
 }

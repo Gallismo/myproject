@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Admin\HourCountRequest;
+use App\Models\Audience;
 use App\Models\subjectHourCount;
 use Illuminate\Http\JsonResponse;
 
@@ -32,9 +33,8 @@ class SubjectHourCountController extends Controller
     {
         $request = $request->validated();
 
-        subjectHourCount::find($request['id'])->delete();
-
-        return $this->sendResp('Успешно', 'Предмет был успешно отвязан от группы, счётчик очищен', 200);
+        return $this->deleteSomething(new subjectHourCount(), $request['id'],
+            $this->sendResp('Успешно', 'Предмет был успешно отвязан от группы, счётчик очищен', 200));
     }
 
     public function editHourCount (HourCountRequest $request): JsonResponse

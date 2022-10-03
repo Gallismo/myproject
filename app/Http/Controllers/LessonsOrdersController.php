@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Admin\LessonsOrdersRequest;
+use App\Models\Audience;
 use App\Models\lessonsOrder;
 use Illuminate\Http\JsonResponse;
 
@@ -34,8 +35,7 @@ class LessonsOrdersController extends Controller
     {
         $request = $request->validated();
 
-        lessonsOrder::find($request['id'])->delete();
-
-        return $this->sendResp('Успешно', 'Пара(расписание) была удалена', 200);
+        return $this->deleteSomething(new lessonsOrder(), $request['id'],
+            $this->sendResp('Успешно', 'Пара(расписание) была удалена', 200));
     }
 }

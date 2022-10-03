@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Admin\SubjectFormRequest;
+use App\Models\Audience;
 use App\Models\Subject;
 
 class SubjectController extends Controller
@@ -31,8 +32,7 @@ class SubjectController extends Controller
     public function deleteSubject (SubjectFormRequest $request) {
         $request = $request->all();
 
-        Subject::find($request['id'])->delete();
-
-        return $this->sendResp('Успешно', 'Предмет был успешно удалён', 200);
+        return $this->deleteSomething(new Subject(), $request['id'],
+            $this->sendResp('Успешно', 'Предмет был успешно удалён', 200));
     }
 }

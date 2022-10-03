@@ -2216,6 +2216,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "BookingAddLesson",
@@ -2648,7 +2663,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     deleteD: function deleteD() {
       var data = {
-        code: this.getCurrentAudience.code
+        id: this.getCurrentAudience.id
       };
       this.deleteAudience(data);
     }
@@ -2761,14 +2776,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     save: function save() {
       var data = {
-        code: this.getCurrentDepartment.code
+        id: this.getCurrentDepartment.id
       };
       $("div.departments input[name=editName]").val() ? data.name = $('div.departments input[name=editName]').val() : false;
       this.saveDepartment(data);
     },
     deleteD: function deleteD() {
       var data = {
-        code: this.getCurrentDepartment.code
+        id: this.getCurrentDepartment.id
       };
       this.deleteDepartment(data);
     }
@@ -2837,6 +2852,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Fundament",
@@ -2867,7 +2888,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getAllDepartments', 'getAllAudiences', 'getAllWeeks', 'getAllLessonOrders', 'getAllGroupParts'])),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getCurrentDepartment', 'getCurrentAudience', 'getCurrentWeek', 'getCurrentLessonOrder', 'getCurrentGroupPart']))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getCurrentDepartment', 'getCurrentSubject', 'getCurrentAudience', 'getCurrentWeek', 'getCurrentLessonOrder', 'getCurrentGroupPart']))
 });
 
 /***/ }),
@@ -2976,14 +2997,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     save: function save() {
       var data = {
-        code: this.getCurrentGroupPart.code
+        id: this.getCurrentGroupPart.id
       };
       $("div.group-parts input[name=editName]").val() ? data.name = $('div.group-parts input[name=editName]').val() : false;
       this.saveGroupPart(data);
     },
     deleteD: function deleteD() {
       var data = {
-        code: this.getCurrentGroupPart.code
+        id: this.getCurrentGroupPart.id
       };
       this.deleteGroupPart(data);
     }
@@ -3096,16 +3117,136 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     save: function save() {
       var data = {
-        code: this.getCurrentLessonOrder.code
+        id: this.getCurrentLessonOrder.id
       };
       $("div.lesson-orders input[name=editName]").val() ? data.name = $('div.lesson-orders input[name=editName]').val() : false;
       this.saveLessonOrder(data);
     },
     deleteD: function deleteD() {
       var data = {
-        code: this.getCurrentLessonOrder.code
+        id: this.getCurrentLessonOrder.id
       };
       this.deleteLessonOrder(data);
+    }
+  })
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "SubjectCreate",
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['createSubject'])), {}, {
+    create: function create() {
+      var data = {
+        name: $('div.subjects input[name=createName]').val()
+      };
+      this.createSubject(data);
+    }
+  })
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "SubjectEdit",
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['getCurrentSubject', 'getSubjectDropdown'])),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['switchSubject', 'saveSubject', 'deleteSubject'])), {}, {
+    switcher: function switcher(event) {
+      this.switchSubject(event.target.id);
+    },
+    save: function save() {
+      var data = {
+        id: this.getCurrentSubject.id
+      };
+      $("div.subjects input[name=editName]").val() ? data.name = $('div.subjects input[name=editName]').val() : false;
+      this.saveSubject(data);
+    },
+    deleteD: function deleteD() {
+      var data = {
+        id: this.getCurrentSubject.id
+      };
+      this.deleteSubject(data);
     }
   })
 });
@@ -3216,14 +3357,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     save: function save() {
       var data = {
-        code: this.getCurrentWeek.code
+        id: this.getCurrentWeek.id
       };
       $("div.weeks input[name=editName]").val() ? data.name = $('div.weeks input[name=editName]').val() : false;
       this.saveWeek(data);
     },
     deleteD: function deleteD() {
       var data = {
-        code: this.getCurrentWeek.code
+        id: this.getCurrentWeek.id
       };
       this.deleteWeek(data);
     }
@@ -6280,7 +6421,7 @@ __webpack_require__.r(__webpack_exports__);
   mutations: {
     deleteAudience: function deleteAudience(state, data) {
       state.audienceData.map(function (obj, index) {
-        if (obj.id === data.code) {
+        if (obj.id == data.id) {
           state.audienceData.splice(index, 1);
         }
       });
@@ -6292,14 +6433,14 @@ __webpack_require__.r(__webpack_exports__);
     currentAudienceSet: function currentAudienceSet(state, response) {
       state.currentAudience = response[0];
     },
-    switchAudience: function switchAudience(state, code) {
+    switchAudience: function switchAudience(state, id) {
       state.currentAudience = state.audienceData.find(function (audience) {
-        return audience.id === code;
+        return audience.id == id;
       });
     },
     updateAudience: function updateAudience(state, data) {
       state.audienceData.map(function (obj, index) {
-        if (obj.id === data.code) {
+        if (obj.id == data.id) {
           data.name ? state.audienceData[index].name = data.name : false;
         }
       });
@@ -6600,7 +6741,7 @@ __webpack_require__.r(__webpack_exports__);
   mutations: {
     deleteDepartment: function deleteDepartment(state, data) {
       state.departmentsData.map(function (obj, index) {
-        if (obj.code === data.code) {
+        if (obj.id == data.id) {
           state.departmentsData.splice(index, 1);
         }
       });
@@ -6612,14 +6753,14 @@ __webpack_require__.r(__webpack_exports__);
     currentDepartmentSet: function currentDepartmentSet(state, response) {
       state.currentDepartment = response[0];
     },
-    switchDepartment: function switchDepartment(state, code) {
+    switchDepartment: function switchDepartment(state, id) {
       state.currentDepartment = state.departmentsData.find(function (department) {
-        return department.code === code;
+        return department.id == id;
       });
     },
     updateDepartment: function updateDepartment(state, data) {
       state.departmentsData.map(function (obj, index) {
-        if (obj.code === data.code) {
+        if (obj.id == data.id) {
           data.name ? state.departmentsData[index].name = data.name : false;
         }
       });
@@ -6948,7 +7089,7 @@ __webpack_require__.r(__webpack_exports__);
   mutations: {
     deleteGroupPart: function deleteGroupPart(state, data) {
       state.groupPartsData.map(function (obj, index) {
-        if (obj.code === data.code) {
+        if (obj.id == data.id) {
           state.groupPartsData.splice(index, 1);
         }
       });
@@ -6960,14 +7101,14 @@ __webpack_require__.r(__webpack_exports__);
     currentGroupPartSet: function currentGroupPartSet(state, response) {
       state.currentGroupPart = response[0];
     },
-    switchGroupPart: function switchGroupPart(state, code) {
+    switchGroupPart: function switchGroupPart(state, id) {
       state.currentGroupPart = state.groupPartsData.find(function (groupPart) {
-        return groupPart.code === code;
+        return groupPart.id == id;
       });
     },
     updateGroupPart: function updateGroupPart(state, data) {
       state.groupPartsData.map(function (obj, index) {
-        if (obj.code === data.code) {
+        if (obj.id == data.id) {
           data.name ? state.groupPartsData[index].name = data.name : false;
         }
       });
@@ -6984,7 +7125,7 @@ __webpack_require__.r(__webpack_exports__);
     getGroupPartDropdown: function getGroupPartDropdown(state) {
       var DropdownProp = {};
       state.groupPartsData.map(function (groupPart) {
-        return DropdownProp[groupPart.code] = groupPart.name;
+        return DropdownProp[groupPart.id] = groupPart.name;
       });
       return DropdownProp;
     },
@@ -7564,6 +7705,160 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/storage/modules/Subjects.js":
+/*!**************************************************!*\
+  !*** ./resources/js/storage/modules/Subjects.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  actions: {
+    getAllSubjects: function getAllSubjects(_ref) {
+      var commit = _ref.commit,
+          dispatch = _ref.dispatch;
+      commit('setLoading', true); // axios('/api/Week')
+      //     .then(response => {
+      //         commit('getAllWeeks', response.data);
+      //         commit('currentSubjectSet', response.data);
+      //     })
+      //     .catch(error => {
+      //         dispatch('showNotification', error.response.data);
+      //     });
+
+      dispatch('sendRequest', {
+        entity: 'Subject',
+        method: 'get',
+        toDoComm: ['getAllSubjects', 'currentSubjectSet']
+      });
+    },
+    saveSubject: function saveSubject(_ref2, data) {
+      var commit = _ref2.commit,
+          dispatch = _ref2.dispatch;
+      // axios({
+      // //     method: 'patch',
+      // //     url: '/api/Week',
+      // //     data: data
+      // // })
+      // //     .then(response => {
+      // //         commit('updateWeek', data);
+      // //         dispatch('showNotification', response.data);
+      // //     })
+      // //     .catch(error => {
+      // //         dispatch('showNotification', error.response.data);
+      //     });
+      dispatch('sendRequest', {
+        entity: 'Subject',
+        method: 'patch',
+        data: data,
+        toDoComm: ['updateSubject']
+      });
+    },
+    deleteSubject: function deleteSubject(_ref3, data) {
+      var commit = _ref3.commit,
+          dispatch = _ref3.dispatch;
+      // axios({
+      //     method: 'delete',
+      //     url: '/api/Week',
+      //     data: data
+      // })
+      //     .then(response => {
+      //         commit('deleteWeek', data);
+      //         dispatch('showNotification', response.data);
+      //     })
+      //     .catch(error => {
+      //         dispatch('showNotification', error.response.data);
+      //     });
+      dispatch('sendRequest', {
+        entity: 'Subject',
+        method: 'delete',
+        data: data,
+        toDoComm: ['deleteSubject']
+      });
+    },
+    createSubject: function createSubject(_ref4, data) {
+      var commit = _ref4.commit,
+          dispatch = _ref4.dispatch;
+      // axios({
+      //     method: 'post',
+      //     url: '/api/Week',
+      //     data: data
+      // })
+      //     .then(response => {
+      //         dispatch('getAllWeeks');
+      //         dispatch('showNotification', response.data);
+      //     })
+      //     .catch(error => {
+      //         dispatch('showNotification', error.response.data);
+      //     });
+      dispatch('sendRequest', {
+        entity: 'Subject',
+        method: 'post',
+        data: data,
+        toDoDisp: ['getAllSubjects']
+      });
+    },
+    switchSubject: function switchSubject(_ref5, id) {
+      var commit = _ref5.commit,
+          dispatch = _ref5.dispatch;
+      commit('switchSubject', id);
+    }
+  },
+  mutations: {
+    deleteSubject: function deleteSubject(state, data) {
+      state.subjectsData.map(function (obj, index) {
+        if (obj.id == data.id) {
+          state.subjectsData.splice(index, 1);
+        }
+      });
+      state.currentSubject = state.subjectsData[0];
+    },
+    getAllSubjects: function getAllSubjects(state, response) {
+      state.subjectsData = response;
+    },
+    currentSubjectSet: function currentSubjectSet(state, response) {
+      state.currentSubject = response[0];
+    },
+    switchSubject: function switchSubject(state, id) {
+      state.currentSubject = state.subjectsData.find(function (subject) {
+        return subject.id == id;
+      });
+    },
+    updateSubject: function updateSubject(state, data) {
+      state.subjectsData.map(function (obj, index) {
+        if (obj.id == data.id) {
+          data.name ? state.subjectsData[index].name = data.name : false;
+        }
+      });
+    }
+  },
+  state: {
+    subjectsData: [],
+    currentSubject: {}
+  },
+  getters: {
+    getSubjectsData: function getSubjectsData(state) {
+      return state.subjectsData;
+    },
+    getSubjectDropdown: function getSubjectDropdown(state) {
+      var DropdownProp = {};
+      state.subjectsData.map(function (subject) {
+        return DropdownProp[subject.id] = subject.name;
+      });
+      return DropdownProp;
+    },
+    getCurrentSubject: function getCurrentSubject(state) {
+      return state.currentSubject;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/storage/modules/User.js":
 /*!**********************************************!*\
   !*** ./resources/js/storage/modules/User.js ***!
@@ -7758,6 +8053,15 @@ __webpack_require__.r(__webpack_exports__);
       var DropdownProp = {};
       state.userData.map(function (user) {
         return DropdownProp[user.id] = user.login;
+      });
+      return DropdownProp;
+    },
+    getTeacherDropdown: function getTeacherDropdown(state) {
+      var DropdownProp = {};
+      state.userData.map(function (user) {
+        if (user.role.id === 2) {
+          DropdownProp[user.id] = user.login;
+        }
       });
       return DropdownProp;
     },
@@ -7959,6 +8263,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       dispatch('getAllWeeks');
       dispatch('getRoles');
       dispatch('getSchedule');
+      dispatch('getAllSubjects');
     },
     sendRequest: function sendRequest(_ref2, request) {
       var _request$method, _request$data, _request$params;
@@ -54733,6 +55038,84 @@ component.options.__file = "resources/js/components/admin/cards/FundamentCardCom
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SubjectsCreate_vue_vue_type_template_id_cbd0b856_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SubjectsCreate.vue?vue&type=template&id=cbd0b856&scoped=true& */ "./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue?vue&type=template&id=cbd0b856&scoped=true&");
+/* harmony import */ var _SubjectsCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SubjectsCreate.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SubjectsCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SubjectsCreate_vue_vue_type_template_id_cbd0b856_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SubjectsCreate_vue_vue_type_template_id_cbd0b856_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "cbd0b856",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SubjectsEdit_vue_vue_type_template_id_0bfe53ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SubjectsEdit.vue?vue&type=template&id=0bfe53ba&scoped=true& */ "./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue?vue&type=template&id=0bfe53ba&scoped=true&");
+/* harmony import */ var _SubjectsEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SubjectsEdit.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SubjectsEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SubjectsEdit_vue_vue_type_template_id_0bfe53ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SubjectsEdit_vue_vue_type_template_id_0bfe53ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "0bfe53ba",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/cards/FundamentCardComponents/Weeks/WeeksCreate.vue":
 /*!*******************************************************************************************!*\
   !*** ./resources/js/components/admin/cards/FundamentCardComponents/Weeks/WeeksCreate.vue ***!
@@ -56982,6 +57365,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SubjectsCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SubjectsCreate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SubjectsCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SubjectsEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SubjectsEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SubjectsEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/cards/FundamentCardComponents/Weeks/WeeksCreate.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************!*\
   !*** ./resources/js/components/admin/cards/FundamentCardComponents/Weeks/WeeksCreate.vue?vue&type=script&lang=js& ***!
@@ -58096,6 +58511,40 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue?vue&type=template&id=cbd0b856&scoped=true&":
+/*!********************************************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue?vue&type=template&id=cbd0b856&scoped=true& ***!
+  \********************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SubjectsCreate_vue_vue_type_template_id_cbd0b856_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SubjectsCreate_vue_vue_type_template_id_cbd0b856_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SubjectsCreate_vue_vue_type_template_id_cbd0b856_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SubjectsCreate.vue?vue&type=template&id=cbd0b856&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue?vue&type=template&id=cbd0b856&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue?vue&type=template&id=0bfe53ba&scoped=true&":
+/*!******************************************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue?vue&type=template&id=0bfe53ba&scoped=true& ***!
+  \******************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SubjectsEdit_vue_vue_type_template_id_0bfe53ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SubjectsEdit_vue_vue_type_template_id_0bfe53ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SubjectsEdit_vue_vue_type_template_id_0bfe53ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SubjectsEdit.vue?vue&type=template&id=0bfe53ba&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue?vue&type=template&id=0bfe53ba&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/cards/FundamentCardComponents/Weeks/WeeksCreate.vue?vue&type=template&id=229f2816&scoped=true&":
 /*!**************************************************************************************************************************************!*\
   !*** ./resources/js/components/admin/cards/FundamentCardComponents/Weeks/WeeksCreate.vue?vue&type=template&id=229f2816&scoped=true& ***!
@@ -59184,76 +59633,150 @@ var render = function () {
     "div",
     { staticClass: "card bg-dark text-white" },
     [
-      _c("form", { staticClass: "card-body", attrs: { id: "LessonCreate" } }, [
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          [
-            _c("label", { attrs: { for: "department" } }, [_vm._v("Группа")]),
+      _c(
+        "form",
+        { staticClass: "card-body grid-1", attrs: { id: "LessonCreate" } },
+        [
+          _c("div", { staticClass: "grid-1 grid-md-2 grid-gap-4" }, [
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "date" } }, [_vm._v("Дата")]),
+                _vm._v(" "),
+                _c("b-form-datepicker", {
+                  staticClass: "btn-secondary",
+                  attrs: {
+                    id: "date",
+                    locale: "ru",
+                    "date-format-options": {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
+                    },
+                  },
+                }),
+              ],
+              1
+            ),
             _vm._v(" "),
-            _c("select-comp", {
-              attrs: {
-                id: "group",
-                items: {
-                  1: "И-19-19",
-                  2: "исп-19-19",
-                },
-              },
-            }),
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          [
-            _c("label", { attrs: { for: "department" } }, [
-              _vm._v("Отделение"),
-            ]),
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "lesson_order" } }, [
+                  _vm._v("Пара"),
+                ]),
+                _vm._v(" "),
+                _c("select-comp", {
+                  attrs: {
+                    id: "lesson_order",
+                    items: _vm.$store.getters.getLessonOrderDropdown,
+                  },
+                }),
+              ],
+              1
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-1 grid-md-2 grid-lg-3 grid-gap-4" }, [
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "group" } }, [_vm._v("Группы")]),
+                _vm._v(" "),
+                _c("select-comp", {
+                  attrs: {
+                    id: "group",
+                    items: _vm.$store.getters.getGroupDropdown,
+                  },
+                }),
+              ],
+              1
+            ),
             _vm._v(" "),
-            _c("b-form-datepicker", {
-              attrs: {
-                locale: "ru",
-                "date-format-options": {
-                  year: "numeric",
-                  month: "numeric",
-                  day: "numeric",
-                },
-              },
-            }),
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          [
-            _c("label", { attrs: { for: "department" } }, [
-              _vm._v("Отделение"),
-            ]),
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "teacher" } }, [
+                  _vm._v("Преподаватель"),
+                ]),
+                _vm._v(" "),
+                _c("select-comp", {
+                  attrs: {
+                    id: "teacher",
+                    items: _vm.$store.getters.getTeacherDropdown,
+                  },
+                }),
+              ],
+              1
+            ),
             _vm._v(" "),
-            _c("select-comp", {
-              attrs: {
-                id: "group",
-                items: {
-                  1: "И-19-19",
-                  2: "исп-19-19",
-                },
-              },
-            }),
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "row mt-4" },
-          [_c("SaveButton", { attrs: { target: "#createConfirm" } })],
-          1
-        ),
-      ]),
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "audience" } }, [
+                  _vm._v("Кабинет"),
+                ]),
+                _vm._v(" "),
+                _c("select-comp", {
+                  attrs: {
+                    id: "audience",
+                    items: _vm.$store.getters.getAudienceDropdown,
+                  },
+                }),
+              ],
+              1
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-1 grid-md-2 grid-gap-4" }, [
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "group_part" } }, [
+                  _vm._v("Подгруппа"),
+                ]),
+                _vm._v(" "),
+                _c("select-comp", {
+                  attrs: {
+                    id: "group_part",
+                    items: _vm.$store.getters.getGroupPartDropdown,
+                  },
+                }),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "subject" } }, [_vm._v("Предмет")]),
+                _vm._v(" "),
+                _c("select-comp", {
+                  attrs: {
+                    id: "subject",
+                    items: _vm.$store.getters.getSubjectDropdown,
+                  },
+                }),
+              ],
+              1
+            ),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "row mt-4" },
+            [_c("SaveButton", { attrs: { target: "#createConfirm" } })],
+            1
+          ),
+        ]
+      ),
       _vm._v(" "),
       _c("BootstrapModalConfirm", { attrs: { id: "createConfirm" } }),
     ],
@@ -60140,6 +60663,23 @@ var render = function () {
       ],
       1
     ),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row justify-content-around subjects" },
+      [
+        _c("h5", { staticClass: "card-title col-12" }, [_vm._v("Предметы")]),
+        _vm._v(" "),
+        _vm.getCurrentSubject
+          ? _c("editCard", [_c("SubjectsEdit")], 1)
+          : _vm._e(),
+        _vm._v(" "),
+        _c("createCard", [_c("SubjectsCreate")], 1),
+      ],
+      1
+    ),
   ])
 }
 var staticRenderFns = []
@@ -60450,6 +60990,163 @@ var render = function () {
       _vm._v(" "),
       _c("BootstrapModalConfirm", {
         attrs: { id: "deleteLessonOrder" },
+        on: { confirmEvent: _vm.deleteD },
+      }),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue?vue&type=template&id=cbd0b856&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue?vue&type=template&id=cbd0b856&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "card-body",
+      on: {
+        keypress: function ($event) {
+          if (
+            !$event.type.indexOf("key") &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.create.apply(null, arguments)
+        },
+      },
+    },
+    [
+      _c("cardHeader", [_vm._v("Создать предмет")]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("inputText", {
+        attrs: {
+          code: "createSubject",
+          alias: "Название",
+          inputName: "createName",
+        },
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row mt-4" },
+        [
+          _c("CreateButton", { on: { clickButton: _vm.create } }),
+          _vm._v(" "),
+          _c("ResetButton"),
+        ],
+        1
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue?vue&type=template&id=0bfe53ba&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue?vue&type=template&id=0bfe53ba&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "card-body",
+      on: {
+        keypress: function ($event) {
+          if (
+            !$event.type.indexOf("key") &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.save.apply(null, arguments)
+        },
+      },
+    },
+    [
+      _c(
+        "cardHeader",
+        [
+          _vm._v("\n        Выбрать предмет\n        "),
+          _c("Dropdown", {
+            attrs: {
+              id: "SubjectDropdown",
+              header: _vm.getCurrentSubject.name,
+              items: _vm.getSubjectDropdown,
+            },
+            on: { clickEvent: _vm.switcher },
+          }),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("inputText", {
+        attrs: {
+          code: "editSubject",
+          valueInput: _vm.getCurrentSubject.name,
+          alias: "Название",
+          inputName: "editName",
+        },
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row" },
+        [
+          _c("SaveButton", { attrs: { target: "#saveSubject" } }),
+          _vm._v(" "),
+          _c("DeleteButton", { attrs: { target: "#deleteSubject" } }),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("BootstrapModalConfirm", {
+        attrs: { id: "saveSubject" },
+        on: { confirmEvent: _vm.save },
+      }),
+      _vm._v(" "),
+      _c("BootstrapModalConfirm", {
+        attrs: { id: "deleteSubject" },
         on: { confirmEvent: _vm.deleteD },
       }),
     ],
@@ -80845,6 +81542,8 @@ var map = {
 	"./admin/cards/FundamentCardComponents/Group_parts/GroupPartsEdit.vue": "./resources/js/components/admin/cards/FundamentCardComponents/Group_parts/GroupPartsEdit.vue",
 	"./admin/cards/FundamentCardComponents/LessonOrders/LessonOrderCreate.vue": "./resources/js/components/admin/cards/FundamentCardComponents/LessonOrders/LessonOrderCreate.vue",
 	"./admin/cards/FundamentCardComponents/LessonOrders/LessonOrderEdit.vue": "./resources/js/components/admin/cards/FundamentCardComponents/LessonOrders/LessonOrderEdit.vue",
+	"./admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue": "./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsCreate.vue",
+	"./admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue": "./resources/js/components/admin/cards/FundamentCardComponents/Subjects/SubjectsEdit.vue",
 	"./admin/cards/FundamentCardComponents/Weeks/WeeksCreate.vue": "./resources/js/components/admin/cards/FundamentCardComponents/Weeks/WeeksCreate.vue",
 	"./admin/cards/FundamentCardComponents/Weeks/WeeksEdit.vue": "./resources/js/components/admin/cards/FundamentCardComponents/Weeks/WeeksEdit.vue",
 	"./admin/cards/Prepod/Prepod.vue": "./resources/js/components/admin/cards/Prepod/Prepod.vue",
@@ -80934,6 +81633,7 @@ var map = {
 	"./Notification.js": "./resources/js/storage/modules/Notification.js",
 	"./Prepod.js": "./resources/js/storage/modules/Prepod.js",
 	"./Schedule.js": "./resources/js/storage/modules/Schedule.js",
+	"./Subjects.js": "./resources/js/storage/modules/Subjects.js",
 	"./User.js": "./resources/js/storage/modules/User.js",
 	"./Weeks.js": "./resources/js/storage/modules/Weeks.js"
 };

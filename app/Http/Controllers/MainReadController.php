@@ -12,6 +12,7 @@ use App\Models\groupCaptain;
 use App\Models\groupsPart;
 use App\Models\lessonsOrder;
 use App\Models\Role;
+use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\weekDay;
 use Illuminate\Http\Request;
@@ -66,6 +67,11 @@ class MainReadController extends Controller
     public function getAllGroupParts(Request $request) {
         $groupsPart = groupsPart::get();
         return response()->json($groupsPart);
+    }
+
+    public function getAllSubject(Request $request) {
+        $subjects = Subject::get();
+        return response()->json($subjects);
     }
 
     public function getUsers(Request $request) {
@@ -163,7 +169,7 @@ class MainReadController extends Controller
     }
 
     public function getTeacherBooking(GetBookingTeacherRequest $request) {
-        $queries = $request->query();
+        $queries = $request->validated();
 
         $db = DB::table('lessons_bookings');
 
@@ -173,12 +179,23 @@ class MainReadController extends Controller
     }
 
     public function getAudienceBooking(GetBookingAudienceRequest $request) {
-        $queries = $request->query();
+        $queries = $request->validated();
 
         $db = DB::table('lessons_bookings');
 
         return $db->where('lesson_date', $queries['date'])
                 ->where('lesson_order_id', $queries['lesson_order_id'])
                 ->where('audience_id', $queries['audience_id'])->first() ?? 'Кабинет свободен';
+    }
+
+    public function getBookings(Request $request) {
+        $db = DB::table('lessons_bookings')
+            ->join('lessons_orders', 'lessons_bookings.lesson_order_id', '=', 'lessons_orders.id')
+            ->join('audiences', 'lessons_bookings.audience_id', '=', 'audiences.id')
+            ->join('subjects', 'lessons_bookings.subject_id', '=', 'subjects.id')
+            ->join('users', 'lessons_bookings.teacher_id', '=', 'users.id')
+            ->select('lessons_bookings.*', 'audiences.name as audience_name', 'subjects.name as subject_name',
+                'users.name as teacher_name')->orderBy('created_at', 'desc')->get();
+        return $db;
     }
 }

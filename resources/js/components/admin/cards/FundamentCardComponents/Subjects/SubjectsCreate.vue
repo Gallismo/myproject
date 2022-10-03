@@ -1,11 +1,11 @@
 <template>
     <form class="card-body" @keypress.enter="create">
 
-        <cardHeader>Создать день недели</cardHeader>
+        <cardHeader>Создать предмет</cardHeader>
 
         <hr>
 
-        <inputText code="createWeek" alias="Название" inputName="createName"/>
+        <inputText code="createSubject" alias="Название" inputName="createName"/>
 
         <div class="row mt-4">
             <CreateButton @clickButton="create"/>
@@ -19,14 +19,14 @@
     import {mapGetters, mapActions} from 'vuex';
 
     export default {
-        name: "WeekCreate",
+        name: "SubjectCreate",
         methods: {
-            ...mapActions(['createWeek']),
+            ...mapActions(['createSubject']),
             create() {
                 const data = {
-                    name: $('div.weeks input[name=createName]').val()
+                    name: $('div.subjects input[name=createName]').val()
                 };
-                this.createWeek(data);
+                this.createSubject(data);
             }
         }
     }

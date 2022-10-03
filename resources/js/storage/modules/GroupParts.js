@@ -93,7 +93,7 @@ export default {
     mutations: {
         deleteGroupPart(state, data) {
             state.groupPartsData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.id == data.id) {
                     state.groupPartsData.splice(index, 1)
                 }
             });
@@ -105,12 +105,12 @@ export default {
         currentGroupPartSet: (state, response) => {
             state.currentGroupPart = response[0]
         },
-        switchGroupPart(state, code) {
-            state.currentGroupPart = state.groupPartsData.find(groupPart => groupPart.code === code);
+        switchGroupPart(state, id) {
+            state.currentGroupPart = state.groupPartsData.find(groupPart => groupPart.id == id);
         },
         updateGroupPart: (state, data) => {
             state.groupPartsData.map((obj, index) => {
-                if (obj.code === data.code) {
+                if (obj.id == data.id) {
                     data.name ? state.groupPartsData[index].name = data.name : false;
                 }
             });
@@ -126,7 +126,7 @@ export default {
         },
         getGroupPartDropdown: state => {
             let DropdownProp = {};
-            state.groupPartsData.map(groupPart => DropdownProp[groupPart.code] = groupPart.name);
+            state.groupPartsData.map(groupPart => DropdownProp[groupPart.id] = groupPart.name);
             return DropdownProp;
         },
         getCurrentGroupPart: state => {return state.currentGroupPart}

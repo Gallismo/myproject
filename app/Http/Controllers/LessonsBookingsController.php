@@ -11,6 +11,7 @@ use App\Models\lessonsBooking;
 use App\Models\lessonsOrder;
 use App\Models\Subject;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 
 class LessonsBookingsController extends Controller
@@ -36,13 +37,12 @@ class LessonsBookingsController extends Controller
         return $this->sendResp('Успешно', 'Пара была успешно добавлена', 200);
     }
 
-    public function deleteLessonBooking (LessonsBookingsRequest $request): JsonResponse
+    public function deleteLessonBooking (LessonsBookingsRequest $request)
     {
         $request = $request->validated();
 
-        lessonsBooking::find($request['id'])->delete();
-
-        return $this->sendResp('Успешно', 'Пара была успешно удалена', 200);
+        return $this->deleteSomething(new lessonsBooking(),
+            $request['id'], $this->sendResp('Успешно', 'Пара была успешно удалена', 200));
     }
 
     public function editLessonBooking (LessonsBookingsRequest $request, AudienceCheckContract $audienceCheck,

@@ -39,7 +39,7 @@
             },
             save() {
                 const data = {
-                    code: this.getCurrentDepartment.code
+                    id: this.getCurrentDepartment.id
                 }
 
                 $(`div.departments input[name=editName]`).val() ? data.name = $('div.departments input[name=editName]').val() : false;
@@ -48,7 +48,7 @@
             },
             deleteD() {
                 const data = {
-                    code: this.getCurrentDepartment.code
+                    id: this.getCurrentDepartment.id
                 }
                 this.deleteDepartment(data);
             }

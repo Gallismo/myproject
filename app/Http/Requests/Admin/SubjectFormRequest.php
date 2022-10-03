@@ -24,14 +24,14 @@ class SubjectFormRequest extends AdminRequest
 
             case 'DELETE': {
                 return [
-                    'id' => 'required|string|exists:subjects,id'
+                    'id' => 'required|integer|exists:subjects,id'
                 ];
             } break;
 
             case 'PATCH': {
                 return [
                     'name' => 'required|string|unique:subjects',
-                    'id' => 'required|string|exists:subjects,id'
+                    'id' => 'required|integer|exists:subjects,id'
                 ];
             } break;
 

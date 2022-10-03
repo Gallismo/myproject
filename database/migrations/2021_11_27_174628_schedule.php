@@ -16,12 +16,12 @@ class Schedule extends Migration
 
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('week_day_id')->nullable();
-            $table->foreign('week_day_id')->references('id')->on('week_days')->onDelete('SET NULL')->onUpdate('CASCADE');
-            $table->unsignedBigInteger('lesson_order_id')->nullable();
-            $table->foreign('lesson_order_id')->references('id')->on('lessons_orders')->onDelete('SET NULL')->onUpdate('CASCADE');
-            $table->unsignedBigInteger('department_id')->nullable();
-            $table->foreign('department_id')->references('id')->on('departments')->onDelete('SET NULL')->onUpdate('CASCADE');
+            $table->unsignedBigInteger('week_day_id');
+            $table->foreign('week_day_id')->references('id')->on('week_days')->onUpdate('CASCADE');
+            $table->unsignedBigInteger('lesson_order_id');
+            $table->foreign('lesson_order_id')->references('id')->on('lessons_orders')->onUpdate('CASCADE');
+            $table->unsignedBigInteger('department_id');
+            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('CASCADE');
             $table->time('start_time')->default(1);
             $table->time('end_time')->default(1);
             $table->integer('break')->default(0)->nullable();

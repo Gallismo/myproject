@@ -39,7 +39,7 @@
             },
             save() {
                 const data = {
-                    code: this.getCurrentGroupPart.code
+                    id: this.getCurrentGroupPart.id
                 }
 
                 $(`div.group-parts input[name=editName]`).val() ? data.name = $('div.group-parts input[name=editName]').val() : false;
@@ -48,7 +48,7 @@
             },
             deleteD() {
                 const data = {
-                    code: this.getCurrentGroupPart.code
+                    id: this.getCurrentGroupPart.id
                 }
                 this.deleteGroupPart(data);
             }

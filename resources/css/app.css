@@ -278,13 +278,13 @@ button.plus-icon {
 #addLessonModal .modal-dialog {
     max-width: 85%;
 }
-#addLessonModal .form-control{
-    width:auto;
-}
-#addLessonModal form{
-    display:flex;
-    justify-content: space-between;
-}
+/*#addLessonModal .form-control{*/
+/*    width:auto;*/
+/*}*/
+/*#addLessonModal form{*/
+/*    display:flex;*/
+/*    justify-content: space-between;*/
+/*}*/
 .b-form-datepicker {
     display: flex;
     padding: 0;
@@ -303,4 +303,36 @@ button.plus-icon {
 .b-form-datepicker .b-calendar-inner {
     width: auto !important;
     min-width: 400px;
+}
+
+.b-form-datepicker.btn-secondary {
+    border-color: #6c757d;
+}
+
+.b-form-datepicker.btn-secondary label{
+    background-color: #6c757d;
+    color: white !important;
+}
+
+.b-form-datepicker.btn-secondary:hover label{
+    background-color: #5a6268;
+    color: white !important;
+}
+
+.b-form-datepicker.btn-secondary button svg {
+    fill: white;
+}
+
+#addLessonModal .grid-1 {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+}
+
+#addLessonModal .form-group {
+    margin-bottom: 0;
+}
+
+#createConfirm .modal-dialog {
+    max-width: 50%;
 }

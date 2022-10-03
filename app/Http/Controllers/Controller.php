@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Contracts\ErrorResponseContract;
 use App\Contracts\ResponseContract;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -93,6 +95,18 @@ class Controller extends BaseController
     {
         $sendResp = $this->sendError;
         return $sendResp($title, $text, $errors, $code);
+    }
+
+    protected function deleteSomething(Model $model, int|string $id, JsonResponse $successResp) {
+        try {
+            $model->find($id)->delete();
+            return $successResp;
+        } catch (QueryException $exception) {
+            if ($exception->getCode() == 23000) {
+                return $this->sendResp('Ошибка', 'Удаление данной записи невозможно, от нее зависят другие дочерние данные!', 422);
+            }
+            return $this->sendResp('Ошибка', 'Произошла непредвиденная ошибка, обратитесь к администратору', 422);
+        }
     }
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

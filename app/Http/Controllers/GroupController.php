@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\ResponeContract;
 use App\Http\Requests\Admin\GroupFormRequest;
+use App\Models\Audience;
 use App\Models\Group;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
@@ -86,10 +87,8 @@ class GroupController extends Controller
     {
         $request = $req->validated();
 
-        $group = Group::find($request['id']);
-        $group->delete();
-
-        return $this->sendResp('Успешно', 'Группа была успешно удалена', 200);
+        return $this->deleteSomething(new Group(), $request['id'],
+            $this->sendResp('Успешно', 'Группа была успешно удалена', 200));
     }
 
     /**

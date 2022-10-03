@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Admin\WeekRequest;
+use App\Models\Audience;
 use App\Models\weekDay;
 use Illuminate\Http\JsonResponse;
 
@@ -34,8 +35,7 @@ class WeekDaysController extends Controller
     {
         $request = $request->validated();
 
-        weekDay::find($request['id'])->delete();
-
-        return $this->sendResp('Успешно', 'День недели был успешно удален', 200);
+        return $this->deleteSomething(new weekDay(), $request['id'],
+            $this->sendResp('Успешно', 'День недели был успешно удален', 200));
     }
 }

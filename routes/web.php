@@ -44,14 +44,15 @@ Route::prefix('api')->group(function () {
     Route::get('/Week', [\App\Http\Controllers\MainReadController::class, 'getAllWeeks']);
     Route::get('/lessonsOrder', [\App\Http\Controllers\MainReadController::class, 'getAllLessonOrders']);
     Route::get('/groupsPart', [\App\Http\Controllers\MainReadController::class, 'getAllGroupParts']);
+    Route::get('/Subject', [\App\Http\Controllers\MainReadController::class, 'getAllSubject']);
     Route::get('/Prepod', [\App\Http\Controllers\MainReadController::class, 'getAllPrepods']);
     Route::get('/Captain', [\App\Http\Controllers\MainReadController::class, 'getCaptains']);
     Route::get('/Schedule', [\App\Http\Controllers\MainReadController::class, 'getSchedules']);
 
-//    Route::get('/Booking', [\App\Http\Controllers\MainReadController::class, '']);
-    Route::get('/Booking/group', [\App\Http\Controllers\MainReadController::class, 'getGroupBooking']);
-    Route::get('/Booking/teacher', [\App\Http\Controllers\MainReadController::class, 'getTeacherBooking']);
-    Route::get('/Booking/audience', [\App\Http\Controllers\MainReadController::class, 'getAudienceBooking']);
+    Route::get('/lessonBooking', [\App\Http\Controllers\MainReadController::class, 'getBookings']);
+    Route::get('/lessonBooking/group', [\App\Http\Controllers\MainReadController::class, 'getGroupBooking']);
+    Route::get('/lessonBooking/teacher', [\App\Http\Controllers\MainReadController::class, 'getTeacherBooking']);
+    Route::get('/lessonBooking/audience', [\App\Http\Controllers\MainReadController::class, 'getAudienceBooking']);
 
 
     Route::post('/User/register', [\App\Http\Controllers\UserController::class, 'register']);
