@@ -10592,3 +10592,25 @@ button.plus-icon {
     max-width: 50%;
 }
 
+.text-overflow-clip {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lesson hr {
+    margin: 0;
+}
+
+.lesson {
+    text-align: center;
+}
+
+.lesson-card {
+    border-width: 2px;
+}
+
+button.to-end {
+    position: absolute;
+    right: 0;
+}
+

@@ -26,7 +26,7 @@ class isTeacher implements Rule
      */
     public function passes($attribute, $value)
     {
-        return User::find($value)->role_id === 2;
+        return User::find($value)->isTeacher();
     }
 
     /**

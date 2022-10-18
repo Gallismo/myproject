@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Actions\AudienceCheckAction;
 use App\Actions\ErrorResponseAction;
 use App\Actions\FindByCode;
+use App\Actions\GroupCheckAction;
 use App\Actions\LessonEditAction;
 use App\Actions\ResponseAction;
 use App\Actions\ScheduleCheckAction;
@@ -13,6 +14,7 @@ use App\Actions\TeacherCheckAction;
 use App\Contracts\AudienceCheckContract;
 use App\Contracts\ErrorResponseContract;
 use App\Contracts\FindByCodeContract;
+use App\Contracts\GroupCheckContract;
 use App\Contracts\LessonEditContract;
 use App\Contracts\ResponseContract;
 use App\Contracts\ScheduleCheckContract;
@@ -37,6 +39,7 @@ class ActionServiceProvider extends ServiceProvider
         $this->app->bind(LessonEditContract::class, LessonEditAction::class);
         $this->app->bind(ScheduleCheckContract::class, ScheduleCheckAction::class);
         $this->app->bind(ScheduleEditContract::class, ScheduleEditAction::class);
+        $this->app->bind(GroupCheckContract::class, GroupCheckAction::class);
     }
 
     /**

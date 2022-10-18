@@ -38,6 +38,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|lessonsBooking whereTeacherId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|lessonsBooking whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $group_id
+ * @property int $group_part_id
+ * @method static \Illuminate\Database\Eloquent\Builder|lessonsBooking whereGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|lessonsBooking whereGroupPartId($value)
  */
 class lessonsBooking extends Model
 {

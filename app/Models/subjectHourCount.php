@@ -26,6 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|subjectHourCount whereSubjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|subjectHourCount whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $group_part_id
+ * @method static \Illuminate\Database\Eloquent\Builder|subjectHourCount whereGroupPartId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|subjectHourCount whereHours($value)
  */
 class subjectHourCount extends Model
 {

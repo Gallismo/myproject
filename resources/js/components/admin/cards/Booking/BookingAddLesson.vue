@@ -4,7 +4,7 @@
             <div class="grid-1 grid-md-2 grid-gap-4">
                 <div class="form-group">
                     <label for="date">Дата</label>
-                    <b-form-datepicker id="date" locale="ru" class="btn-secondary"
+                    <b-form-datepicker id="date" locale="ru" class="btn-secondary" :dark="true" v-model="date"
                                        :date-format-options="{'year': 'numeric', 'month': 'numeric', 'day': 'numeric'}"/>
                 </div>
                 <div class="form-group">
@@ -42,7 +42,7 @@
 
         </form>
 
-        <BootstrapModalConfirm id="createConfirm"></BootstrapModalConfirm>
+        <BootstrapModalConfirm id="createConfirm" @confirmEvent="create"></BootstrapModalConfirm>
     </div>
 </template>
 
@@ -51,7 +51,28 @@
 import {BFormDatepicker} from 'bootstrap-vue';
 export default {
     name: "BookingAddLesson",
-    components: {BFormDatepicker}
+    components: {BFormDatepicker},
+
+    data() {
+        return {
+            date: ''
+        }
+    },
+    methods: {
+        create() {
+            let data = {
+                lesson_date: this.date,
+                lesson_order_id: $('#LessonCreate select#lesson_order').val(),
+                audience_id: $('#LessonCreate select#audience').val(),
+                subject_id: $('#LessonCreate select#subject').val(),
+                teacher_id: $('#LessonCreate select#teacher').val(),
+                group_id: $('#LessonCreate select#group').val(),
+                group_part_id: $('#LessonCreate select#group_part').val()
+            };
+
+            this.$store.dispatch('createBooking', data);
+        }
+    }
 }
 </script>
 

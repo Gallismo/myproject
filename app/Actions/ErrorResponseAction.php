@@ -12,7 +12,7 @@ class ErrorResponseAction implements ErrorResponseContract
     public function __invoke(string $title, string $text, $errors, int $resCode): JsonResponse
     {
         return response()->json(['title' => $title,
-            'text' => $text,
+            'body' => $text,
             'errors' => $errors], $resCode);
     }
 }

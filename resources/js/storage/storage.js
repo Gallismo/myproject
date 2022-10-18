@@ -17,6 +17,7 @@ const store = new Vuex.Store({
             dispatch('getRoles');
             dispatch('getSchedule');
             dispatch('getAllSubjects')
+            dispatch('getAllBookings')
         },
         sendRequest({commit, dispatch}, request) {
             const instance = axios.create({
@@ -42,7 +43,7 @@ const store = new Vuex.Store({
                 }
                 if (Array.isArray(request.toDoDisp) && request.toDoDisp.length !== 0) {
                     request.toDoDisp.map(item => {
-                        dispatch(item, response.data);
+                        dispatch(item);
                     })
                 }
                 if (request.method && request.method !== 'get') {

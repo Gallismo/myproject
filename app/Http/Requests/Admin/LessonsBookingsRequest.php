@@ -24,6 +24,8 @@ class LessonsBookingsRequest extends AdminRequest
                     'audience_id' => 'required|exists:audiences,id|integer',
                     'subject_id' => 'required|exists:subjects,id|integer',
                     'teacher_id' => ['required', 'exists:users,id', 'integer', new isTeacher()],
+                    'group_id' => 'required|exists:groups,id|integer',
+                    'group_part_id' => 'required|exists:groups_parts,id|integer',
                     'is_remote' => 'boolean',
                     'conference_url' => 'string|url',
                     'lesson_topic' => 'string',

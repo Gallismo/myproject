@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\AudienceCheckContract;
+use App\Contracts\GroupCheckContract;
 use App\Contracts\LessonEditContract;
 use App\Contracts\TeacherCheckContract;
 use App\Http\Requests\Admin\LessonsBookingsRequest;
 use App\Models\Audience;
+use App\Models\Group;
 use App\Models\lessonsBooking;
 use App\Models\lessonsOrder;
 use App\Models\Subject;
@@ -17,7 +19,8 @@ use Illuminate\Http\JsonResponse;
 class LessonsBookingsController extends Controller
 {
     public function createLessonBooking (LessonsBookingsRequest $request, AudienceCheckContract $audienceCheck,
-                                         TeacherCheckContract $teacherCheck, LessonEditContract $lessonEdit): JsonResponse
+                                         TeacherCheckContract $teacherCheck, LessonEditContract $lessonEdit,
+                                         GroupCheckContract $groupCheck): JsonResponse
     {
         $request = $request->validated();
 
@@ -29,6 +32,11 @@ class LessonsBookingsController extends Controller
         if ($lesson = $teacherCheck($request)) {
             return $this->sendError('Ошибка', 'Преподаватель уже закреплен за другой парой',
                 $this->generateTeachMessage($lesson), 422);
+        }
+
+        if ($lesson = $groupCheck($request)) {
+            return $this->sendError('Ошибка', 'У группы уже есть пара',
+                $this->generateGroupMessage($lesson), 422);
         }
 
         $lesson = $lessonEdit($request, new lessonsBooking);
@@ -46,7 +54,8 @@ class LessonsBookingsController extends Controller
     }
 
     public function editLessonBooking (LessonsBookingsRequest $request, AudienceCheckContract $audienceCheck,
-                                       TeacherCheckContract $teacherCheck, LessonEditContract $lessonEdit): JsonResponse
+                                       TeacherCheckContract $teacherCheck, LessonEditContract $lessonEdit,
+                                       GroupCheckContract $groupCheck): JsonResponse
     {
         $request = $request->validated();
 
@@ -62,6 +71,11 @@ class LessonsBookingsController extends Controller
                 $this->generateTeachMessage($lesson), 422);
         }
 
+        if ($lesson = $groupCheck(array(), $lessonEdited)) {
+            return $this->sendError('Ошибка', 'У группы уже есть пара',
+                $this->generateGroupMessage($lesson), 422);
+        }
+
         $lessonEdited->save();
 
         return $this->sendResp('Успешно', 'Пара была успешно отредактирована', 200);
@@ -70,27 +84,48 @@ class LessonsBookingsController extends Controller
 
 
 
-    private function generateAudMessage($lesson): object
+    private function generateAudMessage(lessonsBooking $lesson)
     {
         return (object)[
-            'Дата, Пара' =>
-                $lesson->lesson_date.", ".lessonsOrder::find($lesson->lesson_order_id)->name,
-            'Аудитория, Предмет, Преподаватель' =>
+            'date' => [
+                $lesson->lesson_date.", ".lessonsOrder::find($lesson->lesson_order_id)->name
+            ],
+            'description' => [
                 Audience::find($lesson->audience_id)->name.", "
                 .Subject::find($lesson->subject_id)->name.", "
+                .Group::find($lesson->group_id)->name.", "
                 .User::find($lesson->teacher_id)->name
+            ]
         ];
     }
 
-    private function generateTeachMessage($lesson): object
+    private function generateTeachMessage(lessonsBooking $lesson)
     {
         return (object)[
-            'Дата, Пара' =>
-                $lesson->lesson_date.", ".lessonsOrder::find($lesson->lesson_order_id)->name,
-            'Аудитория, Предмет, Преподаватель' =>
+            'date' => [
+                $lesson->lesson_date.", ".lessonsOrder::find($lesson->lesson_order_id)->name
+            ],
+            'description' => [
                 Audience::find($lesson->audience_id)->name.", "
                 .Subject::find($lesson->subject_id)->name.", "
+                .Group::find($lesson->group_id)->name.", "
                 .User::find($lesson->teacher_id)->name
+            ]
+        ];
+    }
+
+    private function generateGroupMessage(lessonsBooking $lesson)
+    {
+        return (object)[
+            'date' => [
+                $lesson->lesson_date.", ".lessonsOrder::find($lesson->lesson_order_id)->name
+            ],
+            'description' => [
+                Audience::find($lesson->audience_id)->name.", "
+                .Subject::find($lesson->subject_id)->name.", "
+                .Group::find($lesson->group_id)->name.", "
+                .User::find($lesson->teacher_id)->name
+            ]
         ];
     }
 }

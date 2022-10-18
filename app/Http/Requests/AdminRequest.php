@@ -14,7 +14,7 @@ class AdminRequest extends MyRequest
      */
     public function authorize()
     {
-//        return true;
+        return true;
         if (!Auth::check()) {
             return false;
         }

@@ -2076,7 +2076,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/components/form-datepicker/form-datepicker.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -2135,37 +2136,122 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Booking",
+  components: {
+    BFormDatepicker: bootstrap_vue__WEBPACK_IMPORTED_MODULE_1__.BFormDatepicker
+  },
   data: function data() {
     return {
       query: {}
     };
   },
   mounted: function mounted() {
-    this.getSchedule();
+    this.getAllBookings();
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(['getSchedule', 'deleteSchedule'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)(['getAllBookings', 'deleteBooking'])), {}, {
     querySchedule: function querySchedule(event) {
       var type = event.target.id;
-      this.query[type] = event.target.value;
+
+      if (event.target.value) {
+        this.query[type] = event.target.value;
+      } else {
+        delete this.query[type];
+      }
+
       this.filter();
     },
     filter: function filter() {
-      this.getSchedule(this.query);
+      this.getAllBookings(this.query);
     },
     openModalCreate: function openModalCreate() {
       $('#createModal').modal('show');
     },
+    queryDate: function queryDate(date) {
+      this.query.date_filter = date;
+      this.filter();
+    },
     del: function del() {
-      this.deleteSchedule({
-        id: this.getCurrentSchedule.id
+      this.deleteBooking({
+        id: this.getCurrentBooking.id
       });
     }
   }),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['getScheduleData', 'getDepartmentsData', 'getWeeksData', 'getLoading', 'getDepartmentDropdown', 'getWeekDropdown', 'getLessonOrderDropdown', 'getCurrentSchedule']))
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['getBookingsData', 'getDepartmentsData', 'getWeeksData', 'getLoading', 'getDepartmentDropdown', 'getWeekDropdown', 'getLessonOrderDropdown', 'getCurrentBooking'])), {}, {
+    groupedLessons: function groupedLessons() {
+      var _this = this;
+
+      var data = {};
+      this.getDepartmentsData.map(function (department) {
+        data[department.name] = [];
+
+        _this.getBookingsData.map(function (booking) {
+          if (booking.department_id === department.id) {
+            data[department.name].push(booking);
+          }
+        });
+
+        if (data[department.name].length === 0) {
+          delete data[department.name];
+        }
+      });
+      return data;
+    }
+  })
 });
 
 /***/ }),
@@ -2236,6 +2322,25 @@ __webpack_require__.r(__webpack_exports__);
   name: "BookingAddLesson",
   components: {
     BFormDatepicker: bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__.BFormDatepicker
+  },
+  data: function data() {
+    return {
+      date: ''
+    };
+  },
+  methods: {
+    create: function create() {
+      var data = {
+        lesson_date: this.date,
+        lesson_order_id: $('#LessonCreate select#lesson_order').val(),
+        audience_id: $('#LessonCreate select#audience').val(),
+        subject_id: $('#LessonCreate select#subject').val(),
+        teacher_id: $('#LessonCreate select#teacher').val(),
+        group_id: $('#LessonCreate select#group').val(),
+        group_part_id: $('#LessonCreate select#group_part').val()
+      };
+      this.$store.dispatch('createBooking', data);
+    }
   }
 });
 
@@ -5338,6 +5443,49 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/DeleteIconSec.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/DeleteIconSec.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "DeleteIconSec",
+  props: {
+    target: {
+      type: String,
+      required: true
+    },
+    data_switch_action: {
+      type: String,
+      required: true
+    }
+  },
+  methods: {
+    deleteEvent: function deleteEvent(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      var item = $(event.target).parents('.lesson-card')[0];
+      var id = $(item).attr('data-id');
+      this.$store.dispatch(this.data_switch_action, id);
+      $(this.target).modal('show');
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/Dropdown.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/Dropdown.vue?vue&type=script&lang=js& ***!
@@ -6290,6 +6438,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_admin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/admin */ "./resources/js/views/admin.vue");
 
 
+ // Vue.use(BootstrapVue, {
+//     BCalendar: { block: true }
+// })
+
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 var files = __webpack_require__("./resources/js/components sync recursive \\.vue$/");
@@ -6463,6 +6615,151 @@ __webpack_require__.r(__webpack_exports__);
     },
     getCurrentAudience: function getCurrentAudience(state) {
       return state.currentAudience;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/storage/modules/Booking.js":
+/*!*************************************************!*\
+  !*** ./resources/js/storage/modules/Booking.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  actions: {
+    getAllBookings: function getAllBookings(_ref, query) {
+      var commit = _ref.commit,
+          dispatch = _ref.dispatch;
+      commit('setLoading', true);
+      dispatch('sendRequest', {
+        entity: 'lessonBooking',
+        method: 'get',
+        params: query,
+        toDoComm: ['getAllBookings', 'currentBookingSet']
+      });
+    },
+    saveBooking: function saveBooking(_ref2, data) {
+      var commit = _ref2.commit,
+          dispatch = _ref2.dispatch;
+      // axios({
+      // //     method: 'patch',
+      // //     url: '/api/Week',
+      // //     data: data
+      // // })
+      // //     .then(response => {
+      // //         commit('updateWeek', data);
+      // //         dispatch('showNotification', response.data);
+      // //     })
+      // //     .catch(error => {
+      // //         dispatch('showNotification', error.response.data);
+      //     });
+      dispatch('sendRequest', {
+        entity: 'lessonBooking',
+        method: 'patch',
+        data: data,
+        toDoComm: ['updateBooking']
+      });
+    },
+    deleteBooking: function deleteBooking(_ref3, data) {
+      var commit = _ref3.commit,
+          dispatch = _ref3.dispatch;
+      // axios({
+      //     method: 'delete',
+      //     url: '/api/Week',
+      //     data: data
+      // })
+      //     .then(response => {
+      //         commit('deleteWeek', data);
+      //         dispatch('showNotification', response.data);
+      //     })
+      //     .catch(error => {
+      //         dispatch('showNotification', error.response.data);
+      //     });
+      dispatch('sendRequest', {
+        entity: 'lessonBooking',
+        method: 'delete',
+        data: data,
+        toDoDisp: ['getAllBookings']
+      });
+    },
+    createBooking: function createBooking(_ref4, data) {
+      var commit = _ref4.commit,
+          dispatch = _ref4.dispatch;
+      // axios({
+      //     method: 'post',
+      //     url: '/api/Week',
+      //     data: data
+      // })
+      //     .then(response => {
+      //         dispatch('getAllWeeks');
+      //         dispatch('showNotification', response.data);
+      //     })
+      //     .catch(error => {
+      //         dispatch('showNotification', error.response.data);
+      //     });
+      dispatch('sendRequest', {
+        entity: 'lessonBooking',
+        method: 'post',
+        data: data,
+        toDoDisp: ['getAllBookings']
+      });
+    },
+    switchBooking: function switchBooking(_ref5, id) {
+      var commit = _ref5.commit,
+          dispatch = _ref5.dispatch;
+      commit('switchBooking', id);
+    }
+  },
+  mutations: {
+    deleteBooking: function deleteBooking(state, data) {
+      state.weeksData.map(function (obj, index) {
+        if (obj.id == data.id) {
+          state.weeksData.splice(index, 1);
+        }
+      });
+      state.currentBooking = state.bookingsData[0];
+    },
+    getAllBookings: function getAllBookings(state, response) {
+      state.bookingsData = response.raw_bookings;
+      state.formattedBookings = response.formatted_bookings;
+    },
+    currentBookingSet: function currentBookingSet(state, response) {
+      state.currentBooking = response.raw_bookings[0];
+    },
+    switchBooking: function switchBooking(state, id) {
+      state.currentBooking = state.bookingsData.find(function (booking) {
+        return booking.id == id;
+      });
+    },
+    updateBooking: function updateBooking(state, data) {
+      state.bookingsData.map(function (obj, index) {
+        if (obj.id == data.id) {
+          data.name ? state.bookingsData[index].name = data.name : false;
+        }
+      });
+    }
+  },
+  state: {
+    bookingsData: [],
+    currentBooking: {},
+    formattedBookings: []
+  },
+  getters: {
+    getBookingsData: function getBookingsData(state) {
+      return state.bookingsData;
+    },
+    getFormattedBookingsData: function getFormattedBookingsData(state) {
+      return state.formattedBookings;
+    },
+    getCurrentBooking: function getCurrentBooking(state) {
+      return state.currentBooking;
     }
   }
 });
@@ -8264,6 +8561,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       dispatch('getRoles');
       dispatch('getSchedule');
       dispatch('getAllSubjects');
+      dispatch('getAllBookings');
     },
     sendRequest: function sendRequest(_ref2, request) {
       var _request$method, _request$data, _request$params;
@@ -8295,7 +8593,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 
         if (Array.isArray(request.toDoDisp) && request.toDoDisp.length !== 0) {
           request.toDoDisp.map(function (item) {
-            dispatch(item, response.data);
+            dispatch(item);
           });
         }
 
@@ -56290,6 +56588,45 @@ component.options.__file = "resources/js/components/all/DeleteIcon.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/all/DeleteIconSec.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/all/DeleteIconSec.vue ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DeleteIconSec_vue_vue_type_template_id_0f5faaa4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteIconSec.vue?vue&type=template&id=0f5faaa4&scoped=true& */ "./resources/js/components/all/DeleteIconSec.vue?vue&type=template&id=0f5faaa4&scoped=true&");
+/* harmony import */ var _DeleteIconSec_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeleteIconSec.vue?vue&type=script&lang=js& */ "./resources/js/components/all/DeleteIconSec.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DeleteIconSec_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DeleteIconSec_vue_vue_type_template_id_0f5faaa4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DeleteIconSec_vue_vue_type_template_id_0f5faaa4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "0f5faaa4",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/all/DeleteIconSec.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/all/Dropdown.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/all/Dropdown.vue ***!
@@ -57877,6 +58214,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/all/DeleteIconSec.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/all/DeleteIconSec.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteIconSec_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DeleteIconSec.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/DeleteIconSec.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteIconSec_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/all/Dropdown.vue?vue&type=script&lang=js&":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/all/Dropdown.vue?vue&type=script&lang=js& ***!
@@ -59055,6 +59408,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/all/DeleteIconSec.vue?vue&type=template&id=0f5faaa4&scoped=true&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/all/DeleteIconSec.vue?vue&type=template&id=0f5faaa4&scoped=true& ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteIconSec_vue_vue_type_template_id_0f5faaa4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteIconSec_vue_vue_type_template_id_0f5faaa4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteIconSec_vue_vue_type_template_id_0f5faaa4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DeleteIconSec.vue?vue&type=template&id=0f5faaa4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/DeleteIconSec.vue?vue&type=template&id=0f5faaa4&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/all/Dropdown.vue?vue&type=template&id=ed4705ac&scoped=true&":
 /*!*********************************************************************************************!*\
   !*** ./resources/js/components/all/Dropdown.vue?vue&type=template&id=ed4705ac&scoped=true& ***!
@@ -59429,7 +59799,18 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c(
+      "div",
+      { staticClass: "row justify-content-between align-items-center" },
+      [
+        _c("h5", { staticClass: "col" }, [
+          _vm._v("Составление расписания занятий"),
+        ]),
+        _vm._v(" "),
+        _c("PlusIcon", { attrs: { target: "#addLessonModal" } }),
+      ],
+      1
+    ),
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
@@ -59476,14 +59857,63 @@ var render = function () {
                   "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
               },
               [
-                _c("span", { staticClass: "w-35" }, [_vm._v("День недели")]),
+                _c("span", { staticClass: "w-35" }, [_vm._v("Дата")]),
+                _vm._v(" "),
+                _c("b-form-datepicker", {
+                  staticClass: "btn-secondary",
+                  attrs: {
+                    id: "date_filter",
+                    locale: "ru",
+                    dark: true,
+                    "date-format-options": {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
+                    },
+                  },
+                  on: { input: _vm.queryDate },
+                }),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
+              },
+              [
+                _c("span", { staticClass: "w-35" }, [_vm._v("Преподаватель")]),
                 _vm._v(" "),
                 _c("SelectComp", {
                   staticClass: "w-50",
                   attrs: {
                     defaultTitle: "Все",
-                    items: _vm.getWeekDropdown,
-                    id: "week_filter",
+                    items: _vm.$store.getters.getTeacherDropdown,
+                    id: "teacher_filter",
+                  },
+                  on: { clickEvent: _vm.querySchedule },
+                }),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "d-flex justify-content-between\n            justify-content-xl-around align-items-center",
+              },
+              [
+                _c("span", { staticClass: "w-35" }, [_vm._v("Аудитория")]),
+                _vm._v(" "),
+                _c("SelectComp", {
+                  staticClass: "w-50",
+                  attrs: {
+                    defaultTitle: "Все",
+                    items: _vm.$store.getters.getAudienceDropdown,
+                    id: "aud_filter",
                   },
                   on: { clickEvent: _vm.querySchedule },
                 }),
@@ -59504,7 +59934,7 @@ var render = function () {
                   staticClass: "w-50",
                   attrs: {
                     defaultTitle: "Все",
-                    items: _vm.getLessonOrderDropdown,
+                    items: _vm.$store.getters.getLessonOrderDropdown,
                     id: "les_filter",
                   },
                   on: { clickEvent: _vm.querySchedule },
@@ -59526,28 +59956,181 @@ var render = function () {
                 expression: "!getLoading",
               },
             ],
-            staticClass: "w-100 grid-1 grid-md-2 grid-xl-3",
+            staticClass: "w-100 grid-1",
           },
-          _vm._l(_vm.getDepartmentsData, function (department) {
-            return _c(
-              "div",
-              { key: department.id, staticClass: "mt-3 p-1" },
-              [
-                _c("h3", [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(department.name) +
-                      "\n\n                "
+          _vm._l(
+            _vm.$store.getters.getFormattedBookingsData,
+            function (department) {
+              return _c(
+                "div",
+                { staticClass: "mt-3 p-1" },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "d-flex align-items-center" },
+                    [
+                      _c("h3", { staticClass: "m-0" }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(department.department_name) +
+                            "\n                    "
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("PlusIcon", {
+                        staticClass: "ml-2",
+                        attrs: { target: "#addLessonModal" },
+                      }),
+                    ],
+                    1
                   ),
-                ]),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _c("PlusIcon", { attrs: { target: "#addLessonModal" } }),
-              ],
-              1
-            )
-          }),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _vm._l(department.days, function (day) {
+                    return _c(
+                      "div",
+                      { staticClass: "mb-3 card bg-dark text-white " },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "card-header",
+                            attrs: {
+                              type: "button",
+                              "data-toggle": "collapse",
+                              "data-target":
+                                "#groupCollapse" +
+                                day.date +
+                                department.department_id,
+                              "aria-expanded": "false",
+                              "aria-controls":
+                                "groupCollapse" +
+                                day.date +
+                                department.department_id,
+                            },
+                          },
+                          [_c("h4", [_vm._v(_vm._s(day.date))])]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "grid-5 grid-gap-1 collapse p-1",
+                            attrs: {
+                              id:
+                                "groupCollapse" +
+                                day.date +
+                                department.department_id,
+                            },
+                          },
+                          _vm._l(day.groups, function (group) {
+                            return _c(
+                              "div",
+                              { staticClass: "card bg-dark text-white" },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "card-header",
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "collapse",
+                                      "data-target":
+                                        "#lessCollapse" +
+                                        group.group_name +
+                                        day.date,
+                                      "aria-expanded": "false",
+                                      "aria-controls":
+                                        "lessCollapse" +
+                                        group.group_name +
+                                        day.date,
+                                    },
+                                  },
+                                  [_c("h5", [_vm._v(_vm._s(group.group_name))])]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "collapse p-1",
+                                    attrs: {
+                                      id:
+                                        "lessCollapse" +
+                                        group.group_name +
+                                        day.date,
+                                    },
+                                  },
+                                  _vm._l(group.bookings, function (lesson) {
+                                    return _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "card lesson-card bg-dark text-white",
+                                        attrs: { "data-id": lesson.id },
+                                      },
+                                      [
+                                        _c("div", { staticClass: "lesson" }, [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "d-flex justify-content-center",
+                                            },
+                                            [
+                                              _c("div", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    lesson.lesson_order_name
+                                                  ) +
+                                                    " " +
+                                                    _vm._s(lesson.subject_name)
+                                                ),
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("DeleteIconSec", {
+                                                staticClass: "to-end",
+                                                attrs: {
+                                                  target: "#deleteConfirm",
+                                                  data_switch_action:
+                                                    "switchBooking",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c("hr"),
+                                          _vm._v(
+                                            "\n                                        Аудитория: " +
+                                              _vm._s(lesson.audience_name) +
+                                              "\n                                        "
+                                          ),
+                                          _c("hr"),
+                                          _vm._v(
+                                            "\n                                        " +
+                                              _vm._s(lesson.teacher_name) +
+                                              "\n                                    "
+                                          ),
+                                        ]),
+                                      ]
+                                    )
+                                  }),
+                                  0
+                                ),
+                              ]
+                            )
+                          }),
+                          0
+                        ),
+                      ]
+                    )
+                  }),
+                ],
+                2
+              )
+            }
+          ),
           0
         ),
         _vm._v(" "),
@@ -59568,14 +60151,6 @@ var render = function () {
           },
         }),
         _vm._v(" "),
-        _c("BootstrapModal", {
-          attrs: {
-            id: "createModal",
-            body: "SheduleCreate",
-            title: "Добавление",
-          },
-        }),
-        _vm._v(" "),
         _c("Loader", {
           directives: [
             {
@@ -59591,22 +60166,7 @@ var render = function () {
     ),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "row justify-content-between align-items-center" },
-      [
-        _c("h5", { staticClass: "col" }, [
-          _vm._v("Составление расписанияя занятий"),
-        ]),
-      ]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -59649,11 +60209,19 @@ var render = function () {
                   attrs: {
                     id: "date",
                     locale: "ru",
+                    dark: true,
                     "date-format-options": {
                       year: "numeric",
                       month: "numeric",
                       day: "numeric",
                     },
+                  },
+                  model: {
+                    value: _vm.date,
+                    callback: function ($$v) {
+                      _vm.date = $$v
+                    },
+                    expression: "date",
                   },
                 }),
               ],
@@ -59778,7 +60346,10 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
-      _c("BootstrapModalConfirm", { attrs: { id: "createConfirm" } }),
+      _c("BootstrapModalConfirm", {
+        attrs: { id: "createConfirm" },
+        on: { confirmEvent: _vm.create },
+      }),
     ],
     1
   )
@@ -63960,6 +64531,43 @@ var render = function () {
       on: { click: _vm.deleteEvent },
     },
     [_c("img", { attrs: { src: "/img/delete-icon.svg" } })]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/DeleteIconSec.vue?vue&type=template&id=0f5faaa4&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/all/DeleteIconSec.vue?vue&type=template&id=0f5faaa4&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "button",
+    {
+      staticClass: "delete-icon",
+      attrs: {
+        type: "button",
+        "data-toggle": "modal",
+        "data-target": _vm.target,
+      },
+      on: { click: _vm.deleteEvent },
+    },
+    [_c("img", { attrs: { src: "/img/delete-icon-2.svg" } })]
   )
 }
 var staticRenderFns = []
@@ -81574,6 +82182,7 @@ var map = {
 	"./all/Card.vue": "./resources/js/components/all/Card.vue",
 	"./all/CollapseToggler.vue": "./resources/js/components/all/CollapseToggler.vue",
 	"./all/DeleteIcon.vue": "./resources/js/components/all/DeleteIcon.vue",
+	"./all/DeleteIconSec.vue": "./resources/js/components/all/DeleteIconSec.vue",
 	"./all/Dropdown.vue": "./resources/js/components/all/Dropdown.vue",
 	"./all/Footer.vue": "./resources/js/components/all/Footer.vue",
 	"./all/Header.vue": "./resources/js/components/all/Header.vue",
@@ -81625,6 +82234,7 @@ webpackContext.id = "./resources/js/components sync recursive \\.vue$/";
 
 var map = {
 	"./Audience.js": "./resources/js/storage/modules/Audience.js",
+	"./Booking.js": "./resources/js/storage/modules/Booking.js",
 	"./Captain.js": "./resources/js/storage/modules/Captain.js",
 	"./Departments.js": "./resources/js/storage/modules/Departments.js",
 	"./Group.js": "./resources/js/storage/modules/Group.js",

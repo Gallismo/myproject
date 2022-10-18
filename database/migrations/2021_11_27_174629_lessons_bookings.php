@@ -24,6 +24,10 @@ class LessonsBookings extends Migration
             $table->foreign('subject_id')->references('id')->on('subjects')->onUpdate('CASCADE');
             $table->unsignedBigInteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('users')->onUpdate('CASCADE');
+            $table->unsignedBigInteger('group_id');
+            $table->foreign('group_id')->references('id')->on('groups')->onUpdate('CASCADE');
+            $table->unsignedBigInteger('group_part_id');
+            $table->foreign('group_part_id')->references('id')->on('groups_parts')->onUpdate('CASCADE');
             $table->boolean('is_remote')->default(0);
             $table->string('conference_url')->nullable();
             $table->string('lesson_topic')->nullable();

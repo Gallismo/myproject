@@ -6,6 +6,7 @@ use App\Http\Requests\Admin\AudienceFormRequest;
 use App\Http\Requests\Admin\GetRequests\GetBookingAudienceRequest;
 use App\Http\Requests\Admin\GetRequests\GetBookingGroupRequest;
 use App\Http\Requests\Admin\GetRequests\GetBookingTeacherRequest;
+use App\Http\Requests\Admin\GetRequests\GetLessonsRequest;
 use App\Models\Audience;
 use App\Models\Department;
 use App\Models\groupCaptain;
@@ -15,6 +16,7 @@ use App\Models\Role;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\weekDay;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -79,7 +81,7 @@ class MainReadController extends Controller
 
         $roles = Role::all();
         $userModel = DB::table('users')->leftJoin('groups', 'users.group_id', '=', 'groups.id')
-            ->select('users.name', 'users.role_id', 'users.login', 'groups.name as group_name', 'users.group_id')
+            ->select('users.id', 'users.name', 'users.login', 'users.role_id', 'users.group_id', 'groups.name as group_name')
             ->orderBy('users.login');
 
         if (isset($queries['login'])) {
@@ -188,14 +190,104 @@ class MainReadController extends Controller
                 ->where('audience_id', $queries['audience_id'])->first() ?? 'Кабинет свободен';
     }
 
-    public function getBookings(Request $request) {
+    public function getBookings(GetLessonsRequest $request) {
+        $queries = $request->validated();
+
+        $now = date('Y-m-d');
+        $days = DB::table('lessons_bookings')->select(DB::raw('DATE_FORMAT(lesson_date, "%d-%m-%Y") as date'))
+            ->where('lesson_date', '>=', $now)
+            ->groupBy('lesson_date')->get();
+        $departments = DB::table('departments')->select('name as department_name', 'id as department_id')->get();
+        $groups = DB::table('groups')->select('name as group_name')->groupBy('name')->get();
+
         $db = DB::table('lessons_bookings')
             ->join('lessons_orders', 'lessons_bookings.lesson_order_id', '=', 'lessons_orders.id')
             ->join('audiences', 'lessons_bookings.audience_id', '=', 'audiences.id')
             ->join('subjects', 'lessons_bookings.subject_id', '=', 'subjects.id')
+            ->join('groups', 'lessons_bookings.group_id', '=', 'groups.id')
+            ->join('groups_parts', 'lessons_bookings.group_part_id', '=', 'groups_parts.id')
             ->join('users', 'lessons_bookings.teacher_id', '=', 'users.id')
-            ->select('lessons_bookings.*', 'audiences.name as audience_name', 'subjects.name as subject_name',
-                'users.name as teacher_name')->orderBy('created_at', 'desc')->get();
-        return $db;
+            ->join('departments', 'groups.department_id', '=', 'departments.id')
+            ->join('week_days', function (JoinClause $join) {
+                $join->on(DB::raw('DAYOFWEEK(lesson_date)'), '=', 'week_days.index');
+            })
+            ->join('schedules', function (JoinClause $join) {
+                $join->on('lessons_bookings.lesson_order_id', '=', 'schedules.lesson_order_id');
+                $join->on('departments.id', '=', 'schedules.department_id');
+                $join->on('week_days.id', '=', 'schedules.week_day_id');
+            })
+            ->select('lessons_bookings.*',
+                DB::raw('DATE_FORMAT(lesson_date, "%d-%m-%Y") as lesson_date'),
+                'audiences.name as audience_name', 'subjects.name as subject_name',
+                'users.name as teacher_name', 'groups.name as group_name', 'groups_parts.name as group_part_name',
+                'departments.name as department_name', 'departments.id as department_id', 'lessons_orders.name as lesson_order_name')
+            ->where('lessons_bookings.lesson_date', '>=', $now)
+            ->orderBy('groups.department_id')->orderBy('lessons_bookings.lesson_date')
+            ->orderBy('lessons_bookings.group_id')->orderBy('schedules.start_time');
+
+        if(isset($queries['dep_filter'])) {
+            $db = $db->where('groups.department_id', $queries['dep_filter']);
+        }
+
+        if(isset($queries['aud_filter'])) {
+            $db = $db->where('lessons_bookings.audience_id', $queries['aud_filter']);
+        }
+
+        if(isset($queries['teacher_filter'])) {
+            $db = $db->where('lessons_bookings.teacher_id', $queries['teacher_filter']);
+        }
+
+        if(isset($queries['les_filter'])) {
+            $db = $db->where('lessons_bookings.lesson_order_id', $queries['les_filter']);
+        }
+
+        if(isset($queries['date_filter'])) {
+            $db = $db->where('lessons_bookings.lesson_date', $queries['date_filter']);
+        }
+
+
+        $db = $db->get();
+
+        $result = [
+            'raw_bookings' => $db,
+            'formatted_bookings' => []
+        ];
+        foreach ($departments as $keyDep => $department) {
+            $depDays = [
+                'department_name' => $department->department_name,
+                'department_id' => $department->department_id,
+                'days' => []
+            ];
+            foreach ($days as $keyDay => $day) {
+                $dayGroups = [
+                    'date' => $day->date,
+                    'groups' => []
+                ];
+                foreach ($groups as $keyGroup => $group) {
+                    $groupBookings = [
+                        'group_name' => $group->group_name,
+                        'bookings' => []
+                    ];
+                    foreach ($db as $booking) {
+                        if ($day->date === $booking->lesson_date &&
+                            $group->group_name === $booking->group_name &&
+                            $department->department_name === $booking->department_name) {
+                            $groupBookings['bookings'][] = $booking;
+                        }
+                    }
+                    if (!empty($groupBookings['bookings'])) {
+                        $dayGroups['groups'][] = $groupBookings;
+                    }
+                }
+                if (!empty($dayGroups['groups'])) {
+                    $depDays['days'][] = $dayGroups;
+                }
+            }
+            if (!empty($depDays['days'])) {
+                $result['formatted_bookings'][] = $depDays;
+            }
+        }
+
+        return response()->json($result);
     }
 }
