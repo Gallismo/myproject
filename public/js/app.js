@@ -60016,7 +60016,8 @@ var render = function () {
                         _c(
                           "div",
                           {
-                            staticClass: "grid-5 grid-gap-1 collapse p-1",
+                            staticClass:
+                              "grid-xl-5 grid-md-3 grid-lg-4 grid-sm-2 grid-1 grid-gap-1 collapse p-1",
                             attrs: {
                               id:
                                 "groupCollapse" +

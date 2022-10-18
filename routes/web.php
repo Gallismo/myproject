@@ -29,10 +29,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\IndexController::class, 'index']);
 Route::get('/admin', function () {
-    return view('admin');
+    return view('layouts.admin');
 })->middleware(['isAuth', 'isAdmin']);
 Route::get('/pub', function () {
-    return view('index');
+    return view('layouts.index');
 });
 Route::prefix('api')->group(function () {
     Route::post('/User/login', [\App\Http\Controllers\UserController::class, 'login']);

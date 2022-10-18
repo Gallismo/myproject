@@ -60,7 +60,7 @@
                                 :aria-controls="'groupCollapse' + day.date + department.department_id">
                             <h4>{{ day.date }}</h4>
                         </button>
-                        <div class="grid-5 grid-gap-1 collapse p-1" :id="'groupCollapse' + day.date + department.department_id">
+                        <div class="grid-xl-5 grid-md-3 grid-lg-4 grid-sm-2 grid-1 grid-gap-1 collapse p-1" :id="'groupCollapse' + day.date + department.department_id">
                             <div v-for="group in day.groups" class="card bg-dark text-white">
                                 <button type="button" data-toggle="collapse"
                                         class="card-header"
