@@ -84,7 +84,7 @@ body {
     cursor: pointer;
 }
 
-.dropdown-menu {
+.admin-dropdown.dropdown-menu {
     overflow: auto;
     max-height: 200px;
 }
@@ -296,14 +296,18 @@ button.plus-icon {
     border: none;
 }
 
-.b-form-datepicker .dropdown-menu {
-    width: auto !important;
-}
+/*.b-form-datepicker .dropdown-menu {*/
+/*    width: auto !important;*/
+/*}*/
 
-.b-form-datepicker .b-calendar-inner {
-    width: auto !important;
-    min-width: 400px;
-}
+/*.b-calendar-inner {*/
+/*    width: auto !important;*/
+/*    min-width: 600px;*/
+/*}*/
+
+/*.b-form-datepicker {*/
+/*    min-width: 700px;*/
+/*}*/
 
 .b-form-datepicker.btn-secondary {
     border-color: #6c757d;
@@ -357,4 +361,18 @@ button.plus-icon {
 button.to-end {
     position: absolute;
     right: 0;
+}
+
+.lessons-tabs  {
+    font-size: 20px;
+}
+
+.arrow-back {
+    width: 1.25em;
+    height: 1.25em;
+}
+
+.arrow-back:hover {
+    color: #298fe2;
+    transition: .2s;
 }

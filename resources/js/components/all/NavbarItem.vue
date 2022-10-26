@@ -16,10 +16,6 @@
         },
         methods: {
             switchTab: function (event) {
-                if (event.target.id === 'Logout') {
-                    alert('Logout');
-                    return;
-                }
                 this.switchAction(event);
             },
             ...mapActions({

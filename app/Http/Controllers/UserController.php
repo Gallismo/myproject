@@ -8,8 +8,10 @@ use App\Http\Requests\UserChPassRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -32,14 +34,24 @@ class UserController extends Controller
         return $this->sendResp('Успешно', 'Пользователь был успешно создан', 200);
     }
 
-    public function login(UserLoginRequest $request)
+    public function login(Request $request)
     {
-        $request = $request->validated();
+        $request = $request->all();
+        $val = Validator::make($request, [
+            'login' => 'required|exists:users,login',
+            'password' => 'required'
+        ]);
+
+        if ($val->fails()) {
+            return back()->with('errorTitle', 'Ошибка')->with('errorText', 'Неверный логин или пароль');
+//            return $this->sendError('sdfdsfs', 'sdgsdgsd', $val->errors(), 422);
+        }
 
         $user = User::where('login', $request['login'])->first();
 
         if (!Hash::check($request['password'], $user->password)) {
-            return $this->sendResp('Ошибка', 'Проверьте правильность заполения, пароль неверный', 422);
+            return back()->with('errorTitle', 'Ошибка')->with('errorText', 'Неверный логин или пароль');
+//            return $this->sendResp('Ошибка', 'Проверьте правильность заполения, пароль неверный', 422);
         }
 
         Auth::login($user);
@@ -48,7 +60,13 @@ class UserController extends Controller
             return redirect('/admin');
         }
 
-        return back();
+        return redirect('/');
+    }
+
+    public function logout () {
+        Auth::logout();
+
+        return redirect('/pub');
     }
 
     public function changePassword (UserChPassRequest $request): JsonResponse

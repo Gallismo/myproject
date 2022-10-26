@@ -34,9 +34,15 @@ Route::get('/admin', function () {
 Route::get('/pub', function () {
     return view('layouts.index');
 });
+Route::get('/login', function () {
+    return view('layouts.login');
+});
+Route::post('/login', [\App\Http\Controllers\UserController::class, 'login']);
+Route::get('/logout', [\App\Http\Controllers\UserController::class, 'logout'])->middleware(['isAuth', 'isAdmin']);
+Route::get('/search', [\App\Http\Controllers\MainReadController::class, 'search']);
 Route::prefix('api')->group(function () {
-    Route::post('/User/login', [\App\Http\Controllers\UserController::class, 'login']);
 
+    Route::get('/lessons', [\App\Http\Controllers\MainReadController::class, 'getLessons']);
     Route::get('/Group', [\App\Http\Controllers\MainReadController::class, 'getAllGroups']);
     Route::get('/Department', [\App\Http\Controllers\MainReadController::class, 'getAllDepartments']);
     Route::get('/Audience', [\App\Http\Controllers\MainReadController::class, 'getAllAudiences']);
@@ -84,10 +90,6 @@ Route::prefix('api')->group(function () {
     Route::post('/Week', [\App\Http\Controllers\WeekDaysController::class, 'createWeekDay']);
     Route::delete('/Week', [\App\Http\Controllers\WeekDaysController::class, 'deleteWeekDay']);
     Route::patch('/Week', [\App\Http\Controllers\WeekDaysController::class, 'editWeekDay']);
-
-    Route::post('/Prepod', [\App\Http\Controllers\TeacherController::class, 'createTeacher']);
-    Route::delete('/Prepod', [\App\Http\Controllers\TeacherController::class, 'deleteTeacher']);
-    Route::patch('/Prepod', [\App\Http\Controllers\TeacherController::class, 'editTeacher']);
 
     Route::post('/Group', [\App\Http\Controllers\GroupController::class, 'createGroup']);
     Route::delete('/Group', [\App\Http\Controllers\GroupController::class, 'deleteGroup']);

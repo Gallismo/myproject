@@ -23,10 +23,21 @@ window.Vue = require('vue').default;
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+import {BootstrapVue, IconsPlugin} from "bootstrap-vue";
+import vueDebounce from 'vue-debounce';
+
 import store from "./storage/storage";
 import router from "./router.js";
+
+Vue.use(vueDebounce, {
+    trim: true
+});
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
+
 const app = new Vue({
     el: '#app',
     router,
     store
 });
+

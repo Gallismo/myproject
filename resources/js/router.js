@@ -11,15 +11,20 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 import index from "./views/index";
 import admin from "./views/admin";
+import login from './views/login';
 
 const routes = [
     {
-        path: '/',
+        path: '/pub',
         component: index
     },
     {
         path: '/admin',
         component: admin
+    },
+    {
+        path: '/login',
+        component: login
     }
 ];
 

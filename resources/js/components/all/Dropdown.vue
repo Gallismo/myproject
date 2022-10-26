@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown col-xl-6 col-lg-7 col-md-12 mt-2 mt-lg-0">
+    <div class="dropdown admin-dropdown col-xl-6 col-lg-7 col-md-12 mt-2 mt-lg-0">
         <button class="btn btn-secondary dropdown-toggle col-12" type="button"
                 id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">

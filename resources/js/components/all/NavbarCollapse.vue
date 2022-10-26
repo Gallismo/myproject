@@ -3,13 +3,13 @@
         <ul class="navbar-nav">
             <NavDropdown :id="index" :dropdown="item" v-for="(item, index) in this.getLinks.dropdowns"
                          :key="index"
-            >
-
-            </NavDropdown>
+            />
             <NavbarItem :name="[index, link]" v-for="(link, index) in this.getLinks.simpleLinks"
                         :key="index"
-            ></NavbarItem>
-            <NavbarItem class="ml-lg-auto" :name="['Logout', 'Выйти']"></NavbarItem>
+            />
+            <li class="nav-item ml-lg-auto">
+                <a class="nav-link" href="/logout">Выйти</a>
+            </li>
         </ul>
     </div>
 </template>

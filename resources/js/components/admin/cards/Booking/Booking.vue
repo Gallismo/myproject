@@ -20,7 +20,9 @@
                 <div class="d-flex justify-content-between
                 justify-content-xl-around align-items-center">
                     <span class="w-35">Дата</span>
-                    <b-form-datepicker id="date_filter" locale="ru" class="btn-secondary" :dark="true" @input="queryDate"
+                    <b-form-datepicker id="date_filter" locale="ru" :dark="true" start-weekday="1" class="btn-secondary"
+                                       label-no-date-selected="Дата не выбрана" :reset-button="true"
+                                       :today-button="true"
                                        :date-format-options="{'year': 'numeric', 'month': 'numeric', 'day': 'numeric'}"/>
                 </div>
                 <div class="d-flex justify-content-between

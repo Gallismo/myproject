@@ -7,6 +7,8 @@ use App\Http\Requests\Admin\GetRequests\GetBookingAudienceRequest;
 use App\Http\Requests\Admin\GetRequests\GetBookingGroupRequest;
 use App\Http\Requests\Admin\GetRequests\GetBookingTeacherRequest;
 use App\Http\Requests\Admin\GetRequests\GetLessonsRequest;
+use App\Http\Requests\LessonsRequest;
+use App\Http\Requests\SearchRequest;
 use App\Models\Audience;
 use App\Models\Department;
 use App\Models\groupCaptain;
@@ -287,6 +289,73 @@ class MainReadController extends Controller
                 $result['formatted_bookings'][] = $depDays;
             }
         }
+
+        return response()->json($result);
+    }
+
+
+    public function search(SearchRequest $request) {
+        $request = $request->validated();
+        $db = null;
+
+        switch ($request['entity']) {
+            case 'group':
+                $db = DB::table('groups');
+                break;
+            case 'teacher':
+                $db = DB::table('users')->where('role_id', '=', 2);
+                break;
+            case 'audience':
+                $db = DB::table('audiences');
+                break;
+        }
+
+        $result = $db->select('name', 'id')->where('name', 'like', '%'.$request['name'].'%')
+            ->limit(10)->orderBy('name', 'desc')->get();
+
+        return response()->json($result);
+    }
+
+    public function getLessons(LessonsRequest $request) {
+        $request = $request->validated();
+
+        $db = DB::table('lessons_bookings')
+            ->join('lessons_orders', 'lessons_bookings.lesson_order_id', '=', 'lessons_orders.id')
+            ->join('audiences', 'lessons_bookings.audience_id', '=', 'audiences.id')
+            ->join('subjects', 'lessons_bookings.subject_id', '=', 'subjects.id')
+            ->join('groups', 'lessons_bookings.group_id', '=', 'groups.id')
+            ->join('groups_parts', 'lessons_bookings.group_part_id', '=', 'groups_parts.id')
+            ->join('users', 'lessons_bookings.teacher_id', '=', 'users.id')
+            ->join('departments', 'groups.department_id', '=', 'departments.id')
+            ->join('week_days', function (JoinClause $join) {
+                $join->on(DB::raw('DAYOFWEEK(lesson_date)'), '=', 'week_days.index');
+            })
+            ->join('schedules', function (JoinClause $join) {
+                $join->on('lessons_bookings.lesson_order_id', '=', 'schedules.lesson_order_id');
+                $join->on('departments.id', '=', 'schedules.department_id');
+                $join->on('week_days.id', '=', 'schedules.week_day_id');
+            })
+            ->select('lessons_bookings.*',
+                'audiences.name as audience_name', 'subjects.name as subject_name',
+                'users.name as teacher_name', 'groups.name as group_name', 'groups_parts.name as group_part_name',
+                DB::raw("TIME_FORMAT(start_time, '%H:%i') as start_time"),
+                DB::raw("TIME_FORMAT(end_time, '%H:%i') as end_time"), 'schedules.break',
+                'lessons_orders.name as lesson_order_name')
+            ->where('lessons_bookings.lesson_date', $request['date'])->orderBy('schedules.start_time');
+
+        if (isset($request['group_id'])) {
+            $db = $db->where('lessons_bookings.group_id', $request['group_id']);
+        }
+
+        if (isset($request['teacher_id'])) {
+            $db = $db->where('lessons_bookings.teacher_id', $request['teacher_id']);
+        }
+
+        if (isset($request['audience_id'])) {
+            $db = $db->where('lessons_bookings.audience_id', $request['audience_id']);
+        }
+
+        $result = $db->get();
 
         return response()->json($result);
     }

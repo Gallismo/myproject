@@ -6,6 +6,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     actions: {
         switchTab: (context, tabName) => context.commit('switchTab', tabName.target.id),
+        switchLessonTab: (context, tabName) => context.commit('switchLessonTab', tabName.target.id),
         callAllData({commit, dispatch}) {
             dispatch('getAllAudiences');
             dispatch('getAllDepartments');
@@ -68,6 +69,7 @@ const store = new Vuex.Store({
     },
     mutations: {
         switchTab: (state, tabName) => state.currentTab = tabName,
+        switchLessonTab: (state, tabName) => state.currentLessonsTab = tabName,
         setLoading(state, type = false) {
             if (state.loading === type) {
                 return;
@@ -106,11 +108,19 @@ const store = new Vuex.Store({
             }
         },
         currentTab: "Booking",
+        lessonsTabs: {
+            GroupsLessons: 'Группы',
+            TeachersLessons: 'Преподаватели',
+            AudLessons: 'Аудитории'
+        },
+        currentLessonsTab: 'GroupsLessons',
         loading: false
     },
     getters: {
         getLinks: state => state.links,
         getCurrentTab: state => state.currentTab,
+        getLessonsTabs: state => state.lessonsTabs,
+        getCurrentLessonTab: state => state.currentLessonsTab,
         getLoading: state => state.loading
     },
     modules: {

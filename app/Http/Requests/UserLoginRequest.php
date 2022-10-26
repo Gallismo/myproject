@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UserLoginRequest extends MyRequest
+class UserLoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +26,14 @@ class UserLoginRequest extends MyRequest
     public function rules()
     {
         return [
-            'login' => 'required|string|exists:users,login',
-            'password' => 'required|string'
+
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json(['title' => 'Ошибка валидации',
+            'body' => 'Проверьте правильность заполнения полей',
+            'errors' => $validator->errors()], 422));
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown admin-dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button"
            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
         >
