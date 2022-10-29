@@ -247,7 +247,6 @@ class MainReadController extends Controller
             $db = $db->where('lessons_bookings.lesson_date', $queries['date_filter']);
         }
 
-
         $db = $db->get();
 
         $result = [

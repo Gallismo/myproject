@@ -4,7 +4,7 @@
             <div class="card bg-dark text-white col-10 col-sm-8 col-lg-6">
                 <form class="card-body" method="POST" action="/login">
                     <div class="card-title d-flex align-items-center">
-                        <b-icon-arrow-left class="arrow-back" @click="$router.push('/pub')"/>
+                        <a href="/pub" class="arrow-back"><b-icon-arrow-left class="arrow-back"/></a>
                         <h4 class="mb-0 ml-2">Вход</h4>
                     </div>
                     <div class="form-group">
@@ -43,5 +43,7 @@ import {BPopover, BButton} from 'bootstrap-vue';
 </script>
 
 <style scoped>
-
+    .card-title a {
+        color: white;
+    }
 </style>

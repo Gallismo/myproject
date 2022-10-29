@@ -54,6 +54,7 @@ Route::prefix('api')->group(function () {
     Route::get('/Captain', [\App\Http\Controllers\MainReadController::class, 'getCaptains']);
     Route::get('/Schedule', [\App\Http\Controllers\MainReadController::class, 'getSchedules']);
 
+
     Route::get('/lessonBooking', [\App\Http\Controllers\MainReadController::class, 'getBookings']);
     Route::get('/lessonBooking/group', [\App\Http\Controllers\MainReadController::class, 'getGroupBooking']);
     Route::get('/lessonBooking/teacher', [\App\Http\Controllers\MainReadController::class, 'getTeacherBooking']);

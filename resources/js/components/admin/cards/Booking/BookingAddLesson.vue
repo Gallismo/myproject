@@ -5,6 +5,12 @@
                 <div class="form-group">
                     <label for="date">Дата</label>
                     <b-form-datepicker id="date" locale="ru" class="btn-secondary" :dark="true" v-model="date"
+                                       label-no-date-selected="Дата не выбрана" :reset-button="true"
+                                       label-reset-button="Сбросить" label-today-button="Сегодня"
+                                       label-current-month="Текущий месяц" label-next-month="Следующий месяц"
+                                       label-next-year="Следующий год" label-prev-month="Предыдущий месяц"
+                                       label-prev-year="Предыдущий год" label-help="Используйте стрелки для навигации по числам"
+                                       :today-button="true" start-weekday="1" @input="loadLessonOrders"
                                        :date-format-options="{'year': 'numeric', 'month': 'numeric', 'day': 'numeric'}"/>
                 </div>
                 <div class="form-group">
@@ -55,7 +61,8 @@ export default {
 
     data() {
         return {
-            date: ''
+            date: '',
+            lessonOrders: {}
         }
     },
     methods: {
@@ -71,6 +78,12 @@ export default {
             };
 
             this.$store.dispatch('createBooking', data);
+        },
+        loadLessonOrders(date) {
+            if (!date) {
+                return;
+            }
+            axios.get()
         }
     }
 }

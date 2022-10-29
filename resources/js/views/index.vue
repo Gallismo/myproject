@@ -5,7 +5,7 @@
         </div>
         <div class="d-flex text-white wrapper justify-content-center p-4">
             <div class="card bg-dark">
-                <div class="card-header grid-3 grid-gap-1 lessons-tabs">
+                <div class="card-header grid-sm-3 grid-1 grid-gap-1 lessons-tabs">
                     <h4 v-for="(name, id) in $store.getters.getLessonsTabs" :id="id"
                         class="btn btn-info" :class="{ active: active === id }" @click="switchAction">{{name}}</h4>
                 </div>
