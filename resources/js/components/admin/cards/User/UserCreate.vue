@@ -18,7 +18,7 @@
             <SelectComp id="selectRole" :items="getRolesData" defaultTitle="Роль" defaultValue="0"
                         :isDisabled="true" @clickEvent="roleChanged"/>
             <label for="selectGroup">Группа</label>
-            <SelectComp id="selectGroup" :items="getGroupDropdown" defaultTitle="Группа" defaultValue="0" :isDisabled="true"/>
+            <SelectComp id="selectGroup" :items="getGroupDropdown" defaultTitle="Группа" defaultValue="0" :isDisabled="true" disabled/>
             <small class="form-text text-muted">Для роли "Староста"</small>
 
             <div class="row mt-4">

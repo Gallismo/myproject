@@ -111,7 +111,7 @@ export default {
             //         dispatch('showNotification', error.response.data);
             //     });
             dispatch('sendRequest', {
-                entity: 'register',
+                entity: 'User/register',
                 method: 'post',
                 data: data,
                 toDoDisp:[
