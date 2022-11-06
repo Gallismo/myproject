@@ -85,6 +85,8 @@
                                                                data_switch_action="switchBooking"/>
                                             </div>
                                             <hr>
+                                            {{lesson.group_part_name}}
+                                            <hr>
                                             Аудитория: {{lesson.audience_name}}
                                             <hr>
                                             {{lesson.teacher_name}}
