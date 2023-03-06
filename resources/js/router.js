@@ -15,7 +15,7 @@ import login from './views/login';
 
 const routes = [
     {
-        path: '/pub',
+        path: '/',
         component: index
     },
     {

@@ -66,7 +66,7 @@ class UserController extends Controller
     public function logout () {
         Auth::logout();
 
-        return redirect('/pub');
+        return redirect('/');
     }
 
     public function changePassword (UserChPassRequest $request): JsonResponse
