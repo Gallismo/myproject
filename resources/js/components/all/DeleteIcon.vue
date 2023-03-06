@@ -1,6 +1,6 @@
 <template>
         <button type="button" class="delete-icon" @click="deleteEvent" data-toggle="modal" :data-target="target">
-            <img src="/img/delete-icon.svg">
+            <img src="/img/delete-icon.svg"/>
         </button>
 </template>
 

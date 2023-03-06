@@ -87,7 +87,6 @@ const store = new Vuex.Store({
                     name: 'Группы и аудитории',
                     items: {
                         Groups:'Группы',
-                        Counter:'Счетчик остатка часов',
                         Fundament: 'Основные'
                     }
                 },

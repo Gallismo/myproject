@@ -15,8 +15,10 @@ class AuthCheck
             return $next($request);
         }
 
-        return response()->json(['title' => 'Ошибка аутентификации',
-            'text' => 'Для доступа необходим вход',
-            'errors' => new \stdClass()], 401);
+//        return response()->json(['title' => 'Ошибка аутентификации',
+//            'text' => 'Для доступа необходим вход',
+//            'errors' => new \stdClass(c)], 401);
+
+        return abort(401);
     }
 }

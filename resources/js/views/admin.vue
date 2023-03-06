@@ -2,7 +2,7 @@
     <div>
         <Header/>
         <Card/>
-        <NotificationBootstrap />
+        <NotificationBootstrap/>
     </div>
 </template>
 
