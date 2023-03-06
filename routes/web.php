@@ -27,11 +27,11 @@ use Illuminate\Support\Facades\Route;
 //    return view('index');
 //})->where('any', '.*');
 
-Route::get('/', [\App\Http\Controllers\IndexController::class, 'index']);
+//Route::get('/', [\App\Http\Controllers\IndexController::class, 'index']);
 Route::get('/admin', function () {
     return view('layouts.admin');
 })->middleware(['isAuth', 'isAdmin']);
-Route::get('/pub', function () {
+Route::get('/', function () {
     return view('layouts.index');
 });
 Route::get('/login', function () {
