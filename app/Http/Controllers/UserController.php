@@ -53,10 +53,12 @@ class UserController extends Controller
             return back()->with('errorTitle', 'Ошибка')->with('errorText', 'Неверный логин или пароль');
 //            return $this->sendResp('Ошибка', 'Проверьте правильность заполения, пароль неверный', 422);
         }
-
-        Auth::login($user);
+//        Раскомментировать если будет добавлены возможности для других ролей
+//        Auth::login($user);
 
         if ($user->role_id == 1) {
+//            Закомментировать если будет расскоментирован логин выше
+            Auth::login($user);
             return redirect('/admin');
         }
 
