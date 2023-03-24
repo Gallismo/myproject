@@ -1,7 +1,8 @@
 <template>
     <div class="d-flex flex-column">
         <div class="d-flex top-menu justify-content-end">
-            <a href="/login" class="nav-link text-info">Вход</a>
+            <a href="/admin" class="nav-link text-info" v-show="isAdmin">Панель администратора</a>
+            <a href="/login" class="nav-link text-info ml-1" v-show="!isAdmin">Вход</a>
         </div>
         <div class="d-flex text-white wrapper justify-content-center p-4">
             <div class="card bg-dark">
@@ -19,9 +20,10 @@
 </template>
 
 <script>
+import getCookie from "../mixins/getCookie";
     export default {
         name: "index",
-
+        mixins: [getCookie],
         methods: {
             switchAction(event) {
                 this.$store.dispatch('switchLessonTab', event);
@@ -30,6 +32,9 @@
         computed: {
             active() {
                 return this.$store.getters.getCurrentLessonTab
+            },
+            isAdmin() {
+                return !!this.getCookie('isAdmin');
             }
         }
     }

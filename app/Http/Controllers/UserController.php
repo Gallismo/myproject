@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -59,13 +60,17 @@ class UserController extends Controller
         if ($user->role_id == 1) {
 //            Закомментировать если будет расскоментирован логин выше
             Auth::login($user);
-            return redirect('/admin');
+            $cookie = Cookie::make('isAdmin', 'true', 60, null, null, null, false);
+            return redirect('/admin')->withCookie($cookie);
         }
 
         return redirect('/');
     }
 
     public function logout () {
+        if (Cookie::has('isAdmin')) {
+            Cookie::queue(Cookie::forget('isAdmin'));
+        }
         Auth::logout();
 
         return redirect('/');

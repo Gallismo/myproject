@@ -12,5 +12,20 @@
 <body>
     @yield('content')
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        var time = new Date().getTime();
+        $(document.body).bind("mousemove keypress", function(e) {
+            time = new Date().getTime();
+        });
+
+        function refresh() {
+            if(new Date().getTime() - time >= 31 * 60 * 1000)
+                window.location.reload();
+            else
+                setTimeout(refresh, 10 * 1000);
+        }
+
+        setTimeout(refresh, 10 * 1000);
+    </script>
 </body>
 </html>

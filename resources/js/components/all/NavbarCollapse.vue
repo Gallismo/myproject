@@ -8,6 +8,9 @@
                         :key="index"
             />
             <li class="nav-item ml-lg-auto">
+                <a class="nav-link" href="/">На главную</a>
+            </li>
+            <li class="nav-item ml-1">
                 <a class="nav-link" href="/logout">Выйти</a>
             </li>
         </ul>

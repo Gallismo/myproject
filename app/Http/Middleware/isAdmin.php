@@ -6,6 +6,7 @@ use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -30,6 +31,7 @@ class isAdmin
 //        return response()->json(['title' => 'Ошибка авторизации',
 //            'text' => 'Вы не имеета доступа',
 //            'errors' => new \stdClass()], 401);
+        Cookie::queue(Cookie::forget('isAdmin'));
         return abort(401);
     }
 }

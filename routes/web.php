@@ -35,6 +35,9 @@ Route::get('/', function () {
     return view('layouts.index');
 });
 Route::get('/login', function () {
+    if (\Illuminate\Support\Facades\Auth::check()) {
+        return redirect('/');
+    }
     return view('layouts.login');
 });
 Route::post('/login', [\App\Http\Controllers\UserController::class, 'login']);

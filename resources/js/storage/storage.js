@@ -120,7 +120,7 @@ const store = new Vuex.Store({
         getCurrentTab: state => state.currentTab,
         getLessonsTabs: state => state.lessonsTabs,
         getCurrentLessonTab: state => state.currentLessonsTab,
-        getLoading: state => state.loading
+        getLoading: state => state.loading,
     },
     modules: {
 
